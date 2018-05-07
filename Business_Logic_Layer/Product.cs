@@ -31,7 +31,7 @@ namespace Business_Logic_Layer
             foreach(DataRow item in dh.GetData("tblProducts").Rows)
             {
                 prods.Add(new Product(
-                (int)item["ProductIDPK"],
+                (int)item["ProductNoPK"],
                 item["ProductModel"].ToString(), 
                 item["ProductDetail"].ToString(),
                 (decimal)item["UnitPrice"],

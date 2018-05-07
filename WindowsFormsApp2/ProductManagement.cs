@@ -11,10 +11,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp2
 {
-    
+
     public partial class frmProductManagement : Form
     {
         BindingSource data = new BindingSource();
+        private static Product prod;
+
         public frmProductManagement()
         {
             InitializeComponent();
@@ -27,20 +29,53 @@ namespace WindowsFormsApp2
             dvgProducts.DataSource = data;
             if (data.DataSource != null)
             {
-                txtProdModel.DataBindings.Add("Text", data, "ProductModel");
+                txtProdModels.DataBindings.Add("Text", data, "ProductModel");
                 txtProdDesc.DataBindings.Add("Text", data, "ProductDetail");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
             }
 
-            
+
         }
 
         private void dvgProducts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu main = new frmMainMenu();
+            main.Show();
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            prod = new Product(
+           0,
+           txtProdModels.Text,
+           txtProdDetails.Text,
+           decimal.Parse(txtProdPrice.Text.ToString()),
+           false
+
+       );
+            //if (Product.Insert(prod))
+            //{
+            //    MessageBox.Show("Product inserted.");
+            //}
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtProdDesc_TextChanged(object sender, EventArgs e)
         {
 
         }
