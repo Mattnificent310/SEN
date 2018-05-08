@@ -55,6 +55,8 @@ namespace Business_Logic_Layer
             items.Add("ProductDetail", prod.ProductDetail);
             items.Add("UnitPrice", prod.UnitPrice);
             items.Add("Discontinued", prod.Discontinued);
+            items.Add("InventoryIDFK", 1);
+            items.Add("CategoryIDFK", 1);
             return dh.Insert(items, "tblProducts") != null ? true : false;
         }
 

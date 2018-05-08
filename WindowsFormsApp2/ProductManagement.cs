@@ -45,7 +45,7 @@ namespace WindowsFormsApp2
             {
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 txtProdModels.DataBindings.Add("Text", data, "ProductModel");
-                txtrodDesc.DataBindings.Add("Text", data, "ProductDetail");
+                txtProdDesc.DataBindings.Add("Text", data, "ProductDetail");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
                 return true;
             }
