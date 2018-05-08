@@ -107,7 +107,7 @@
             // 
             // txtProdId
             // 
-            this.txtProdId.Location = new System.Drawing.Point(47, 178);
+            this.txtProdId.Location = new System.Drawing.Point(68, 178);
             this.txtProdId.Name = "txtProdId";
             this.txtProdId.Size = new System.Drawing.Size(10, 26);
             this.txtProdId.TabIndex = 32;

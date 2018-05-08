@@ -42,14 +42,29 @@ namespace WindowsFormsApp2
                 txtCustEmail.DataBindings.Add("Text", data, "EmailAddress");
                 cmbCustCountry.DataBindings.Add("Text", data, "Country");
                 cmbCustCity.DataBindings.Add("Text", data, "City");
-                txtCustStreet.DataBindings.Add("Text", data, "Street");
+               
                 return true;
             }
             return false;
         }
+        private void Clear()
+        {
+           
+            txtClientId.DataBindings.Clear();
+            cmbCustTitle.DataBindings.Clear();
+            txtCustName.DataBindings.Clear();
+            txtCustSurname.DataBindings.Clear();
+            cmbCustGender.DataBindings.Clear();
+            dtpCustDOB.DataBindings.Clear();
+            txtCustPhone.DataBindings.Clear();
+            txtCustEmail.DataBindings.Clear();
+            txtCustStreet.DataBindings.Clear();
+            cmbCustCity.DataBindings.Clear();
+            cmbCustCountry.DataBindings.Clear();
+        }
         private bool Populate()
         {
-            client = new Client();
+            client = new Client();            
             if (Client.clients.Any())
             {
                 data.DataSource = Client.clients;
@@ -98,7 +113,8 @@ namespace WindowsFormsApp2
             }
             else
             {
-                Populate();
+                Clear();
+                BindData();
                 MessageBox.Show("Customer information was updated successfully.");
             }
             
@@ -112,7 +128,8 @@ namespace WindowsFormsApp2
             }
             else
             {
-                Populate();
+                Clear();
+                BindData();
                 MessageBox.Show("Customer was deleted successfully");
             }
             
@@ -139,7 +156,8 @@ namespace WindowsFormsApp2
             }
             else
             {
-                Populate();
+                Clear();
+                BindData();
                 MessageBox.Show("Customer was added successfully.");
             }
            

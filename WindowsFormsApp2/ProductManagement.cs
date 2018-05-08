@@ -16,7 +16,7 @@ namespace WindowsFormsApp2
     {
         BindingSource data = new BindingSource();
         private Product prod;
-       
+
 
         public frmProductManagement()
         {
@@ -25,23 +25,28 @@ namespace WindowsFormsApp2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Populate();
+
             if (!BindData())
             {
                 MessageBox.Show("No products were found.");
             }
         }
-        private void Populate()
+        private bool Populate()
         {
-            data = new BindingSource();
             prod = new Product();
-            data.DataSource = Product.prods;
-            dvgProducts.DataSource = data;
+            if (Product.prods.Any())
+            {
+                data.DataSource = Product.prods;
+                dvgProducts.DataSource = data;
+                return true;
+            }
+            return false;
+
 
         }
         private bool BindData()
         {
-            if (data.DataSource != null)
+            if (Populate())
             {
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 txtProdModels.DataBindings.Add("Text", data, "ProductModel");
@@ -50,6 +55,14 @@ namespace WindowsFormsApp2
                 return true;
             }
             return false;
+        }
+
+        public void Clear()
+        {
+            txtProdId.DataBindings.Clear();
+            txtProdModels.DataBindings.Clear();
+            txtProdDesc.DataBindings.Clear();
+            txtUnitPrice.DataBindings.Clear();
         }
 
         private void dvgProducts_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -85,6 +98,8 @@ namespace WindowsFormsApp2
             }
             else
             {
+                Clear();
+                BindData();
                 MessageBox.Show("Product was added successfully.");
             }
         }
@@ -115,8 +130,13 @@ namespace WindowsFormsApp2
             if (!Product.Update(prod))
             {
                 MessageBox.Show("Product information could not be changed");
+            }           
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Product information was changed");
             }
-            Populate();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -127,10 +147,12 @@ namespace WindowsFormsApp2
             }
             else
             {
+                Clear();
+                BindData();
                 MessageBox.Show("The product was successfully removed");
-                Populate();
+
             }
-            
+
         }
     }
 }
