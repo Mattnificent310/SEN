@@ -165,6 +165,7 @@ namespace Business_Logic_Layer
         {
             Location loc = new Location(client.Street, client.City, client.Country);
             int locId = loc.LocationId;
+            dh.GetData("tblClient");
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add("ClientTitle", client.Title);
             items.Add("ClientName", client.Name);
@@ -196,6 +197,7 @@ namespace Business_Logic_Layer
 
         public static bool Delete(string clientId)
         {
+            dh.GetData("tblClient");
             return dh.Delete("tblClient", clientId);
         }
         #region Poly Methods

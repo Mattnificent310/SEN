@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvClient = new System.Windows.Forms.DataGridView();
+            this.txtClientId = new System.Windows.Forms.TextBox();
             this.btnMainMenu = new System.Windows.Forms.Button();
             this.cmbCustGender = new System.Windows.Forms.ComboBox();
             this.dtpCustDOB = new System.Windows.Forms.DateTimePicker();
@@ -75,12 +77,10 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.btnInsert = new System.Windows.Forms.Button();
-            this.txtClientId = new System.Windows.Forms.TextBox();
-            this.dgvClient = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -131,6 +131,22 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dgvClient
+            // 
+            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClient.Location = new System.Drawing.Point(36, 21);
+            this.dgvClient.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvClient.Name = "dgvClient";
+            this.dgvClient.Size = new System.Drawing.Size(1114, 288);
+            this.dgvClient.TabIndex = 71;
+            // 
+            // txtClientId
+            // 
+            this.txtClientId.Location = new System.Drawing.Point(67, 207);
+            this.txtClientId.Name = "txtClientId";
+            this.txtClientId.Size = new System.Drawing.Size(10, 26);
+            this.txtClientId.TabIndex = 70;
             // 
             // btnMainMenu
             // 
@@ -6520,22 +6536,7 @@
             this.btnInsert.TabIndex = 65;
             this.btnInsert.Text = "Insert";
             this.btnInsert.UseVisualStyleBackColor = false;
-            // 
-            // txtClientId
-            // 
-            this.txtClientId.Location = new System.Drawing.Point(67, 207);
-            this.txtClientId.Name = "txtClientId";
-            this.txtClientId.Size = new System.Drawing.Size(10, 26);
-            this.txtClientId.TabIndex = 70;
-            // 
-            // dgvClient
-            // 
-            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Location = new System.Drawing.Point(36, 21);
-            this.dgvClient.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dgvClient.Name = "dgvClient";
-            this.dgvClient.Size = new System.Drawing.Size(1114, 288);
-            this.dgvClient.TabIndex = 71;
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click_1);
             // 
             // frmCustomerService
             // 
@@ -6552,9 +6553,9 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             this.ResumeLayout(false);
 
         }

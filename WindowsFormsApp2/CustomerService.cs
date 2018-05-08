@@ -61,6 +61,65 @@ namespace WindowsFormsApp2
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu main = new frmMainMenu();
+            main.Show();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            client = new Client()
+            {
+                Identity = txtClientId.Text, 
+                Title = cmbCustTitle.Text,
+                Name = txtCustName.Text,
+                Surname = txtCustSurname.Text,
+                Gender = cmbCustGender.Text,
+                BirthDate = dtpCustDOB.Value,
+                ContactNumber = txtCustPhone.Text,
+                EmailAddress = txtCustEmail.Text,               
+                Country = txtCustCountry.Text,
+                City = cmbCustCity.Text,
+                Street = txtCustStreet.Text
+            };
+            if (!Client.Update(client))
+            {
+                MessageBox.Show("Customer information could not be changed.");
+            }
+            else
+            {
+                Populate();
+                MessageBox.Show("Customer information was updated successfully.");
+            }
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!Client.Delete(txtClientId.Text))
+            {
+                MessageBox.Show("Customer could not be deleted.");
+            }
+            else
+            {
+                Populate();
+                MessageBox.Show("Customer was deleted successfully");
+            }
+            
+        }
+
+        private void btnInsert_Click_1(object sender, EventArgs e)
+        {
             client = new Client()
             {
                 Identity = txtClientId.Text,
@@ -80,56 +139,11 @@ namespace WindowsFormsApp2
                 MessageBox.Show("Customer could not be added.");
             }
             else
+            {
+                Populate();
                 MessageBox.Show("Customer was added successfully.");
-            Populate();
-        }
-
-        private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMainMenu_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            client = new Client()
-            {
-                Identity = txtClientId.Text,
-                Title = cmbCustTitle.Text,
-                Name = txtCustName.Text,
-                Surname = txtCustSurname.Text,
-                Gender = cmbCustGender.Text,
-                BirthDate = dtpCustDOB.Value,
-                ContactNumber = txtCustPhone.Text,
-                EmailAddress = txtCustEmail.Text,               
-                Country = txtCustCountry.Text,
-                City = cmbCustCity.Text,
-                Street = txtCustStreet.Text
-            };
-            if (!Client.Update(client))
-            {
-                MessageBox.Show("Customer information could not be changed.");
             }
-            else
-                MessageBox.Show("Customer information was updated successfully.");
-            Populate();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (!Client.Delete(txtClientId.Text))
-            {
-                MessageBox.Show("Customer could not be deleted.");
-            }
-            else
-                MessageBox.Show("Customer was deleted successfully");
-            Populate();
+           
         }
     }
 }
