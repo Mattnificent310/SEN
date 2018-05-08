@@ -40,7 +40,7 @@ namespace WindowsFormsApp2
                 cmbCustGender.DataBindings.Add("Text", data, "Gender");
                 txtCustPhone.DataBindings.Add("Text", data, "ContactNumber");
                 txtCustEmail.DataBindings.Add("Text", data, "EmailAddress");
-                txtCustCountry.DataBindings.Add("Text", data, "Country");
+                cmbCustCountry.DataBindings.Add("Text", data, "Country");
                 cmbCustCity.DataBindings.Add("Text", data, "City");
                 txtCustStreet.DataBindings.Add("Text", data, "Street");
                 return true;
@@ -88,7 +88,7 @@ namespace WindowsFormsApp2
                 BirthDate = dtpCustDOB.Value,
                 ContactNumber = txtCustPhone.Text,
                 EmailAddress = txtCustEmail.Text,               
-                Country = txtCustCountry.Text,
+                Country = cmbCustCountry.Text,
                 City = cmbCustCity.Text,
                 Street = txtCustStreet.Text
             };
@@ -122,17 +122,16 @@ namespace WindowsFormsApp2
         {
             client = new Client()
             {
-                Identity = txtClientId.Text,
-                Title = cmbCustTitle.Text,
-                Name = txtCustName.Text,
-                Surname = txtCustSurname.Text,
-                Gender = cmbCustGender.Text,
-                BirthDate = dtpCustDOB.Value,
-                ContactNumber = txtCustPhone.Text,
-                EmailAddress = txtCustEmail.Text,
-                Country = txtCustCountry.Text,
-                City = cmbCustCity.Text,
-                Street = txtCustStreet.Text
+                Title = cmbCTitle.Text,
+                Name = txtCName.Text,
+                Surname = txtCSurname.Text,
+                Gender = cmbCGender.Text,
+                BirthDate = dtpCBD.Value,
+                ContactNumber = txtCPhone.Text,
+                EmailAddress = txtCEmail.Text,
+                Country = cmbCCountry.Text,
+                City = cmbCCity.Text,
+                Street = txtCAddress.Text
             };
             if (!Client.Insert(client))
             {
