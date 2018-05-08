@@ -48,8 +48,8 @@
             this.txtProdPrice = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtProdDetails = new System.Windows.Forms.TextBox();
-            this.txtProdModel = new System.Windows.Forms.TextBox();
+            this.txtPDetails = new System.Windows.Forms.TextBox();
+            this.txtPModel = new System.Windows.Forms.TextBox();
             this.btnInsert = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
@@ -226,8 +226,8 @@
             this.tabPage2.Controls.Add(this.txtProdPrice);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.txtProdDetails);
-            this.tabPage2.Controls.Add(this.txtProdModel);
+            this.tabPage2.Controls.Add(this.txtPDetails);
+            this.tabPage2.Controls.Add(this.txtPModel);
             this.tabPage2.Controls.Add(this.btnInsert);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -287,21 +287,21 @@
             this.label9.TabIndex = 34;
             this.label9.Text = "Product Model";
             // 
-            // txtProdDetails
+            // txtPDetails
             // 
-            this.txtProdDetails.Location = new System.Drawing.Point(585, 155);
-            this.txtProdDetails.Multiline = true;
-            this.txtProdDetails.Name = "txtProdDetails";
-            this.txtProdDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtProdDetails.Size = new System.Drawing.Size(324, 133);
-            this.txtProdDetails.TabIndex = 32;
+            this.txtPDetails.Location = new System.Drawing.Point(585, 155);
+            this.txtPDetails.Multiline = true;
+            this.txtPDetails.Name = "txtPDetails";
+            this.txtPDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtPDetails.Size = new System.Drawing.Size(324, 133);
+            this.txtPDetails.TabIndex = 32;
             // 
-            // txtProdModel
+            // txtPModel
             // 
-            this.txtProdModel.Location = new System.Drawing.Point(585, 83);
-            this.txtProdModel.Name = "txtProdModel";
-            this.txtProdModel.Size = new System.Drawing.Size(324, 26);
-            this.txtProdModel.TabIndex = 30;
+            this.txtPModel.Location = new System.Drawing.Point(585, 83);
+            this.txtPModel.Name = "txtPModel";
+            this.txtPModel.Size = new System.Drawing.Size(324, 26);
+            this.txtPModel.TabIndex = 30;
             // 
             // btnInsert
             // 
@@ -358,8 +358,8 @@
         private System.Windows.Forms.TextBox txtProdPrice;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtProdDetails;
-        private System.Windows.Forms.TextBox txtProdModel;
+        private System.Windows.Forms.TextBox txtPDetails;
+        private System.Windows.Forms.TextBox txtPModel;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button btnMainMenu;
         private System.Windows.Forms.Label label5;

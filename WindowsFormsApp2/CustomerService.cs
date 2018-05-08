@@ -14,7 +14,7 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         BindingSource data = new BindingSource();
-        private Client client;
+        public Client client;
         public frmCustomerService()
         {
             InitializeComponent();
@@ -61,19 +61,20 @@ namespace WindowsFormsApp2
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-                client = new Client(
-                txtClientId.Text,
-                cmbCustTitle.SelectedItem.ToString(),
-                txtCustName.Text,
-                txtCustSurname.Text,
-                cmbCustGender.SelectedItem.ToString(),
-                dtpCustDOB.Value,
-                txtCustPhone.Text,
-                txtCustEmail.Text, "", "", "",
-                txtCustCountry.Text,
-                cmbCustCity.SelectedItem.ToString(),
-                txtCustStreet.Text
-            );
+            client = new Client()
+            {
+                Identity = txtClientId.Text,
+                Title = cmbCustTitle.Text,
+                Name = txtCustName.Text,
+                Surname = txtCustSurname.Text,
+                Gender = cmbCustGender.Text,
+                BirthDate = dtpCustDOB.Value,
+                ContactNumber = txtCustPhone.Text,
+                EmailAddress = txtCustEmail.Text,
+                Country = txtCustCountry.Text,
+                City = cmbCustCity.Text,
+                Street = txtCustStreet.Text
+            };
             if (!Client.Insert(client))
             {
                 MessageBox.Show("Customer could not be added.");
@@ -97,19 +98,20 @@ namespace WindowsFormsApp2
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            client = new Client(
-            txtClientId.Text,
-            cmbCustTitle.SelectedItem.ToString(),
-            txtCustName.Text,
-            txtCustSurname.Text,
-            cmbCustGender.SelectedItem.ToString(),
-            dtpCustDOB.Value,
-            txtCustPhone.Text,
-            txtCustEmail.Text, "", "", "",
-            txtCustCountry.Text,
-            cmbCustCity.SelectedItem.ToString(),
-            txtCustStreet.Text
-        );
+            client = new Client()
+            {
+                Identity = txtClientId.Text,
+                Title = cmbCustTitle.Text,
+                Name = txtCustName.Text,
+                Surname = txtCustSurname.Text,
+                Gender = cmbCustGender.Text,
+                BirthDate = dtpCustDOB.Value,
+                ContactNumber = txtCustPhone.Text,
+                EmailAddress = txtCustEmail.Text,               
+                Country = txtCustCountry.Text,
+                City = cmbCustCity.Text,
+                Street = txtCustStreet.Text
+            };
             if (!Client.Update(client))
             {
                 MessageBox.Show("Customer information could not be changed.");

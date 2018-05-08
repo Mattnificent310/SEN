@@ -45,7 +45,7 @@ namespace WindowsFormsApp2
             {
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 txtProdModels.DataBindings.Add("Text", data, "ProductModel");
-                txtProdDesc.DataBindings.Add("Text", data, "ProductDetail");
+                txtrodDesc.DataBindings.Add("Text", data, "ProductDetail");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
                 return true;
             }
@@ -73,9 +73,9 @@ namespace WindowsFormsApp2
         {
             prod = new Product(
            0,
-           txtProdModels.Text,
-           txtProdDetails.Text,
-           decimal.Parse(txtUnitPrice.Text.ToString()),
+           txtPModel.Text,
+           txtPDetails.Text,
+           decimal.Parse(txtProdPrice.Text.ToString()),
            false
 
        );
@@ -107,7 +107,7 @@ namespace WindowsFormsApp2
             prod = new Product(
                int.Parse(txtProdId.Text),
                txtProdModels.Text,
-               txtProdDetails.Text,
+               txtProdDesc.Text,
                price,
                cbxDiscontinue.Checked
 
