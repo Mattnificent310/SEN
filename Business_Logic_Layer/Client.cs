@@ -98,31 +98,30 @@ namespace Business_Logic_Layer
         #region Constructor
         public Client()
         {
-            
-            if (clients == null)
+
+
+            dh = new Data_Access_Layer.DataHandler();
+            clients = new List<Client>();
+            foreach (DataRow item in dh.GetData("tblClient").Rows)
             {
-                dh = new Data_Access_Layer.DataHandler();
-                clients = new List<Client>();
-                foreach (DataRow item in dh.GetData("tblClient").Rows)
-                {
-                    Location loc = new Location((int)item["LocationIDFK"]);
-                    clients.Add(new Client(
-                    item["ClientIDPK"].ToString(),
-                    item["ClientTitle"].ToString(),
-                    item["ClientName"].ToString(),
-                    item["ClientSurname"].ToString(),
-                    (bool)item["ClientGender"] ? "Female" : "Male",
-                    (DateTime)item["ClientDOB"],
-                    item["ClientPhone"].ToString(),
-                    item["ClientEmail"].ToString(),
-                    string.Empty,
-                    string.Empty,
-                    string.Empty,
-                    loc.Country,
-                    loc.City,
-                    loc.Street
-                    ));
-                }
+                Location loc = new Location((int)item["LocationIDFK"]);
+                clients.Add(new Client(
+                item["ClientIDPK"].ToString(),
+                item["ClientTitle"].ToString(),
+                item["ClientName"].ToString(),
+                item["ClientSurname"].ToString(),
+                (bool)item["ClientGender"] ? "Female" : "Male",
+                (DateTime)item["ClientDOB"],
+                item["ClientPhone"].ToString(),
+                item["ClientEmail"].ToString(),
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                loc.Country,
+                loc.City,
+                loc.Street
+                ));
+
             }
 
         }
@@ -166,7 +165,6 @@ namespace Business_Logic_Layer
         {
             Location loc = new Location(client.Street, client.City, client.Country);
             int locId = loc.LocationId;
-            dh = new Data_Access_Layer.DataHandler();
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add("ClientTitle", client.Title);
             items.Add("ClientName", client.Name);
@@ -176,7 +174,28 @@ namespace Business_Logic_Layer
             items.Add("ClientPhone", client.ContactNumber);
             items.Add("ClientEmail", client.EmailAddress);
             items.Add("LocationIDFK", locId);
-            return dh.Insert(items, "tblClient", "ClientIDPK") != null ? true : false;
+            return dh.Insert(items, "tblClient") != null ? true : false;
+        }
+
+        public static bool Update(Client client)
+        {
+            Location loc = new Location(client.Street, client.City, client.Country);
+            int locId = loc.LocationId;
+            Dictionary<string, object> items = new Dictionary<string, object>();
+            items.Add("ClientTitle", client.Title);
+            items.Add("ClientName", client.Name);
+            items.Add("ClientSurname", client.Surname);
+            items.Add("ClientDOB", client.BirthDate);
+            items.Add("ClientGender", client.Gender.StartsWith("M") ? false : true);
+            items.Add("ClientPhone", client.ContactNumber);
+            items.Add("ClientEmail", client.EmailAddress);
+            items.Add("LocationIDFK", locId);
+            return dh.Update(items, "tblClient", client.Identity);
+        }
+
+        public static bool Delete(string clientId)
+        {
+            return dh.Delete("tblClient", clientId);
         }
         #region Poly Methods
         public override bool Equals(object obj)

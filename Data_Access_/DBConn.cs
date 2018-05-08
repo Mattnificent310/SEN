@@ -13,26 +13,27 @@ namespace Data_Access_Layer
         private static SqlDataAdapter adapter;
         private static SqlConnection conn;
         private static SqlCommandBuilder cmd;
-        public static DataSet ds;
+        private static DataSet ds;
         private string connStr;
 
         public DBConn()
         {
-            connStr = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMSDB;Integrated Security=True";
+            connStr = @"";
+            connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMSDB;Integrated Security=True";
             ds = new DataSet();
 
-           // adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            //adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
 
         }
-        public DataSet Read(string _table, string _query = null) //Select the required table from the database
+        public DataSet Read(string _table)
         {
             using (conn = new SqlConnection(connStr))
             {
-                using (adapter = new SqlDataAdapter(_query ?? "SELECT * FROM " + _table, conn))
+                using (adapter = new SqlDataAdapter("SELECT * FROM " + _table, conn))
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
-                        adapter.Fill(ds, _table);                       
+                        adapter.Fill(ds, _table);
 
                     }
                 }
@@ -40,26 +41,22 @@ namespace Data_Access_Layer
             }
             return ds;
         }
-        public bool Write(DataSet updDS, string _table) //Insert or update changes made to tables 
+        public bool Write(DataSet updDS, string _table)
         {
-            bool saved = false;
+          
             using (conn = new SqlConnection(connStr))
             {
                 using (adapter = new SqlDataAdapter("SELECT * FROM " + _table, conn))
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
-                    using (var cm = new SqlCommand()){  }
-                    
-                        adapter.Update(updDS, _table);
-                        ds.Merge(updDS);
-                        ds.AcceptChanges();
-                        saved = true;
+                        return adapter.Update(ds, _table) == 1 ? true : false;
+                        
                     }
                 }
 
             }
-            return saved;
+           
         }
 
     }

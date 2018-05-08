@@ -15,7 +15,8 @@ namespace WindowsFormsApp2
     public partial class frmProductManagement : Form
     {
         BindingSource data = new BindingSource();
-        private static Product prod;
+        private Product prod;
+       
 
         public frmProductManagement()
         {
@@ -24,17 +25,31 @@ namespace WindowsFormsApp2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Product prod = new Product();
+            Populate();
+            if (!BindData())
+            {
+                MessageBox.Show("No products were found.");
+            }
+        }
+        private void Populate()
+        {
+            data = new BindingSource();
+            prod = new Product();
             data.DataSource = Product.prods;
             dvgProducts.DataSource = data;
+
+        }
+        private bool BindData()
+        {
             if (data.DataSource != null)
             {
+                txtProdId.DataBindings.Add("Text", data, "ProductID");
                 txtProdModels.DataBindings.Add("Text", data, "ProductModel");
                 txtProdDesc.DataBindings.Add("Text", data, "ProductDetail");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                return true;
             }
-
-
+            return false;
         }
 
         private void dvgProducts_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -60,14 +75,18 @@ namespace WindowsFormsApp2
            0,
            txtProdModels.Text,
            txtProdDetails.Text,
-           decimal.Parse(txtProdPrice.Text.ToString()),
+           decimal.Parse(txtUnitPrice.Text.ToString()),
            false
 
        );
-            //if (Product.Insert(prod))
-            //{
-            //    MessageBox.Show("Product inserted.");
-            //}
+            if (!Product.Insert(prod))
+            {
+                MessageBox.Show("Product could not be added.");
+            }
+            else
+            {
+                MessageBox.Show("Product was added successfully.");
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -78,6 +97,40 @@ namespace WindowsFormsApp2
         private void txtProdDesc_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            decimal price = 0;
+            decimal.TryParse(txtUnitPrice.Text, out price);
+
+            prod = new Product(
+               int.Parse(txtProdId.Text),
+               txtProdModels.Text,
+               txtProdDetails.Text,
+               price,
+               cbxDiscontinue.Checked
+
+           );
+            if (!Product.Update(prod))
+            {
+                MessageBox.Show("Product information could not be changed");
+            }
+            Populate();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!Product.Delete(txtProdId.Text))
+            {
+                MessageBox.Show("The product could not be removed.");
+            }
+            else
+            {
+                MessageBox.Show("The product was successfully removed");
+                Populate();
+            }
+            
         }
     }
 }

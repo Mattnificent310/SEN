@@ -25,35 +25,36 @@ namespace Business_Logic_Layer
         public Location(int key)
         {
             dh = new Data_Access_Layer.DataHandler();
-            DataRow dtrStreet = dh.Search(key.ToString(), "tblLocation");
+            DataRow dtrStreet = dh.Search("tblLocation", key.ToString());
             int cityId = (int)dtrStreet["CityIDFK"];
             this.Street = dtrStreet["StreetAddress"].ToString();
-            DataRow dtrCity = dh.Search(cityId.ToString(), "tblCity");
+            DataRow dtrCity = dh.Search("tblCity", cityId.ToString());
             int countryId = (int)dtrCity["CountryIDFK"];
             this.City = dtrCity["CityName"].ToString();
-            DataRow dtrCountry = dh.Search(countryId.ToString(), "tblCountry");
+            DataRow dtrCountry = dh.Search("tblCountry", countryId.ToString());
             this.Country = dtrCountry["CountryName"].ToString();
-           
+
         }
         public Location(string street, string city, string country)
         {
             dh = new Data_Access_Layer.DataHandler();
-            Dictionary<string, object> countries = new Dictionary<string, object>();
-            Dictionary<string, object> cities = new Dictionary<string, object>();
             Dictionary<string, object> streets = new Dictionary<string, object>();
-            countries.Add("CountryName", country);
-            countries.Add("CountryCode", "TBA");
-            int countryId = (int)dh.Insert(countries, "tblCountry", "CountryIDPK");
-            cities.Add("CityName", city);
-            cities.Add("CityCode", "TBA");
-            cities.Add("StateCode", "TBA");
-            cities.Add("CountryIDFK", countryId);
-            int cityId = (int)dh.Insert(cities, "tblCity", "CityIDPK");
+            int countryId = (int)dh.SearchByName("tblCountry", "CountryName", country)[0];
+            int cityId = (int)dh.SearchByName("tblCity", "CityName", city)[0];
             streets.Add("StreetAddress", street);
             streets.Add("Suburb", "TBA");
             streets.Add("CityIDFK", cityId);
-            this.LocationId = (int)dh.Insert(streets, "tblLocation", "LocationIDPK");
+            if(dh.SearchByName("tblLocation", "StreetAddress", street)==null)
+            {
+               
+                this.LocationId = (int)dh.Insert(streets, "tblLocation");
+            }
+            else
+            {
+                this.locationId = (int)dh.SearchByName("tblLocation", "StreetAddress", street)[0];
+            }
             
+
         }
     }
 }
