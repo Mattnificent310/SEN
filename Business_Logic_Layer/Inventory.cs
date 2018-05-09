@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Data_Access_Layer;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,8 @@ namespace Business_Logic_Layer
         private string warhouse;
         private int unitsInStock;
         private int reorderLevel;
+        public static List<Inventory> stocks;
+        DataHandler dh;
 
         public int InventoryID
         {
@@ -66,11 +70,22 @@ namespace Business_Logic_Layer
 
         public Inventory()
         {
-
+            stocks = new List<Inventory>();
+            dh = new DataHandler();
+            foreach (DataRow item in dh.GetData("tblInventory").Rows)
+            {
+                stocks.Add(new Inventory
+                ((int)item["InventoryIDPK"],
+                item["WarehouseNo"] as string,
+                (int)item["UnitsInStock"],
+                (int)item["ReorderLevel"]
+                ));
+            }
         }
-
-        public Inventory(string _warehouse, int _units, int _reorder)
+        
+        public Inventory(int invId, string _warehouse, int _units, int _reorder)
         {
+            this.InventoryID = invId;
             this.Warhouse = _warehouse;
             this.UnitsInStock = _units;
             this.ReorderLevel = _reorder;
