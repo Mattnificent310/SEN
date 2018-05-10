@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data_Access_;
 using Data_Access_Layer;
 
 namespace Business_Logic_Layer
@@ -26,18 +27,21 @@ namespace Business_Logic_Layer
 
         public Product()
         {
-            dh = new DataHandler();
+            new Product(Cons.table2);
             prods = new List<Product>();
-            foreach (DataRow item in dh.GetData("tblProducts").Rows)
+            foreach (DataRow item in dh.GetData().Rows)
             {
                 prods.Add(new Product(
-                (int)item["ProductNoPK"],
-                item["ProductModel"].ToString(),
-                item["ProductDetail"].ToString(),
-                (decimal)item["UnitPrice"],
-                (bool)item["Discontinued"]));
+                (int)item[Cons.table2Id],
+                item[Cons.table2Col1].ToString(),
+                item[Cons.table2Col2].ToString(),
+                (decimal)item[Cons.table2Col3],
+                (bool)item[Cons.table2Col4]));
             }
-
+        }
+        public Product(string cons)
+        {
+            dh = new DataHandler(cons);
         }
         public Product(int id, string model, string detail, decimal price, bool discontinued)
         {
@@ -48,31 +52,34 @@ namespace Business_Logic_Layer
             this.Discontinued = discontinued;
         }
 
-        public static bool Insert(Product prod)
-        {
+        public static bool Insert(Product prod, Category cat, Inventory inv)
+        {            
+            new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
-            items.Add("ProductModel", prod.ProductModel);
-            items.Add("ProductDetail", prod.ProductDetail);
-            items.Add("UnitPrice", prod.UnitPrice);
-            items.Add("Discontinued", prod.Discontinued);
-            items.Add("InventoryIDFK", 1);
-            items.Add("CategoryIDFK", 1);
-            return dh.Insert(items, "tblProducts") != null ? true : false;
+            items.Add(Cons.table2Col1, prod.ProductModel);
+            items.Add(Cons.table2Col2, prod.ProductDetail);
+            items.Add(Cons.table2Col3, prod.UnitPrice);
+            items.Add(Cons.table2Col4, prod.Discontinued);
+            items.Add(Cons.table2IdFk1, inv.InventoryID);
+            items.Add(Cons.table2IdFk2, cat.CategoryId);
+            return dh.Insert(items) != null ? true : false;
         }
 
         public static bool Update(Product prod)
         {
+            new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
-            items.Add("ProductModel", prod.ProductModel);
-            items.Add("ProductDetail", prod.ProductDetail);
-            items.Add("UnitPrice", prod.UnitPrice);
-            items.Add("Discontinued", prod.Discontinued);
-            return dh.Update(items, "tblProducts", prod.ProductID.ToString());
+            items.Add(Cons.table2Col1, prod.ProductModel);
+            items.Add(Cons.table2Col2, prod.ProductDetail);
+            items.Add(Cons.table2Col3, prod.UnitPrice);
+            items.Add(Cons.table2Col4, prod.Discontinued);
+            return dh.Update(items, prod.ProductID.ToString());
         }
 
         public static bool Delete(string prodId)
         {
-            return dh.Delete("tblProducts", prodId);
+            new Product(Cons.table2);
+            return dh.Delete(prodId);
         }
     }
 

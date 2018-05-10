@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data_Access_;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,46 +15,76 @@ namespace Business_Logic_Layer
         private string city;
         private string street;
         private static Data_Access_Layer.DataHandler dh;
+        private static List<Location> locs;
+        private static Dictionary<string, object> values;
 
         public int LocationId { get { return locationId; } set { locationId = value; } }
         public string Country { get { return country; } set { country = value; } }
         public string City { get { return city; } set { city = value; } }
         public string Street { get { return street; } set { street = value; } }
 
-        public Location()
-        { }
-        public Location(int key)
-        {
-            dh = new Data_Access_Layer.DataHandler();
-            DataRow dtrStreet = dh.Search("tblLocation", key.ToString());
-            int cityId = (int)dtrStreet["CityIDFK"];
-            this.Street = dtrStreet["StreetAddress"].ToString();
-            DataRow dtrCity = dh.Search("tblCity", cityId.ToString());
-            int countryId = (int)dtrCity["CountryIDFK"];
-            this.City = dtrCity["CityName"].ToString();
-            DataRow dtrCountry = dh.Search("tblCountry", countryId.ToString());
-            this.Country = dtrCountry["CountryName"].ToString();
+        public Location(string cons)
+        { dh = new Data_Access_Layer.DataHandler(cons); }
 
-        }
-        public Location(string street, string city, string country)
+        public Location()
         {
             dh = new Data_Access_Layer.DataHandler();
-            Dictionary<string, object> streets = new Dictionary<string, object>();
-            int countryId = (int)dh.SearchByName("tblCountry", "CountryName", country)[0];
-            int cityId = (int)dh.SearchByName("tblCity", "CityName", city)[0];
-            streets.Add("StreetAddress", street);
-            streets.Add("Suburb", "TBA");
-            streets.Add("CityIDFK", cityId);
-            if(dh.SearchByName("tblLocation", "StreetAddress", street)==null)
+            locs = new List<Location>();
+            foreach (DataRow item in dh.GetData(Cons.table4).Rows)
             {
-               
-                this.LocationId = (int)dh.Insert(streets, "tblLocation");
+                locs.Add(new Location(
+                  (int)item[Cons.table4Id],
+                       item[Cons.table4Col1].ToString(),
+                       dh.Search(item[Cons.table4IdFk].ToString(), Cons.table5)[Cons.table5Col1].ToString(),
+                       dh.Search(dh.Search(item[Cons.table4IdFk].ToString(),
+                       Cons.table5)[Cons.table5IdFk].ToString(),
+                       Cons.table6)[Cons.table6Col1].ToString()
+
+                  ));
             }
-            else
+        }
+
+        public Location(int locId, string street, string city, string country)
+        {
+            this.LocationId = locId;
+            this.Street = street;
+            this.City = city;
+            this.Country = country;
+        }
+        #region Indexer
+        public Location this[string locId = null, string street = null, string city = null, string country = null]
+        {
+            get
             {
-                this.locationId = (int)dh.SearchByName("tblLocation", "StreetAddress", street)[0];
+                if (!locs.Any()) { new Location(); }
+                foreach (var item in locs)
+                {
+                    
+                    if (item.LocationId.ToString() == (locId ?? item.LocationId.ToString())
+                    && item.Street == (street ?? item.Street)
+                    && item.City == (city ?? item.City)
+                    && item.Country == (country ?? item.Country))
+                    {
+                        this.LocationId = item.LocationId;
+                        this.Street = item.Street;
+                        this.City = item.City;
+                        this.Country = item.Country;
+                        return (Location)item;
+                    }                    
+                }
+                throw new KeyNotFoundException();
             }
-            
+        }
+
+
+        #endregion
+        public int Insert(Location location)
+        {
+            values = new Dictionary<string, object>();
+            values.Add(Cons.table4Col1, street);
+            values.Add(Cons.table4Col2, city);
+            values.Add(Cons.table4IdFk, country);
+            return (int)dh.Insert(values);
 
         }
     }

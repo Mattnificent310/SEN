@@ -1,4 +1,5 @@
-﻿using Data_Access_Layer;
+﻿using Data_Access_;
+using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +14,9 @@ namespace Business_Logic_Layer
         private int categoryId;
         private string categoryName;
         private string categoryDesc;
-        DataHandler dh;
+        private DataHandler dh;
         public static List<Category> cats;
+        private Dictionary<string, object> values;
 
         public int CategoryId { get { return categoryId; } set { categoryId = value; } }
         public string CategoryName { get { return categoryName; } set { categoryName = value; } }
@@ -22,18 +24,22 @@ namespace Business_Logic_Layer
 
         public Category()
         {
-            dh = new DataHandler();
+            new Category(Cons.table7);
             cats = new List<Category>();
-            foreach (DataRow item in dh.GetData("tblCategory").Rows)
+            foreach (DataRow item in dh.GetData().Rows)
             {
                 cats.Add(new Category
                 (
-                    (int)item["CategoryIDPK"],
-                    item["CategoryName"].ToString(),
-                    item["CategoryDescription"].ToString()
+                    (int)item[Cons.table7Id],
+                    item[Cons.table7Col1].ToString(),
+                    item[Cons.table7Col2].ToString()
                 )
                 );
             }
+        }
+        public Category(string cons)
+        {
+            dh = new DataHandler(cons);
         }
         public Category(int catId, string catName, string catDesc)
         {
@@ -41,12 +47,27 @@ namespace Business_Logic_Layer
             this.CategoryName = catName;
             this.CategoryDesc = catDesc;
         }
-        public Category(string catName)
+        #region Indexer
+        public Category this[int catId = 0, string catName = null, string catDesc = null]
         {
-            dh = new DataHandler();
-            this.categoryId = (int)dh.SearchByName("tblCategory", "CategoryName", catName)[0];
-            this.categoryName = catName;
-            this.CategoryDesc = dh.SearchByName("tblCategory", "CategoryName", catName)["categoryDescription"] as string;
+            get
+            {
+                new Category();
+                foreach (var item in cats)
+                {
+                    if (item.CategoryId == (catId != 0 ? catId : item.CategoryId)
+                    && item.CategoryName == (catName != null ? catName : item.CategoryName)
+                    && item.CategoryDesc == (catDesc != null ? catDesc : item.CategoryDesc))
+                    {
+                        return (Category)item;
+                    }
+                    
+                }
+                throw new KeyNotFoundException();
+            }
         }
+
+
+        #endregion
     }
 }

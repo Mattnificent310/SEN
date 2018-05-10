@@ -16,6 +16,8 @@ namespace WindowsFormsApp2
     {
         BindingSource data = new BindingSource();
         private Product prod;
+        private Category cat;
+        private Inventory inv;
 
 
         public frmProductManagement()
@@ -90,9 +92,11 @@ namespace WindowsFormsApp2
            txtPDetails.Text,
            decimal.Parse(txtProdPrice.Text.ToString()),
            false
-
+           
        );
-            if (!Product.Insert(prod))
+            cat = new Category(cmbPType.Text);
+            inv = new Inventory(txtPStock.Text);
+            if (!Product.Insert(prod,cat,inv))
             {
                 MessageBox.Show("Product could not be added.");
             }

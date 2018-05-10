@@ -32,11 +32,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvClient = new System.Windows.Forms.DataGridView();
             this.txtClientId = new System.Windows.Forms.TextBox();
-            this.btnMainMenu = new System.Windows.Forms.Button();
             this.cmbCustGender = new System.Windows.Forms.ComboBox();
             this.dtpCustDOB = new System.Windows.Forms.DateTimePicker();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.txtCustName = new System.Windows.Forms.TextBox();
             this.cmbCustCity = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -77,6 +74,10 @@
             this.btnInsert = new System.Windows.Forms.Button();
             this.cmbCCountry = new System.Windows.Forms.ComboBox();
             this.cmbCustCountry = new System.Windows.Forms.ComboBox();
+            this.btnMainMenu = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
@@ -91,7 +92,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1203, 877);
+            this.tabControl1.Size = new System.Drawing.Size(1497, 877);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -101,11 +102,8 @@
             this.tabPage1.Controls.Add(this.cmbCustCountry);
             this.tabPage1.Controls.Add(this.dgvClient);
             this.tabPage1.Controls.Add(this.txtClientId);
-            this.tabPage1.Controls.Add(this.btnMainMenu);
             this.tabPage1.Controls.Add(this.cmbCustGender);
             this.tabPage1.Controls.Add(this.dtpCustDOB);
-            this.tabPage1.Controls.Add(this.btnDelete);
-            this.tabPage1.Controls.Add(this.btnUpdate);
             this.tabPage1.Controls.Add(this.txtCustName);
             this.tabPage1.Controls.Add(this.cmbCustCity);
             this.tabPage1.Controls.Add(this.label9);
@@ -127,7 +125,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1195, 844);
+            this.tabPage1.Size = new System.Drawing.Size(1489, 844);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -148,19 +146,6 @@
             this.txtClientId.Size = new System.Drawing.Size(10, 26);
             this.txtClientId.TabIndex = 70;
             // 
-            // btnMainMenu
-            // 
-            this.btnMainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMainMenu.Location = new System.Drawing.Point(856, 754);
-            this.btnMainMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnMainMenu.Name = "btnMainMenu";
-            this.btnMainMenu.Size = new System.Drawing.Size(278, 46);
-            this.btnMainMenu.TabIndex = 69;
-            this.btnMainMenu.Text = "MainMenu";
-            this.btnMainMenu.UseVisualStyleBackColor = false;
-            this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
-            // 
             // cmbCustGender
             // 
             this.cmbCustGender.FormattingEnabled = true;
@@ -180,32 +165,6 @@
             this.dtpCustDOB.Name = "dtpCustDOB";
             this.dtpCustDOB.Size = new System.Drawing.Size(324, 26);
             this.dtpCustDOB.TabIndex = 67;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(472, 754);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(278, 46);
-            this.btnDelete.TabIndex = 66;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Location = new System.Drawing.Point(88, 754);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(278, 46);
-            this.btnUpdate.TabIndex = 65;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtCustName
             // 
@@ -3361,7 +3320,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1195, 844);
+            this.tabPage2.Size = new System.Drawing.Size(1198, 844);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Manage Clients";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -12452,13 +12411,65 @@
             this.cmbCustCountry.Size = new System.Drawing.Size(337, 28);
             this.cmbCustCountry.TabIndex = 72;
             // 
+            // btnMainMenu
+            // 
+            this.btnMainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMainMenu.Location = new System.Drawing.Point(1162, 50);
+            this.btnMainMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnMainMenu.Name = "btnMainMenu";
+            this.btnMainMenu.Size = new System.Drawing.Size(278, 46);
+            this.btnMainMenu.TabIndex = 72;
+            this.btnMainMenu.Text = "MainMenu";
+            this.btnMainMenu.UseVisualStyleBackColor = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Location = new System.Drawing.Point(1162, 209);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(278, 46);
+            this.btnDelete.TabIndex = 71;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdate.Location = new System.Drawing.Point(1162, 128);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(278, 46);
+            this.btnUpdate.TabIndex = 70;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Location = new System.Drawing.Point(1162, 292);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(278, 46);
+            this.btnReset.TabIndex = 73;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1200, 869);
+            this.ClientSize = new System.Drawing.Size(1501, 766);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.btnMainMenu);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmCustomerService";
@@ -12480,8 +12491,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ComboBox cmbCustGender;
         private System.Windows.Forms.DateTimePicker dtpCustDOB;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.TextBox txtCustName;
         private System.Windows.Forms.ComboBox cmbCustCity;
         private System.Windows.Forms.Label label9;
@@ -12520,10 +12529,13 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox txtCSurname;
         private System.Windows.Forms.Button btnInsert;
-        private System.Windows.Forms.Button btnMainMenu;
         private System.Windows.Forms.DataGridView dgvClient;
         private System.Windows.Forms.TextBox txtClientId;
         private System.Windows.Forms.ComboBox cmbCustCountry;
         private System.Windows.Forms.ComboBox cmbCCountry;
+        private System.Windows.Forms.Button btnMainMenu;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnReset;
     }
 }

@@ -50,7 +50,7 @@ namespace Data_Access_Layer
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
-                        return adapter.Update(ds, _table) == 1 ? true : false;
+                        return adapter.Update(updDS, _table) == 1 ? true : false;
                         
                     }
                 }

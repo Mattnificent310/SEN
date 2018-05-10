@@ -43,7 +43,6 @@
             this.txtProdDesc = new System.Windows.Forms.TextBox();
             this.txtProdModels = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtProdPrice = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,6 +51,14 @@
             this.txtPModel = new System.Windows.Forms.TextBox();
             this.btnInsert = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbProdType = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtProdStock = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtPStock = new System.Windows.Forms.TextBox();
+            this.cmbPType = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgProducts)).BeginInit();
@@ -74,6 +81,10 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.txtProdStock);
+            this.tabPage1.Controls.Add(this.cmbProdType);
+            this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.dvgProducts);
             this.tabPage1.Controls.Add(this.txtProdId);
             this.tabPage1.Controls.Add(this.cbxDiscontinue);
@@ -99,7 +110,7 @@
             // dvgProducts
             // 
             this.dvgProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgProducts.Location = new System.Drawing.Point(68, 33);
+            this.dvgProducts.Location = new System.Drawing.Point(68, 22);
             this.dvgProducts.Name = "dvgProducts";
             this.dvgProducts.RowTemplate.Height = 28;
             this.dvgProducts.Size = new System.Drawing.Size(975, 212);
@@ -116,7 +127,7 @@
             // 
             this.cbxDiscontinue.AutoSize = true;
             this.cbxDiscontinue.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbxDiscontinue.Location = new System.Drawing.Point(609, 426);
+            this.cbxDiscontinue.Location = new System.Drawing.Point(609, 434);
             this.cbxDiscontinue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxDiscontinue.Name = "cbxDiscontinue";
             this.cbxDiscontinue.Size = new System.Drawing.Size(124, 24);
@@ -128,7 +139,7 @@
             // 
             this.btnMainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMainMenu.Location = new System.Drawing.Point(1050, 203);
+            this.btnMainMenu.Location = new System.Drawing.Point(1050, 183);
             this.btnMainMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMainMenu.Name = "btnMainMenu";
             this.btnMainMenu.Size = new System.Drawing.Size(261, 51);
@@ -140,7 +151,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(612, 326);
+            this.label5.Location = new System.Drawing.Point(612, 334);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 20);
@@ -149,7 +160,7 @@
             // 
             // txtUnitPrice
             // 
-            this.txtUnitPrice.Location = new System.Drawing.Point(609, 352);
+            this.txtUnitPrice.Location = new System.Drawing.Point(609, 360);
             this.txtUnitPrice.Name = "txtUnitPrice";
             this.txtUnitPrice.Size = new System.Drawing.Size(324, 26);
             this.txtUnitPrice.TabIndex = 28;
@@ -158,7 +169,7 @@
             // 
             this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(1050, 112);
+            this.btnDelete.Location = new System.Drawing.Point(1050, 102);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(261, 51);
@@ -183,7 +194,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(168, 400);
+            this.label4.Location = new System.Drawing.Point(168, 408);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(148, 20);
@@ -193,7 +204,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(168, 326);
+            this.label2.Location = new System.Drawing.Point(168, 334);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 20);
@@ -202,17 +213,17 @@
             // 
             // txtProdDesc
             // 
-            this.txtProdDesc.Location = new System.Drawing.Point(165, 426);
+            this.txtProdDesc.Location = new System.Drawing.Point(165, 434);
             this.txtProdDesc.Multiline = true;
             this.txtProdDesc.Name = "txtProdDesc";
             this.txtProdDesc.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtProdDesc.Size = new System.Drawing.Size(324, 132);
+            this.txtProdDesc.Size = new System.Drawing.Size(324, 111);
             this.txtProdDesc.TabIndex = 19;
             this.txtProdDesc.TextChanged += new System.EventHandler(this.txtProdDesc_TextChanged);
             // 
             // txtProdModels
             // 
-            this.txtProdModels.Location = new System.Drawing.Point(165, 352);
+            this.txtProdModels.Location = new System.Drawing.Point(165, 360);
             this.txtProdModels.Name = "txtProdModels";
             this.txtProdModels.Size = new System.Drawing.Size(324, 26);
             this.txtProdModels.TabIndex = 17;
@@ -221,7 +232,10 @@
             // 
             this.tabPage2.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage2.Controls.Add(this.checkBox1);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.txtPStock);
+            this.tabPage2.Controls.Add(this.cmbPType);
+            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.txtProdPrice);
             this.tabPage2.Controls.Add(this.label7);
@@ -238,21 +252,10 @@
             this.tabPage2.Text = "Manage Products";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(585, 412);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(119, 24);
-            this.checkBox1.TabIndex = 40;
-            this.checkBox1.Text = "Discontinue";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(585, 314);
+            this.label6.Location = new System.Drawing.Point(584, 354);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 20);
@@ -261,7 +264,7 @@
             // 
             // txtProdPrice
             // 
-            this.txtProdPrice.Location = new System.Drawing.Point(585, 340);
+            this.txtProdPrice.Location = new System.Drawing.Point(584, 380);
             this.txtProdPrice.Name = "txtProdPrice";
             this.txtProdPrice.Size = new System.Drawing.Size(324, 26);
             this.txtProdPrice.TabIndex = 38;
@@ -270,7 +273,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(585, 129);
+            this.label7.Location = new System.Drawing.Point(584, 169);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(148, 20);
@@ -280,7 +283,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(585, 57);
+            this.label9.Location = new System.Drawing.Point(584, 97);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(111, 20);
@@ -289,7 +292,7 @@
             // 
             // txtPDetails
             // 
-            this.txtPDetails.Location = new System.Drawing.Point(585, 155);
+            this.txtPDetails.Location = new System.Drawing.Point(584, 195);
             this.txtPDetails.Multiline = true;
             this.txtPDetails.Name = "txtPDetails";
             this.txtPDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -298,7 +301,7 @@
             // 
             // txtPModel
             // 
-            this.txtPModel.Location = new System.Drawing.Point(585, 83);
+            this.txtPModel.Location = new System.Drawing.Point(584, 123);
             this.txtPModel.Name = "txtPModel";
             this.txtPModel.Size = new System.Drawing.Size(324, 26);
             this.txtPModel.TabIndex = 30;
@@ -327,6 +330,76 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Orders";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(168, 256);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 20);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Product Type";
+            // 
+            // cmbProdType
+            // 
+            this.cmbProdType.FormattingEnabled = true;
+            this.cmbProdType.Location = new System.Drawing.Point(172, 280);
+            this.cmbProdType.Name = "cmbProdType";
+            this.cmbProdType.Size = new System.Drawing.Size(121, 28);
+            this.cmbProdType.TabIndex = 35;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(619, 256);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 20);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Stock Quantity";
+            // 
+            // txtProdStock
+            // 
+            this.txtProdStock.Location = new System.Drawing.Point(616, 282);
+            this.txtProdStock.Name = "txtProdStock";
+            this.txtProdStock.Size = new System.Drawing.Size(324, 26);
+            this.txtProdStock.TabIndex = 36;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(580, 434);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(113, 20);
+            this.label8.TabIndex = 44;
+            this.label8.Text = "Stock Quantity";
+            // 
+            // txtPStock
+            // 
+            this.txtPStock.Location = new System.Drawing.Point(584, 457);
+            this.txtPStock.Name = "txtPStock";
+            this.txtPStock.Size = new System.Drawing.Size(324, 26);
+            this.txtPStock.TabIndex = 43;
+            // 
+            // cmbPType
+            // 
+            this.cmbPType.FormattingEnabled = true;
+            this.cmbPType.Location = new System.Drawing.Point(584, 48);
+            this.cmbPType.Name = "cmbPType";
+            this.cmbPType.Size = new System.Drawing.Size(121, 28);
+            this.cmbPType.TabIndex = 42;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(580, 24);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(102, 20);
+            this.label10.TabIndex = 41;
+            this.label10.Text = "Product Type";
             // 
             // frmProductManagement
             // 
@@ -370,10 +443,17 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtProdDesc;
         private System.Windows.Forms.TextBox txtProdModels;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox cbxDiscontinue;
         private System.Windows.Forms.TextBox txtProdId;
         private System.Windows.Forms.DataGridView dvgProducts;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtProdStock;
+        private System.Windows.Forms.ComboBox cmbProdType;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtPStock;
+        private System.Windows.Forms.ComboBox cmbPType;
+        private System.Windows.Forms.Label label10;
     }
 }
 

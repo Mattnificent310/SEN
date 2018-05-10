@@ -14,27 +14,26 @@ namespace Data_Access_Layer
     public class DataHandler
     {
         #region Fields
-        private static DBConn db;
-        private static DBConn dbc;
         private static DataSet ds;
         private List<object> sender;
         private static string[] index;
         private static SqlParameter[] param;
+        private static DBConn db;
+        private static string table;
         #endregion
         #region Constructor
-        public DataHandler()
+        public DataHandler(string _table = null)
         {
-            db = new DBConn();
-            dbc = new DBConn();
+            db = new DBConn();            
             sender = new List<object>();
             ds = new DataSet();
-
-
-        }
+            table = _table;
+            if (_table != null) { table = _table; GetData(); }
+            }
         #endregion
 
         #region Method
-        public DataTable GetData(string table, string[] columns = null)
+        public DataTable GetData(string _table = null, string[] columns = null)
         {
             int i = 0;
             string _query = "SELECT ";
@@ -49,13 +48,13 @@ namespace Data_Access_Layer
                     _query += " FROM " + table;
                     //ds = db.ReadOnly(_query);
                 }
-               ds = db.Read(table);
-                return ds.Tables[table];
+               ds = db.Read(_table ?? table);
+                return ds.Tables[_table ?? table];
            
           
         }
 
-        public static bool CreateEntity(Dictionary<string, object> create, string[] columns, string table)
+        public static bool CreateEntity(Dictionary<string, object> create, string[] columns)
         {
             bool inserted = false;
             try
@@ -85,12 +84,9 @@ namespace Data_Access_Layer
             catch (SqlException e) { throw new Exception(e.Message); }
             return inserted;
         }
-        public static bool ChangeEntity(Dictionary<string, object> values, string[] columns, string table)
-        {
-            bool updated = false;
-
+        public static bool ChangeEntity(Dictionary<string, object> values, string[] columns)
+        {            
             try
-
             {
                 int i = 0, j = 1;
                 string _query = "UPDATE " + table + " SET ";
@@ -112,10 +108,10 @@ namespace Data_Access_Layer
 
             }
             catch (SqlException e) { throw new Exception(e.Message); }
-            return updated;
+            return false;
         }
 
-        public object Insert(Dictionary<string, object> values, string table)
+        public object Insert(Dictionary<string, object> values)
         {
             try
             {
@@ -125,7 +121,7 @@ namespace Data_Access_Layer
                     dr[item.Key] = item.Value;
                 }
                 ds.Tables[table].Rows.Add(dr);
-              if(dbc.Write(ds, table))
+              if(db.Write(ds, table))
               {
                     int count = ds.Tables[table].Rows.Count - 1;
                     return ds.Tables[table].Rows[count][0];
@@ -136,23 +132,21 @@ namespace Data_Access_Layer
             catch (SqlException e) { throw new Exception(e.Message); }
            
         }
-        public int GetRow(DataSet ds, string table, string identifier)
+        public int GetRow(DataSet getDS, string getTable, string identifier)
         {
-            ds.Tables[table].PrimaryKey = new DataColumn[] { ds.Tables[table].Columns[0] };
+            getDS.Tables[getTable].PrimaryKey = new DataColumn[] { getDS.Tables[getTable].Columns[0] };
             int index = 0;
-            foreach (DataRow dr in ds.Tables[table].Rows)
+            foreach (DataRow dr in getDS.Tables[getTable].Rows)
             {
-                if (dr == ds.Tables[table].Rows.Find(identifier))
+                if (dr == getDS.Tables[getTable].Rows.Find(identifier))
                 {
-                    index = (int)ds.Tables[table].Rows.IndexOf(dr);
+                    index = getDS.Tables[getTable].Rows.IndexOf(dr);
                 }
             }
             return index;
         }
-        public bool Update(Dictionary<string, object> values, string table, string identifier)
-        {
-
-           
+        public bool Update(Dictionary<string, object> values, string identifier)
+        {           
             try
             {
                 foreach (var item in values)
@@ -160,42 +154,44 @@ namespace Data_Access_Layer
                     ds.Tables[table].Rows[GetRow(ds, table, identifier)][item.Key] = item.Value;
 
                 }
-               return dbc.Write(ds, table);
+               return db.Write(ds, table);
                 
             }
             catch (SqlException e) { throw new Exception(e.Message); }
            
         }
-        public bool Delete(string table, string identifier)
+        public bool Delete(string identifier)
         {
            
             try
             {
                 ds.Tables[table].Rows[GetRow(ds, table, identifier)].Delete();
-               return dbc.Write(ds, table);
+               return db.Write(ds, table);
               
             }
             catch (SqlException e) { throw new Exception(e.Message); }
            
         }
 
-        public DataRow Search(string table, string identifier)
+        public DataRow Search(string identifier, string _table = null)
         {
-            GetData(table);
-            int index = 0;
-            ds.Tables[table].PrimaryKey = new DataColumn[] { ds.Tables[table].Columns[0] };
-            foreach (DataRow dr in ds.Tables[table].Rows)
+            if (_table != null)
             {
-                if (dr == ds.Tables[table].Rows.Find(identifier))
+                GetData(_table);
+            }
+            int index = 0;
+            ds.Tables[_table ?? table].PrimaryKey = new DataColumn[] { ds.Tables[_table ?? table].Columns[0] };
+            foreach (DataRow dr in ds.Tables[_table ?? table].Rows)
+            {
+                if (dr == ds.Tables[_table ?? table].Rows.Find(identifier))
                 {
-                    index = (int)ds.Tables[table].Rows.IndexOf(dr);
+                    index = (int)ds.Tables[_table ?? table].Rows.IndexOf(dr);
                 }
             }
-            return ds.Tables[table].Rows[index];
+            return ds.Tables[_table ?? table].Rows[index];
         }
-        public DataRow SearchByName(string table, string column,string value)
-        {
-            GetData(table);
+        public DataRow SearchByName(string column,string value)
+        {            
             int index = 0;
             foreach (DataRow dr in ds.Tables[table].Rows)
             {
