@@ -34,7 +34,7 @@ namespace Business_Logic_Layer
             {
                 locs.Add(new Location(
                   (int)item[Cons.table4Id],
-                       item[Cons.table4Col1].ToString(),
+                       item[Cons.table4Col1].ToString().Trim(),
                        dh.Search(item[Cons.table4IdFk].ToString(), Cons.table5)[Cons.table5Col1].ToString(),
                        dh.Search(dh.Search(item[Cons.table4IdFk].ToString(),
                        Cons.table5)[Cons.table5IdFk].ToString(),
@@ -52,7 +52,7 @@ namespace Business_Logic_Layer
             this.Country = country;
         }
         #region Indexer
-        public Location this[string locId = null, string street = null, string city = null, string country = null]
+        public Location this[int? locId, string street = null, string city = null, string country = null]
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Business_Logic_Layer
                 foreach (var item in locs)
                 {
                     
-                    if (item.LocationId.ToString() == (locId ?? item.LocationId.ToString())
+                    if (item.LocationId == (locId ?? item.LocationId)
                     && item.Street == (street ?? item.Street)
                     && item.City == (city ?? item.City)
                     && item.Country == (country ?? item.Country))

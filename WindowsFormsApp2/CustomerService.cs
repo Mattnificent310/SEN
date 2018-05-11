@@ -42,7 +42,7 @@ namespace WindowsFormsApp2
                 txtCustEmail.DataBindings.Add("Text", data, "EmailAddress");
                 cmbCustCountry.DataBindings.Add("Text", data, "Country");
                 cmbCustCity.DataBindings.Add("Text", data, "City");
-               
+                txtCustStreet.DataBindings.Add("Text", data, "Street");
                 return true;
             }
             return false;
@@ -86,23 +86,102 @@ namespace WindowsFormsApp2
 
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
+           
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnInsert_Click_1(object sender, EventArgs e)
+        {
+            client = new Client()
+            {
+                Title = cmbCTitle.Text,
+                Name = txtCName.Text.Trim(),
+                Surname = txtCSurname.Text.Trim(),
+                Gender = cmbCGender.Text,
+                BirthDate = dtpCBD.Value,
+                ContactNumber = txtCPhone.Text.Trim(),
+                EmailAddress = txtCEmail.Text.Trim(),
+                Country = cmbCCountry.Text,
+                City = cmbCCity.Text,
+                Street = txtCustStreet.Text
+            };
+            if (!Client.Insert(client))
+            {
+                MessageBox.Show("Customer could not be added.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Customer was added successfully.");
+            }
+           
+        }
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void btnMainMenu_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnMainMenu_Click_2(object sender, EventArgs e)
+        {
             this.Hide();
             frmMainMenu main = new frmMainMenu();
             main.Show();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click_2(object sender, EventArgs e)
+        {
+            if (!Client.Delete(txtClientId.Text))
+            {
+                MessageBox.Show("Customer could not be deleted.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Customer was deleted successfully");
+            }
+        }
+
+        private void btnUpdate_Click_2(object sender, EventArgs e)
         {
             client = new Client()
             {
-                Identity = txtClientId.Text, 
+                Identity = txtClientId.Text,
                 Title = cmbCustTitle.Text,
                 Name = txtCustName.Text,
                 Surname = txtCustSurname.Text,
                 Gender = cmbCustGender.Text,
                 BirthDate = dtpCustDOB.Value,
                 ContactNumber = txtCustPhone.Text,
-                EmailAddress = txtCustEmail.Text,               
+                EmailAddress = txtCustEmail.Text,
                 Country = cmbCustCountry.Text,
                 City = cmbCustCity.Text,
                 Street = txtCustStreet.Text
@@ -117,50 +196,6 @@ namespace WindowsFormsApp2
                 BindData();
                 MessageBox.Show("Customer information was updated successfully.");
             }
-            
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (!Client.Delete(txtClientId.Text))
-            {
-                MessageBox.Show("Customer could not be deleted.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Customer was deleted successfully");
-            }
-            
-        }
-
-        private void btnInsert_Click_1(object sender, EventArgs e)
-        {
-            client = new Client()
-            {
-                Title = cmbCTitle.Text,
-                Name = txtCName.Text,
-                Surname = txtCSurname.Text,
-                Gender = cmbCGender.Text,
-                BirthDate = dtpCBD.Value,
-                ContactNumber = txtCPhone.Text,
-                EmailAddress = txtCEmail.Text,
-                Country = cmbCCountry.Text,
-                City = cmbCCity.Text,
-                Street = txtCAddress.Text
-            };
-            if (!Client.Insert(client))
-            {
-                MessageBox.Show("Customer could not be added.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Customer was added successfully.");
-            }
-           
         }
     }
 }

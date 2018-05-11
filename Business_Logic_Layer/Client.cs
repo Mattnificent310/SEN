@@ -120,7 +120,7 @@ namespace Business_Logic_Layer
                 string.Empty,
                 string.Empty,
                 string.Empty,
-                loc[item[Cons.table1IdFk].ToString()].Country,
+                loc[(int)item[Cons.table1IdFk]].Country,
                 loc.City,
                 loc.Street
                 ));
