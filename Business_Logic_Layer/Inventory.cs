@@ -98,27 +98,23 @@ namespace Business_Logic_Layer
             this.ReorderLevel = _reorder;
         }
         #region Indexer
-        public Inventory this[int invId = 0, string warehouse = null, int stock = 0, int reorder = 0]
+        public Inventory this[int invId = 0, string warehouse = null, int? stock = null, int? reorder = null]
         {
             get
             {
                 new Inventory();
                 foreach (var item in stocks)
                 {
-                    if (item.Warehouse == (warehouse != null ? warehouse : item.Warehouse)
-                    && item.UnitsInStock == (stock != 0 ? stock : item.UnitsInStock)
-                    && item.ReorderLevel == (reorder != 0 ? reorder : item.ReorderLevel))
+                    if (item.Warehouse == (warehouse ?? item.Warehouse)
+                    && item.UnitsInStock == (stock ?? item.UnitsInStock)
+                    && item.ReorderLevel == (reorder ?? item.ReorderLevel))
                     {
+                        this.InventoryID = item.InventoryID;
+                        this.UnitsInStock = item.UnitsInStock;
+                        this.Warehouse = item.Warehouse;
+                        this.ReorderLevel = item.ReorderLevel;
                         return (Inventory)item;
-                    }
-                    else
-                    {
-                         values = new Dictionary<string, object>();
-                        values.Add(Cons.table8Col1, warehouse);
-                        values.Add(Cons.table8Col2, stock);
-                        values.Add(Cons.table8Col3, reorder);
-                        this.InventoryID = (int)dh.Insert(values);
-                    }
+                    }                    
                 }
                 throw new KeyNotFoundException();
             }
@@ -127,8 +123,16 @@ namespace Business_Logic_Layer
 
         #endregion
 
-
-        #region Methods
+        public int Insert(Inventory inv)
+        {
+            new Inventory(Cons.table8);
+            values = new Dictionary<string, object>();
+            values.Add(Cons.table8Col1, inv.Warehouse);
+            values.Add(Cons.table8Col2, inv.UnitsInStock);
+            values.Add(Cons.table8Col3, inv.reorderLevel);
+            return this.InventoryID = (int)dh.Insert(values);
+        }
+        #region Poly Methods
         public override bool Equals(object obj)
         {
             return false;

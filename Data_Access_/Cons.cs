@@ -43,8 +43,8 @@ namespace Data_Access_
                             table3Col5 = "StaffGender",
                             table3Col6 = "StaffPhone",
                             table3Col7 = "StaffEmail",
-                            table3Col8 = "JobDescIDFK",
-                            table3Col9 = "LocationIDFK";
+                            table3IdFk1 = "JobDescIDFK",
+                            table3IdFk2 = "LocationIDFK";
         #endregion
 
         #region Location
@@ -84,6 +84,15 @@ namespace Data_Access_
                             table8Col1 = "WarehouseNo",
                             table8Col2 = "UnitsInStock",
                             table8Col3 = "ReorderLevel";
+        #endregion
+
+        #region Job
+        public const string table9 = "tblJob",
+                            table9Id = "JobIDPK",
+                            table9Col1 = "JobDescription",
+                            table9Col2 = "JobSalary",
+                            table9Col3 = "HireDate",
+                            table9Col4 = "JobDetails";
         #endregion
     }
 }

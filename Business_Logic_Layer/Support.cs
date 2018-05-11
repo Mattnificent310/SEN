@@ -9,6 +9,11 @@ namespace Business_Logic_Layer
     class Support
     {
         private int supportIDPK;
+        public static List<Support> clients;
+        private static Data_Access_Layer.DataHandler dh;
+        private static Dictionary<string, object> items;
+        private static Location loc;
+
 
         public int SupportIDPK
         {

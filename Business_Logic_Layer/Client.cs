@@ -149,8 +149,13 @@ namespace Business_Logic_Layer
             {
                 foreach (Person item in clients)
                 {
-                    if ((item.Name == name && item.Surname == surname) || item.EmailAddress == email)
+                    if (item.Name == (name ?? item.Name)
+                    && item.Surname == (surname ?? item.Surname)
+                    && item.EmailAddress == (email ?? item.EmailAddress))
                     {
+                        this.Name = item.Name;
+                        this.Surname = item.Surname;
+                        this.EmailAddress = item.EmailAddress;
                         return (Client)item;
                     }
                 }

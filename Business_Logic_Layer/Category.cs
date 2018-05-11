@@ -48,17 +48,20 @@ namespace Business_Logic_Layer
             this.CategoryDesc = catDesc;
         }
         #region Indexer
-        public Category this[int catId = 0, string catName = null, string catDesc = null]
+        public Category this[int? catId = null, string catName = null, string catDesc = null]
         {
             get
             {
                 new Category();
                 foreach (var item in cats)
                 {
-                    if (item.CategoryId == (catId != 0 ? catId : item.CategoryId)
-                    && item.CategoryName == (catName != null ? catName : item.CategoryName)
-                    && item.CategoryDesc == (catDesc != null ? catDesc : item.CategoryDesc))
+                    if (item.CategoryId == (catId ?? item.CategoryId)
+                    && item.CategoryName == (catName ?? item.CategoryName)
+                    && item.CategoryDesc == (catDesc ?? item.CategoryDesc))
                     {
+                        this.CategoryId = item.CategoryId;
+                        this.CategoryName = item.CategoryName;
+                        this.CategoryDesc = item.CategoryDesc;
                         return (Category)item;
                     }
                     

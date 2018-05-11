@@ -51,6 +51,34 @@ namespace Business_Logic_Layer
             this.UnitPrice = price;
             this.Discontinued = discontinued;
         }
+        #region Indexer
+        public Product this[int? prodId = null, string model = null, string desc = null, decimal? price = null, bool? discon = null]
+        {
+            get
+            {
+                new Inventory();
+                foreach (var item in prods)
+                {
+                    if (item.ProductID == (prodId ?? item.ProductID)
+                    && item.ProductModel == (model ?? item.ProductModel)
+                    && item.ProductDetail == (desc ?? item.ProductDetail)
+                    && item.UnitPrice == (price ?? item.UnitPrice)
+                    && item.Discontinued == (discon ?? item.Discontinued))
+                    {
+                        this.ProductID = item.ProductID;
+                        this.ProductModel = item.ProductModel;
+                        this.ProductDetail = item.ProductDetail;
+                        this.UnitPrice = item.UnitPrice;
+                        this.Discontinued = item.Discontinued;
+                        return (Product)item;
+                    }
+                }
+                throw new KeyNotFoundException();
+            }
+        }
+
+
+        #endregion
 
         public static bool Insert(Product prod, Category cat, Inventory inv)
         {            
