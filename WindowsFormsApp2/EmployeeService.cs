@@ -107,5 +107,46 @@ namespace WindowsFormsApp2
         {
 
         }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            staff = new Staff()
+            {
+                Title = cmbETitle.Text,
+                Name = txtEName.Text.Trim(),
+                Surname = txtESurname.Text.Trim(),
+                Gender = cmbEGender.Text,
+                BirthDate = dtpEBD.Value,
+                ContactNumber = txtEPhone.Text.Trim(),
+                EmailAddress = txtEEmail.Text.Trim(),
+                Country = cmbECountry.Text,
+                City = cmbECity.Text,
+                Street = txtEAddress.Text
+            };
+            if (!Staff.Insert(staff))
+            {
+                MessageBox.Show("Employee could not be added.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Employee was added successfully.");
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!Staff.Delete(txtEmpId.Text))
+            {
+                MessageBox.Show("Employee could not be deleted.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Employee was deleted successfully");
+            }
+        }
     }
 }
