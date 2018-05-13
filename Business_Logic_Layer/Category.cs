@@ -24,9 +24,9 @@ namespace Business_Logic_Layer
 
         public Category()
         {
-            new Category(Cons.table7);
+            dh = new DataHandler();
             cats = new List<Category>();
-            foreach (DataRow item in dh.GetData().Rows)
+            foreach (DataRow item in dh.GetData(Cons.table7).Rows)
             {
                 cats.Add(new Category
                 (
@@ -52,7 +52,8 @@ namespace Business_Logic_Layer
         {
             get
             {
-                new Category();
+                if(!cats.Any())new Category();
+
                 foreach (var item in cats)
                 {
                     if (item.CategoryId == (catId ?? item.CategoryId)

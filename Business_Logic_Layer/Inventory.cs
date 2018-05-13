@@ -16,7 +16,7 @@ namespace Business_Logic_Layer
         private int unitsInStock;
         private int reorderLevel;
         public static List<Inventory> stocks;
-        private DataHandler dh;
+        private static DataHandler dh;
         private Dictionary<string, object> values;
 
         public int InventoryID
@@ -72,9 +72,9 @@ namespace Business_Logic_Layer
 
         public Inventory()
         {
-            new Inventory(Cons.table8);
+            dh = new DataHandler();
             stocks = new List<Inventory>();
-            foreach (DataRow item in dh.GetData().Rows)
+            foreach (DataRow item in dh.GetData(Cons.table8).Rows)
             {
                 stocks.Add(new Inventory
                 ((int)item[Cons.table8Id],
@@ -83,7 +83,7 @@ namespace Business_Logic_Layer
                 (int)item[Cons.table8Col3]
                 ));
             }
-            Inventory inv = new Inventory();
+           
 
         }
         public Inventory(string cons)

@@ -72,7 +72,7 @@ namespace Data_Access_
         #endregion
 
         #region Category
-        public const string table7 = "tblCategory",
+        public const string table7 = "tblCategories",
                             table7Id = "CategoryIDPK",
                             table7Col1 = "CategoryName",
                             table7Col2 = "CategoryDescription";

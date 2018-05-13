@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    class Staff : Person
+    public class Staff : Person
     {
         private int identity;
         private string jobDesc;
@@ -26,6 +26,7 @@ namespace Business_Logic_Layer
             dh = new Data_Access_Layer.DataHandler();
             loc = new Location();
             staff = new List<Staff>();
+            job = new Job();
 
             foreach (DataRow item in dh.GetData(Cons.table3).Rows)
             {
@@ -38,7 +39,7 @@ namespace Business_Logic_Layer
                 (DateTime)item[Cons.table3Col4],
                 item[Cons.table3Col6].ToString(),
                 item[Cons.table3Col7].ToString(),
-                "Jobless",
+                job[(int)item[Cons.table3IdFk1]].JobDesc,
                 loc[(int)item[Cons.table3IdFk2]].Country,
                 loc.City,
                 loc.Street

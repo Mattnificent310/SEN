@@ -88,9 +88,11 @@ namespace WindowsFormsApp2
         {
             prod = new Product(
            0,
+           cmbPType.Text,
            txtPModel.Text,
            txtPDetails.Text,
            decimal.Parse(txtProdPrice.Text.ToString()),
+           int.Parse(txtProdStock.Text),
            false
            
        );
@@ -125,9 +127,11 @@ namespace WindowsFormsApp2
 
             prod = new Product(
                int.Parse(txtProdId.Text),
+              cmbProdType.Text,
                txtProdModels.Text,
                txtProdDesc.Text,
                price,
+               int.Parse(txtProdStock.Text),
                cbxDiscontinue.Checked
 
            );

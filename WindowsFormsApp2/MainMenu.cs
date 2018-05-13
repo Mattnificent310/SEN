@@ -37,6 +37,12 @@ namespace WindowsFormsApp2
             frmTechnicalSupport tech = new frmTechnicalSupport();
             tech.Show();
         }
-       
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            EmployeeService emp = new EmployeeService();
+            emp.Show();
+        }
     }
 }
