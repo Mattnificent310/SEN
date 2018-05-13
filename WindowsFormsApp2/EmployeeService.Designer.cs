@@ -77,12 +77,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtEmpSurname = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.dgvStaff = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.cmbJobDesc = new System.Windows.Forms.ComboBox();
+            this.lblJobDesc = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.cmbJobDescription = new System.Windows.Forms.ComboBox();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label18
@@ -6163,6 +6167,7 @@
             // 
             resources.ApplyResources(this.txtEmpPhone, "txtEmpPhone");
             this.txtEmpPhone.Name = "txtEmpPhone";
+            this.txtEmpPhone.TextChanged += new System.EventHandler(this.txtEmpPhone_TextChanged);
             // 
             // label5
             // 
@@ -12171,6 +12176,8 @@
             // 
             this.tabPage2.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
             resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Controls.Add(this.lblJobDesc);
+            this.tabPage2.Controls.Add(this.cmbJobDesc);
             this.tabPage2.Controls.Add(this.cmbCCountry);
             this.tabPage2.Controls.Add(this.cmbCGender);
             this.tabPage2.Controls.Add(this.dtpCBD);
@@ -12227,6 +12234,8 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.label21);
+            this.tabPage1.Controls.Add(this.cmbJobDescription);
             this.tabPage1.Controls.Add(this.dgvStaff);
             this.tabPage1.Controls.Add(this.btnReset);
             this.tabPage1.Controls.Add(this.btnMainMenu);
@@ -12256,6 +12265,12 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dgvStaff
+            // 
+            this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.dgvStaff, "dgvStaff");
+            this.dgvStaff.Name = "dgvStaff";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -12264,11 +12279,27 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
-            // dgvStaff
+            // cmbJobDesc
             // 
-            this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(this.dgvStaff, "dgvStaff");
-            this.dgvStaff.Name = "dgvStaff";
+            this.cmbJobDesc.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbJobDesc, "cmbJobDesc");
+            this.cmbJobDesc.Name = "cmbJobDesc";
+            // 
+            // lblJobDesc
+            // 
+            resources.ApplyResources(this.lblJobDesc, "lblJobDesc");
+            this.lblJobDesc.Name = "lblJobDesc";
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.Name = "label21";
+            // 
+            // cmbJobDescription
+            // 
+            this.cmbJobDescription.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbJobDescription, "cmbJobDescription");
+            this.cmbJobDescription.Name = "cmbJobDescription";
             // 
             // EmployeeService
             // 
@@ -12281,8 +12312,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -12339,5 +12370,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.DataGridView dgvStaff;
+        private System.Windows.Forms.Label lblJobDesc;
+        private System.Windows.Forms.ComboBox cmbJobDesc;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox cmbJobDescription;
     }
 }
