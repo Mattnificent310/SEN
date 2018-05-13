@@ -51,9 +51,11 @@ namespace WindowsFormsApp2
             if (Populate())
             {
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
+                cmbProdType.DataBindings.Add("Text", data, "ProductType");
                 txtProdModels.DataBindings.Add("Text", data, "ProductModel");
                 txtProdDesc.DataBindings.Add("Text", data, "ProductDetail");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                txtProdStock.DataBindings.Add("Text", data, "InStock");
                 return true;
             }
             return false;
@@ -62,9 +64,11 @@ namespace WindowsFormsApp2
         public void Clear()
         {
             txtProdId.DataBindings.Clear();
+            cmbProdType.DataBindings.Clear();
             txtProdModels.DataBindings.Clear();
             txtProdDesc.DataBindings.Clear();
             txtUnitPrice.DataBindings.Clear();
+            txtProdStock.DataBindings.Clear();
         }
 
         private void dvgProducts_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -91,14 +95,13 @@ namespace WindowsFormsApp2
            cmbPType.Text,
            txtPModel.Text,
            txtPDetails.Text,
-           decimal.Parse(txtProdPrice.Text.ToString()),
-           int.Parse(txtProdStock.Text),
+           decimal.Parse(txtPPrice.Text.ToString()),
+           int.Parse(txtPStock.Text),
            false
            
-       );
-            cat = new Category(cmbPType.Text);
-            inv = new Inventory(txtPStock.Text);
-            if (!Product.Insert(prod,cat,inv))
+       );           
+            
+            if (!CRUD.InsertProduct(prod))
             {
                 MessageBox.Show("Product could not be added.");
             }
@@ -135,7 +138,7 @@ namespace WindowsFormsApp2
                cbxDiscontinue.Checked
 
            );
-            if (!Product.Update(prod))
+            if (!CRUD.UpdateProduct(prod))
             {
                 MessageBox.Show("Product information could not be changed");
             }           
@@ -149,7 +152,7 @@ namespace WindowsFormsApp2
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!Product.Delete(txtProdId.Text))
+            if (!CRUD.DeleteProduct(int.Parse(txtProdId.Text)))
             {
                 MessageBox.Show("The product could not be removed.");
             }

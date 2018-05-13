@@ -115,7 +115,7 @@ namespace WindowsFormsApp2
                 City = cmbCCity.Text,
                 Street = txtCustStreet.Text
             };
-            if (!Client.Insert(client))
+            if (!CRUD.InsertClient(client))
             {
                 MessageBox.Show("Customer could not be added.");
             }
@@ -158,7 +158,7 @@ namespace WindowsFormsApp2
 
         private void btnDelete_Click_2(object sender, EventArgs e)
         {
-            if (!Client.Delete(txtClientId.Text))
+            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
             {
                 MessageBox.Show("Customer could not be deleted.");
             }
@@ -186,7 +186,7 @@ namespace WindowsFormsApp2
                 City = cmbCustCity.Text,
                 Street = txtCustStreet.Text
             };
-            if (!Client.Update(client))
+            if (!CRUD.UpdateClient(client))
             {
                 MessageBox.Show("Customer information could not be changed.");
             }

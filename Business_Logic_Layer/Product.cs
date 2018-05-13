@@ -9,7 +9,7 @@ using Data_Access_Layer;
 
 namespace Business_Logic_Layer
 {
-    public class Product
+    public class Product : IProduct
     {
         private int productID;
         private string productType;
@@ -95,20 +95,22 @@ namespace Business_Logic_Layer
 
         #endregion
 
-        public static bool Insert(Product prod, Category cat, Inventory inv)
+        public bool Insert(Product prod)
         {
+            inv = new Inventory();
+            cat = new Category();
             new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add(Cons.table2Col1, prod.ProductModel);
             items.Add(Cons.table2Col2, prod.ProductDetail);
             items.Add(Cons.table2Col3, prod.UnitPrice);
             items.Add(Cons.table2Col4, prod.Discontinued);
-            items.Add(Cons.table2IdFk1, inv.InventoryID);
-            items.Add(Cons.table2IdFk2, cat.CategoryId);
+            items.Add(Cons.table2IdFk1, inv[null,null,prod.InStock].InventoryID);
+            items.Add(Cons.table2IdFk2, cat[null,prod.ProductType].CategoryName);
             return dh.Insert(items) != null ? true : false;
         }
 
-        public static bool Update(Product prod)
+        public bool Update(Product prod)
         {
             new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
@@ -119,10 +121,10 @@ namespace Business_Logic_Layer
             return dh.Update(items, prod.ProductID.ToString());
         }
 
-        public static bool Delete(string prodId)
+        public bool Delete(int prodId)
         {
             new Product(Cons.table2);
-            return dh.Delete(prodId);
+            return dh.Delete(prodId.ToString());
         }
     }
 

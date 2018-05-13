@@ -15,7 +15,7 @@ namespace Business_Logic_Layer
         NewClient,
         Removed
     }
-    public class Client : Person
+    public class Client : Person, IClient
     {
         #region Fields
 
@@ -171,43 +171,6 @@ namespace Business_Logic_Layer
 
         }
 
-        public static bool Insert(Client client)
-        {            
-            int locId = loc[null, client.City,client.Country].LocationId;
-            new Client(Cons.table1);
-            items = new Dictionary<string, object>();
-            items.Add(Cons.table1Col1, client.Title);
-            items.Add(Cons.table1Col2, client.Name);
-            items.Add(Cons.table1Col3, client.Surname);
-            items.Add(Cons.table1Col4, client.BirthDate);
-            items.Add(Cons.table1Col5, client.Gender.StartsWith("M") ? false : true);
-            items.Add(Cons.table1Col6, client.ContactNumber);
-            items.Add(Cons.table1Col7, client.EmailAddress);
-            items.Add(Cons.table1IdFk, locId);
-            return dh.Insert(items) != null ? true : false;
-        }
-
-        public static bool Update(Client client)
-        {
-            int locId = loc[null,client.Street, client.City, client.Country].LocationId;
-            items = new Dictionary<string, object>();
-            new Client(Cons.table1);
-            items.Add(Cons.table1Col1, client.Title);
-            items.Add(Cons.table1Col2, client.Name);
-            items.Add(Cons.table1Col3, client.Surname);
-            items.Add(Cons.table1Col4, client.BirthDate);
-            items.Add(Cons.table1Col5, client.Gender.StartsWith("M") ? false : true);
-            items.Add(Cons.table1Col6, client.ContactNumber);
-            items.Add(Cons.table1Col7, client.EmailAddress);
-            items.Add(Cons.table1IdFk, locId);
-            return dh.Update(items, client.Identity);
-        }
-
-        public static bool Delete(string clientId)
-        {
-            new Client(Cons.table1);
-            return dh.Delete(clientId);
-        }
         #region Poly Methods
         public override bool Equals(object obj)
         {
@@ -229,6 +192,50 @@ namespace Business_Logic_Layer
         {
             return string.Format(Identity, Title, Name, Surname, Gender, BirthDate.ToShortDateString(), ContactNumber, EmailAddress, ContactMethod, Status, creditRating, Country, City, Street);
         }
+        #endregion
+
+        #region SOLID Methods
+        public bool Insert(Client client)
+        {
+            int locId = loc[null, client.City, client.Country].LocationId;
+            new Client(Cons.table1);
+            items = new Dictionary<string, object>();
+            items.Add(Cons.table1Col1, client.Title);
+            items.Add(Cons.table1Col2, client.Name);
+            items.Add(Cons.table1Col3, client.Surname);
+            items.Add(Cons.table1Col4, client.BirthDate);
+            items.Add(Cons.table1Col5, client.Gender.StartsWith("M") ? false : true);
+            items.Add(Cons.table1Col6, client.ContactNumber);
+            items.Add(Cons.table1Col7, client.EmailAddress);
+            items.Add(Cons.table1IdFk, locId);
+            return dh.Insert(items) != null ? true : false;
+        }
+
+        public bool Update(Client client)
+        {
+            int locId = loc[null, client.Street, client.City, client.Country].LocationId;
+            items = new Dictionary<string, object>();
+            new Client(Cons.table1);
+            items.Add(Cons.table1Col1, client.Title);
+            items.Add(Cons.table1Col2, client.Name);
+            items.Add(Cons.table1Col3, client.Surname);
+            items.Add(Cons.table1Col4, client.BirthDate);
+            items.Add(Cons.table1Col5, client.Gender.StartsWith("M") ? false : true);
+            items.Add(Cons.table1Col6, client.ContactNumber);
+            items.Add(Cons.table1Col7, client.EmailAddress);
+            items.Add(Cons.table1IdFk, locId);
+            return dh.Update(items, client.Identity);
+        }
+
+        public bool Delete(int clientId)
+        {
+            new Client(Cons.table1);
+            return dh.Delete(clientId.ToString());
+        }
+
+
+
+
 
 
         #endregion

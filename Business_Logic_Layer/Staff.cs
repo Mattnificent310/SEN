@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Staff : Person
+    public class Staff : Person, IStaff
     {
         private int identity;
         private string jobDesc;
@@ -77,7 +77,7 @@ namespace Business_Logic_Layer
         #endregion
 
         #region CRUD
-        public static bool Insert(Staff staff)
+        public bool Insert(Staff staff)
         {
             int locId = loc[null, staff.City, staff.Country].LocationId;
             new Client(Cons.table3);
@@ -93,7 +93,7 @@ namespace Business_Logic_Layer
             return dh.Insert(items) != null ? true : false;
         }
 
-        public static bool Update(Staff staff)
+        public bool Update(Staff staff)
         {
             int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
             items = new Dictionary<string, object>();
@@ -109,10 +109,10 @@ namespace Business_Logic_Layer
             return dh.Update(items, staff.Identity.ToString());
         }
 
-        public static bool Delete(string clientId)
+        public bool Delete(int staffId)
         {
             new Client(Cons.table3);
-            return dh.Delete(clientId);
+            return dh.Delete(staffId.ToString());
         }
         #endregion
 

@@ -32,6 +32,7 @@ namespace WindowsFormsApp2
                 cmbEmpGender.DataBindings.Add("Text", data, "Gender");
                 txtEmpPhone.DataBindings.Add("Text", data, "ContactNumber");
                 txtEmpEmail.DataBindings.Add("Text", data, "EmailAddress");
+                cmbJobDescription.DataBindings.Add("Text", data, "JobDesc");
                 cmbEmpCountry.DataBindings.Add("Text", data, "Country");
                 cmbEmpCity.DataBindings.Add("Text", data, "City");
                 txtEmpStreet.DataBindings.Add("Text", data, "Street");
@@ -50,6 +51,7 @@ namespace WindowsFormsApp2
             dtpEmpDOB.DataBindings.Clear();
             txtEmpPhone.DataBindings.Clear();
             txtEmpEmail.DataBindings.Clear();
+            cmbJobDescription.DataBindings.Clear();
             txtEmpStreet.DataBindings.Clear();
             cmbEmpCity.DataBindings.Clear();
             cmbEmpCountry.DataBindings.Clear();
@@ -84,7 +86,7 @@ namespace WindowsFormsApp2
                 City = cmbEmpCity.Text.Trim(),
                 Street = txtEmpStreet.Text.Trim()
             };
-            if (!Staff.Update(staff))
+            if (!CRUD.UpdateStaff(staff))
             {
                 MessageBox.Show("Employee information could not be changed.");
             }
@@ -123,7 +125,7 @@ namespace WindowsFormsApp2
                 City = cmbECity.Text,
                 Street = txtEAddress.Text
             };
-            if (!Staff.Insert(staff))
+            if (!CRUD.InsertStaff(staff))
             {
                 MessageBox.Show("Employee could not be added.");
             }
@@ -137,7 +139,7 @@ namespace WindowsFormsApp2
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!Staff.Delete(txtEmpId.Text))
+            if (!CRUD.DeleteStaff(int.Parse(txtEmpId.Text)))
             {
                 MessageBox.Show("Employee could not be deleted.");
             }

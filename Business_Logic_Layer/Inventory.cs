@@ -98,7 +98,7 @@ namespace Business_Logic_Layer
             this.ReorderLevel = _reorder;
         }
         #region Indexer
-        public Inventory this[int invId = 0, string warehouse = null, int? stock = null, int? reorder = null]
+        public Inventory this[int? invId = null, string warehouse = null, int? stock = null, int? reorder = null]
         {
             get
             {

@@ -43,7 +43,11 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="CRUD.cs" />
+    <Compile Include="IClient.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="IProduct.cs" />
+    <Compile Include="IStaff.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Person.cs" />
