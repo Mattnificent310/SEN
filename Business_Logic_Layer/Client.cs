@@ -213,6 +213,7 @@ namespace Business_Logic_Layer
 
         public bool Update(Client client)
         {
+            loc = new Location();
             int locId = loc[null, client.Street, client.City, client.Country].LocationId;
             items = new Dictionary<string, object>();
             new Client(Cons.table1);

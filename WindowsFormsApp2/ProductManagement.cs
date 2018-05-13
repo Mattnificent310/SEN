@@ -27,6 +27,8 @@ namespace WindowsFormsApp2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            new Category();
+           
 
             if (!BindData())
             {
@@ -40,8 +42,12 @@ namespace WindowsFormsApp2
             {
                 data.DataSource = Product.prods;
                 dvgProducts.DataSource = data;
+                BindingSource types = new BindingSource();
+                types.DataSource = Category.cats.Select(x => x.CategoryName);
+                cmbProdType.DataSource = types;
                 return true;
             }
+
             return false;
 
 
@@ -98,9 +104,9 @@ namespace WindowsFormsApp2
            decimal.Parse(txtPPrice.Text.ToString()),
            int.Parse(txtPStock.Text),
            false
-           
-       );           
-            
+
+       );
+
             if (!CRUD.InsertProduct(prod))
             {
                 MessageBox.Show("Product could not be added.");
@@ -141,7 +147,7 @@ namespace WindowsFormsApp2
             if (!CRUD.UpdateProduct(prod))
             {
                 MessageBox.Show("Product information could not be changed");
-            }           
+            }
             else
             {
                 Clear();

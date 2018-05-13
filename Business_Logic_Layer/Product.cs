@@ -44,11 +44,11 @@ namespace Business_Logic_Layer
             {
                 prods.Add(new Product(
                 (int)item[Cons.table2Id],
-                 cat[(int)item[Cons.table2IdFk2]].CategoryName,
+                 cat[(int)item[Cons.table2IdFk1]].CategoryName,
                 item[Cons.table2Col1].ToString(),
                 item[Cons.table2Col2].ToString(),
                 (decimal)item[Cons.table2Col3],
-                 inv[(int)item[Cons.table2IdFk1]].UnitsInStock,
+                 inv[(int)item[Cons.table2IdFk2]].UnitsInStock,
                  (bool)item[Cons.table2Col4]));
             }
         }
@@ -106,18 +106,24 @@ namespace Business_Logic_Layer
             items.Add(Cons.table2Col3, prod.UnitPrice);
             items.Add(Cons.table2Col4, prod.Discontinued);
             items.Add(Cons.table2IdFk1, inv[null,null,prod.InStock].InventoryID);
-            items.Add(Cons.table2IdFk2, cat[null,prod.ProductType].CategoryName);
+            items.Add(Cons.table2IdFk2, cat[null,prod.ProductType].CategoryId);
             return dh.Insert(items) != null ? true : false;
         }
 
         public bool Update(Product prod)
         {
+            inv = new Inventory();
+            cat = new Category();
+            int catId = cat[null, prod.ProductType].CategoryId;
+            int invId = inv[null, null, prod.inStock].InventoryID;
             new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add(Cons.table2Col1, prod.ProductModel);
             items.Add(Cons.table2Col2, prod.ProductDetail);
             items.Add(Cons.table2Col3, prod.UnitPrice);
             items.Add(Cons.table2Col4, prod.Discontinued);
+            items.Add(Cons.table2IdFk1, catId);
+            items.Add(Cons.table2IdFk2, invId);
             return dh.Update(items, prod.ProductID.ToString());
         }
 
