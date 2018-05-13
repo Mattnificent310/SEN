@@ -44,5 +44,10 @@ namespace WindowsFormsApp2
             EmployeeService emp = new EmployeeService();
             emp.Show();
         }
+
+        private void frmMainMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

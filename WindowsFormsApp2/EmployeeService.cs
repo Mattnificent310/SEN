@@ -102,5 +102,10 @@ namespace WindowsFormsApp2
             frmMainMenu menu = new frmMainMenu();
             menu.Show();
         }
+
+        private void txtEmpPhone_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
