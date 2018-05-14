@@ -64,6 +64,10 @@ namespace WindowsFormsApp2
             {
                 data.DataSource = Staff.staff;
                 dgvStaff.DataSource = data;
+                BindingSource jobDescs = new BindingSource();
+                jobDescs.DataSource = Job.jobs.Select(x => x.JobDesc);
+                cmbJobDescription.DataSource = jobDescs;
+                cmbJobDesc.DataSource = jobDescs;
                 return true;
             }
             return false;

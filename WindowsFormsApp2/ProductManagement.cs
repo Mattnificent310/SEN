@@ -45,6 +45,8 @@ namespace WindowsFormsApp2
                 BindingSource types = new BindingSource();
                 types.DataSource = Category.cats.Select(x => x.CategoryName);
                 cmbProdType.DataSource = types;
+                cmbPType.DataSource = types;
+
                 return true;
             }
 
