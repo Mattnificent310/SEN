@@ -19,7 +19,7 @@ namespace Data_Access_Layer
         public DBConn()
         {
             connStr = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMSDB;Integrated Security=True";
-            //connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMSDB;Integrated Security=True";
+            connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMSDB;Integrated Security=True";
             ds = new DataSet();
 
             //adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
