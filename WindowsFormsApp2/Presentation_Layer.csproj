@@ -125,5 +125,20 @@
   <ItemGroup>
     <None Include="Resources\50-Beautiful-and-Minimalist-Presentation-Backgrounds-08.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\callbtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\endCall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\End.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newcall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hangup.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
