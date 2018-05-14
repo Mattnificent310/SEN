@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Inventory
+    public class Inventory : IStock
     {
         private int inventoryID;
         private string warehouse;
@@ -123,15 +123,32 @@ namespace Business_Logic_Layer
 
         #endregion
 
-        public int Insert(Inventory inv)
+        #region CRUD
+        public int? Insert(Inventory inv)
         {
             new Inventory(Cons.table8);
             values = new Dictionary<string, object>();
             values.Add(Cons.table8Col1, inv.Warehouse);
             values.Add(Cons.table8Col2, inv.UnitsInStock);
-            values.Add(Cons.table8Col3, inv.reorderLevel);
-            return this.InventoryID = (int)dh.Insert(values);
+            values.Add(Cons.table8Col3, inv.ReorderLevel);
+            return (int?)dh.Insert(values);
         }
+        public bool Update(Inventory inv)
+        {
+            new Inventory(Cons.table8);
+            values = new Dictionary<string, object>();
+            values.Add(Cons.table8Col1, inv.Warehouse);
+            values.Add(Cons.table8Col2, inv.UnitsInStock);
+            values.Add(Cons.table8Col3, inv.ReorderLevel);
+            return dh.Update(values, inv.InventoryID.ToString());
+        }
+
+        public bool Delete(int invId)
+        {
+            return dh.Delete(invId.ToString());
+        }
+        #endregion
+
         #region Poly Methods
         public override bool Equals(object obj)
         {
@@ -147,6 +164,8 @@ namespace Business_Logic_Layer
         {
             return null;
         }
+
+        
         #endregion
     }
 }

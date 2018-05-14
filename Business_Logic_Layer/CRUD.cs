@@ -54,5 +54,22 @@ namespace Business_Logic_Layer
             return new Product().Delete(prodId);
         }
         #endregion
+
+        #region Inventory
+        public static bool InsertInventory(Inventory inv)
+        {
+            return new Inventory().Insert(inv) == null ? false : true;
+        }
+
+        public static bool UpdateInventory(Inventory inv)
+        {
+            return new Inventory().Update(inv);
+        }
+
+        public static bool DeleteInventory(int invId)
+        {
+            return new Inventory().Delete(invId);
+        }
+        #endregion
     }
 }
