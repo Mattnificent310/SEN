@@ -51,12 +51,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCustSurname = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvTech = new System.Windows.Forms.DataGridView();
             this.btnMainMenu = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -94,7 +94,7 @@
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.txtCustSurname);
-            this.tabPage1.Controls.Add(this.dataGridView1);
+            this.tabPage1.Controls.Add(this.dgvTech);
             this.tabPage1.Controls.Add(this.btnMainMenu);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -128,6 +128,7 @@
             this.btnSearch.TabIndex = 83;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnBookTask
             // 
@@ -180,11 +181,16 @@
             // cmbSuportType
             // 
             this.cmbSuportType.FormattingEnabled = true;
+            this.cmbSuportType.Items.AddRange(new object[] {
+            "Product Support",
+            "Customer Support"});
             this.cmbSuportType.Location = new System.Drawing.Point(480, 274);
             this.cmbSuportType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbSuportType.Name = "cmbSuportType";
             this.cmbSuportType.Size = new System.Drawing.Size(298, 28);
             this.cmbSuportType.TabIndex = 77;
+            this.cmbSuportType.SelectedIndexChanged += new System.EventHandler(this.cmbSuportType_SelectedIndexChanged);
+            this.cmbSuportType.TextChanged += new System.EventHandler(this.cmbSuportType_TextChanged);
             // 
             // lblSupCost
             // 
@@ -306,14 +312,14 @@
             this.txtCustSurname.Size = new System.Drawing.Size(337, 26);
             this.txtCustSurname.TabIndex = 64;
             // 
-            // dataGridView1
+            // dgvTech
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(906, 223);
-            this.dataGridView1.TabIndex = 2;
+            this.dgvTech.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTech.Location = new System.Drawing.Point(12, 12);
+            this.dgvTech.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvTech.Name = "dgvTech";
+            this.dgvTech.Size = new System.Drawing.Size(906, 223);
+            this.dgvTech.TabIndex = 2;
             // 
             // btnMainMenu
             // 
@@ -354,7 +360,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,7 +371,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnMainMenu;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvTech;
         private System.Windows.Forms.TextBox txtCustName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;

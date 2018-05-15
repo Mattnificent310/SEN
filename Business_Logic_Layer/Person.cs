@@ -136,7 +136,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                city = value == null ? string.Empty : value.Trim();
+                city = string.IsNullOrEmpty(value.Trim()) ? "Pending" : value.Trim();
             }
         }
 
@@ -149,7 +149,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                street = value == null ? string.Empty : value.Trim();
+                street = string.IsNullOrEmpty(value.Trim()) ? "Pending" : value.Trim();
             }
         }
 
