@@ -19,7 +19,7 @@ namespace Business_Logic_Layer
         private static Job job;
 
         public int Identity { get { return identity; } set { identity = value; } }
-        public string JobDesc { get { return jobDesc; } set { jobDesc = value; } }
+        public string JobDesc { get { return jobDesc; } set { jobDesc = string.IsNullOrEmpty(value.Trim()) ? "Pending" : value.Trim(); } }
 
         public Staff()
         {

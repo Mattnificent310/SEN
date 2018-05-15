@@ -40,7 +40,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                warehouse = value;
+                warehouse = string.IsNullOrEmpty(value) ? "W1001" : value.Trim();
             }
         }
 
@@ -53,7 +53,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                unitsInStock = value;
+                unitsInStock = value < 1 ? 1 : value;
             }
         }
 
@@ -66,7 +66,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                reorderLevel = value;
+                reorderLevel = value < 0 ? 10 : value;
             }
         }
 

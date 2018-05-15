@@ -42,7 +42,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                identity = value == null ? string.Empty : value.Trim();
+                identity = string.IsNullOrEmpty(value) ? "" : value.Trim();
             }
         }
         public static List<Client> Clients
@@ -143,7 +143,7 @@ namespace Business_Logic_Layer
         }
         #endregion
         #region Indexer
-        public Client this[string name, string surname, string email]
+        public Client this[string name = null, string surname = null, string email = null]
         {
             get
             {
