@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnReset = new System.Windows.Forms.Button();
@@ -79,6 +80,8 @@
             this.txtCSurname = new System.Windows.Forms.TextBox();
             this.btnInsert = new System.Windows.Forms.Button();
             this.lblLogin = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblDate = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
@@ -12471,10 +12474,26 @@
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
-            this.lblLogin.Location = new System.Drawing.Point(649, 5);
+            this.lblLogin.Location = new System.Drawing.Point(617, 5);
             this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(0, 20);
+            this.lblLogin.Size = new System.Drawing.Size(237, 20);
             this.lblLogin.TabIndex = 86;
+            this.lblLogin.Text = "Welcome: Mr BlahBlah BlahBlah";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(981, 5);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(171, 20);
+            this.lblDate.TabIndex = 87;
+            this.lblDate.Text = "15 May 2018 08:46 PM";
             // 
             // frmCustomerService
             // 
@@ -12485,6 +12504,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1501, 766);
             this.ControlBox = false;
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12556,5 +12576,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblDate;
     }
 }

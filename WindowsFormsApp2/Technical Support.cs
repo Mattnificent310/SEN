@@ -22,6 +22,8 @@ namespace WindowsFormsApp2
             InitializeComponent();
             new Client();
             new Product();
+            timer1.Start();
+
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
@@ -97,11 +99,17 @@ namespace WindowsFormsApp2
         }
         public void Login(Staff staf)
         {
-            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+            lblLogin.Text = string.Format("Welcome:  {0} {1} {2}", staf.Title, staf.Name, staf.Surname);
 
         }
         private void frmTechnicalSupport_Load(object sender, EventArgs e)
         {
+           
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+             lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
 
         }
     }

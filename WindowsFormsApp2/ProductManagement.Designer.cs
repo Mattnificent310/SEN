@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,6 +63,8 @@
             this.btnEndCall = new System.Windows.Forms.Button();
             this.btnCall = new System.Windows.Forms.Button();
             this.lblLogin = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgProducts)).BeginInit();
@@ -434,10 +437,26 @@
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
-            this.lblLogin.Location = new System.Drawing.Point(642, 4);
+            this.lblLogin.Location = new System.Drawing.Point(533, 4);
             this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(0, 20);
+            this.lblLogin.Size = new System.Drawing.Size(237, 20);
             this.lblLogin.TabIndex = 86;
+            this.lblLogin.Text = "Welcome: Mr BlahBlah BlahBlah";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(867, 6);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(171, 20);
+            this.lblDate.TabIndex = 88;
+            this.lblDate.Text = "15 May 2018 08:46 PM";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmProductManagement
             // 
@@ -447,6 +466,7 @@
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(1346, 666);
             this.ControlBox = false;
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.Name = "frmProductManagement";
@@ -501,6 +521,8 @@
         private System.Windows.Forms.Button btnEndCall;
         private System.Windows.Forms.Button btnCall;
         private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

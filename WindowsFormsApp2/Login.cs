@@ -30,54 +30,62 @@ namespace WindowsFormsApp2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var staff = CRUD.Login(txtUsername.Text, txtPassword.Text);
-            if (staff != null)
+            try
             {
-                switch (staff.Department)
+                var staff = CRUD.Login(txtUsername.Text, txtPassword.Text);
+                if (staff != null)
                 {
-                    case "Technical Support":
-                        {
-                            this.Hide();
-                            frmTechnicalSupport support = new frmTechnicalSupport();
-                            support.Login(staff);
-                            support.Show();
-                            break;
-                        }
-                    case "Product Management":
-                        {
-                            this.Hide();
-                            frmProductManagement prodMng = new frmProductManagement();
-                            prodMng.Login(staff);
-                            prodMng.Show();
-                            break;
-                        }
-                    case "Customer Support":
-                        {
-                            this.Hide();
-                            frmCustomerService custSupport = new frmCustomerService();
-                            custSupport.Login(staff);
-                            custSupport.Show();
-                            break;
-                        }
-                    case "Employee Services":
-                        {
-                            this.Hide();
-                            EmployeeService emp = new EmployeeService();
-                            emp.Login(staff);
-                            emp.Show();
-                            break;
-                        }
-                    default:
-                        {
+                    switch (staff.Department)
+                    {
+                        case "Technical Support":
+                            {
+                                this.Hide();
+                                frmTechnicalSupport support = new frmTechnicalSupport();
+                                support.Login(staff);
+                                support.Show();
+                                break;
+                            }
+                        case "Product Management":
+                            {
+                                this.Hide();
+                                frmProductManagement prodMng = new frmProductManagement();
+                                prodMng.Login(staff);
+                                prodMng.Show();
+                                break;
+                            }
+                        case "Customer Support":
+                            {
+                                this.Hide();
+                                frmCustomerService custSupport = new frmCustomerService();
+                                custSupport.Login(staff);
+                                custSupport.Show();
+                                break;
+                            }
+                        case "Employee Services":
+                            {
+                                this.Hide();
+                                EmployeeService emp = new EmployeeService();
+                                emp.Login(staff);
+                                emp.Show();
+                                break;
+                            }
+                        default:
+                            {
 
-                            MessageBox.Show("Unauthorized Access Detected!");
-                            break;
-                        }
+                                MessageBox.Show("Unauthorized Access Detected!");
+                                break;
+                            }
+                    }
+
                 }
+                else
+                    MessageBox.Show("Unauthorized Access Detected!");
 
             }
-            else
+            catch (Exception ex)
+            {
                 MessageBox.Show("Unauthorized Access Detected!");
+            }
         }
     }
 }

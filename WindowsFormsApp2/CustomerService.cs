@@ -18,6 +18,7 @@ namespace WindowsFormsApp2
         public frmCustomerService()
         {
             InitializeComponent();
+            timer1.Start();
         }
 
         private void CustomerService_Load(object sender, EventArgs e)
@@ -201,6 +202,12 @@ namespace WindowsFormsApp2
                 BindData();
                 MessageBox.Show("Customer information was updated successfully.");
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+
         }
     }
 }

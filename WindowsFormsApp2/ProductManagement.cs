@@ -23,6 +23,7 @@ namespace WindowsFormsApp2
         public frmProductManagement()
         {
             InitializeComponent();
+            timer1.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -176,6 +177,12 @@ namespace WindowsFormsApp2
                 MessageBox.Show("The product was successfully removed");
 
             }
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
 
         }
     }

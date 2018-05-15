@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeService));
             this.label18 = new System.Windows.Forms.Label();
             this.cmbETitle = new System.Windows.Forms.ComboBox();
@@ -84,6 +85,8 @@
             this.dgvStaff = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.lblLogin = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblDate = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
@@ -12309,17 +12312,30 @@
             resources.ApplyResources(this.lblLogin, "lblLogin");
             this.lblLogin.Name = "lblLogin";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lblDate
+            // 
+            resources.ApplyResources(this.lblDate, "lblDate");
+            this.lblDate.Name = "lblDate";
+            // 
             // EmployeeService
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ControlBox = false;
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EmployeeService";
+            this.Load += new System.EventHandler(this.EmployeeService_Load);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -12388,5 +12404,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cmbJobDescription;
         private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lblDate;
     }
 }

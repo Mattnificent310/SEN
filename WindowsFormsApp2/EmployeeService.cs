@@ -19,10 +19,12 @@ namespace WindowsFormsApp2
         {
             InitializeComponent();
             BindData();
+            timer1.Start();
+
         }
         public void Login(Staff staf)
         {
-            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+            lblLogin.Text = string.Format("Welcome:  {0} {1} {2}", staff.Title, staf.Name, staf.Surname);
 
         }
         private bool BindData()
@@ -158,6 +160,16 @@ namespace WindowsFormsApp2
                 BindData();
                 MessageBox.Show("Employee was deleted successfully");
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+             lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+        }
+
+        private void EmployeeService_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

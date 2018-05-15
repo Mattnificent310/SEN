@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -54,7 +54,10 @@
             this.txtCustSurname = new System.Windows.Forms.TextBox();
             this.dgvTech = new System.Windows.Forms.DataGridView();
             this.btnMainMenu = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblLogin = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -70,17 +73,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1221, 678);
             this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1213, 645);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Manage Tasks";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
@@ -346,13 +338,40 @@
             this.btnMainMenu.UseVisualStyleBackColor = false;
             this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(1213, 645);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Manage Tasks";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
-            this.lblLogin.Location = new System.Drawing.Point(521, 4);
+            this.lblLogin.Location = new System.Drawing.Point(472, 4);
             this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(0, 20);
+            this.lblLogin.Size = new System.Drawing.Size(235, 20);
             this.lblLogin.TabIndex = 85;
+            this.lblLogin.Text = "Welcome: Mr Blahblah BlahBlah";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(757, 4);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(162, 20);
+            this.lblDate.TabIndex = 86;
+            this.lblDate.Text = "15 May 2018 8:46 PM";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // frmTechnicalSupport
             // 
@@ -361,6 +380,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(1218, 677);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -406,5 +426,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnBookTask;
         private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Timer timer1;
     }
 }
