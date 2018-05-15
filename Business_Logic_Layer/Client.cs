@@ -172,12 +172,12 @@ namespace Business_Logic_Layer
         }
 
         #region Poly Methods
-        public override bool Equals(object obj)
+        protected override bool Equals(object obj)
         {
             return obj == null || !(obj is Client) ? false : Name.Equals(((Client)obj).Name);
         }
 
-        public override int GetHashCode()
+        protected override int GetHashCode()
         {
             int i = 0;
             try
@@ -188,7 +188,7 @@ namespace Business_Logic_Layer
             return i;
         }
 
-        public override string ToString()
+        protected override string ToString()
         {
             return string.Format(Identity, Title, Name, Surname, Gender, BirthDate.ToShortDateString(), ContactNumber, EmailAddress, ContactMethod, Status, creditRating, Country, City, Street);
         }

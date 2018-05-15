@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -53,7 +54,7 @@
             this.txtCustSurname = new System.Windows.Forms.TextBox();
             this.dgvTech = new System.Windows.Forms.DataGridView();
             this.btnMainMenu = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblLogin = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -69,6 +70,17 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1221, 678);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(1213, 645);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Manage Tasks";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
@@ -334,16 +346,13 @@
             this.btnMainMenu.UseVisualStyleBackColor = false;
             this.btnMainMenu.Click += new System.EventHandler(this.btnMainMenu_Click);
             // 
-            // tabPage2
+            // lblLogin
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1213, 645);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Manage Tasks";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.lblLogin.AutoSize = true;
+            this.lblLogin.Location = new System.Drawing.Point(521, 4);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(0, 20);
+            this.lblLogin.TabIndex = 85;
             // 
             // frmTechnicalSupport
             // 
@@ -352,16 +361,19 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(1218, 677);
+            this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmTechnicalSupport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Technical Support";
+            this.Load += new System.EventHandler(this.frmTechnicalSupport_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -393,5 +405,6 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnBookTask;
+        private System.Windows.Forms.Label lblLogin;
     }
 }

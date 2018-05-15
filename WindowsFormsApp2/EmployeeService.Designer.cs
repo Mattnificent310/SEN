@@ -83,6 +83,7 @@
             this.cmbJobDescription = new System.Windows.Forms.ComboBox();
             this.dgvStaff = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.lblLogin = new System.Windows.Forms.Label();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
@@ -12303,11 +12304,17 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
+            // lblLogin
+            // 
+            resources.ApplyResources(this.lblLogin, "lblLogin");
+            this.lblLogin.Name = "lblLogin";
+            // 
             // EmployeeService
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ControlBox = false;
+            this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -12320,6 +12327,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -12379,5 +12387,6 @@
         private System.Windows.Forms.ComboBox cmbJobDesc;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox cmbJobDescription;
+        private System.Windows.Forms.Label lblLogin;
     }
 }

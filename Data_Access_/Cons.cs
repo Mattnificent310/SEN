@@ -94,5 +94,14 @@ namespace Data_Access_
                             table9Col3 = "HireDate",
                             table9Col4 = "JobDetails";
         #endregion
+                            #region Accounts
+        public const string table10 = "tblAccounts",
+                            table10Id = "AccountIDPK",
+                            table10Col1 = "Username",
+                            table10Col2 = "Password",
+                            table10Col3 = "Department",
+                            table10IDFk = "StaffIDFK";
+        #endregion
+
     }
 }

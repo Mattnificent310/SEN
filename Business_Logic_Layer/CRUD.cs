@@ -26,6 +26,10 @@ namespace Business_Logic_Layer
         #endregion
 
         #region Staff
+        public static Staff Login(string username, string password)
+        {
+            return new Staff().Login(username, password);
+        }
         public static bool InsertStaff(Staff staff)
         {
             return new Staff().Insert(staff);

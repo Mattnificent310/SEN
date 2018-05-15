@@ -186,5 +186,14 @@ namespace Business_Logic_Layer
         /// <returns>Returns a list of Person members as search results</returns>
         protected abstract List<Person> Search(string name = "empty", string surname = "empty", string email = "example@example.com");
         #endregion
+
+        #region Poly
+        protected abstract bool Equals(object obj);
+
+        protected abstract int GetHashCode();
+        ///
+        protected abstract string ToString();
+        #endregion
     }
+
 }

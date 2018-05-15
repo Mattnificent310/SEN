@@ -28,6 +28,11 @@ namespace WindowsFormsApp2
                 MessageBox.Show("No customers could be found.");
             }
         }
+        public void Login(Staff staf)
+        {
+            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+           
+        }
         private bool BindData()
         {
             if (Populate())
@@ -49,7 +54,7 @@ namespace WindowsFormsApp2
         }
         private void Clear()
         {
-           
+
             txtClientId.DataBindings.Clear();
             cmbCustTitle.DataBindings.Clear();
             txtCustName.DataBindings.Clear();
@@ -64,7 +69,7 @@ namespace WindowsFormsApp2
         }
         private bool Populate()
         {
-            client = new Client();            
+            client = new Client();
             if (Client.clients.Any())
             {
                 data.DataSource = Client.clients;
@@ -76,7 +81,7 @@ namespace WindowsFormsApp2
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,18 +91,18 @@ namespace WindowsFormsApp2
 
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            
-            
+
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnInsert_Click_1(object sender, EventArgs e)
@@ -125,23 +130,23 @@ namespace WindowsFormsApp2
                 BindData();
                 MessageBox.Show("Customer was added successfully.");
             }
-           
+
         }
 
         private void btnUpdate_Click_1(object sender, EventArgs e)
         {
-           
+
         }
 
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
-           
+
 
         }
 
         private void btnMainMenu_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnMainMenu_Click_2(object sender, EventArgs e)

@@ -54,6 +54,11 @@ namespace WindowsFormsApp2
 
 
         }
+        public void Login(Staff staf)
+        {
+            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+            
+        }
         private bool BindData()
         {
             if (Populate())

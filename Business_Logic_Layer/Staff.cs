@@ -12,15 +12,24 @@ namespace Business_Logic_Layer
     {
         private int identity;
         private string jobDesc;
+        private string department;
         public static List<Staff> staff;
         private static Data_Access_Layer.DataHandler dh;
         private static Dictionary<string, object> items;
         private static Location loc;
         private static Job job;
 
+        #region Properties
         public int Identity { get { return identity; } set { identity = value; } }
         public string JobDesc { get { return jobDesc; } set { jobDesc = string.IsNullOrEmpty(value.Trim()) ? "Pending" : value.Trim(); } }
+        public string Department { get { return department; } set { department = value; } }
+        #endregion
 
+        #region Constructors
+        public Staff(string cons)
+        {
+            dh = new Data_Access_Layer.DataHandler(cons);
+        }
         public Staff()
         {
             dh = new Data_Access_Layer.DataHandler();
@@ -54,20 +63,24 @@ namespace Business_Logic_Layer
             this.JobDesc = jobDesc;
         }
 
+        public Staff(string username, string password)
+        {}
+        #endregion
+
         #region Indexer
-        public Staff this[string name, string surname, string email]
+        public Staff this[int? staffId = null, string department = null, string name = null, string surname = null, string phone = null, string email = null]
         {
             get
             {
-                foreach (Person item in staff)
+                foreach (var item in staff)
                 {
-                    if (item.Name == (name ?? item.Name) 
-                    && item.Surname == (surname ?? item.Surname) 
+                    if (item.Identity == (staffId ?? item.Identity)
+                    && item.Name == (name ?? item.Name)
+                    && item.Surname == (surname ?? item.Surname)
+                    && item.ContactNumber == (phone ?? item.ContactNumber)
                     && item.EmailAddress == (email ?? item.EmailAddress))
                     {
-                        this.Name = item.Name;
-                        this.Surname = item.Surname;
-                        this.EmailAddress = item.EmailAddress;
+                        item.Department = department == null ? string.Empty : department;
                         return (Staff)item;
                     }
                 }
@@ -77,10 +90,24 @@ namespace Business_Logic_Layer
         #endregion
 
         #region CRUD
+
+        public Staff Login(string username, string password)
+        {
+            dh = new Data_Access_Layer.DataHandler();
+            foreach (DataRow item in dh.GetData(Cons.table10).Rows)
+            {
+                if (username.Equals(item[Cons.table10Col1].ToString()) && password.Equals(item[Cons.table10Col2].ToString()))
+                {
+                    return new Staff(username,password)[(int?)item[Cons.table10IDFk], item[Cons.table10Col3].ToString()];
+                }
+
+            }
+            return null;
+        }
         public bool Insert(Staff staff)
         {
             int locId = loc[null, staff.City, staff.Country].LocationId;
-            new Client(Cons.table3);
+            new Staff(Cons.table3);
             items = new Dictionary<string, object>();
             items.Add(Cons.table3Col1, staff.Title);
             items.Add(Cons.table3Col2, staff.Name);
@@ -97,7 +124,7 @@ namespace Business_Logic_Layer
         {
             int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
             items = new Dictionary<string, object>();
-            new Client(Cons.table3);
+            new Staff(Cons.table3);
             items.Add(Cons.table3Col1, staff.Title);
             items.Add(Cons.table3Col2, staff.Name);
             items.Add(Cons.table3Col3, staff.Surname);
@@ -116,20 +143,27 @@ namespace Business_Logic_Layer
         }
         #endregion
 
-        #region Methods
-        public override bool Equals(object obj)
+        #region Poly
+        protected override bool Equals(object obj)
         {
-            return false;
+            return obj == null || !(obj is Staff) ? false : Name.Equals(((Staff)obj).Name);
         }
 
-        public override int GetHashCode()
+        protected override int GetHashCode()
         {
-            return 0;
+            int i = 0;
+            try
+            {
+                i = Name.GetHashCode();
+            }
+            catch (Exception e) { return 0; }
+            return i;
         }
 
-        public override string ToString()
+        protected override string ToString()
         {
-            return null;
+            return string.Format(Identity.ToString(), Title, Name, Surname, Gender, BirthDate.ToShortDateString(), ContactNumber, EmailAddress, JobDesc, Country, City, Street);
+
         }
 
         protected override List<Person> Search(string name = "empty", string surname = "empty", string email = "example@example.com")

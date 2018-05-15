@@ -78,6 +78,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.txtCSurname = new System.Windows.Forms.TextBox();
             this.btnInsert = new System.Windows.Forms.Button();
+            this.lblLogin = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
@@ -12467,6 +12468,14 @@
             this.btnInsert.UseVisualStyleBackColor = false;
             this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click_1);
             // 
+            // lblLogin
+            // 
+            this.lblLogin.AutoSize = true;
+            this.lblLogin.Location = new System.Drawing.Point(649, 5);
+            this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Size = new System.Drawing.Size(0, 20);
+            this.lblLogin.TabIndex = 86;
+            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -12476,6 +12485,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1501, 766);
             this.ControlBox = false;
+            this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmCustomerService";
@@ -12489,6 +12499,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -12544,5 +12555,6 @@
         private System.Windows.Forms.Button btnMainMenu;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Label lblLogin;
     }
 }
