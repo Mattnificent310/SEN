@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    class Support
+    public class Support
     {
         private int supportIDPK;
         public static List<Support> clients;

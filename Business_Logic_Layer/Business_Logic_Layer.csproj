@@ -43,20 +43,29 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Contract.cs" />
     <Compile Include="CRUD.cs" />
     <Compile Include="IClient.cs" />
+    <Compile Include="Installation.cs" />
     <Compile Include="IStock.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="IProduct.cs" />
     <Compile Include="IStaff.cs" />
     <Compile Include="Job.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Maintenance.cs" />
+    <Compile Include="Offer.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sale.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="Tasks.cs" />
+    <Compile Include="Upgrade.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data_Access_\Data_Access_Layer.csproj">
