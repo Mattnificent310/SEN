@@ -200,29 +200,33 @@ namespace WindowsFormsApp2
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            decimal price = 0;
-            decimal.TryParse(txtUnitPrice.Text, out price);
-
-            prod = new Product(
-               int.Parse(txtProdId.Text),
-              cmbProdType.Text,
-               txtProdModels.Text,
-               txtProdDesc.Text,
-               price,
-               int.Parse(txtProdStock.Text),
-               cbxDiscontinue.Checked
-
-           );
-            if (!CRUD.UpdateProduct(prod))
+            if (ValidateAll(this.tabPage1))
             {
-                MessageBox.Show("Product information could not be changed");
+                decimal price = 0;
+                decimal.TryParse(txtUnitPrice.Text, out price);
+
+                prod = new Product(
+                   int.Parse(txtProdId.Text),
+                  cmbProdType.Text,
+                   txtProdModels.Text,
+                   txtProdDesc.Text,
+                   price,
+                   int.Parse(txtProdStock.Text),
+                   cbxDiscontinue.Checked
+
+               );
+                if (!CRUD.UpdateProduct(prod))
+                {
+                    MessageBox.Show("Product information could not be changed");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Product information was changed");
+                }
             }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Product information was changed");
-            }
+            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
