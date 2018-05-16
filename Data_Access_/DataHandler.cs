@@ -111,20 +111,20 @@ namespace Data_Access_Layer
             return false;
         }
 
-        public object Insert(Dictionary<string, object> values)
+        public object Insert(Dictionary<string, object> values, string _table = null)
         {
             try
             {
-                DataRow dr = ds.Tables[table].NewRow();
+                DataRow dr = ds.Tables[_table ?? table].NewRow();
                 foreach (var item in values)
                 {
                     dr[item.Key] = item.Value;
                 }
                 ds.Tables[table].Rows.Add(dr);
-              if(db.Write(ds, table))
+              if(db.Write(ds, _table ?? table))
               {
-                    int count = ds.Tables[table].Rows.Count - 1;
-                    return ds.Tables[table].Rows[count][0];
+                    int count = ds.Tables[_table ?? table].Rows.Count - 1;
+                    return ds.Tables[_table ?? table].Rows[count][0];
               }
                 return null;
                
@@ -145,28 +145,28 @@ namespace Data_Access_Layer
             }
             return index;
         }
-        public bool Update(Dictionary<string, object> values, string identifier)
+        public bool Update(Dictionary<string, object> values, string identifier, string _table = null)
         {           
             try
             {
                 foreach (var item in values)
                 {
-                    ds.Tables[table].Rows[GetRow(ds, table, identifier)][item.Key] = item.Value;
+                    ds.Tables[_table ?? table].Rows[GetRow(ds, _table ?? table, identifier)][item.Key] = item.Value;
 
                 }
-               return db.Write(ds, table);
+               return db.Write(ds, _table ?? table);
                 
             }
             catch (SqlException e) { throw new Exception(e.Message); }
            
         }
-        public bool Delete(string identifier)
+        public bool Delete(string identifier, string _table = null)
         {
            
             try
             {
-                ds.Tables[table].Rows[GetRow(ds, table, identifier)].Delete();
-               return db.Write(ds, table);
+                ds.Tables[_table ?? table].Rows[GetRow(ds, _table ?? table, identifier)].Delete();
+               return db.Write(ds, _table ?? table);
               
             }
             catch (SqlException e) { throw new Exception(e.Message); }
@@ -190,15 +190,15 @@ namespace Data_Access_Layer
             }
             return ds.Tables[_table ?? table].Rows[index];
         }
-        public DataRow SearchByName(string column,string value)
+        public DataRow SearchByName(string column,string value, string _table = null)
         {            
             int index = 0;
-            foreach (DataRow dr in ds.Tables[table].Rows)
+            foreach (DataRow dr in ds.Tables[_table ?? table].Rows)
             {
                
-                    if (dr.Equals(ds.Tables[table].Select(column + " = '" + value + "'")))
+                    if (dr.Equals(ds.Tables[_table ?? table].Select(column + " = '" + value + "'")))
                     {
-                        index = (int)ds.Tables[table].Rows.IndexOf(dr);
+                        index = (int)ds.Tables[_table ?? table].Rows.IndexOf(dr);
                     }
                 
                
