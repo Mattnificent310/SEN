@@ -99,14 +99,14 @@ namespace Business_Logic_Layer
         {
             inv = new Inventory();
             cat = new Category();
-            new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add(Cons.table2Col1, prod.ProductModel);
             items.Add(Cons.table2Col2, prod.ProductDetail);
             items.Add(Cons.table2Col3, prod.UnitPrice);
-            items.Add(Cons.table2Col4, prod.Discontinued);
-            items.Add(Cons.table2IdFk1, inv[null,null,prod.InStock].InventoryID);
-            items.Add(Cons.table2IdFk2, cat[null,prod.ProductType].CategoryId);
+            items.Add(Cons.table2Col4, prod.Discontinued); 
+            items.Add(Cons.table2IdFk1, cat[null, prod.ProductType].CategoryId);
+            items.Add(Cons.table2IdFk2, inv[null, null, prod.InStock].InventoryID);
+            new Product(Cons.table2);
             return dh.Insert(items) != null ? true : false;
         }
 
