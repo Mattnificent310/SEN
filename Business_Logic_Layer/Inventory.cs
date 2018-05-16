@@ -126,20 +126,20 @@ namespace Business_Logic_Layer
         #region CRUD
         public int? Insert(Inventory inv)
         {
-            new Inventory(Cons.table8);
             values = new Dictionary<string, object>();
             values.Add(Cons.table8Col1, inv.Warehouse);
             values.Add(Cons.table8Col2, inv.UnitsInStock);
             values.Add(Cons.table8Col3, inv.ReorderLevel);
+            new Inventory(Cons.table8);
             return (int?)dh.Insert(values);
         }
         public bool Update(Inventory inv)
         {
-            new Inventory(Cons.table8);
             values = new Dictionary<string, object>();
             values.Add(Cons.table8Col1, inv.Warehouse);
             values.Add(Cons.table8Col2, inv.UnitsInStock);
             values.Add(Cons.table8Col3, inv.ReorderLevel);
+            new Inventory(Cons.table8);
             return dh.Update(values, inv.InventoryID.ToString());
         }
 

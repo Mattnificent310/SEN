@@ -44,6 +44,62 @@ namespace WindowsFormsApp2
 
         }
 
+        private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
+        {
+            { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
+            { typeof(ComboBox), ctrl => ((ComboBox)ctrl).Text = string.Empty },
+        };
+        private bool ValidateAll(Control parent)
+        {
+            int counter = parent.Controls.Count;
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (controlType == typeof(TextBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+                if (controlType == typeof(ComboBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+
+
+
+            }
+            return counter < parent.Controls.Count ? false : true;
+        }
+        private void ClearAll(Control parent)
+        {
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (actions.ContainsKey(controlType))
+                {
+                    actions[controlType](child);
+                }
+
+                ClearAll(child);
+            }
+        }
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             try
@@ -111,6 +167,11 @@ namespace WindowsFormsApp2
         {
              lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
 
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
         }
     }
 }

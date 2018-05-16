@@ -194,11 +194,10 @@ namespace Business_Logic_Layer
         }
         #endregion
 
-        #region SOLID Methods
+        #region CRUD
         public bool Insert(Client client)
         {
             int locId = loc[null, client.City, client.Country].LocationId;
-            new Client(Cons.table1);
             items = new Dictionary<string, object>();
             items.Add(Cons.table1Col1, client.Title);
             items.Add(Cons.table1Col2, client.Name);
@@ -208,6 +207,7 @@ namespace Business_Logic_Layer
             items.Add(Cons.table1Col6, client.ContactNumber);
             items.Add(Cons.table1Col7, client.EmailAddress);
             items.Add(Cons.table1IdFk, locId);
+            new Client(Cons.table1);
             return dh.Insert(items) != null ? true : false;
         }
 
@@ -216,7 +216,6 @@ namespace Business_Logic_Layer
             loc = new Location();
             int locId = loc[null, client.Street, client.City, client.Country].LocationId;
             items = new Dictionary<string, object>();
-            new Client(Cons.table1);
             items.Add(Cons.table1Col1, client.Title);
             items.Add(Cons.table1Col2, client.Name);
             items.Add(Cons.table1Col3, client.Surname);
@@ -225,6 +224,7 @@ namespace Business_Logic_Layer
             items.Add(Cons.table1Col6, client.ContactNumber);
             items.Add(Cons.table1Col7, client.EmailAddress);
             items.Add(Cons.table1IdFk, locId);
+            new Client(Cons.table1);
             return dh.Update(items, client.Identity);
         }
 

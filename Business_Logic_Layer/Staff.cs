@@ -107,7 +107,6 @@ namespace Business_Logic_Layer
         public bool Insert(Staff staff)
         {
             int locId = loc[null, staff.City, staff.Country].LocationId;
-            new Staff(Cons.table3);
             items = new Dictionary<string, object>();
             items.Add(Cons.table3Col1, staff.Title);
             items.Add(Cons.table3Col2, staff.Name);
@@ -117,6 +116,7 @@ namespace Business_Logic_Layer
             items.Add(Cons.table3Col6, staff.ContactNumber);
             items.Add(Cons.table3Col7, staff.EmailAddress);
             items.Add(Cons.table3IdFk2, locId);
+            new Staff(Cons.table3);
             return dh.Insert(items) != null ? true : false;
         }
 
@@ -124,7 +124,6 @@ namespace Business_Logic_Layer
         {
             int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
             items = new Dictionary<string, object>();
-            new Staff(Cons.table3);
             items.Add(Cons.table3Col1, staff.Title);
             items.Add(Cons.table3Col2, staff.Name);
             items.Add(Cons.table3Col3, staff.Surname);
@@ -133,6 +132,7 @@ namespace Business_Logic_Layer
             items.Add(Cons.table3Col6, staff.ContactNumber);
             items.Add(Cons.table3Col7, staff.EmailAddress);
             items.Add(Cons.table3IdFk2, locId);
+            new Staff(Cons.table3);
             return dh.Update(items, staff.Identity.ToString());
         }
 

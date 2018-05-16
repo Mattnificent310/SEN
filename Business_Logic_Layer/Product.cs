@@ -116,7 +116,6 @@ namespace Business_Logic_Layer
             cat = new Category();
             int catId = cat[null, prod.ProductType].CategoryId;
             int invId = inv[null, null, prod.inStock].InventoryID;
-            new Product(Cons.table2);
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add(Cons.table2Col1, prod.ProductModel);
             items.Add(Cons.table2Col2, prod.ProductDetail);
@@ -124,6 +123,7 @@ namespace Business_Logic_Layer
             items.Add(Cons.table2Col4, prod.Discontinued);
             items.Add(Cons.table2IdFk1, catId);
             items.Add(Cons.table2IdFk2, invId);
+            new Product(Cons.table2);
             return dh.Update(items, prod.ProductID.ToString());
         }
 
