@@ -79,7 +79,61 @@ namespace WindowsFormsApp2
             }
             return false;
         }
+        private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
+        {
+            { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
+            { typeof(ComboBox), ctrl => ((ComboBox)ctrl).Text = string.Empty },
+        };
+        private bool ValidateAll(Control parent)
+        {
+            int counter = parent.Controls.Count;
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
 
+                if (controlType == typeof(TextBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+                if (controlType == typeof(ComboBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+
+
+
+            }
+            return counter < parent.Controls.Count ? false : true;
+        }
+        private void ClearAll(Control parent)
+        {
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (actions.ContainsKey(controlType))
+                {
+                    actions[controlType](child);
+                }
+
+                ClearAll(child);
+            }
+        }
         private void btnInsert_Click(object sender, EventArgs e)
         {
 
@@ -108,28 +162,32 @@ namespace WindowsFormsApp2
 
         private void btnInsert_Click_1(object sender, EventArgs e)
         {
-            client = new Client()
+            if (ValidateAll(this.tabPage2))
             {
-                Title = cmbCTitle.Text,
-                Name = txtCName.Text.Trim(),
-                Surname = txtCSurname.Text.Trim(),
-                Gender = cmbCGender.Text,
-                BirthDate = dtpCBD.Value,
-                ContactNumber = txtCPhone.Text.Trim(),
-                EmailAddress = txtCEmail.Text.Trim(),
-                Country = cmbCCountry.Text,
-                City = cmbCCity.Text,
-                Street = txtCustStreet.Text
-            };
-            if (!CRUD.InsertClient(client))
-            {
-                MessageBox.Show("Customer could not be added.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Customer was added successfully.");
+
+                client = new Client()
+                {
+                    Title = cmbCTitle.Text,
+                    Name = txtCName.Text.Trim(),
+                    Surname = txtCSurname.Text.Trim(),
+                    Gender = cmbCGender.Text,
+                    BirthDate = dtpCBD.Value,
+                    ContactNumber = txtCPhone.Text.Trim(),
+                    EmailAddress = txtCEmail.Text.Trim(),
+                    Country = cmbCCountry.Text,
+                    City = cmbCCity.Text,
+                    Street = txtCustStreet.Text
+                };
+                if (!CRUD.InsertClient(client))
+                {
+                    MessageBox.Show("Customer could not be added.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Customer was added successfully.");
+                }
             }
 
         }
@@ -159,11 +217,12 @@ namespace WindowsFormsApp2
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-
+            ClearAll(this.tabPage1);
         }
 
         private void btnDelete_Click_2(object sender, EventArgs e)
         {
+           
             if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
             {
                 MessageBox.Show("Customer could not be deleted.");
@@ -178,30 +237,34 @@ namespace WindowsFormsApp2
 
         private void btnUpdate_Click_2(object sender, EventArgs e)
         {
-            client = new Client()
+            if (ValidateAll(this.tabPage1))
             {
-                Identity = txtClientId.Text,
-                Title = cmbCustTitle.Text,
-                Name = txtCustName.Text,
-                Surname = txtCustSurname.Text,
-                Gender = cmbCustGender.Text,
-                BirthDate = dtpCustDOB.Value,
-                ContactNumber = txtCustPhone.Text,
-                EmailAddress = txtCustEmail.Text,
-                Country = cmbCustCountry.Text,
-                City = cmbCustCity.Text,
-                Street = txtCustStreet.Text
-            };
-            if (!CRUD.UpdateClient(client))
-            {
-                MessageBox.Show("Customer information could not be changed.");
+                client = new Client()
+                {
+                    Identity = txtClientId.Text,
+                    Title = cmbCustTitle.Text,
+                    Name = txtCustName.Text,
+                    Surname = txtCustSurname.Text,
+                    Gender = cmbCustGender.Text,
+                    BirthDate = dtpCustDOB.Value,
+                    ContactNumber = txtCustPhone.Text,
+                    EmailAddress = txtCustEmail.Text,
+                    Country = cmbCustCountry.Text,
+                    City = cmbCustCity.Text,
+                    Street = txtCustStreet.Text
+                };
+                if (!CRUD.UpdateClient(client))
+                {
+                    MessageBox.Show("Customer information could not be changed.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Customer information was updated successfully.");
+                }
             }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Customer information was updated successfully.");
-            }
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)

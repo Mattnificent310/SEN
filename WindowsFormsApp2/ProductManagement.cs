@@ -88,7 +88,7 @@ namespace WindowsFormsApp2
         private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
         {
             { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
-            { typeof(ComboBox), ctrl => ((ComboBox)ctrl).SelectedIndex = -1 },
+            { typeof(ComboBox), ctrl => ((ComboBox)ctrl).Text = string.Empty },
         };
         private bool ValidateAll(Control parent)
         {
