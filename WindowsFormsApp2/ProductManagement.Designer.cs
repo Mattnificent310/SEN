@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtProdStock = new System.Windows.Forms.TextBox();
             this.cmbProdType = new System.Windows.Forms.ComboBox();
@@ -65,11 +66,13 @@
             this.lblLogin = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.errors = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgProducts)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -88,6 +91,7 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.txtProdStock);
             this.tabPage1.Controls.Add(this.cmbProdType);
@@ -113,6 +117,19 @@
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(1042, 525);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(261, 51);
+            this.button1.TabIndex = 38;
+            this.button1.Text = "Reset";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -316,7 +333,7 @@
             this.cmbPType.FormattingEnabled = true;
             this.cmbPType.Location = new System.Drawing.Point(584, 48);
             this.cmbPType.Name = "cmbPType";
-            this.cmbPType.Size = new System.Drawing.Size(121, 28);
+            this.cmbPType.Size = new System.Drawing.Size(324, 28);
             this.cmbPType.TabIndex = 42;
             // 
             // label10
@@ -387,10 +404,10 @@
             // 
             this.btnInsert.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInsert.Location = new System.Drawing.Point(612, 517);
+            this.btnInsert.Location = new System.Drawing.Point(584, 517);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(261, 57);
+            this.btnInsert.Size = new System.Drawing.Size(324, 57);
             this.btnInsert.TabIndex = 26;
             this.btnInsert.Text = "Insert";
             this.btnInsert.UseVisualStyleBackColor = false;
@@ -458,6 +475,10 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // errors
+            // 
+            this.errors.ContainerControl = this;
+            // 
             // frmProductManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -480,6 +501,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,6 +545,8 @@
         private System.Windows.Forms.Label lblLogin;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ErrorProvider errors;
     }
 }
 

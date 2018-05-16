@@ -29,7 +29,7 @@ namespace WindowsFormsApp2
         private void Form1_Load(object sender, EventArgs e)
         {
             new Category();
-           
+
 
             if (!BindData())
             {
@@ -58,7 +58,7 @@ namespace WindowsFormsApp2
         public void Login(Staff staf)
         {
             lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
-            
+
         }
         private bool BindData()
         {
@@ -85,6 +85,63 @@ namespace WindowsFormsApp2
             txtProdStock.DataBindings.Clear();
         }
 
+        private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
+        {
+            { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
+            { typeof(ComboBox), ctrl => ((ComboBox)ctrl).SelectedIndex = -1 },
+        };
+        private bool ValidateAll(Control parent)
+        {
+            int counter = parent.Controls.Count;
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (controlType == typeof(TextBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+                if (controlType == typeof(ComboBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+
+
+
+            }
+            return counter < parent.Controls.Count ? false : true;
+        }
+        private void ClearAll(Control parent)
+        {
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (actions.ContainsKey(controlType))
+                {
+                    actions[controlType](child);
+                }
+
+                ClearAll(child);
+            }
+        }
+
+
         private void dvgProducts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -104,27 +161,31 @@ namespace WindowsFormsApp2
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            prod = new Product(
-           0,
-           cmbPType.Text,
-           txtPModel.Text,
-           txtPDetails.Text,
-           decimal.Parse(txtPPrice.Text.ToString()),
-           int.Parse(txtPStock.Text),
-           false
-
-       );
-
-            if (!CRUD.InsertProduct(prod))
+            if (ValidateAll(this.tabPage2))
             {
-                MessageBox.Show("Product could not be added.");
+                prod = new Product(
+               0,
+               cmbPType.Text,
+               txtPModel.Text,
+               txtPDetails.Text,
+               decimal.Parse(txtPPrice.Text.ToString()),
+               int.Parse(txtPStock.Text),
+               false
+
+           );
+
+                if (!CRUD.InsertProduct(prod))
+                {
+                    MessageBox.Show("Product could not be added.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Product was added successfully.");
+                }
             }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Product was added successfully.");
-            }
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -184,6 +245,11 @@ namespace WindowsFormsApp2
         {
             lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
         }
     }
 }
