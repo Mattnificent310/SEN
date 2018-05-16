@@ -63,6 +63,63 @@ namespace WindowsFormsApp2
             cmbEmpCity.DataBindings.Clear();
             cmbEmpCountry.DataBindings.Clear();
         }
+
+        private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
+        {
+            { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
+            { typeof(ComboBox), ctrl => ((ComboBox)ctrl).Text = string.Empty },
+        };
+        private bool ValidateAll(Control parent)
+        {
+            int counter = parent.Controls.Count;
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (controlType == typeof(TextBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+                if (controlType == typeof(ComboBox))
+                {
+                    if (string.IsNullOrEmpty(child.Text))
+                    {
+                        errors.SetError(child, "This field is required");
+                        counter--;
+                    }
+                    else { errors.SetError(child, ""); }
+
+                }
+
+
+
+
+            }
+            return counter < parent.Controls.Count ? false : true;
+        }
+        private void ClearAll(Control parent)
+        {
+            foreach (Control child in parent.Controls)
+            {
+                var controlType = child.GetType();
+
+                if (actions.ContainsKey(controlType))
+                {
+                    actions[controlType](child);
+                }
+
+                ClearAll(child);
+            }
+        }
+
         private bool Populate()
         {
             staff = new Staff();
@@ -83,30 +140,34 @@ namespace WindowsFormsApp2
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            staff = new Staff()
+            if (ValidateAll(this.tabPage1))
             {
-                Identity = int.Parse(txtEmpId.Text),
-                Title = cmbEmpTitle.Text.Trim(),
-                Name = txtEmpName.Text.Trim(),
-                Surname = txtEmpSurname.Text.Trim(),
-                Gender = cmbEmpGender.Text.Trim(),
-                BirthDate = dtpEmpDOB.Value,
-                ContactNumber = txtEmpPhone.Text.Trim(),
-                EmailAddress = txtEmpEmail.Text.Trim(),
-                Country = cmbEmpCountry.Text.Trim(),
-                City = cmbEmpCity.Text.Trim(),
-                Street = txtEmpStreet.Text.Trim()
-            };
-            if (!CRUD.UpdateStaff(staff))
-            {
-                MessageBox.Show("Employee information could not be changed.");
+                staff = new Staff()
+                {
+                    Identity = int.Parse(txtEmpId.Text),
+                    Title = cmbEmpTitle.Text.Trim(),
+                    Name = txtEmpName.Text.Trim(),
+                    Surname = txtEmpSurname.Text.Trim(),
+                    Gender = cmbEmpGender.Text.Trim(),
+                    BirthDate = dtpEmpDOB.Value,
+                    ContactNumber = txtEmpPhone.Text.Trim(),
+                    EmailAddress = txtEmpEmail.Text.Trim(),
+                    Country = cmbEmpCountry.Text.Trim(),
+                    City = cmbEmpCity.Text.Trim(),
+                    Street = txtEmpStreet.Text.Trim()
+                };
+                if (!CRUD.UpdateStaff(staff))
+                {
+                    MessageBox.Show("Employee information could not be changed.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Employee information was updated successfully.");
+                }
             }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Employee information was updated successfully.");
-            }
+            
         }
 
         private void btnMainMenu_Click(object sender, EventArgs e)
@@ -123,29 +184,33 @@ namespace WindowsFormsApp2
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            staff = new Staff()
+            if (ValidateAll(this.tabPage2))
             {
-                Title = cmbETitle.Text,
-                Name = txtEName.Text.Trim(),
-                Surname = txtESurname.Text.Trim(),
-                Gender = cmbEGender.Text,
-                BirthDate = dtpEBD.Value,
-                ContactNumber = txtEPhone.Text.Trim(),
-                EmailAddress = txtEEmail.Text.Trim(),
-                Country = cmbECountry.Text,
-                City = cmbECity.Text,
-                Street = txtEAddress.Text
-            };
-            if (!CRUD.InsertStaff(staff))
-            {
-                MessageBox.Show("Employee could not be added.");
+                staff = new Staff()
+                {
+                    Title = cmbETitle.Text,
+                    Name = txtEName.Text.Trim(),
+                    Surname = txtESurname.Text.Trim(),
+                    Gender = cmbEGender.Text,
+                    BirthDate = dtpEBD.Value,
+                    ContactNumber = txtEPhone.Text.Trim(),
+                    EmailAddress = txtEEmail.Text.Trim(),
+                    Country = cmbECountry.Text,
+                    City = cmbECity.Text,
+                    Street = txtEAddress.Text.Trim()
+                };
+                if (!CRUD.InsertStaff(staff))
+                {
+                    MessageBox.Show("Employee could not be added.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Employee was added successfully.");
+                }
             }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Employee was added successfully.");
-            }
+           
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -170,6 +235,11 @@ namespace WindowsFormsApp2
         private void EmployeeService_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
         }
     }
 }

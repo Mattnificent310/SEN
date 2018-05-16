@@ -87,10 +87,12 @@
             this.lblLogin = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
+            this.errors = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
             this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             this.SuspendLayout();
             // 
             // label18
@@ -118,6 +120,7 @@
             resources.ApplyResources(this.btnReset, "btnReset");
             this.btnReset.Name = "btnReset";
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnMainMenu
             // 
@@ -12323,6 +12326,10 @@
             resources.ApplyResources(this.lblDate, "lblDate");
             this.lblDate.Name = "lblDate";
             // 
+            // errors
+            // 
+            this.errors.ContainerControl = this;
+            // 
             // EmployeeService
             // 
             resources.ApplyResources(this, "$this");
@@ -12342,6 +12349,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -12406,5 +12414,6 @@
         private System.Windows.Forms.Label lblLogin;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.ErrorProvider errors;
     }
 }
