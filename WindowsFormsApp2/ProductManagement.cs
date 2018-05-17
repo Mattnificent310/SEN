@@ -36,6 +36,21 @@ namespace WindowsFormsApp2
                 MessageBox.Show("No products were found.");
             }
         }
+
+        #region Login
+        public void Login(Staff staf)
+        {
+            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+
+        }
+        #endregion
+
+        #region Binding
         private bool Populate()
         {
             prod = new Product();
@@ -53,11 +68,6 @@ namespace WindowsFormsApp2
 
             return false;
 
-
-        }
-        public void Login(Staff staf)
-        {
-            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
 
         }
         private bool BindData()
@@ -84,7 +94,137 @@ namespace WindowsFormsApp2
             txtUnitPrice.DataBindings.Clear();
             txtProdStock.DataBindings.Clear();
         }
+        #endregion
 
+        #region Main
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu main = new frmMainMenu();
+            main.Show();
+        }
+        #endregion
+
+        #region Insert
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            if (ValidateAll(this.tabPage2))
+            {
+                prod = new Product(
+               0,
+               cmbPType.Text,
+               txtPModel.Text,
+               txtPDetails.Text,
+               decimal.Parse(txtPPrice.Text.ToString()),
+               int.Parse(txtPStock.Text),
+               false
+
+           );
+
+                if (!CRUD.InsertProduct(prod))
+                {
+                    MessageBox.Show("Product could not be added.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Product was added successfully.");
+                }
+            }
+
+        }
+        #endregion
+
+        #region Update
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (ValidateAll(this.tabPage1))
+            {
+                decimal price = 0;
+                decimal.TryParse(txtUnitPrice.Text, out price);
+
+                prod = new Product(
+                   int.Parse(txtProdId.Text),
+                  cmbProdType.Text,
+                   txtProdModels.Text,
+                   txtProdDesc.Text,
+                   price,
+                   int.Parse(txtProdStock.Text),
+                   cbxDiscontinue.Checked
+
+               );
+                if (!CRUD.UpdateProduct(prod))
+                {
+                    MessageBox.Show("Product information could not be changed");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Product information was changed");
+                }
+            }
+
+        }
+        #endregion
+
+        #region Delete
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!CRUD.DeleteProduct(int.Parse(txtProdId.Text)))
+            {
+                MessageBox.Show("The product could not be removed.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("The product was successfully removed");
+
+            }
+
+        }
+        #endregion
+
+
+
+        #region Reset
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
+        }
+        #endregion
+
+        #region Validation
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtProdDesc_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+        private void cmbPType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtPModel_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtPDetails_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtPStock_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
         private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
         {
             { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
@@ -117,12 +257,7 @@ namespace WindowsFormsApp2
                         counter--;
                     }
                     else { errors.SetError(child, ""); }
-
                 }
-
-
-
-
             }
             return counter < parent.Controls.Count ? false : true;
         }
@@ -140,8 +275,9 @@ namespace WindowsFormsApp2
                 ClearAll(child);
             }
         }
+        #endregion
 
-
+        #region Empty
         private void dvgProducts_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -151,129 +287,6 @@ namespace WindowsFormsApp2
         {
 
         }
-
-        private void btnMainMenu_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
-        }
-
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-            if (ValidateAll(this.tabPage2))
-            {
-                prod = new Product(
-               0,
-               cmbPType.Text,
-               txtPModel.Text,
-               txtPDetails.Text,
-               decimal.Parse(txtPPrice.Text.ToString()),
-               int.Parse(txtPStock.Text),
-               false
-
-           );
-
-                if (!CRUD.InsertProduct(prod))
-                {
-                    MessageBox.Show("Product could not be added.");
-                }
-                else
-                {
-                    Clear();
-                    BindData();
-                    MessageBox.Show("Product was added successfully.");
-                }
-            }
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            ValidateAll(this.tabPage2);
-        }
-
-        private void txtProdDesc_TextChanged(object sender, EventArgs e)
-        {
-            ValidateAll(this.tabPage2);
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (ValidateAll(this.tabPage1))
-            {
-                decimal price = 0;
-                decimal.TryParse(txtUnitPrice.Text, out price);
-
-                prod = new Product(
-                   int.Parse(txtProdId.Text),
-                  cmbProdType.Text,
-                   txtProdModels.Text,
-                   txtProdDesc.Text,
-                   price,
-                   int.Parse(txtProdStock.Text),
-                   cbxDiscontinue.Checked
-
-               );
-                if (!CRUD.UpdateProduct(prod))
-                {
-                    MessageBox.Show("Product information could not be changed");
-                }
-                else
-                {
-                    Clear();
-                    BindData();
-                    MessageBox.Show("Product information was changed");
-                }
-            }
-            
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (!CRUD.DeleteProduct(int.Parse(txtProdId.Text)))
-            {
-                MessageBox.Show("The product could not be removed.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("The product was successfully removed");
-
-            }
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ClearAll(this.tabPage1);
-        }
-
-        private void cmbPType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ValidateAll(this.tabPage2);
-        }
-
-        private void txtPModel_TextChanged(object sender, EventArgs e)
-        {
-            ValidateAll(this.tabPage2);
-        }
-
-        private void txtPDetails_TextChanged(object sender, EventArgs e)
-        {
-            ValidateAll(this.tabPage2);
-        }
-
-        private void txtPStock_TextChanged(object sender, EventArgs e)
-        {
-            ValidateAll(this.tabPage2);
-        }
+        #endregion
     }
 }

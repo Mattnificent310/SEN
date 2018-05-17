@@ -29,11 +29,19 @@ namespace WindowsFormsApp2
                 MessageBox.Show("No customers could be found.");
             }
         }
+
+        #region Login
         public void Login(Staff staf)
         {
             lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
            
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+
+        }
+        #endregion
 
         #region Binding
         private bool BindData()
@@ -81,34 +89,17 @@ namespace WindowsFormsApp2
             }
             return false;
         }
+        #endregion        
+
+        #region Main
+        private void btnMainMenu_Click_2(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu main = new frmMainMenu();
+            main.Show();
+        }
         #endregion
-
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMainMenu_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         #region Insert
         private void btnInsert_Click_1(object sender, EventArgs e)
         {
@@ -143,51 +134,6 @@ namespace WindowsFormsApp2
         }
         #endregion
 
-        private void btnUpdate_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDelete_Click_1(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void btnMainMenu_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnMainMenu_Click_2(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            ClearAll(this.tabPage1);
-        }
-
-        #region Delete
-        private void btnDelete_Click_2(object sender, EventArgs e)
-        {
-           
-            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
-            {
-                MessageBox.Show("Customer could not be deleted.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Customer was deleted successfully");
-            }
-        }
-        #endregion
-
         #region Update
         private void btnUpdate_Click_2(object sender, EventArgs e)
         {
@@ -218,15 +164,33 @@ namespace WindowsFormsApp2
                     MessageBox.Show("Customer information was updated successfully.");
                 }
             }
-            
+
         }
         #endregion
 
-        private void timer1_Tick(object sender, EventArgs e)
+        #region Delete
+        private void btnDelete_Click_2(object sender, EventArgs e)
         {
-            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
-
+           
+            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
+            {
+                MessageBox.Show("Customer could not be deleted.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Customer was deleted successfully");
+            }
         }
+        #endregion
+
+        #region Reset
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
+        }
+        #endregion       
 
         #region Validation
 
@@ -328,6 +292,52 @@ namespace WindowsFormsApp2
         private void cmbCGender_TextChanged(object sender, EventArgs e)
         {
             ValidateAll(this.tabPage2);
+        }
+        #endregion
+
+        #region Empty
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnMainMenu_Click_1(object sender, EventArgs e)
+        {
+
         }
         #endregion
     }
