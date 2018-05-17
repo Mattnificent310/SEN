@@ -9314,6 +9314,7 @@
             this.cmbCCountry.Name = "cmbCCountry";
             this.cmbCCountry.Size = new System.Drawing.Size(324, 28);
             this.cmbCCountry.TabIndex = 89;
+            this.cmbCCountry.TextChanged += new System.EventHandler(this.cmbCCountry_TextChanged);
             // 
             // cmbCGender
             // 
@@ -9326,6 +9327,7 @@
             this.cmbCGender.Name = "cmbCGender";
             this.cmbCGender.Size = new System.Drawing.Size(324, 28);
             this.cmbCGender.TabIndex = 88;
+            this.cmbCGender.TextChanged += new System.EventHandler(this.cmbCGender_TextChanged);
             // 
             // dtpCBD
             // 
@@ -9341,6 +9343,7 @@
             this.txtCName.Name = "txtCName";
             this.txtCName.Size = new System.Drawing.Size(324, 26);
             this.txtCName.TabIndex = 86;
+            this.txtCName.TextChanged += new System.EventHandler(this.txtCName_TextChanged);
             // 
             // cmbCCity
             // 
@@ -12305,6 +12308,7 @@
             this.cmbCCity.Name = "cmbCCity";
             this.cmbCCity.Size = new System.Drawing.Size(324, 28);
             this.cmbCCity.TabIndex = 85;
+            this.cmbCCity.TextChanged += new System.EventHandler(this.cmbCCity_TextChanged);
             // 
             // label11
             // 
@@ -12367,6 +12371,7 @@
             this.txtCAddress.Name = "txtCAddress";
             this.txtCAddress.Size = new System.Drawing.Size(324, 26);
             this.txtCAddress.TabIndex = 79;
+            this.txtCAddress.TextChanged += new System.EventHandler(this.txtCAddress_TextChanged);
             // 
             // txtCEmail
             // 
@@ -12374,6 +12379,7 @@
             this.txtCEmail.Name = "txtCEmail";
             this.txtCEmail.Size = new System.Drawing.Size(324, 26);
             this.txtCEmail.TabIndex = 78;
+            this.txtCEmail.TextChanged += new System.EventHandler(this.txtCEmail_TextChanged);
             // 
             // txtCPhone
             // 
@@ -12381,6 +12387,7 @@
             this.txtCPhone.Name = "txtCPhone";
             this.txtCPhone.Size = new System.Drawing.Size(324, 26);
             this.txtCPhone.TabIndex = 77;
+            this.txtCPhone.TextChanged += new System.EventHandler(this.txtCPhone_TextChanged);
             // 
             // label16
             // 
@@ -12408,6 +12415,7 @@
             this.cmbCTitle.Name = "cmbCTitle";
             this.cmbCTitle.Size = new System.Drawing.Size(324, 28);
             this.cmbCTitle.TabIndex = 75;
+            this.cmbCTitle.TextChanged += new System.EventHandler(this.cmbCTitle_TextChanged);
             // 
             // label17
             // 
@@ -12459,6 +12467,7 @@
             this.txtCSurname.Name = "txtCSurname";
             this.txtCSurname.Size = new System.Drawing.Size(324, 26);
             this.txtCSurname.TabIndex = 70;
+            this.txtCSurname.TextChanged += new System.EventHandler(this.txtCSurname_TextChanged);
             // 
             // btnInsert
             // 

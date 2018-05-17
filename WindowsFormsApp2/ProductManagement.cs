@@ -190,12 +190,12 @@ namespace WindowsFormsApp2
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
         private void txtProdDesc_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -254,6 +254,26 @@ namespace WindowsFormsApp2
         private void button1_Click(object sender, EventArgs e)
         {
             ClearAll(this.tabPage1);
+        }
+
+        private void cmbPType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtPModel_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtPDetails_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtPStock_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
         }
     }
 }

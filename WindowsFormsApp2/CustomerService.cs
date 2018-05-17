@@ -34,6 +34,8 @@ namespace WindowsFormsApp2
             lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
            
         }
+
+        #region Binding
         private bool BindData()
         {
             if (Populate())
@@ -79,6 +81,155 @@ namespace WindowsFormsApp2
             }
             return false;
         }
+        #endregion
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #region Insert
+        private void btnInsert_Click_1(object sender, EventArgs e)
+        {
+            if (ValidateAll(this.tabPage2))
+            {
+
+                client = new Client()
+                {
+                    Title = cmbCTitle.Text,
+                    Name = txtCName.Text.Trim(),
+                    Surname = txtCSurname.Text.Trim(),
+                    Gender = cmbCGender.Text,
+                    BirthDate = dtpCBD.Value,
+                    ContactNumber = txtCPhone.Text.Trim(),
+                    EmailAddress = txtCEmail.Text.Trim(),
+                    Country = cmbCCountry.Text,
+                    City = cmbCCity.Text,
+                    Street = txtCustStreet.Text
+                };
+                if (!CRUD.InsertClient(client))
+                {
+                    MessageBox.Show("Customer could not be added.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Customer was added successfully.");
+                }
+            }
+
+        }
+        #endregion
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnMainMenu_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMainMenu_Click_2(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu main = new frmMainMenu();
+            main.Show();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
+        }
+
+        #region Delete
+        private void btnDelete_Click_2(object sender, EventArgs e)
+        {
+           
+            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
+            {
+                MessageBox.Show("Customer could not be deleted.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Customer was deleted successfully");
+            }
+        }
+        #endregion
+
+        #region Update
+        private void btnUpdate_Click_2(object sender, EventArgs e)
+        {
+            if (ValidateAll(this.tabPage1))
+            {
+                client = new Client()
+                {
+                    Identity = txtClientId.Text,
+                    Title = cmbCustTitle.Text,
+                    Name = txtCustName.Text,
+                    Surname = txtCustSurname.Text,
+                    Gender = cmbCustGender.Text,
+                    BirthDate = dtpCustDOB.Value,
+                    ContactNumber = txtCustPhone.Text,
+                    EmailAddress = txtCustEmail.Text,
+                    Country = cmbCustCountry.Text,
+                    City = cmbCustCity.Text,
+                    Street = txtCustStreet.Text
+                };
+                if (!CRUD.UpdateClient(client))
+                {
+                    MessageBox.Show("Customer information could not be changed.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Customer information was updated successfully.");
+                }
+            }
+            
+        }
+        #endregion
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+
+        }
+
+        #region Validation
+
         private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
         {
             { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
@@ -134,143 +285,50 @@ namespace WindowsFormsApp2
                 ClearAll(child);
             }
         }
-        private void btnInsert_Click(object sender, EventArgs e)
+        private void cmbCTitle_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtCName_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnMainMenu_Click(object sender, EventArgs e)
+        private void txtCSurname_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void txtCPhone_TextChanged(object sender, EventArgs e)
         {
-
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void txtCEmail_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnInsert_Click_1(object sender, EventArgs e)
+        private void txtCAddress_TextChanged(object sender, EventArgs e)
         {
-            if (ValidateAll(this.tabPage2))
-            {
-
-                client = new Client()
-                {
-                    Title = cmbCTitle.Text,
-                    Name = txtCName.Text.Trim(),
-                    Surname = txtCSurname.Text.Trim(),
-                    Gender = cmbCGender.Text,
-                    BirthDate = dtpCBD.Value,
-                    ContactNumber = txtCPhone.Text.Trim(),
-                    EmailAddress = txtCEmail.Text.Trim(),
-                    Country = cmbCCountry.Text,
-                    City = cmbCCity.Text,
-                    Street = txtCustStreet.Text
-                };
-                if (!CRUD.InsertClient(client))
-                {
-                    MessageBox.Show("Customer could not be added.");
-                }
-                else
-                {
-                    Clear();
-                    BindData();
-                    MessageBox.Show("Customer was added successfully.");
-                }
-            }
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnUpdate_Click_1(object sender, EventArgs e)
+        private void cmbCCity_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnDelete_Click_1(object sender, EventArgs e)
+        private void cmbCCountry_TextChanged(object sender, EventArgs e)
         {
-
-
+            ValidateAll(this.tabPage2);
         }
 
-        private void btnMainMenu_Click_1(object sender, EventArgs e)
+        private void cmbCGender_TextChanged(object sender, EventArgs e)
         {
-
+            ValidateAll(this.tabPage2);
         }
-
-        private void btnMainMenu_Click_2(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            ClearAll(this.tabPage1);
-        }
-
-        private void btnDelete_Click_2(object sender, EventArgs e)
-        {
-           
-            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
-            {
-                MessageBox.Show("Customer could not be deleted.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Customer was deleted successfully");
-            }
-        }
-
-        private void btnUpdate_Click_2(object sender, EventArgs e)
-        {
-            if (ValidateAll(this.tabPage1))
-            {
-                client = new Client()
-                {
-                    Identity = txtClientId.Text,
-                    Title = cmbCustTitle.Text,
-                    Name = txtCustName.Text,
-                    Surname = txtCustSurname.Text,
-                    Gender = cmbCustGender.Text,
-                    BirthDate = dtpCustDOB.Value,
-                    ContactNumber = txtCustPhone.Text,
-                    EmailAddress = txtCustEmail.Text,
-                    Country = cmbCustCountry.Text,
-                    City = cmbCustCity.Text,
-                    Street = txtCustStreet.Text
-                };
-                if (!CRUD.UpdateClient(client))
-                {
-                    MessageBox.Show("Customer information could not be changed.");
-                }
-                else
-                {
-                    Clear();
-                    BindData();
-                    MessageBox.Show("Customer information was updated successfully.");
-                }
-            }
-            
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
-
-        }
+        #endregion
     }
 }
