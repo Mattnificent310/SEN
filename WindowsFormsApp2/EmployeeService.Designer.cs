@@ -113,6 +113,7 @@
             resources.GetString("cmbETitle.Items5")});
             resources.ApplyResources(this.cmbETitle, "cmbETitle");
             this.cmbETitle.Name = "cmbETitle";
+            this.cmbETitle.SelectedIndexChanged += new System.EventHandler(this.cmbETitle_SelectedIndexChanged);
             // 
             // btnReset
             // 
@@ -3130,16 +3131,19 @@
             // 
             resources.ApplyResources(this.txtEAddress, "txtEAddress");
             this.txtEAddress.Name = "txtEAddress";
+            this.txtEAddress.TextChanged += new System.EventHandler(this.txtEAddress_TextChanged);
             // 
             // txtEEmail
             // 
             resources.ApplyResources(this.txtEEmail, "txtEEmail");
             this.txtEEmail.Name = "txtEEmail";
+            this.txtEEmail.TextChanged += new System.EventHandler(this.txtEEmail_TextChanged);
             // 
             // txtEPhone
             // 
             resources.ApplyResources(this.txtEPhone, "txtEPhone");
             this.txtEPhone.Name = "txtEPhone";
+            this.txtEPhone.TextChanged += new System.EventHandler(this.txtEPhone_TextChanged);
             // 
             // label16
             // 
@@ -9194,6 +9198,7 @@
             resources.GetString("cmbECountry.Items2953")});
             resources.ApplyResources(this.cmbECountry, "cmbECountry");
             this.cmbECountry.Name = "cmbECountry";
+            this.cmbECountry.TextChanged += new System.EventHandler(this.cmbECountry_TextChanged);
             // 
             // cmbEGender
             // 
@@ -9203,6 +9208,7 @@
             resources.GetString("cmbEGender.Items1")});
             resources.ApplyResources(this.cmbEGender, "cmbEGender");
             this.cmbEGender.Name = "cmbEGender";
+            this.cmbEGender.TextChanged += new System.EventHandler(this.cmbEGender_TextChanged);
             // 
             // dtpEBD
             // 
@@ -9213,6 +9219,7 @@
             // 
             resources.ApplyResources(this.txtEName, "txtEName");
             this.txtEName.Name = "txtEName";
+            this.txtEName.TextChanged += new System.EventHandler(this.txtEName_TextChanged);
             // 
             // cmbECity
             // 
@@ -12174,6 +12181,7 @@
             resources.GetString("cmbECity.Items2953")});
             resources.ApplyResources(this.cmbECity, "cmbECity");
             this.cmbECity.Name = "cmbECity";
+            this.cmbECity.TextChanged += new System.EventHandler(this.cmbECity_TextChanged);
             // 
             // label11
             // 
@@ -12221,6 +12229,7 @@
             this.cmbJobDesc.FormattingEnabled = true;
             resources.ApplyResources(this.cmbJobDesc, "cmbJobDesc");
             this.cmbJobDesc.Name = "cmbJobDesc";
+            this.cmbJobDesc.TextChanged += new System.EventHandler(this.cmbJobDesc_TextChanged);
             // 
             // label12
             // 
@@ -12232,6 +12241,7 @@
             // 
             resources.ApplyResources(this.txtESurname, "txtESurname");
             this.txtESurname.Name = "txtESurname";
+            this.txtESurname.TextChanged += new System.EventHandler(this.txtESurname_TextChanged);
             // 
             // label2
             // 

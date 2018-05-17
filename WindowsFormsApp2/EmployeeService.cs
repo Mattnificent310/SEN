@@ -22,11 +22,20 @@ namespace WindowsFormsApp2
             timer1.Start();
 
         }
+
+        #region Login
         public void Login(Staff staf)
         {
             lblLogin.Text = string.Format("Welcome:  {0} {1} {2}", staff.Title, staf.Name, staf.Surname);
 
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+        }
+        #endregion
+
+        #region Binding
         private bool BindData()
         {
             if (Populate())
@@ -64,6 +73,175 @@ namespace WindowsFormsApp2
             cmbEmpCountry.DataBindings.Clear();
         }
 
+
+
+        private bool Populate()
+        {
+            staff = new Staff();
+            data = new BindingSource();
+            if (Staff.staff.Any())
+            {
+                data.DataSource = Staff.staff;
+                dgvStaff.DataSource = data;
+                BindingSource jobDescs = new BindingSource();
+                jobDescs.DataSource = Job.jobs.Select(x => x.JobDesc);
+                cmbJobDescription.DataSource = jobDescs;
+                cmbJobDesc.DataSource = jobDescs;
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region Main
+        private void btnMainMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu menu = new frmMainMenu();
+            menu.Show();
+        }
+        #endregion
+
+        #region Insert
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            if (ValidateAll(this.tabPage2))
+            {
+                staff = new Staff()
+                {
+                    Title = cmbETitle.Text,
+                    Name = txtEName.Text.Trim(),
+                    Surname = txtESurname.Text.Trim(),
+                    Gender = cmbEGender.Text,
+                    BirthDate = dtpEBD.Value,
+                    ContactNumber = txtEPhone.Text.Trim(),
+                    EmailAddress = txtEEmail.Text.Trim(),
+                    Country = cmbECountry.Text,
+                    City = cmbECity.Text,
+                    Street = txtEAddress.Text.Trim()
+                };
+                if (!CRUD.InsertStaff(staff))
+                {
+                    MessageBox.Show("Employee could not be added.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Employee was added successfully.");
+                }
+            }
+
+        }
+        #endregion
+
+        #region Update
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (ValidateAll(this.tabPage1))
+            {
+                staff = new Staff()
+                {
+                    Identity = int.Parse(txtEmpId.Text),
+                    Title = cmbEmpTitle.Text.Trim(),
+                    Name = txtEmpName.Text.Trim(),
+                    Surname = txtEmpSurname.Text.Trim(),
+                    Gender = cmbEmpGender.Text.Trim(),
+                    BirthDate = dtpEmpDOB.Value,
+                    ContactNumber = txtEmpPhone.Text.Trim(),
+                    EmailAddress = txtEmpEmail.Text.Trim(),
+                    Country = cmbEmpCountry.Text.Trim(),
+                    City = cmbEmpCity.Text.Trim(),
+                    Street = txtEmpStreet.Text.Trim()
+                };
+                if (!CRUD.UpdateStaff(staff))
+                {
+                    MessageBox.Show("Employee information could not be changed.");
+                }
+                else
+                {
+                    Clear();
+                    BindData();
+                    MessageBox.Show("Employee information was updated successfully.");
+                }
+            }
+
+        }
+        #endregion
+
+        #region Delete
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (!CRUD.DeleteStaff(int.Parse(txtEmpId.Text)))
+            {
+                MessageBox.Show("Employee could not be deleted.");
+            }
+            else
+            {
+                Clear();
+                BindData();
+                MessageBox.Show("Employee was deleted successfully");
+            }
+        }
+        #endregion
+
+        #region Reset
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearAll(this.tabPage1);
+        }
+        #endregion
+
+        #region Validation
+        private void cmbETitle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtEName_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtESurname_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void cmbEGender_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void cmbJobDesc_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtEPhone_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtEEmail_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void txtEAddress_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void cmbECity_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
+
+        private void cmbECountry_TextChanged(object sender, EventArgs e)
+        {
+            ValidateAll(this.tabPage2);
+        }
         private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
         {
             { typeof(TextBox), ctrl => ((TextBox)ctrl).Text = string.Empty},
@@ -119,127 +297,17 @@ namespace WindowsFormsApp2
                 ClearAll(child);
             }
         }
+        #endregion
 
-        private bool Populate()
-        {
-            staff = new Staff();
-            data = new BindingSource();
-            if (Staff.staff.Any())
-            {
-                data.DataSource = Staff.staff;
-                dgvStaff.DataSource = data;
-                BindingSource jobDescs = new BindingSource();
-                jobDescs.DataSource = Job.jobs.Select(x => x.JobDesc);
-                cmbJobDescription.DataSource = jobDescs;
-                cmbJobDesc.DataSource = jobDescs;
-                return true;
-            }
-            return false;
-        }
-
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (ValidateAll(this.tabPage1))
-            {
-                staff = new Staff()
-                {
-                    Identity = int.Parse(txtEmpId.Text),
-                    Title = cmbEmpTitle.Text.Trim(),
-                    Name = txtEmpName.Text.Trim(),
-                    Surname = txtEmpSurname.Text.Trim(),
-                    Gender = cmbEmpGender.Text.Trim(),
-                    BirthDate = dtpEmpDOB.Value,
-                    ContactNumber = txtEmpPhone.Text.Trim(),
-                    EmailAddress = txtEmpEmail.Text.Trim(),
-                    Country = cmbEmpCountry.Text.Trim(),
-                    City = cmbEmpCity.Text.Trim(),
-                    Street = txtEmpStreet.Text.Trim()
-                };
-                if (!CRUD.UpdateStaff(staff))
-                {
-                    MessageBox.Show("Employee information could not be changed.");
-                }
-                else
-                {
-                    Clear();
-                    BindData();
-                    MessageBox.Show("Employee information was updated successfully.");
-                }
-            }
-            
-        }
-
-        private void btnMainMenu_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmMainMenu menu = new frmMainMenu();
-            menu.Show();
-        }
-
+        #region Empty
         private void txtEmpPhone_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void btnInsert_Click(object sender, EventArgs e)
-        {
-            if (ValidateAll(this.tabPage2))
-            {
-                staff = new Staff()
-                {
-                    Title = cmbETitle.Text,
-                    Name = txtEName.Text.Trim(),
-                    Surname = txtESurname.Text.Trim(),
-                    Gender = cmbEGender.Text,
-                    BirthDate = dtpEBD.Value,
-                    ContactNumber = txtEPhone.Text.Trim(),
-                    EmailAddress = txtEEmail.Text.Trim(),
-                    Country = cmbECountry.Text,
-                    City = cmbECity.Text,
-                    Street = txtEAddress.Text.Trim()
-                };
-                if (!CRUD.InsertStaff(staff))
-                {
-                    MessageBox.Show("Employee could not be added.");
-                }
-                else
-                {
-                    Clear();
-                    BindData();
-                    MessageBox.Show("Employee was added successfully.");
-                }
-            }
-           
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (!CRUD.DeleteStaff(int.Parse(txtEmpId.Text)))
-            {
-                MessageBox.Show("Employee could not be deleted.");
-            }
-            else
-            {
-                Clear();
-                BindData();
-                MessageBox.Show("Employee was deleted successfully");
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-             lblDate.Text = string.Format("{0} -- {1}", DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
-        }
-
         private void EmployeeService_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            ClearAll(this.tabPage1);
-        }
+        #endregion
     }
 }

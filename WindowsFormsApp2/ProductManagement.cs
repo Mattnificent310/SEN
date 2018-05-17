@@ -187,8 +187,6 @@ namespace WindowsFormsApp2
         }
         #endregion
 
-
-
         #region Reset
         private void button1_Click(object sender, EventArgs e)
         {
