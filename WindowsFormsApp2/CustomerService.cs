@@ -14,8 +14,9 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         BindingSource data = new BindingSource();
-        public Client client;
-        Product prod;
+        private static Client client;
+        private static Product prod;
+        private static frmMainMenu menu = new frmMainMenu();
         public frmCustomerService()
         {
             InitializeComponent();
@@ -96,8 +97,12 @@ namespace WindowsFormsApp2
         private void btnMainMenu_Click_2(object sender, EventArgs e)
         {
             this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
+            menu.Show();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            menu.Show();
         }
         #endregion
 
