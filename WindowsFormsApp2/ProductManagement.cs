@@ -77,7 +77,7 @@ namespace WindowsFormsApp2
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 cmbProdType.DataBindings.Add("Text", data, "ProductType");
                 txtProdModels.DataBindings.Add("Text", data, "ProductModel");
-                txtProdDesc.DataBindings.Add("Text", data, "ProductDetail");
+                txtProdDesc.DataBindings.Add("Text", data, "ProductName");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
                 txtProdStock.DataBindings.Add("Text", data, "InStock");
                 return true;
@@ -129,6 +129,7 @@ namespace WindowsFormsApp2
                 {
                     Clear();
                     BindData();
+                    ClearAll(this.tabPage2);
                     MessageBox.Show("Product was added successfully.");
                 }
             }

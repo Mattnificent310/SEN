@@ -6633,6 +6633,8 @@
             // 
             // errors
             // 
+            this.errors.BlinkRate = 500;
+            this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
             // tabPage3
@@ -6675,12 +6677,13 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sales";
             this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(1147, 249);
+            this.button1.Location = new System.Drawing.Point(1160, 249);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(278, 46);
@@ -6692,7 +6695,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(1147, 8);
+            this.button2.Location = new System.Drawing.Point(1160, 8);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(278, 46);
@@ -6704,7 +6707,7 @@
             // 
             this.button3.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(1147, 166);
+            this.button3.Location = new System.Drawing.Point(1160, 166);
             this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(278, 46);
@@ -6716,7 +6719,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(1147, 84);
+            this.button4.Location = new System.Drawing.Point(1160, 84);
             this.button4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(278, 46);

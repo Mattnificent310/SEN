@@ -378,6 +378,7 @@
             // 
             // errors
             // 
+            this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
             // frmTechnicalSupport

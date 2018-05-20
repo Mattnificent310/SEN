@@ -416,12 +416,17 @@ namespace WindowsFormsApp2
 
         }
 
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
 
+        }
         #endregion
 
         private void numQuantity_ValueChanged(object sender, EventArgs e)
         {
             lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
         }
+
+        
     }
 }

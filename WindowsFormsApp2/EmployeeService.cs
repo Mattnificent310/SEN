@@ -107,19 +107,20 @@ namespace WindowsFormsApp2
         {
             if (ValidateAll(this.tabPage2))
             {
-                staff = new Staff()
-                {
-                    Title = cmbETitle.Text,
-                    Name = txtEName.Text.Trim(),
-                    Surname = txtESurname.Text.Trim(),
-                    Gender = cmbEGender.Text,
-                    BirthDate = dtpEBD.Value,
-                    ContactNumber = txtEPhone.Text.Trim(),
-                    EmailAddress = txtEEmail.Text.Trim(),
-                    Country = cmbECountry.Text,
-                    City = cmbECity.Text,
-                    Street = txtEAddress.Text.Trim()
-                };
+                staff = new Staff(
+                    0,
+                    cmbETitle.Text,
+                    txtEName.Text.Trim(),
+                    txtESurname.Text.Trim(),
+                    cmbEGender.Text,
+                    dtpEBD.Value,
+                    txtEPhone.Text.Trim(),
+                    txtEEmail.Text.Trim(),
+                    cmbJobDesc.Text,
+                    cmbECountry.Text,
+                    cmbECity.Text,
+                    txtEAddress.Text.Trim()
+                );
                 if (!CRUD.InsertStaff(staff))
                 {
                     MessageBox.Show("Employee could not be added.");
@@ -128,6 +129,7 @@ namespace WindowsFormsApp2
                 {
                     Clear();
                     BindData();
+                    ClearAll(this.tabPage2);
                     MessageBox.Show("Employee was added successfully.");
                 }
             }
