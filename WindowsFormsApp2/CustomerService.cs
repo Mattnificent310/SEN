@@ -15,6 +15,7 @@ namespace WindowsFormsApp2
     {
         BindingSource data = new BindingSource();
         public Client client;
+        Product prod;
         public frmCustomerService()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace WindowsFormsApp2
         public void Login(Staff staf)
         {
             lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
-           
+
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -99,26 +100,86 @@ namespace WindowsFormsApp2
             main.Show();
         }
         #endregion
+
+        #region Search
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(cmbProdType.Text)
+                && string.IsNullOrEmpty(cmbProdModel.Text)
+                && string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                {
+                    client = new Client();
+                    data.DataSource = client[
+                    string.IsNullOrEmpty(txtCSName.Text.Trim()) ? null : txtCSName.Text.Trim(),
+                    string.IsNullOrEmpty(txtCSSurname.Text.Trim()) ? null : txtCSSurname.Text.Trim(),
+                    string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
+                    dgvSales.DataSource = data;
+                    txtCSName.DataBindings.Clear();
+                    txtCSSurname.DataBindings.Clear();
+                    txtCSPhone.DataBindings.Clear();
+                    txtCSEmail.DataBindings.Clear();
+                    txtCSName.DataBindings.Add("Text", data, "Name");
+                    txtCSSurname.DataBindings.Add("Text", data, "Surname");
+                    txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
+                    txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
+
+                }
+                else
+                {
+
+                    new Product();
+                    data = new BindingSource();
+                    data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text 
+                    || x.ProductModel == cmbProdModel.Text 
+                    || x.ProductName == txtProdName.Text.Trim()).ToList();
+                    dgvSales.DataSource = data;
+                    cmbProdType.DataBindings.Clear();
+                    cmbProdModel.DataBindings.Clear();
+                    lblUnitPrice.DataBindings.Clear();
+                    lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                    lblTotal.Text = "R "+ decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+                    txtProdName.DataBindings.Clear();
+                    cmbProdType.DataBindings.Add("Text", data, "ProductType");
+                    cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
+                    txtProdName.DataBindings.Add("Text", data, "ProductName");
+                }
+            }
+            catch (KeyNotFoundException knf)
+            {
+                MessageBox.Show("There were 0 search results found.");
+
+            }
+
+        }
         
+
+        #endregion
+
         #region Insert
         private void btnInsert_Click_1(object sender, EventArgs e)
         {
             if (ValidateAll(this.tabPage2))
             {
 
-                client = new Client()
-                {
-                    Title = cmbCTitle.Text,
-                    Name = txtCName.Text.Trim(),
-                    Surname = txtCSurname.Text.Trim(),
-                    Gender = cmbCGender.Text,
-                    BirthDate = dtpCBD.Value,
-                    ContactNumber = txtCPhone.Text.Trim(),
-                    EmailAddress = txtCEmail.Text.Trim(),
-                    Country = cmbCCountry.Text,
-                    City = cmbCCity.Text,
-                    Street = txtCustStreet.Text
-                };
+                client = new Client(
+                    string.Empty,
+                    cmbCTitle.Text,
+                    txtCName.Text.Trim(),
+                    txtCSurname.Text.Trim(),
+                    cmbCGender.Text,
+                    dtpCBD.Value,
+                    txtCPhone.Text.Trim(),
+                    txtCEmail.Text.Trim(),
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    cmbCCountry.Text,
+                    cmbCCity.Text,
+                    txtCAddress.Text.Trim());
+
                 if (!CRUD.InsertClient(client))
                 {
                     MessageBox.Show("Customer could not be added.");
@@ -127,7 +188,9 @@ namespace WindowsFormsApp2
                 {
                     Clear();
                     BindData();
+                    ClearAll(this.tabPage2);
                     MessageBox.Show("Customer was added successfully.");
+
                 }
             }
 
@@ -171,7 +234,7 @@ namespace WindowsFormsApp2
         #region Delete
         private void btnDelete_Click_2(object sender, EventArgs e)
         {
-           
+
             if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
             {
                 MessageBox.Show("Customer could not be deleted.");
@@ -289,7 +352,7 @@ namespace WindowsFormsApp2
         {
             ValidateAll(this.tabPage2);
         }
-       
+
         #endregion
 
         #region Empty
@@ -309,7 +372,7 @@ namespace WindowsFormsApp2
         {
             if (radioDel.Checked)
             {
-                dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2,14));
+                dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
             }
 
 
@@ -352,8 +415,13 @@ namespace WindowsFormsApp2
         {
 
         }
+
+
         #endregion
 
-       
+        private void numQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+        }
     }
 }

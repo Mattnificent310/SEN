@@ -13,7 +13,7 @@ namespace Data_Access_Layer
         private static SqlDataAdapter adapter;
         private static SqlConnection conn;
         private static SqlCommandBuilder cmd;
-        private static DataSet ds;
+        public static DataSet ds;
         private string connStr;
 
         public DBConn()
@@ -33,13 +33,18 @@ namespace Data_Access_Layer
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
-                        adapter.Fill(ds, _table);
+                        DBConn.ds = new DataSet();
+                        adapter.Fill(DBConn.ds, _table);
+                        ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
+                        ds.Tables[_table].Columns[0].AutoIncrement = true;
+
+
 
                     }
                 }
 
             }
-            return ds;
+            return DBConn.ds;
         }
         public bool Write(DataSet updDS, string _table)
         {
@@ -49,7 +54,7 @@ namespace Data_Access_Layer
                 using (adapter = new SqlDataAdapter("SELECT * FROM " + _table, conn))
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
-                    {
+                    {                        
                         return adapter.Update(updDS, _table) == 1 ? true : false;
                         
                     }

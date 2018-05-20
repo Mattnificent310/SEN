@@ -14,7 +14,7 @@ namespace Business_Logic_Layer
         private int categoryId;
         private string categoryName;
         private string categoryDesc;
-        private DataHandler dh;
+        private static DataHandler dh = new DataHandler(Cons.table7);
         public static List<Category> cats;
         private Dictionary<string, object> values;
 
@@ -24,9 +24,8 @@ namespace Business_Logic_Layer
 
         public Category()
         {
-            dh = new DataHandler();
             cats = new List<Category>();
-            foreach (DataRow item in dh.GetData(Cons.table7).Rows)
+            foreach (DataRow item in DataHandler.GetData(Cons.table7).Rows)
             {
                 cats.Add(new Category
                 (

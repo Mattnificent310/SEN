@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data_Access_;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Business_Logic_Layer
         #region Client
         public static bool InsertClient(Client client)
         {
-            return new Client().Insert(client);
+            return new Client(0).Insert(client);
         }
 
         public static bool UpdateClient(Client client)

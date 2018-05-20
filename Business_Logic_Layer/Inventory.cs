@@ -72,9 +72,8 @@ namespace Business_Logic_Layer
 
         public Inventory()
         {
-            dh = new DataHandler();
             stocks = new List<Inventory>();
-            foreach (DataRow item in dh.GetData(Cons.table8).Rows)
+            foreach (DataRow item in DataHandler.GetData(Cons.table8).Rows)
             {
                 stocks.Add(new Inventory
                 ((int)item[Cons.table8Id],

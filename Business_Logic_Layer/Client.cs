@@ -1,4 +1,5 @@
 ﻿using Data_Access_;
+using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,7 +25,7 @@ namespace Business_Logic_Layer
         private string contactMethod;
         private string creditRating;
         public static List<Client> clients;
-        private static Data_Access_Layer.DataHandler dh;
+        private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table1);
         private static Dictionary<string, object> items;
         private static Location loc;
 
@@ -102,11 +103,11 @@ namespace Business_Logic_Layer
         #region Constructor
         public Client()
         {
-            dh = new Data_Access_Layer.DataHandler();
             loc = new Location();
             clients = new List<Client>();
 
-            foreach (DataRow item in dh.GetData(Cons.table1).Rows)
+            DataTable clientTbl = DataHandler.GetData(Cons.table1);
+            foreach (DataRow item in clientTbl.Rows)
             {
                 clients.Add(new Client(
                 item[Cons.table1Id].ToString(),
@@ -126,6 +127,7 @@ namespace Business_Logic_Layer
                 ));
             }
         }
+        public Client(int identity){ }
         public Client(string cons)
         {
             dh = new Data_Access_Layer.DataHandler(cons);
@@ -197,7 +199,7 @@ namespace Business_Logic_Layer
         #region CRUD
         public bool Insert(Client client)
         {
-            int locId = loc[null, client.City, client.Country].LocationId;
+            int locId = loc[null,client.Street, client.City, client.Country].LocationId;
             items = new Dictionary<string, object>();
             items.Add(Cons.table1Col1, client.Title);
             items.Add(Cons.table1Col2, client.Name);

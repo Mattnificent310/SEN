@@ -1,4 +1,5 @@
 ﻿using Data_Access_;
+using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,9 +15,10 @@ namespace Business_Logic_Layer
         private string country;
         private string city;
         private string street;
-        private static Data_Access_Layer.DataHandler dh;
+        private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table4);
         private static List<Location> locs;
         private static Dictionary<string, object> values;
+        private static bool notFound = false;
 
         public int LocationId { get { return locationId; } set { locationId = value; } }
         public string Country { get { return country; } set { country = value; } }
@@ -28,15 +30,16 @@ namespace Business_Logic_Layer
 
         public Location()
         {
-            dh = new Data_Access_Layer.DataHandler();
             locs = new List<Location>();
-            foreach (DataRow item in dh.GetData(Cons.table4).Rows)
+            DataTable locTbl = DataHandler.GetData(Cons.table4);
+
+            foreach (DataRow item in locTbl.Rows)
             {
                 locs.Add(new Location(
                   (int)item[Cons.table4Id],
                        item[Cons.table4Col1].ToString().Trim(),
-                       dh.Search(item[Cons.table4IdFk].ToString(), Cons.table5)[Cons.table5Col1].ToString(),
-                       dh.Search(dh.Search(item[Cons.table4IdFk].ToString(),
+                       DataHandler.Search(item[Cons.table4IdFk].ToString(), Cons.table5)[Cons.table5Col1].ToString(),
+                       DataHandler.Search(DataHandler.Search(item[Cons.table4IdFk].ToString(),
                        Cons.table5)[Cons.table5IdFk].ToString(),
                        Cons.table6)[Cons.table6Col1].ToString()
 
@@ -59,7 +62,7 @@ namespace Business_Logic_Layer
                 if (!locs.Any()) { new Location(); }
                 foreach (var item in locs)
                 {
-                    
+
                     if (item.LocationId == (locId ?? item.LocationId)
                     && item.Street == (street ?? item.Street)
                     && item.City == (city ?? item.City)
@@ -70,8 +73,9 @@ namespace Business_Logic_Layer
                         this.City = item.City;
                         this.Country = item.Country;
                         return (Location)item;
-                    }                    
+                    }                                    
                 }
+                return new Location(Insert(new Location(0, street, city, country)),street, city, country);
                 throw new KeyNotFoundException();
             }
         }
@@ -81,10 +85,10 @@ namespace Business_Logic_Layer
         public int Insert(Location location)
         {
             values = new Dictionary<string, object>();
-            values.Add(Cons.table4Col1, street);
-            values.Add(Cons.table4Col2, city);
-            values.Add(Cons.table4IdFk, country);
-            return (int)dh.Insert(values);
+            values.Add(Cons.table4Col1, location.Street);
+            values.Add(Cons.table4Col2, "N/A");
+            values.Add(Cons.table4IdFk, (int)DataHandler.SearchByName(Cons.table5Col1, location.City, Cons.table5)[Cons.table5Id]);                      
+            return dh.Insert(values, Cons.table4) != null ? (int)dh.Insert(values, Cons.table4) : -1;
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Data_Access_;
+using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,7 @@ namespace Business_Logic_Layer
         private string jobDesc;
         private string department;
         public static List<Staff> staff;
-        private static Data_Access_Layer.DataHandler dh;
+        private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table3);
         private static Dictionary<string, object> items;
         private static Location loc;
         private static Job job;
@@ -32,12 +33,11 @@ namespace Business_Logic_Layer
         }
         public Staff()
         {
-            dh = new Data_Access_Layer.DataHandler();
             loc = new Location();
             staff = new List<Staff>();
             job = new Job();
 
-            foreach (DataRow item in dh.GetData(Cons.table3).Rows)
+            foreach (DataRow item in DataHandler.GetData(Cons.table3).Rows)
             {
                 staff.Add(new Staff(
                 (int)item[Cons.table3Id],
@@ -93,8 +93,7 @@ namespace Business_Logic_Layer
 
         public Staff Login(string username, string password)
         {
-            dh = new Data_Access_Layer.DataHandler();
-            foreach (DataRow item in dh.GetData(Cons.table10).Rows)
+            foreach (DataRow item in DataHandler.GetData(Cons.table10).Rows)
             {
                 if (username.Equals(item[Cons.table10Col1].ToString()) && password.Equals(item[Cons.table10Col2].ToString()))
                 {

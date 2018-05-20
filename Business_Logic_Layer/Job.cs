@@ -1,4 +1,5 @@
 ﻿using Data_Access_;
+using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +14,7 @@ namespace Business_Logic_Layer
         private System.DateTime? hireDate;
         private string jobDetails;
         public static List<Job> jobs;
-        private static Data_Access_Layer.DataHandler dh;
+        private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table9);
         private static Dictionary<string, object> items;
 
         public int? JobId
@@ -36,10 +37,9 @@ namespace Business_Logic_Layer
 
         public Job()
         {
-            dh = new Data_Access_Layer.DataHandler();
             jobs = new List<Job>();
 
-            foreach (DataRow item in dh.GetData(Cons.table9).Rows)
+            foreach (DataRow item in DataHandler.GetData(Cons.table9).Rows)
             {
                 jobs.Add(new Job(
                 (int)item[Cons.table9Id],
