@@ -228,10 +228,6 @@ namespace WindowsFormsApp2
                     else { errors.SetError(child, ""); }
 
                 }
-
-
-
-
             }
             return counter < parent.Controls.Count ? false : true;
         }
@@ -293,6 +289,7 @@ namespace WindowsFormsApp2
         {
             ValidateAll(this.tabPage2);
         }
+       
         #endregion
 
         #region Empty
@@ -300,7 +297,23 @@ namespace WindowsFormsApp2
         {
 
         }
+        private void radioCol_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioCol.Checked)
+            {
+                dtpColDel.Value = DateTime.Now.AddDays(1.0);
+            }
+        }
 
+        private void radioDel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioDel.Checked)
+            {
+                dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2,14));
+            }
+
+
+        }
         private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -340,5 +353,7 @@ namespace WindowsFormsApp2
 
         }
         #endregion
+
+       
     }
 }
