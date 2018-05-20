@@ -84,7 +84,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1360, 702);
+            this.tabControl1.Size = new System.Drawing.Size(1486, 910);
             this.tabControl1.TabIndex = 16;
             // 
             // tabPage1
@@ -112,7 +112,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1352, 669);
+            this.tabPage1.Size = new System.Drawing.Size(1478, 877);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(1074, 265);
+            this.button1.Location = new System.Drawing.Point(1151, 265);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(261, 51);
@@ -169,10 +169,10 @@
             // dvgProducts
             // 
             this.dvgProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgProducts.Location = new System.Drawing.Point(68, 22);
+            this.dvgProducts.Location = new System.Drawing.Point(33, 22);
             this.dvgProducts.Name = "dvgProducts";
             this.dvgProducts.RowTemplate.Height = 28;
-            this.dvgProducts.Size = new System.Drawing.Size(975, 294);
+            this.dvgProducts.Size = new System.Drawing.Size(1067, 294);
             this.dvgProducts.TabIndex = 33;
             // 
             // txtProdId
@@ -198,7 +198,7 @@
             // 
             this.btnMainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMainMenu.Location = new System.Drawing.Point(1074, 183);
+            this.btnMainMenu.Location = new System.Drawing.Point(1151, 183);
             this.btnMainMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMainMenu.Name = "btnMainMenu";
             this.btnMainMenu.Size = new System.Drawing.Size(261, 51);
@@ -228,7 +228,7 @@
             // 
             this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(1074, 102);
+            this.btnDelete.Location = new System.Drawing.Point(1151, 102);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(261, 51);
@@ -241,7 +241,7 @@
             // 
             this.btnUpdate.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Location = new System.Drawing.Point(1074, 22);
+            this.btnUpdate.Location = new System.Drawing.Point(1151, 22);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(261, 51);
@@ -306,15 +306,15 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1352, 669);
+            this.tabPage2.Size = new System.Drawing.Size(1478, 877);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Manage Products";
+            this.tabPage2.Text = "New Products";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(580, 332);
+            this.label8.Location = new System.Drawing.Point(562, 406);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(113, 20);
@@ -323,7 +323,7 @@
             // 
             // txtPStock
             // 
-            this.txtPStock.Location = new System.Drawing.Point(584, 355);
+            this.txtPStock.Location = new System.Drawing.Point(566, 429);
             this.txtPStock.Name = "txtPStock";
             this.txtPStock.Size = new System.Drawing.Size(324, 26);
             this.txtPStock.TabIndex = 43;
@@ -332,7 +332,7 @@
             // cmbPType
             // 
             this.cmbPType.FormattingEnabled = true;
-            this.cmbPType.Location = new System.Drawing.Point(584, 48);
+            this.cmbPType.Location = new System.Drawing.Point(566, 122);
             this.cmbPType.Name = "cmbPType";
             this.cmbPType.Size = new System.Drawing.Size(324, 28);
             this.cmbPType.TabIndex = 42;
@@ -341,7 +341,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(580, 25);
+            this.label10.Location = new System.Drawing.Point(562, 99);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 20);
@@ -351,7 +351,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(584, 252);
+            this.label6.Location = new System.Drawing.Point(566, 326);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 20);
@@ -360,7 +360,7 @@
             // 
             // txtPPrice
             // 
-            this.txtPPrice.Location = new System.Drawing.Point(584, 278);
+            this.txtPPrice.Location = new System.Drawing.Point(566, 352);
             this.txtPPrice.Name = "txtPPrice";
             this.txtPPrice.Size = new System.Drawing.Size(324, 26);
             this.txtPPrice.TabIndex = 38;
@@ -369,7 +369,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(584, 169);
+            this.label7.Location = new System.Drawing.Point(566, 243);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(110, 20);
@@ -379,7 +379,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(584, 97);
+            this.label9.Location = new System.Drawing.Point(566, 171);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(111, 20);
@@ -388,7 +388,7 @@
             // 
             // txtPDetails
             // 
-            this.txtPDetails.Location = new System.Drawing.Point(584, 195);
+            this.txtPDetails.Location = new System.Drawing.Point(566, 269);
             this.txtPDetails.Multiline = true;
             this.txtPDetails.Name = "txtPDetails";
             this.txtPDetails.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -398,7 +398,7 @@
             // 
             // txtPModel
             // 
-            this.txtPModel.Location = new System.Drawing.Point(584, 123);
+            this.txtPModel.Location = new System.Drawing.Point(566, 197);
             this.txtPModel.Name = "txtPModel";
             this.txtPModel.Size = new System.Drawing.Size(324, 26);
             this.txtPModel.TabIndex = 30;
@@ -408,7 +408,7 @@
             // 
             this.btnInsert.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInsert.Location = new System.Drawing.Point(584, 534);
+            this.btnInsert.Location = new System.Drawing.Point(566, 608);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(324, 40);
@@ -428,7 +428,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Size = new System.Drawing.Size(1352, 669);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Orders";
+            this.tabPage3.Text = "Warehouse";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // btnEndCall
@@ -490,7 +490,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1346, 666);
+            this.ClientSize = new System.Drawing.Size(1464, 854);
             this.ControlBox = false;
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);

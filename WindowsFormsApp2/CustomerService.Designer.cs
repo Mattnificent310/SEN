@@ -114,6 +114,8 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.numQuantity = new System.Windows.Forms.NumericUpDown();
             this.lblUnitPrice = new System.Windows.Forms.Label();
+            this.btnEndCall = new System.Windows.Forms.Button();
+            this.btnCall = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
@@ -6640,6 +6642,8 @@
             // tabPage3
             // 
             this.tabPage3.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
+            this.tabPage3.Controls.Add(this.btnEndCall);
+            this.tabPage3.Controls.Add(this.btnCall);
             this.tabPage3.Controls.Add(this.lblUnitPrice);
             this.tabPage3.Controls.Add(this.numQuantity);
             this.tabPage3.Controls.Add(this.lblTotal);
@@ -6688,7 +6692,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(278, 46);
             this.button1.TabIndex = 103;
-            this.button1.Text = "Hangup";
+            this.button1.Text = "Checkout";
             this.button1.UseVisualStyleBackColor = false;
             // 
             // button2
@@ -6712,7 +6716,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(278, 46);
             this.button3.TabIndex = 101;
-            this.button3.Text = "Answer";
+            this.button3.Text = "Order";
             this.button3.UseVisualStyleBackColor = false;
             // 
             // button4
@@ -9946,6 +9950,30 @@
             this.lblUnitPrice.Size = new System.Drawing.Size(0, 2);
             this.lblUnitPrice.TabIndex = 108;
             // 
+            // btnEndCall
+            // 
+            this.btnEndCall.BackgroundImage = global::WindowsFormsApp2.Properties.Resources.hangup;
+            this.btnEndCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEndCall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEndCall.Location = new System.Drawing.Point(1303, 573);
+            this.btnEndCall.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnEndCall.Name = "btnEndCall";
+            this.btnEndCall.Size = new System.Drawing.Size(135, 113);
+            this.btnEndCall.TabIndex = 110;
+            this.btnEndCall.UseVisualStyleBackColor = true;
+            // 
+            // btnCall
+            // 
+            this.btnCall.BackgroundImage = global::WindowsFormsApp2.Properties.Resources.newcall;
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCall.Location = new System.Drawing.Point(1303, 423);
+            this.btnCall.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(135, 122);
+            this.btnCall.TabIndex = 109;
+            this.btnCall.UseVisualStyleBackColor = true;
+            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -10066,5 +10094,7 @@
         private System.Windows.Forms.TextBox txtCSSurname;
         private System.Windows.Forms.NumericUpDown numQuantity;
         private System.Windows.Forms.Label lblUnitPrice;
+        private System.Windows.Forms.Button btnEndCall;
+        private System.Windows.Forms.Button btnCall;
     }
 }

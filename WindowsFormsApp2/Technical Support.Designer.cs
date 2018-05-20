@@ -59,6 +59,8 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnEndCall = new System.Windows.Forms.Button();
+            this.btnCall = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -73,12 +75,14 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1221, 678);
+            this.tabControl1.Size = new System.Drawing.Size(1486, 910);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_08;
+            this.tabPage1.Controls.Add(this.btnEndCall);
+            this.tabPage1.Controls.Add(this.btnCall);
             this.tabPage1.Controls.Add(this.btnReset);
             this.tabPage1.Controls.Add(this.btnSearch);
             this.tabPage1.Controls.Add(this.btnBookTask);
@@ -106,7 +110,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(1213, 645);
+            this.tabPage1.Size = new System.Drawing.Size(1478, 877);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -115,7 +119,7 @@
             // 
             this.btnReset.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.Location = new System.Drawing.Point(958, 275);
+            this.btnReset.Location = new System.Drawing.Point(1191, 275);
             this.btnReset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(214, 51);
@@ -128,7 +132,7 @@
             // 
             this.btnSearch.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Location = new System.Drawing.Point(958, 188);
+            this.btnSearch.Location = new System.Drawing.Point(1191, 188);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(214, 51);
@@ -141,7 +145,7 @@
             // 
             this.btnBookTask.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnBookTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBookTask.Location = new System.Drawing.Point(958, 100);
+            this.btnBookTask.Location = new System.Drawing.Point(1191, 100);
             this.btnBookTask.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnBookTask.Name = "btnBookTask";
             this.btnBookTask.Size = new System.Drawing.Size(214, 51);
@@ -152,7 +156,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(480, 494);
+            this.comboBox1.Location = new System.Drawing.Point(684, 529);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(298, 28);
@@ -161,7 +165,7 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(480, 425);
+            this.dateTimePicker2.Location = new System.Drawing.Point(684, 460);
             this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(298, 26);
@@ -169,7 +173,7 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(480, 349);
+            this.dateTimePicker1.Location = new System.Drawing.Point(684, 384);
             this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(298, 26);
@@ -178,7 +182,7 @@
             // lblFinishDate
             // 
             this.lblFinishDate.AutoSize = true;
-            this.lblFinishDate.Location = new System.Drawing.Point(480, 397);
+            this.lblFinishDate.Location = new System.Drawing.Point(684, 432);
             this.lblFinishDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFinishDate.Name = "lblFinishDate";
             this.lblFinishDate.Size = new System.Drawing.Size(90, 20);
@@ -191,7 +195,7 @@
             this.cmbSuportType.Items.AddRange(new object[] {
             "Product Support",
             "Customer Support"});
-            this.cmbSuportType.Location = new System.Drawing.Point(480, 274);
+            this.cmbSuportType.Location = new System.Drawing.Point(684, 309);
             this.cmbSuportType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbSuportType.Name = "cmbSuportType";
             this.cmbSuportType.Size = new System.Drawing.Size(298, 28);
@@ -202,7 +206,7 @@
             // lblSupCost
             // 
             this.lblSupCost.AutoSize = true;
-            this.lblSupCost.Location = new System.Drawing.Point(480, 469);
+            this.lblSupCost.Location = new System.Drawing.Point(684, 504);
             this.lblSupCost.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSupCost.Name = "lblSupCost";
             this.lblSupCost.Size = new System.Drawing.Size(103, 20);
@@ -212,7 +216,7 @@
             // lblStartDate
             // 
             this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(480, 325);
+            this.lblStartDate.Location = new System.Drawing.Point(684, 360);
             this.lblStartDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStartDate.Name = "lblStartDate";
             this.lblStartDate.Size = new System.Drawing.Size(83, 20);
@@ -222,7 +226,7 @@
             // lblTaskType
             // 
             this.lblTaskType.AutoSize = true;
-            this.lblTaskType.Location = new System.Drawing.Point(480, 252);
+            this.lblTaskType.Location = new System.Drawing.Point(684, 287);
             this.lblTaskType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTaskType.Name = "lblTaskType";
             this.lblTaskType.Size = new System.Drawing.Size(104, 20);
@@ -231,7 +235,7 @@
             // 
             // txtProdNo
             // 
-            this.txtProdNo.Location = new System.Drawing.Point(21, 558);
+            this.txtProdNo.Location = new System.Drawing.Point(164, 594);
             this.txtProdNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtProdNo.Name = "txtProdNo";
             this.txtProdNo.Size = new System.Drawing.Size(337, 26);
@@ -240,7 +244,7 @@
             // lblProdNo
             // 
             this.lblProdNo.AutoSize = true;
-            this.lblProdNo.Location = new System.Drawing.Point(16, 534);
+            this.lblProdNo.Location = new System.Drawing.Point(159, 570);
             this.lblProdNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProdNo.Name = "lblProdNo";
             this.lblProdNo.Size = new System.Drawing.Size(88, 20);
@@ -249,7 +253,7 @@
             // 
             // txtCustName
             // 
-            this.txtCustName.Location = new System.Drawing.Point(21, 275);
+            this.txtCustName.Location = new System.Drawing.Point(164, 311);
             this.txtCustName.Name = "txtCustName";
             this.txtCustName.Size = new System.Drawing.Size(337, 26);
             this.txtCustName.TabIndex = 71;
@@ -258,7 +262,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Location = new System.Drawing.Point(16, 469);
+            this.label8.Location = new System.Drawing.Point(159, 505);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(121, 20);
@@ -269,7 +273,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Location = new System.Drawing.Point(16, 397);
+            this.label10.Location = new System.Drawing.Point(159, 433);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(128, 20);
@@ -278,14 +282,14 @@
             // 
             // txtCustEmail
             // 
-            this.txtCustEmail.Location = new System.Drawing.Point(21, 492);
+            this.txtCustEmail.Location = new System.Drawing.Point(164, 528);
             this.txtCustEmail.Name = "txtCustEmail";
             this.txtCustEmail.Size = new System.Drawing.Size(337, 26);
             this.txtCustEmail.TabIndex = 68;
             // 
             // txtCustPhone
             // 
-            this.txtCustPhone.Location = new System.Drawing.Point(21, 425);
+            this.txtCustPhone.Location = new System.Drawing.Point(164, 461);
             this.txtCustPhone.Name = "txtCustPhone";
             this.txtCustPhone.Size = new System.Drawing.Size(337, 26);
             this.txtCustPhone.TabIndex = 67;
@@ -294,7 +298,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(16, 325);
+            this.label3.Location = new System.Drawing.Point(159, 361);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(147, 20);
@@ -305,7 +309,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(16, 252);
+            this.label2.Location = new System.Drawing.Point(159, 288);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(124, 20);
@@ -314,7 +318,7 @@
             // 
             // txtCustSurname
             // 
-            this.txtCustSurname.Location = new System.Drawing.Point(21, 348);
+            this.txtCustSurname.Location = new System.Drawing.Point(164, 384);
             this.txtCustSurname.Name = "txtCustSurname";
             this.txtCustSurname.Size = new System.Drawing.Size(337, 26);
             this.txtCustSurname.TabIndex = 64;
@@ -325,14 +329,14 @@
             this.dgvTech.Location = new System.Drawing.Point(12, 12);
             this.dgvTech.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvTech.Name = "dgvTech";
-            this.dgvTech.Size = new System.Drawing.Size(906, 223);
+            this.dgvTech.Size = new System.Drawing.Size(1140, 223);
             this.dgvTech.TabIndex = 2;
             // 
             // btnMainMenu
             // 
             this.btnMainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMainMenu.Location = new System.Drawing.Point(958, 12);
+            this.btnMainMenu.Location = new System.Drawing.Point(1191, 12);
             this.btnMainMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMainMenu.Name = "btnMainMenu";
             this.btnMainMenu.Size = new System.Drawing.Size(214, 51);
@@ -347,7 +351,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(1213, 645);
+            this.tabPage2.Size = new System.Drawing.Size(1213, 685);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Manage Tasks";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -381,13 +385,37 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
+            // btnEndCall
+            // 
+            this.btnEndCall.BackgroundImage = global::WindowsFormsApp2.Properties.Resources.hangup;
+            this.btnEndCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnEndCall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnEndCall.Location = new System.Drawing.Point(1270, 529);
+            this.btnEndCall.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnEndCall.Name = "btnEndCall";
+            this.btnEndCall.Size = new System.Drawing.Size(135, 113);
+            this.btnEndCall.TabIndex = 86;
+            this.btnEndCall.UseVisualStyleBackColor = true;
+            // 
+            // btnCall
+            // 
+            this.btnCall.BackgroundImage = global::WindowsFormsApp2.Properties.Resources.newcall;
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCall.Location = new System.Drawing.Point(1270, 379);
+            this.btnCall.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(135, 122);
+            this.btnCall.TabIndex = 85;
+            this.btnCall.UseVisualStyleBackColor = true;
+            // 
             // frmTechnicalSupport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1218, 677);
+            this.ClientSize = new System.Drawing.Size(1464, 854);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
@@ -438,5 +466,7 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ErrorProvider errors;
+        private System.Windows.Forms.Button btnEndCall;
+        private System.Windows.Forms.Button btnCall;
     }
 }
