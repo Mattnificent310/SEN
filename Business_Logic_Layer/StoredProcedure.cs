@@ -81,16 +81,16 @@ namespace DataAccessLayer
         #endregion
 
         #region Add 
-        public bool AddProcs(string spName, string[] param, SqlDbType[] dbTypes, object[] obj)
+        public bool AddProcs(string spName, Dictionary<string, object> param)
         {
 
 
             StoredProcedureCollection spCol = new StoredProcedureCollection();
             StoredProcedure sp = new StoredProcedure();
             sp.ProcName = spName;
-            for (int i = 0; i < param.Length; i++)
+            foreach (var item in param)
             {
-                sp.SetParam(param[i], obj[i]);
+                sp.SetParam(item.Key, item.Value);
             }
             spCol.add(sp);
             return ExecuteSps(spCol);
@@ -98,17 +98,42 @@ namespace DataAccessLayer
         }
         #endregion
 
+        #region Change
+        public bool ChangeProc(string spName, Dictionary<string, object> param)
+        {
+            StoredProcedureCollection spCol = new StoredProcedureCollection();
+            StoredProcedure sp = new StoredProcedure();
+            sp.ProcName = spName;
+            SqlParameter[] sqlParam = { };
+            int i = 0;
+            foreach (var item in param)
+            {
+                sqlParam[i++] =
+                        new SqlParameter
+                        {
+                            ParameterName = item.Key,
+                            Value = item.Value
+                        };
+
+            }
+            spCol.add(sp);
+            return InsertProcedure(spName, sqlParam);
+
+
+        }
+        #endregion
+
         #region Search
-        public DataTable GetProcs(string spName, string[] param, SqlDbType[] dbTypes, object[] obj)
+        public DataTable GetProcs(string spName, Dictionary<string, object> param)
         {
 
 
             StoredProcedureCollection spCol = new StoredProcedureCollection();
             StoredProcedure sp = new StoredProcedure();
             sp.ProcName = spName;
-            for (int i = 0; i < param.Length; i++)
+            foreach (var item in param)
             {
-                sp.SetParam(param[i], obj[i]);
+                sp.SetParam(item.Key, item.Value);
             }
             spCol.add(sp);
             return SearchProcedure(spCol);
@@ -128,7 +153,8 @@ namespace DataAccessLayer
         private SqlConnection OpenConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn_string = @"Data Source=MSI;Initial Catalog=SHSDB;Integrated Security=True";
+            conn_string = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMSDB;Integrated Security=True";
+            //conn_string = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMSDB;Integrated Security=True";
             conn = new SqlConnection(conn_string);
             if (conn.State == ConnectionState.Closed || conn.State ==
                         ConnectionState.Broken)
@@ -158,7 +184,7 @@ namespace DataAccessLayer
             }
             catch (SqlException e)
             {
-               
+
             }
             finally
             {
@@ -191,7 +217,7 @@ namespace DataAccessLayer
                     {
                         ParamData pData = (ParamData)myEnumerator.Current;
                         cmd.Parameters.Add(pData.pName);
-                        //cmd.Parameters[i].Value = pData.pValue;
+                        cmd.Parameters[i].Value = pData.pValue;
                         i++;
 
                     }
@@ -204,7 +230,7 @@ namespace DataAccessLayer
             }
             catch (SqlException e)
             {
-               
+
             }
             finally
             {
@@ -214,7 +240,7 @@ namespace DataAccessLayer
         }
         #endregion
 
-        
+
 
         #region Stored Procedure Insert
         public bool InsertProcedure(string _spName, SqlParameter[] sqlParameter)
@@ -261,7 +287,7 @@ namespace DataAccessLayer
                     {
                         ParamData pData = (ParamData)myEnumerator.Current;
                         cmd.Parameters.Add(pData.pName);
-                        //cmd.Parameters[i].Value = pData.pValue;
+                        cmd.Parameters[i].Value = pData.pValue;
                         i++;
 
                     }
