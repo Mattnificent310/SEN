@@ -6823,7 +6823,7 @@
             // 
             // cmbCustGender
             // 
-<<<<<<< HEAD
+
             this.cmbCustGender.FormattingEnabled = true;
             this.cmbCustGender.Items.AddRange(new object[] {
             "Male",
@@ -6833,18 +6833,8 @@
             this.cmbCustGender.Name = "cmbCustGender";
             this.cmbCustGender.Size = new System.Drawing.Size(288, 24);
             this.cmbCustGender.TabIndex = 68;
-=======
-            this.button2.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(1160, 8);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(278, 46);
-            this.button2.TabIndex = 102;
-            this.button2.Text = "MainMenu";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
->>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
+
+            
             // 
             // dtpCustDOB
             // 

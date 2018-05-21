@@ -77,7 +77,7 @@ namespace WindowsFormsApp2
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 cmbProdType.DataBindings.Add("Text", data, "ProductType");
                 cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
-                txtProdDesc.DataBindings.Add("Text", data, "ProductDescription");
+                txtProdName.DataBindings.Add("Text", data, "ProductDescription");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
                 numProdStock.DataBindings.Add("Text", data, "InStock");
                 return true;
@@ -90,7 +90,7 @@ namespace WindowsFormsApp2
             txtProdId.DataBindings.Clear();
             cmbProdType.DataBindings.Clear();
             cmbProdModel.DataBindings.Clear();
-            txtProdDesc.DataBindings.Clear();
+            txtProdName.DataBindings.Clear();
             txtUnitPrice.DataBindings.Clear();
             numProdStock.DataBindings.Clear();
         }
@@ -148,7 +148,7 @@ namespace WindowsFormsApp2
                    int.Parse(txtProdId.Text),
                   cmbProdType.Text,
                    cmbProdModel.Text,
-                   txtProdDesc.Text,
+                   txtProdName.Text,
                    price,
                    int.Parse(numProdStock.Text),
                    cbxDiscontinue.Checked
