@@ -14,7 +14,7 @@ namespace Business_Logic_Layer
         private int productID;
         private string productType;
         private string productModel;
-        private string productDescription;
+        private string productName;
         private decimal unitPrice;
         private int inStock;
         private bool discontinued;
@@ -40,10 +40,10 @@ namespace Business_Logic_Layer
             get { return productType; }
             set { productType = value; }
         }
-        public string ProductDescription
+        public string ProductName
         {
-            get { return productDescription; }
-            set { productDescription = value; }
+            get { return productName; }
+            set { productName = value; }
         }
         public string ProductModel
         {
@@ -93,7 +93,7 @@ namespace Business_Logic_Layer
             this.ProductID = id;
             this.ProductType = type;
             this.ProductModel = model;
-            this.ProductDescription = name;
+            this.ProductName = name;
             this.UnitPrice = price;
             this.InStock = inStock;
             this.Discontinued = discontinued;
@@ -120,7 +120,7 @@ namespace Business_Logic_Layer
                     if ((item.ProductID == (prodId ?? item.ProductID))
                     && (item.ProductType == (prodType ?? item.ProductType))
                     && (item.ProductModel == (model ?? item.ProductModel))
-                    && (item.ProductDescription == (name ?? item.ProductDescription))
+                    && (item.ProductName == (name ?? item.ProductName))
                     && (item.UnitPrice == (price ?? item.UnitPrice))
                     && (item.Discontinued == (discon ?? item.Discontinued)))
                     {
@@ -140,7 +140,7 @@ namespace Business_Logic_Layer
             cat = new Category();
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add(Cons.table2Col1, prod.ProductModel);
-            items.Add(Cons.table2Col2, prod.ProductDescription);
+            items.Add(Cons.table2Col2, prod.ProductName);
             items.Add(Cons.table2Col3, prod.UnitPrice);
             items.Add(Cons.table2Col4, prod.Discontinued);
             items.Add(Cons.table2IdFk1, cat[null, prod.ProductType].CategoryId);
@@ -157,7 +157,7 @@ namespace Business_Logic_Layer
             int invId = inv[null, null, prod.inStock].InventoryID;
             Dictionary<string, object> items = new Dictionary<string, object>();
             items.Add(Cons.table2Col1, prod.ProductModel);
-            items.Add(Cons.table2Col2, prod.ProductDescription);
+            items.Add(Cons.table2Col2, prod.ProductName);
             items.Add(Cons.table2Col3, prod.UnitPrice);
             items.Add(Cons.table2Col4, prod.Discontinued);
             items.Add(Cons.table2IdFk1, catId);

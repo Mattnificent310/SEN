@@ -89,7 +89,7 @@ namespace Business_Logic_Layer
         {
             dh = new DataHandler(cons);
         }
-        public Inventory(int? invId, string _warehouse, int? _units, int? _reorder)
+        public Inventory(int invId, string _warehouse, int _units, int _reorder)
         {
             this.InventoryID = invId;
             this.Warehouse = _warehouse;
@@ -115,7 +115,7 @@ namespace Business_Logic_Layer
                         return (Inventory)item;
                     }
                 }
-                return new Inventory(Insert(new Inventory(invId, warehouse, stock, reorder)), warehouse, stock, reorder);
+                return new Inventory(Insert(new Inventory(invId ?? 0, warehouse, stock ?? 10, reorder ?? 1)) ?? 0, warehouse, stock ?? 10, reorder ?? 1);
                 throw new KeyNotFoundException();
             }
         }

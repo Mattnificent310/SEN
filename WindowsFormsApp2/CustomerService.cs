@@ -143,7 +143,7 @@ namespace WindowsFormsApp2
                     data = new BindingSource();
                     data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text 
                     || x.ProductModel == cmbProdModel.Text 
-                    || x.ProductDescription == txtProdName.Text.Trim()).ToList();
+                    || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();

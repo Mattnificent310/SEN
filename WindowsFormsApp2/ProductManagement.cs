@@ -77,7 +77,7 @@ namespace WindowsFormsApp2
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 cmbProdType.DataBindings.Add("Text", data, "ProductType");
                 cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
-                txtProdName.DataBindings.Add("Text", data, "ProductDescription");
+                txtProdName.DataBindings.Add("Text", data, "ProductName");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
                 numProdStock.DataBindings.Add("Text", data, "InStock");
                 return true;
