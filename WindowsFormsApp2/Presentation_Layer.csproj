@@ -149,5 +149,8 @@
   <ItemGroup>
     <None Include="Resources\hangup.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\50-Beautiful-and-Minimalist-Presentation-Backgrounds-081.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

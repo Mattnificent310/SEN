@@ -14,9 +14,15 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         BindingSource data = new BindingSource();
+<<<<<<< HEAD
+        public Client client;
+        Product prod;
+
+=======
         private static Client client;
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
+>>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
         public frmCustomerService()
         {
             InitializeComponent();
@@ -139,7 +145,7 @@ namespace WindowsFormsApp2
                     data = new BindingSource();
                     data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text 
                     || x.ProductModel == cmbProdModel.Text 
-                    || x.ProductName == txtProdName.Text.Trim()).ToList();
+                    || x.ProductDescription == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
@@ -430,6 +436,13 @@ namespace WindowsFormsApp2
         private void numQuantity_ValueChanged(object sender, EventArgs e)
         {
             lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmMainMenu main = new frmMainMenu();
+            main.Show();
         }
 
         

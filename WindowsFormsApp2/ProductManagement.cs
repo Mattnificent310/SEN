@@ -76,10 +76,10 @@ namespace WindowsFormsApp2
             {
                 txtProdId.DataBindings.Add("Text", data, "ProductID");
                 cmbProdType.DataBindings.Add("Text", data, "ProductType");
-                txtProdModels.DataBindings.Add("Text", data, "ProductModel");
-                txtProdDesc.DataBindings.Add("Text", data, "ProductName");
+                cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
+                txtProdDesc.DataBindings.Add("Text", data, "ProductDescription");
                 txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
-                txtProdStock.DataBindings.Add("Text", data, "InStock");
+                numProdStock.DataBindings.Add("Text", data, "InStock");
                 return true;
             }
             return false;
@@ -89,10 +89,10 @@ namespace WindowsFormsApp2
         {
             txtProdId.DataBindings.Clear();
             cmbProdType.DataBindings.Clear();
-            txtProdModels.DataBindings.Clear();
+            cmbProdModel.DataBindings.Clear();
             txtProdDesc.DataBindings.Clear();
             txtUnitPrice.DataBindings.Clear();
-            txtProdStock.DataBindings.Clear();
+            numProdStock.DataBindings.Clear();
         }
         #endregion
 
@@ -113,10 +113,9 @@ namespace WindowsFormsApp2
                 prod = new Product(
                0,
                cmbPType.Text,
-               txtPModel.Text,
-               txtPDetails.Text,
+               cmbProductModel.Text,
                decimal.Parse(txtPPrice.Text.ToString()),
-               int.Parse(txtPStock.Text),
+               int.Parse(numStock.Text),
                false
 
            );
@@ -148,10 +147,10 @@ namespace WindowsFormsApp2
                 prod = new Product(
                    int.Parse(txtProdId.Text),
                   cmbProdType.Text,
-                   txtProdModels.Text,
+                   cmbProdModel.Text,
                    txtProdDesc.Text,
                    price,
-                   int.Parse(txtProdStock.Text),
+                   int.Parse(numProdStock.Text),
                    cbxDiscontinue.Checked
 
                );
@@ -287,5 +286,15 @@ namespace WindowsFormsApp2
 
         }
         #endregion
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbProdModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

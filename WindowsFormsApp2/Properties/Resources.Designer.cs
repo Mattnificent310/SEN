@@ -73,6 +73,16 @@ namespace WindowsFormsApp2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _50_Beautiful_and_Minimalist_Presentation_Backgrounds_081 {
+            get {
+                object obj = ResourceManager.GetObject("50-Beautiful-and-Minimalist-Presentation-Backgrounds-081", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap callbtn {
             get {
                 object obj = ResourceManager.GetObject("callbtn", resourceCulture);
