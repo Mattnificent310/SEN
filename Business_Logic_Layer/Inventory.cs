@@ -82,7 +82,7 @@ namespace Business_Logic_Layer
                 (int)item[Cons.table8Col3]
                 ));
             }
-           
+
 
         }
         public Inventory(string cons)
@@ -113,7 +113,7 @@ namespace Business_Logic_Layer
                         this.Warehouse = item.Warehouse;
                         this.ReorderLevel = item.ReorderLevel;
                         return (Inventory)item;
-                    }                    
+                    }
                 }
                 throw new KeyNotFoundException();
             }
@@ -164,7 +164,7 @@ namespace Business_Logic_Layer
             return null;
         }
 
-        
+
         #endregion
     }
 }
