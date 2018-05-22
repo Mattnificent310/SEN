@@ -6823,7 +6823,11 @@
             // 
             // cmbCustGender
             // 
+<<<<<<< HEAD
 //<<<<<<< HEAD
+=======
+
+>>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
             this.cmbCustGender.FormattingEnabled = true;
             this.cmbCustGender.Items.AddRange(new object[] {
             "Male",
@@ -6833,6 +6837,7 @@
             this.cmbCustGender.Name = "cmbCustGender";
             this.cmbCustGender.Size = new System.Drawing.Size(288, 24);
             this.cmbCustGender.TabIndex = 68;
+<<<<<<< HEAD
 //=======
             this.btnMain.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnMain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -6845,6 +6850,10 @@
             this.btnMain.UseVisualStyleBackColor = false;
             this.btnMain.Click += new System.EventHandler(this.button2_Click);
 //>>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
+=======
+
+            
+>>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
             // 
             // dtpCustDOB
             // 

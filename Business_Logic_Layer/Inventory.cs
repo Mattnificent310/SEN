@@ -115,6 +115,7 @@ namespace Business_Logic_Layer
                         return (Inventory)item;
                     }
                 }
+                return new Inventory(Insert(new Inventory(invId ?? 0, warehouse, stock ?? 10, reorder ?? 1)) ?? 0, warehouse, stock ?? 10, reorder ?? 1);
                 throw new KeyNotFoundException();
             }
         }

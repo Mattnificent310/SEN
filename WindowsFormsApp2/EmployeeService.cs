@@ -152,6 +152,7 @@ namespace WindowsFormsApp2
                     BirthDate = dtpEmpDOB.Value,
                     ContactNumber = txtEmpPhone.Text.Trim(),
                     EmailAddress = txtEmpEmail.Text.Trim(),
+                    JobDesc = cmbJobDesc.Text,
                     Country = cmbEmpCountry.Text.Trim(),
                     City = cmbEmpCity.Text.Trim(),
                     Street = txtEmpStreet.Text.Trim()

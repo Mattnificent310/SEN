@@ -14,6 +14,7 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         BindingSource data = new BindingSource();
+<<<<<<< HEAD
 //<<<<<<< HEAD
        // public Client client;
         //Product prod;
@@ -23,6 +24,15 @@ namespace WindowsFormsApp2
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
 //>>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
+=======
+
+       
+
+
+        private static Client client;
+        private static Product prod;
+        private static frmMainMenu menu = new frmMainMenu();
+>>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
         public frmCustomerService()
         {
             InitializeComponent();
@@ -145,7 +155,7 @@ namespace WindowsFormsApp2
                     data = new BindingSource();
                     data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text 
                     || x.ProductModel == cmbProdModel.Text 
-                    || x.ProductDescription == txtProdName.Text.Trim()).ToList();
+                    || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
@@ -439,12 +449,23 @@ namespace WindowsFormsApp2
         }
 
         private void btnMain_Click(object sender, EventArgs e)
+<<<<<<< HEAD
+=======
+        {
+           
+        }
+
+        private void dgvSales_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnMain_Click_1(object sender, EventArgs e)
+>>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
         {
             this.Hide();
             frmMainMenu main = new frmMainMenu();
             main.Show();
         }
-
-        
     }
 }
