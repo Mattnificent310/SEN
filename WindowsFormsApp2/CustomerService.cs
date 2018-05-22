@@ -14,10 +14,6 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         BindingSource data = new BindingSource();
-
-
-
-
         private static Client client;
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
@@ -131,6 +127,55 @@ namespace WindowsFormsApp2
                 this.Hide();
                 menu.Show();
             }
+        }
+
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            if (this.btnMain.Text.StartsWith("Log Out"))
+            {
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+            }
+            else
+            {
+                this.Hide();
+                menu.Show();
+            }
+        }
+        #endregion
+
+        #region Sales
+        private void numQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+        }
+        private void radioCol_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioCol.Checked)
+            {
+                dtpColDel.Value = DateTime.Now.AddDays(1.0);
+            }
+        }
+
+        private void radioDel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioDel.Checked)
+            {
+                dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
+            }
+
+
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -389,27 +434,15 @@ namespace WindowsFormsApp2
         #endregion
 
         #region Empty
+        private void dgvSales_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
         private void btnInsert_Click(object sender, EventArgs e)
         {
 
         }
-        private void radioCol_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioCol.Checked)
-            {
-                dtpColDel.Value = DateTime.Now.AddDays(1.0);
-            }
-        }
-
-        private void radioDel_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioDel.Checked)
-            {
-                dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
-            }
-
-
-        }
+        
         private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -453,28 +486,15 @@ namespace WindowsFormsApp2
         {
 
         }
+
+
+
+
+
+
+
         #endregion
 
-        private void numQuantity_ValueChanged(object sender, EventArgs e)
-        {
-            lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
-        }
-
-        private void btnMain_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvSales_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btnMain_Click_1(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
-        }
+        
     }
 }
