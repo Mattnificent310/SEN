@@ -17,10 +17,10 @@ namespace WindowsFormsApp2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+//=======
             Application.Exit();
->>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
+//>>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
         }
     }
 }
