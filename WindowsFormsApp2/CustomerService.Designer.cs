@@ -285,8 +285,8 @@
             // 
             this.btnMain.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnMain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMain.Location = new System.Drawing.Point(1030, 6);
-            this.btnMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnMain.Location = new System.Drawing.Point(1030, 8);
+            this.btnMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMain.Name = "btnMain";
             this.btnMain.Size = new System.Drawing.Size(246, 37);
             this.btnMain.TabIndex = 102;
@@ -298,7 +298,7 @@
             // 
             this.button3.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(1030, 133);
+            this.button3.Location = new System.Drawing.Point(1030, 136);
             this.button3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(246, 37);
@@ -310,7 +310,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(1030, 67);
+            this.button4.Location = new System.Drawing.Point(1030, 72);
             this.button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(246, 37);
@@ -6823,11 +6823,6 @@
             // 
             // cmbCustGender
             // 
-<<<<<<< HEAD
-//<<<<<<< HEAD
-=======
-
->>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
             this.cmbCustGender.FormattingEnabled = true;
             this.cmbCustGender.Items.AddRange(new object[] {
             "Male",
@@ -6837,23 +6832,6 @@
             this.cmbCustGender.Name = "cmbCustGender";
             this.cmbCustGender.Size = new System.Drawing.Size(288, 24);
             this.cmbCustGender.TabIndex = 68;
-<<<<<<< HEAD
-//=======
-            this.btnMain.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnMain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMain.Location = new System.Drawing.Point(1160, 8);
-            this.btnMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnMain.Name = "button2";
-            this.btnMain.Size = new System.Drawing.Size(278, 46);
-            this.btnMain.TabIndex = 102;
-            this.btnMain.Text = "MainMenu";
-            this.btnMain.UseVisualStyleBackColor = false;
-            this.btnMain.Click += new System.EventHandler(this.button2_Click);
-//>>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
-=======
-
-            
->>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
             // 
             // dtpCustDOB
             // 
@@ -10032,7 +10010,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1096, 521);
+            this.ClientSize = new System.Drawing.Size(1248, 521);
             this.ControlBox = false;
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);

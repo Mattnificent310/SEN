@@ -14,25 +14,17 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         BindingSource data = new BindingSource();
-<<<<<<< HEAD
-//<<<<<<< HEAD
+
        // public Client client;
         //Product prod;
 
-//=======
+        private static Client client;
+        private static Product prod;
+        private static frmMainMenu menu = new frmMainMenu();     
         private static Client client;
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
-//>>>>>>> dc73666e1ee07ef4f93ac9f63b041a1569b090de
-=======
 
-       
-
-
-        private static Client client;
-        private static Product prod;
-        private static frmMainMenu menu = new frmMainMenu();
->>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
         public frmCustomerService()
         {
             InitializeComponent();
@@ -98,7 +90,7 @@ namespace WindowsFormsApp2
         }
         private bool Populate()
         {
-            client = new Client();
+            //client = new Client();
             if (Client.clients.Any())
             {
                 data.DataSource = Client.clients;
@@ -111,9 +103,9 @@ namespace WindowsFormsApp2
 
         #region Main
         private void btnMainMenu_Click_2(object sender, EventArgs e)
-        {
-            this.Hide();
-            menu.Show();
+        //{
+        //   this.Hide();
+        //    menu.Show();
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -449,8 +441,6 @@ namespace WindowsFormsApp2
         }
 
         private void btnMain_Click(object sender, EventArgs e)
-<<<<<<< HEAD
-=======
         {
            
         }
@@ -461,7 +451,6 @@ namespace WindowsFormsApp2
         }
 
         private void btnMain_Click_1(object sender, EventArgs e)
->>>>>>> ebd49e655e637bfa0900dc3bb8ed81d3f58feeab
         {
             this.Hide();
             frmMainMenu main = new frmMainMenu();
