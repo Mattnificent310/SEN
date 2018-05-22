@@ -181,7 +181,7 @@ namespace WindowsFormsApp2
                 int.Parse(lblProdId.Text),
                 1,
                 (int)numQuantity.Value,
-                decimal.Parse(lblTotal.Text),
+                decimal.Parse(lblTotal.Text.Substring(1)),
                 0.1));
             }
         }

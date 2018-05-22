@@ -46,7 +46,6 @@
             this.btnOrder = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.cmbPayment = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.cmbProdModel = new System.Windows.Forms.ComboBox();
             this.dtpColDel = new System.Windows.Forms.DateTimePicker();
             this.txtCSName = new System.Windows.Forms.TextBox();
@@ -160,7 +159,6 @@
             this.tabPage3.Controls.Add(this.btnOrder);
             this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Controls.Add(this.cmbPayment);
-            this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.cmbProdModel);
             this.tabPage3.Controls.Add(this.dtpColDel);
             this.tabPage3.Controls.Add(this.txtCSName);
@@ -3328,6 +3326,7 @@
             this.cmbPayment.Size = new System.Drawing.Size(263, 24);
             this.cmbPayment.TabIndex = 99;
             // 
+<<<<<<< HEAD
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(44, 155);
@@ -3336,6 +3335,8 @@
             this.textBox1.Size = new System.Drawing.Size(9, 22);
             this.textBox1.TabIndex = 97;
             // 
+=======
+>>>>>>> 28cc06d5c731798a9aa0077eb0d687374cb407f5
             // cmbProdModel
             // 
             this.cmbProdModel.FormattingEnabled = true;
@@ -10141,7 +10142,6 @@
         private System.Windows.Forms.Button btnOrder;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox cmbPayment;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox cmbProdModel;
         private System.Windows.Forms.DateTimePicker dtpColDel;
         private System.Windows.Forms.TextBox txtCSName;

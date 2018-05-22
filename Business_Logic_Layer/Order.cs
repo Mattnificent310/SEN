@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
+    #region Enums
     enum OrderProcess
     {
         Ordered,
         Pending,
         Terminated
     }
-    public class Order : Sale
+    #endregion 
+
+    
+    public class Order : Sale , IOrder
     {
+        #region Fields
         private Guid orderNumber;
         private string orderType;
         private DateTime orderDate;
         private string orderDetails;
+        #endregion
 
+        #region Properties
         public Guid OrderNumber
         {
             get
@@ -70,6 +77,9 @@ namespace Business_Logic_Layer
                 orderDetails = value;
             }
         }
+        #endregion
+
+        #region Constructors
         public Order()
         {
 
@@ -80,6 +90,28 @@ namespace Business_Logic_Layer
             orderDate = _date;
             OrderType = _type;
             orderDetails = _details;
+        }     
+        #endregion
+
+        #region Insert
+        public bool Insert(Order order)
+        {
+            throw new NotImplementedException();
         }
+        #endregion
+
+        #region Update
+        public bool Update(Order order)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region Delete
+        public bool Delete(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
