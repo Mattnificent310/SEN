@@ -36978,6 +36978,9 @@
   <data name="lblLogin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblLogin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
   <data name="lblLogin.Location" type="System.Drawing.Point, System.Drawing">
     <value>428, 12</value>
   </data>
@@ -36985,7 +36988,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 13</value>
+    <value>184, 15</value>
   </data>
   <data name="lblLogin.TabIndex" type="System.Int32, mscorlib">
     <value>87</value>
@@ -37011,6 +37014,9 @@
   <data name="lblDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
   <data name="lblDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -37021,7 +37027,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 13</value>
+    <value>123, 15</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
     <value>88</value>
