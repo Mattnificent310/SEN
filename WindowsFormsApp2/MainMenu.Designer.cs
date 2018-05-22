@@ -36,12 +36,13 @@
             // 
             // btnClientDept
             // 
-            this.btnClientDept.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnClientDept.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnClientDept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClientDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClientDept.Location = new System.Drawing.Point(226, 64);
+            this.btnClientDept.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClientDept.Location = new System.Drawing.Point(264, 74);
+            this.btnClientDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClientDept.Name = "btnClientDept";
-            this.btnClientDept.Size = new System.Drawing.Size(221, 27);
+            this.btnClientDept.Size = new System.Drawing.Size(258, 31);
             this.btnClientDept.TabIndex = 0;
             this.btnClientDept.Text = "Customer Service";
             this.btnClientDept.UseVisualStyleBackColor = false;
@@ -49,12 +50,13 @@
             // 
             // btnProdDept
             // 
-            this.btnProdDept.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnProdDept.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnProdDept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProdDept.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProdDept.Location = new System.Drawing.Point(226, 116);
+            this.btnProdDept.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProdDept.Location = new System.Drawing.Point(264, 134);
+            this.btnProdDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnProdDept.Name = "btnProdDept";
-            this.btnProdDept.Size = new System.Drawing.Size(221, 27);
+            this.btnProdDept.Size = new System.Drawing.Size(258, 31);
             this.btnProdDept.TabIndex = 1;
             this.btnProdDept.Text = "Product Department";
             this.btnProdDept.UseVisualStyleBackColor = false;
@@ -62,12 +64,13 @@
             // 
             // btnTechSupport
             // 
-            this.btnTechSupport.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnTechSupport.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnTechSupport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTechSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTechSupport.Location = new System.Drawing.Point(226, 170);
+            this.btnTechSupport.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTechSupport.Location = new System.Drawing.Point(264, 196);
+            this.btnTechSupport.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTechSupport.Name = "btnTechSupport";
-            this.btnTechSupport.Size = new System.Drawing.Size(221, 27);
+            this.btnTechSupport.Size = new System.Drawing.Size(258, 31);
             this.btnTechSupport.TabIndex = 2;
             this.btnTechSupport.Text = "Technical Support";
             this.btnTechSupport.UseVisualStyleBackColor = false;
@@ -75,12 +78,13 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.SteelBlue;
+            this.button1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(226, 223);
+            this.button1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(264, 257);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(221, 27);
+            this.button1.Size = new System.Drawing.Size(258, 31);
             this.button1.TabIndex = 3;
             this.button1.Text = "Employee Service";
             this.button1.UseVisualStyleBackColor = false;
@@ -88,15 +92,17 @@
             // 
             // frmMainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(681, 327);
+            this.ClientSize = new System.Drawing.Size(794, 377);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTechSupport);
             this.Controls.Add(this.btnProdDept);
             this.Controls.Add(this.btnClientDept);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainMenu";

@@ -12324,6 +12324,7 @@
             // 
             resources.ApplyResources(this.lblLogin, "lblLogin");
             this.lblLogin.Name = "lblLogin";
+            this.lblLogin.Click += new System.EventHandler(this.lblLogin_Click);
             // 
             // timer1
             // 

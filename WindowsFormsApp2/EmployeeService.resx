@@ -36978,6 +36978,9 @@
   <data name="lblLogin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblLogin.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
   <data name="lblLogin.Location" type="System.Drawing.Point, System.Drawing">
     <value>428, 12</value>
   </data>
@@ -36985,13 +36988,10 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 13</value>
+    <value>0, 15</value>
   </data>
   <data name="lblLogin.TabIndex" type="System.Int32, mscorlib">
     <value>87</value>
-  </data>
-  <data name="lblLogin.Text" xml:space="preserve">
-    <value>Welcome: Mr BlahBlah BlahBlah</value>
   </data>
   <data name="&gt;&gt;lblLogin.Name" xml:space="preserve">
     <value>lblLogin</value>
@@ -37011,6 +37011,9 @@
   <data name="lblDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
   <data name="lblDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -37021,7 +37024,7 @@
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 13</value>
+    <value>123, 15</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
     <value>88</value>
@@ -37047,6 +37050,9 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -37057,7 +37063,7 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>911, 484</value>
+    <value>911, 495</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>

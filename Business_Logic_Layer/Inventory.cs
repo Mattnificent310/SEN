@@ -40,7 +40,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                warehouse = string.IsNullOrEmpty(value) ? "W1001" : value.Trim();
+                warehouse = string.IsNullOrEmpty(value) ? "1001" : value.Trim();
             }
         }
 

@@ -15,12 +15,10 @@ namespace WindowsFormsApp2
     {
         BindingSource data = new BindingSource();
 
-       
-
-
         private static Client client;
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
+     
         public frmCustomerService()
         {
             InitializeComponent();
@@ -95,7 +93,7 @@ namespace WindowsFormsApp2
             }
             return false;
         }
-        #endregion        
+        #endregion
 
         #region Main
         private void btnMainMenu_Click_2(object sender, EventArgs e)
@@ -141,15 +139,15 @@ namespace WindowsFormsApp2
 
                     new Product();
                     data = new BindingSource();
-                    data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text 
-                    || x.ProductModel == cmbProdModel.Text 
+                    data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text
+                    || x.ProductModel == cmbProdModel.Text
                     || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
                     lblUnitPrice.DataBindings.Clear();
                     lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
-                    lblTotal.Text = "R "+ decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+                    lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
                     txtProdName.DataBindings.Clear();
                     cmbProdType.DataBindings.Add("Text", data, "ProductType");
                     cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
@@ -163,7 +161,7 @@ namespace WindowsFormsApp2
             }
 
         }
-        
+
 
         #endregion
 
@@ -262,7 +260,7 @@ namespace WindowsFormsApp2
         {
             ClearAll(this.tabPage1);
         }
-        #endregion       
+        #endregion
 
         #region Validation
 
@@ -438,7 +436,7 @@ namespace WindowsFormsApp2
 
         private void btnMain_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dgvSales_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -451,6 +449,10 @@ namespace WindowsFormsApp2
             this.Hide();
             frmMainMenu main = new frmMainMenu();
             main.Show();
+        }
+
+        private void lblDate_Click(object sender, EventArgs e)
+        {
         }
     }
 }

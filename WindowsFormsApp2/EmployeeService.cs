@@ -20,13 +20,12 @@ namespace WindowsFormsApp2
             InitializeComponent();
             BindData();
             timer1.Start();
-
         }
 
         #region Login
         public void Login(Staff staf)
         {
-            lblLogin.Text = string.Format("Welcome:  {0} {1} {2}", staff.Title, staf.Name, staf.Surname);
+            lblLogin.Text = string.Format("Welcome:  {0} {1} {2}", staf.Title, staf.Name, staf.Surname);
 
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -312,5 +311,10 @@ namespace WindowsFormsApp2
 
         }
         #endregion
+
+        private void lblLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
