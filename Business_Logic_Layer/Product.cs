@@ -99,16 +99,16 @@ namespace Business_Logic_Layer
             this.Discontinued = discontinued;
         }
 
-        public Product(int p1, string p2, string p3, decimal p4, int p5, bool p6)
-        {
-            // TODO: Complete member initialization
-            this.p1 = p1;
-            this.p2 = p2;
-            this.p3 = p3;
-            this.p4 = p4;
-            this.p5 = p5;
-            this.p6 = p6;
-        }
+        //private Product(int p1, string p2, string p3, decimal p4, int p5, bool p6)
+        //{
+        //    // TODO: Complete member initialization
+        //    this.p1 = p1;
+        //    this.p2 = p2;
+        //    this.p3 = p3;
+        //    this.p4 = p4;
+        //    this.p5 = p5;
+        //    this.p6 = p6;
+        //}
         #region Indexer
         public Product this[int? prodId = null, string prodType = null, string model = null, string name = null, decimal? price = null, bool? discon = null]
         {

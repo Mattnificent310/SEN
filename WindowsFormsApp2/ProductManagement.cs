@@ -128,6 +128,7 @@ namespace WindowsFormsApp2
                0,
                cmbPType.Text,
                cmbProductModel.Text,
+               txtPName.Text.Trim(),
                decimal.Parse(txtPPrice.Text.ToString()),
                int.Parse(numStock.Text),
                false
