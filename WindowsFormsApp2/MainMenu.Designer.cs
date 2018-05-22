@@ -33,6 +33,8 @@
             this.btnTechSupport = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lblLogin = new System.Windows.Forms.Label();
+            this.btnAdminTools = new System.Windows.Forms.Button();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClientDept
@@ -101,13 +103,45 @@
             this.lblLogin.TabIndex = 4;
             this.lblLogin.Text = "Welcome: ";
             // 
+            // btnAdminTools
+            // 
+            this.btnAdminTools.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnAdminTools.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdminTools.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdminTools.Location = new System.Drawing.Point(740, 447);
+            this.btnAdminTools.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAdminTools.Name = "btnAdminTools";
+            this.btnAdminTools.Size = new System.Drawing.Size(269, 42);
+            this.btnAdminTools.TabIndex = 5;
+            this.btnAdminTools.Text = "Admin Tools";
+            this.btnAdminTools.UseVisualStyleBackColor = false;
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.Location = new System.Drawing.Point(13, 447);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(269, 42);
+            this.btnLogOut.TabIndex = 6;
+            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.UseVisualStyleBackColor = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // frmMainMenu
             // 
+            this.AcceptButton = this.btnAdminTools;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CancelButton = this.btnLogOut;
             this.ClientSize = new System.Drawing.Size(1022, 503);
+            this.ControlBox = false;
+            this.Controls.Add(this.btnLogOut);
+            this.Controls.Add(this.btnAdminTools);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTechSupport);
@@ -130,5 +164,7 @@
         private System.Windows.Forms.Button btnTechSupport;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblLogin;
+        private System.Windows.Forms.Button btnAdminTools;
+        private System.Windows.Forms.Button btnLogOut;
     }
 }

@@ -59,5 +59,12 @@ namespace WindowsFormsApp2
         {
 
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            this.Hide();
+            login.Show();
+        }
     }
 }

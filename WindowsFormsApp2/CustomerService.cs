@@ -17,6 +17,7 @@ namespace WindowsFormsApp2
         private static Client client;
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
+        private static List<OrderDetail> cart = new List<OrderDetail>();
         public frmCustomerService()
         {
             InitializeComponent();
@@ -170,7 +171,19 @@ namespace WindowsFormsApp2
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-
+            if (ValidateAll(this.tabPage3))
+            {
+                cart.Add(new OrderDetail(
+                0,
+                "Customer Sale",
+                DateTime.Now,
+                "N/A",
+                int.Parse(lblProdId.Text),
+                1,
+                (int)numQuantity.Value,
+                decimal.Parse(lblTotal.Text),
+                0.1));
+            }
         }
 
         private void btnCheckOut_Click(object sender, EventArgs e)

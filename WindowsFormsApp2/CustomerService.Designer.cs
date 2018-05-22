@@ -43,7 +43,6 @@
             this.btnOrder = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.cmbPayment = new System.Windows.Forms.ComboBox();
-            this.dgvSales = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.cmbProdModel = new System.Windows.Forms.ComboBox();
             this.dtpColDel = new System.Windows.Forms.DateTimePicker();
@@ -116,14 +115,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblProdId = new System.Windows.Forms.Label();
+            this.lblCSId = new System.Windows.Forms.Label();
+            this.dgvSales = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -143,6 +145,9 @@
             // 
             this.tabPage3.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage3.Controls.Add(this.dgvSales);
+            this.tabPage3.Controls.Add(this.lblCSId);
+            this.tabPage3.Controls.Add(this.lblProdId);
             this.tabPage3.Controls.Add(this.btnEndCall);
             this.tabPage3.Controls.Add(this.btnCall);
             this.tabPage3.Controls.Add(this.lblUnitPrice);
@@ -155,7 +160,6 @@
             this.tabPage3.Controls.Add(this.btnOrder);
             this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Controls.Add(this.cmbPayment);
-            this.tabPage3.Controls.Add(this.dgvSales);
             this.tabPage3.Controls.Add(this.textBox1);
             this.tabPage3.Controls.Add(this.cmbProdModel);
             this.tabPage3.Controls.Add(this.dtpColDel);
@@ -3284,15 +3288,6 @@
             this.cmbPayment.Name = "cmbPayment";
             this.cmbPayment.Size = new System.Drawing.Size(300, 31);
             this.cmbPayment.TabIndex = 99;
-            // 
-            // dgvSales
-            // 
-            this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSales.Location = new System.Drawing.Point(22, 6);
-            this.dgvSales.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dgvSales.Name = "dgvSales";
-            this.dgvSales.Size = new System.Drawing.Size(990, 230);
-            this.dgvSales.TabIndex = 98;
             // 
             // textBox1
             // 
@@ -10005,11 +10000,41 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
+            // lblProdId
+            // 
+            this.lblProdId.AutoSize = true;
+            this.lblProdId.BackColor = System.Drawing.Color.Transparent;
+            this.lblProdId.Location = new System.Drawing.Point(447, 171);
+            this.lblProdId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProdId.Name = "lblProdId";
+            this.lblProdId.Size = new System.Drawing.Size(0, 23);
+            this.lblProdId.TabIndex = 111;
+            // 
+            // lblCSId
+            // 
+            this.lblCSId.AutoSize = true;
+            this.lblCSId.BackColor = System.Drawing.Color.Transparent;
+            this.lblCSId.Location = new System.Drawing.Point(469, 147);
+            this.lblCSId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCSId.Name = "lblCSId";
+            this.lblCSId.Size = new System.Drawing.Size(0, 23);
+            this.lblCSId.TabIndex = 113;
+            // 
+            // dgvSales
+            // 
+            this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSales.Location = new System.Drawing.Point(19, 7);
+            this.dgvSales.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvSales.Name = "dgvSales";
+            this.dgvSales.Size = new System.Drawing.Size(990, 230);
+            this.dgvSales.TabIndex = 114;
+            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1291, 701);
@@ -10027,13 +10052,13 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10104,7 +10129,6 @@
         private System.Windows.Forms.Button btnOrder;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ComboBox cmbPayment;
-        private System.Windows.Forms.DataGridView dgvSales;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox cmbProdModel;
         private System.Windows.Forms.DateTimePicker dtpColDel;
@@ -10128,5 +10152,8 @@
         private System.Windows.Forms.Label lblUnitPrice;
         private System.Windows.Forms.Button btnEndCall;
         private System.Windows.Forms.Button btnCall;
+        private System.Windows.Forms.DataGridView dgvSales;
+        private System.Windows.Forms.Label lblCSId;
+        private System.Windows.Forms.Label lblProdId;
     }
 }
