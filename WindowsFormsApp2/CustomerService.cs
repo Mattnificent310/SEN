@@ -208,6 +208,7 @@ namespace WindowsFormsApp2
                     string.IsNullOrEmpty(txtCSSurname.Text.Trim()) ? null : txtCSSurname.Text.Trim(),
                     string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
                     dgvSales.DataSource = data;
+                    lblCSId.DataBindings.Add("Text", data, "Identity");
                     txtCSName.DataBindings.Clear();
                     txtCSSurname.DataBindings.Clear();
                     txtCSPhone.DataBindings.Clear();
@@ -227,6 +228,7 @@ namespace WindowsFormsApp2
                     || x.ProductModel == cmbProdModel.Text
                     || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
+                    lblProdId.DataBindings.Add("Text", data, "ProductID");
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
                     lblUnitPrice.DataBindings.Clear();

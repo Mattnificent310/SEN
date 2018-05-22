@@ -230,9 +230,19 @@
             // 
             this.numQuantity.Location = new System.Drawing.Point(642, 448);
             this.numQuantity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numQuantity.Name = "numQuantity";
             this.numQuantity.Size = new System.Drawing.Size(300, 30);
             this.numQuantity.TabIndex = 107;
+            this.numQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
             // 
             // lblTotal

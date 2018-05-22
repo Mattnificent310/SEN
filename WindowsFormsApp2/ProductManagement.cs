@@ -84,7 +84,7 @@ namespace WindowsFormsApp2
                 cmbProdType.DataBindings.Add("Text", data, "ProductType");
                 cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
                 txtProdName.DataBindings.Add("Text", data, "ProductName");
-                txtUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                numPrice.DataBindings.Add("Text", data, "UnitPrice");
                 numProdStock.DataBindings.Add("Text", data, "InStock");
                 return true;
             }
@@ -97,7 +97,7 @@ namespace WindowsFormsApp2
             cmbProdType.DataBindings.Clear();
             cmbProdModel.DataBindings.Clear();
             txtProdName.DataBindings.Clear();
-            txtUnitPrice.DataBindings.Clear();
+            numPrice.DataBindings.Clear();
             numProdStock.DataBindings.Clear();
         }
         #endregion
@@ -129,7 +129,7 @@ namespace WindowsFormsApp2
                cmbPType.Text,
                cmbProductModel.Text,
                txtPName.Text.Trim(),
-               decimal.Parse(txtPPrice.Text.ToString()),
+               numUnitPrice.Value,
                int.Parse(numStock.Text),
                false
 
@@ -156,15 +156,13 @@ namespace WindowsFormsApp2
         {
             if (ValidateAll(this.tabPage1))
             {
-                decimal price = 0;
-                decimal.TryParse(txtUnitPrice.Text, out price);
-
+                
                 prod = new Product(
                    int.Parse(txtProdId.Text),
                   cmbProdType.Text,
                    cmbProdModel.Text,
                    txtProdName.Text,
-                   price,
+                   numPrice.Value,
                    int.Parse(numProdStock.Text),
                    cbxDiscontinue.Checked
 

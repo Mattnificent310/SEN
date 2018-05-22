@@ -42,7 +42,6 @@
             this.cbxDiscontinue = new System.Windows.Forms.CheckBox();
             this.btnMainMenu = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtUnitPrice = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,7 +56,6 @@
             this.cmbPType = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtPPrice = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnInsert = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -65,6 +63,8 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.numUnitPrice = new System.Windows.Forms.NumericUpDown();
+            this.numPrice = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numProdStock)).BeginInit();
@@ -72,6 +72,8 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,6 +93,7 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.numPrice);
             this.tabPage1.Controls.Add(this.numProdStock);
             this.tabPage1.Controls.Add(this.cmbProdModel);
             this.tabPage1.Controls.Add(this.button1);
@@ -102,7 +105,6 @@
             this.tabPage1.Controls.Add(this.cbxDiscontinue);
             this.tabPage1.Controls.Add(this.btnMainMenu);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.txtUnitPrice);
             this.tabPage1.Controls.Add(this.btnDelete);
             this.tabPage1.Controls.Add(this.btnUpdate);
             this.tabPage1.Controls.Add(this.label4);
@@ -220,7 +222,7 @@
             // 
             this.btnMainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMainMenu.Location = new System.Drawing.Point(1150, 183);
+            this.btnMainMenu.Location = new System.Drawing.Point(1150, 22);
             this.btnMainMenu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMainMenu.Name = "btnMainMenu";
             this.btnMainMenu.Size = new System.Drawing.Size(261, 51);
@@ -239,18 +241,11 @@
             this.label5.TabIndex = 29;
             this.label5.Text = "Unit Price";
             // 
-            // txtUnitPrice
-            // 
-            this.txtUnitPrice.Location = new System.Drawing.Point(616, 454);
-            this.txtUnitPrice.Name = "txtUnitPrice";
-            this.txtUnitPrice.Size = new System.Drawing.Size(324, 30);
-            this.txtUnitPrice.TabIndex = 28;
-            // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDelete.Location = new System.Drawing.Point(1150, 102);
+            this.btnDelete.Location = new System.Drawing.Point(1150, 185);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(261, 51);
@@ -263,7 +258,7 @@
             // 
             this.btnUpdate.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Location = new System.Drawing.Point(1150, 22);
+            this.btnUpdate.Location = new System.Drawing.Point(1150, 104);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(261, 51);
@@ -305,6 +300,7 @@
             // 
             this.tabPage2.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage2.Controls.Add(this.numUnitPrice);
             this.tabPage2.Controls.Add(this.lblPDesc);
             this.tabPage2.Controls.Add(this.txtPName);
             this.tabPage2.Controls.Add(this.cmbProductModel);
@@ -313,7 +309,6 @@
             this.tabPage2.Controls.Add(this.cmbPType);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.txtPPrice);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.btnInsert);
             this.tabPage2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -368,9 +363,19 @@
             0,
             0,
             0});
+            this.numStock.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numStock.Name = "numStock";
             this.numStock.Size = new System.Drawing.Size(326, 30);
             this.numStock.TabIndex = 45;
+            this.numStock.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label8
             // 
@@ -410,14 +415,6 @@
             this.label6.Size = new System.Drawing.Size(94, 23);
             this.label6.TabIndex = 39;
             this.label6.Text = "Unit Price";
-            // 
-            // txtPPrice
-            // 
-            this.txtPPrice.Location = new System.Drawing.Point(520, 288);
-            this.txtPPrice.Name = "txtPPrice";
-            this.txtPPrice.Size = new System.Drawing.Size(324, 30);
-            this.txtPPrice.TabIndex = 38;
-            this.txtPPrice.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label9
             // 
@@ -485,6 +482,56 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
+            // numUnitPrice
+            // 
+            this.numUnitPrice.DecimalPlaces = 2;
+            this.numUnitPrice.Location = new System.Drawing.Point(524, 280);
+            this.numUnitPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numUnitPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numUnitPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUnitPrice.Name = "numUnitPrice";
+            this.numUnitPrice.Size = new System.Drawing.Size(326, 30);
+            this.numUnitPrice.TabIndex = 49;
+            this.numUnitPrice.ThousandsSeparator = true;
+            this.numUnitPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numPrice
+            // 
+            this.numPrice.DecimalPlaces = 2;
+            this.numPrice.Location = new System.Drawing.Point(616, 456);
+            this.numPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numPrice.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPrice.Name = "numPrice";
+            this.numPrice.Size = new System.Drawing.Size(326, 30);
+            this.numPrice.TabIndex = 50;
+            this.numPrice.ThousandsSeparator = true;
+            this.numPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // frmProductManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -509,6 +556,8 @@
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -521,12 +570,10 @@
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtPPrice;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button btnMainMenu;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtUnitPrice;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label label4;
@@ -552,6 +599,8 @@
         private System.Windows.Forms.Label lblPDesc;
         private System.Windows.Forms.TextBox txtPName;
         private System.Windows.Forms.NumericUpDown numProdStock;
+        private System.Windows.Forms.NumericUpDown numUnitPrice;
+        private System.Windows.Forms.NumericUpDown numPrice;
     }
 }
 
