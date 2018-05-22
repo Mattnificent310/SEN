@@ -125,6 +125,14 @@ namespace WindowsFormsApp2
                                     emp.Show();
                                     break;
                                 }
+                            case "Administrator":
+                            {
+                                    this.Hide();
+                                    frmMainMenu menu = new frmMainMenu();
+                                    menu.Login(staff);
+                                    menu.Show();
+                                    break;
+                            }
                             default:
                                 {
 

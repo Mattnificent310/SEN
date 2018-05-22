@@ -15,6 +15,7 @@ namespace WindowsFormsApp2
     {
         Staff staff;
         BindingSource data;
+        private static frmMainMenu menu = new frmMainMenu();
         public EmployeeService()
         {
             InitializeComponent();
@@ -26,6 +27,11 @@ namespace WindowsFormsApp2
         #region Login
         public void Login(Staff staf)
         {
+            if (!staf.Department.Equals("Administrator"))
+            {               
+                this.btnMainMenu.Text = "Log Out";
+            }
+            menu.Login(staf);
             lblLogin.Text = string.Format("Welcome:  {0} {1} {2}", staff.Title, staf.Name, staf.Surname);
 
         }
@@ -96,9 +102,17 @@ namespace WindowsFormsApp2
         #region Main
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frmMainMenu menu = new frmMainMenu();
-            menu.Show();
+            if (this.btnMainMenu.Text.StartsWith("Log Out"))
+            {
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+            }
+            else
+            {
+                this.Hide();                
+                menu.Show();
+            }
         }
         #endregion
 

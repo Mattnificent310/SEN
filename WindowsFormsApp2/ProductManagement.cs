@@ -18,6 +18,7 @@ namespace WindowsFormsApp2
         private Product prod;
         private Category cat;
         private Inventory inv;
+        private static frmMainMenu main = new frmMainMenu();
 
 
         public frmProductManagement()
@@ -40,7 +41,12 @@ namespace WindowsFormsApp2
         #region Login
         public void Login(Staff staf)
         {
-            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+            if (!staf.Department.Equals("Administrator"))
+            {                
+                this.btnMainMenu.Text = "Log Out";
+            }
+            main.Login(staf);
+            lblLogin.Text = string.Format("Welcome:  {0}  {1}  {2}", staf.Title, staf.Name, staf.Surname);
 
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -99,9 +105,17 @@ namespace WindowsFormsApp2
         #region Main
         private void btnMainMenu_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frmMainMenu main = new frmMainMenu();
-            main.Show();
+            if (this.btnMainMenu.Text.StartsWith("Log Out"))
+            {
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+            }
+            else
+            {
+                this.Hide();                
+                main.Show();
+            }
         }
         #endregion
 

@@ -15,7 +15,7 @@ namespace WindowsFormsApp2
     {
         BindingSource data = new BindingSource();
 
-       
+
 
 
         private static Client client;
@@ -39,7 +39,13 @@ namespace WindowsFormsApp2
         #region Login
         public void Login(Staff staf)
         {
-            lblLogin.Text = string.Format("Welcome {0} {1}            {2}    {3}", staf.Name, staf.Surname, DateTime.Now.ToLongDateString(), DateTime.Now.ToShortTimeString());
+            if (!staf.Department.Equals("Administrator"))
+            {                
+                this.btnMain.Text = "Log Out";
+                this.btnMainMenu.Text = "Log Out";
+            }
+            menu.Login(staf);
+            lblLogin.Text = string.Format("Welcome:  {0}  {1}  {2}", staf.Title, staf.Name, staf.Surname);
 
         }
         private void timer1_Tick(object sender, EventArgs e)
@@ -100,13 +106,31 @@ namespace WindowsFormsApp2
         #region Main
         private void btnMainMenu_Click_2(object sender, EventArgs e)
         {
-            this.Hide();
-            menu.Show();
+            if (this.btnMainMenu.Text.StartsWith("Log Out"))
+            {
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+            }
+            else
+            {
+                this.Hide();                
+                menu.Show();
+            }
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            menu.Show();
+            if (this.btnMain.Text.StartsWith("Log Out"))
+            {
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+            }
+            else
+            {
+                this.Hide();
+                menu.Show();
+            }
         }
         #endregion
 
@@ -141,15 +165,15 @@ namespace WindowsFormsApp2
 
                     new Product();
                     data = new BindingSource();
-                    data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text 
-                    || x.ProductModel == cmbProdModel.Text 
+                    data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text
+                    || x.ProductModel == cmbProdModel.Text
                     || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
                     lblUnitPrice.DataBindings.Clear();
                     lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
-                    lblTotal.Text = "R "+ decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+                    lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
                     txtProdName.DataBindings.Clear();
                     cmbProdType.DataBindings.Add("Text", data, "ProductType");
                     cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
@@ -163,7 +187,7 @@ namespace WindowsFormsApp2
             }
 
         }
-        
+
 
         #endregion
 
@@ -438,7 +462,7 @@ namespace WindowsFormsApp2
 
         private void btnMain_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void dgvSales_CellContentClick(object sender, DataGridViewCellEventArgs e)
