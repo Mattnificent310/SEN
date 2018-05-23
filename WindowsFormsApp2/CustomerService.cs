@@ -16,6 +16,7 @@ namespace WindowsFormsApp2
         BindingSource data = new BindingSource();
         private static Client client;
         private static Product prod;
+        private static Category cat;
         private static frmMainMenu menu = new frmMainMenu();
         private static Sale sale;
         private static Order order;
@@ -94,14 +95,15 @@ namespace WindowsFormsApp2
         private bool Populate()
         {
             client = new Client();
+            cat = new Category();
             prod = new Product();
-            if (Product.prods.Any())
+            if (Category.cats.Any())
             {
                 cmbProdType.Items.Clear();
                 cmbPayment.Items.Clear();
                 cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
                 cmbProdModel.Items.Clear();
-                cmbProdType.DataSource = Product.prods.Select(x => x.ProductType).ToList();
+                cmbProdType.DataSource = Category.cats.Select(x => x.CategoryName).ToList();
                 cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
                 cmbProdType.Text = "";
                 cmbProdModel.Text = "";
@@ -288,6 +290,22 @@ namespace WindowsFormsApp2
                     }
                     #endregion
 
+                    #region Find Product Model
+                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()))
+                    {
+                        data.DataSource = Product.prods.Where(x => x.ProductModel == cmbProdModel.Text.Trim()).ToList();
+
+                    }
+                    #endregion
+
+                    #region Find Product Name
+                    if (!string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                    {
+                        data.DataSource = Product.prods.Where(x => x.ProductName == txtProdName.Text.Trim()).ToList();
+
+                    }
+                    #endregion
+
                     #region Find Product Type & Product Model
                     if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()) && !string.IsNullOrEmpty(cmbProdType.Text.Trim()))
                     {
@@ -309,17 +327,7 @@ namespace WindowsFormsApp2
                     }
                     #endregion
 
-                    #region Find Anything
-                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim())
-                    || !string.IsNullOrEmpty(cmbProdType.Text.Trim())
-                    || !string.IsNullOrEmpty(txtProdName.Text.Trim()))
-                    {
-                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
-                           || x.ProductModel == cmbProdModel.Text.Trim()
-                           || x.ProductName == txtProdName.Text.Trim()).ToList();
-
-                    }
-                    #endregion
+                    
 
                     dgvSales.DataSource = data;
 
