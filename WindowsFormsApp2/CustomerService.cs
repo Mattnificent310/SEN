@@ -210,6 +210,7 @@ namespace WindowsFormsApp2
                 decimal.Parse(lblTotal.Text.Substring(1)),
                 0.1));
 
+                #region Values
                 object[] values =
                 {
                 cmbProdModel.Text,
@@ -220,9 +221,11 @@ namespace WindowsFormsApp2
                 numQuantity.Value.ToString(),
                 double.Parse(lblTotal.Text.Substring(1))
                 };
+                #endregion
 
                 if (!columns)
                 {
+                    #region Columns
                     dgvItems.DataSource = null;
                     dgvItems.DataBindings.Clear();
                     dgvItems.Columns.Add("ProductModel", "Product Model");
@@ -232,6 +235,7 @@ namespace WindowsFormsApp2
                     dgvItems.Columns.Add("UnitPrice", "Unit Price");
                     dgvItems.Columns.Add("ItemQuantity", "Item Quantity");
                     dgvItems.Columns.Add("Total", "Total");
+                    #endregion 
 
                     columns = true;
                 }
@@ -276,9 +280,47 @@ namespace WindowsFormsApp2
 
                     dgvItems.Hide();
 
-                    data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text
-                    || x.ProductModel == cmbProdModel.Text
-                    || x.ProductName == txtProdName.Text.Trim()).ToList();
+                    #region Find Product Type
+                    if (!string.IsNullOrEmpty(cmbProdType.Text.Trim()))
+                    {
+                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()).ToList();
+                       
+                    }
+                    #endregion
+
+                    #region Find Product Type & Product Model
+                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()) && !string.IsNullOrEmpty(cmbProdType.Text.Trim()))
+                    {
+                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()                       
+                       && x.ProductModel == cmbProdModel.Text.Trim()).ToList();
+                        
+                    }
+                    #endregion
+
+                    #region Find Product Type, Model & Name
+                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()) 
+                    && !string.IsNullOrEmpty(cmbProdType.Text.Trim()) 
+                    && !string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                    {
+                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
+                           && x.ProductModel == cmbProdModel.Text.Trim()
+                           && x.ProductName == txtProdName.Text.Trim()).ToList();
+                        
+                    }
+                    #endregion
+
+                    #region Find Anything
+                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim())
+                    || !string.IsNullOrEmpty(cmbProdType.Text.Trim())
+                    || !string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                    {
+                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
+                           || x.ProductModel == cmbProdModel.Text.Trim()
+                           || x.ProductName == txtProdName.Text.Trim()).ToList();
+
+                    }
+                    #endregion
+
                     dgvSales.DataSource = data;
 
                     #region Clear
@@ -288,12 +330,15 @@ namespace WindowsFormsApp2
                     lblProdId.DataBindings.Clear();
                     txtProdName.DataBindings.Clear();
                     #endregion
+
+                    #region Bind
                     lblProdId.DataBindings.Add("Text", data, "ProductID");
                     cmbProdType.DataBindings.Add("Text", data, "ProductType");
                     cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
                     txtProdName.DataBindings.Add("Text", data, "ProductName");
                     lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
                     lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+                    #endregion
 
 
                 }
@@ -321,12 +366,14 @@ namespace WindowsFormsApp2
                     txtProdName.DataBindings.Clear();
                     txtProdName.Clear();
                     #endregion
+
+                    #region Bind
                     lblCSId.DataBindings.Add("Text", data, "Identity");
                     txtCSName.DataBindings.Add("Text", data, "Name");
                     txtCSSurname.DataBindings.Add("Text", data, "Surname");
                     txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
                     txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
-
+                    #endregion
                 }
                 
                 else
@@ -345,11 +392,15 @@ namespace WindowsFormsApp2
         {
             cmbProdModel.Text = "";
             txtProdName.Text = "";
+            cmbProdModel.DataBindings.Clear();
+            txtProdName.DataBindings.Clear();
         }
 
         private void cmbProdModel_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtProdName.Text = "";
+            cmbProdType.DataBindings.Clear();
+            txtProdName.DataBindings.Clear();
         }
 
 
