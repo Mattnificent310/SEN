@@ -94,6 +94,16 @@ namespace WindowsFormsApp2
         private bool Populate()
         {
             client = new Client();
+            prod = new Product();
+            if (Product.prods.Any())
+            {
+                cmbProdType.Items.Clear();
+                cmbPayment.Items.Clear();
+                cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
+                cmbProdModel.Items.Clear();
+                cmbProdType.DataSource = Product.prods.Select(x => x.ProductType).ToList();
+                cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
+            }
             if (Client.clients.Any())
             {
                 data.DataSource = Client.clients;
@@ -204,9 +214,9 @@ namespace WindowsFormsApp2
                 txtProdName.Text,
                  radioCol.Checked ? "Collection" : "Delivery",
                 dtpColDel.Value.ToShortDateString(),
-                decimal.Parse(lblUnitPrice.Text),
+                double.Parse(lblUnitPrice.Text),
                 numQuantity.Value.ToString(),
-                decimal.Parse(lblTotal.Text.Substring(1))
+                double.Parse(lblTotal.Text.Substring(1))
                 };
 
                 if (!columns)
@@ -228,7 +238,7 @@ namespace WindowsFormsApp2
                     vals.Add(values);
                     dgvItems.Rows.Add(values);
                     dgvItems.Show();
-                    lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(5).GetType() == typeof(decimal) ? (decimal)x.ElementAt(5) : 0));
+                    lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(6).GetType() == typeof(double) ? (double)x.ElementAt(6) : 0));
                 }
                 else
                 {
@@ -236,7 +246,10 @@ namespace WindowsFormsApp2
                 }
             }
         }
-
+        private void lblUnitPrice_TextChanged(object sender, EventArgs e)
+        {
+            lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+        }
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
 
@@ -249,33 +262,11 @@ namespace WindowsFormsApp2
         {
             try
             {
-                if (string.IsNullOrEmpty(cmbProdType.Text)
-                && string.IsNullOrEmpty(cmbProdModel.Text)
-                && string.IsNullOrEmpty(txtProdName.Text.Trim()))
-                {
-                    client = new Client();
-
-                    dgvItems.Hide();
-                    data.DataSource = client[
-                    string.IsNullOrEmpty(txtCSName.Text.Trim()) ? null : txtCSName.Text.Trim(),
-                    string.IsNullOrEmpty(txtCSSurname.Text.Trim()) ? null : txtCSSurname.Text.Trim(),
-                    string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
-                    dgvSales.DataSource = data;
-                   
-                    #region Clear
-                    txtCSName.DataBindings.Clear();
-                    txtCSSurname.DataBindings.Clear();
-                    txtCSPhone.DataBindings.Clear();
-                    txtCSEmail.DataBindings.Clear();
-                    #endregion
-                    lblCSId.DataBindings.Add("Text", data, "Identity");
-                    txtCSName.DataBindings.Add("Text", data, "Name");
-                    txtCSSurname.DataBindings.Add("Text", data, "Surname");
-                    txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
-                    txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
-
-                }
-                else
+                if (
+                    !string.IsNullOrEmpty(txtCSName.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
                 {
 
                     new Product();
@@ -287,7 +278,7 @@ namespace WindowsFormsApp2
                     || x.ProductModel == cmbProdModel.Text
                     || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
-                   
+
                     #region Clear
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
@@ -303,6 +294,42 @@ namespace WindowsFormsApp2
                     lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
 
 
+                }
+                else if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
+                || !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                || !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                || !string.IsNullOrEmpty(txtCSEmail.Text.Trim())
+                && string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                {
+                    client = new Client();
+
+                    dgvItems.Hide();
+                    data.DataSource = client[
+                    string.IsNullOrEmpty(txtCSName.Text.Trim()) ? null : txtCSName.Text.Trim(),
+                    string.IsNullOrEmpty(txtCSSurname.Text.Trim()) ? null : txtCSSurname.Text.Trim(),
+                    string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
+                    dgvSales.DataSource = data;
+
+                    #region Clear
+                    lblCSId.DataBindings.Clear();
+                    txtCSName.DataBindings.Clear();
+                    txtCSSurname.DataBindings.Clear();
+                    txtCSPhone.DataBindings.Clear();
+                    txtCSEmail.DataBindings.Clear();
+                    txtProdName.DataBindings.Clear();
+                    txtProdName.Clear();
+                    #endregion
+                    lblCSId.DataBindings.Add("Text", data, "Identity");
+                    txtCSName.DataBindings.Add("Text", data, "Name");
+                    txtCSSurname.DataBindings.Add("Text", data, "Surname");
+                    txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
+                    txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
+
+                }
+                
+                else
+                {
+                    MessageBox.Show("There were 0 search results found.");
                 }
             }
             catch (KeyNotFoundException knf)
@@ -566,6 +593,7 @@ namespace WindowsFormsApp2
         {
 
         }
+
 
 
 
