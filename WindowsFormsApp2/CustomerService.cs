@@ -31,7 +31,7 @@ namespace WindowsFormsApp2
 
         private void CustomerService_Load(object sender, EventArgs e)
         {
-
+            PopulateSales();
             if (!BindData())
             {
                 MessageBox.Show("No customers could be found.");
@@ -95,26 +95,44 @@ namespace WindowsFormsApp2
         private bool Populate()
         {
             client = new Client();
-            cat = new Category();
-            prod = new Product();
-            if (Category.cats.Any())
-            {
-                cmbProdType.Items.Clear();
-                cmbPayment.Items.Clear();
-                cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
-                cmbProdModel.Items.Clear();
-                cmbProdType.DataSource = Category.cats.Select(x => x.CategoryName).ToList();
-                cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
-                cmbProdType.Text = "";
-                cmbProdModel.Text = "";
-                numQuantity.Enabled = false;
-            }
+
             if (Client.clients.Any())
             {
                 data.DataSource = Client.clients;
                 dgvClient.DataSource = data;
                 return true;
             }
+            return false;
+        }
+        private bool PopulateSales()
+        {
+            try
+            {
+                cat = new Category();
+                prod = new Product();
+                if (Category.cats.Any())
+                {
+                    cmbProdType.Items.Clear();
+                    cmbPayment.Items.Clear();
+                    cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
+                    cmbProdModel.Items.Clear();
+                    cmbProdType.DataSource = Category.cats.Select(x => x.CategoryName).ToList();
+                    cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
+                    cmbProdType.Text = "";
+                    cmbProdModel.Text = "";
+                    cmbProdType.Enabled = false;
+                    cmbProdModel.Enabled = false;
+                    txtProdName.Enabled = false;
+                    numQuantity.Enabled = false;
+                    radioCol.Enabled = false;
+                    radioDel.Enabled = false;
+                    dtpColDel.Enabled = false;
+                    cmbPayment.Enabled = false;
+
+                    return true;
+                }
+            }
+            catch (Exception e) { MessageBox.Show("Unexpected problems were detected."); }
             return false;
         }
         #endregion        
@@ -198,7 +216,7 @@ namespace WindowsFormsApp2
 
         }
 
-        bool columns = false;
+        bool columns = false, ordered = false;
         List<object[]> vals = new List<object[]>();
         private void btnOrder_Click(object sender, EventArgs e)
         {
@@ -226,6 +244,17 @@ namespace WindowsFormsApp2
                 };
                 #endregion
 
+                #region Clear
+                cmbProdType.Text = "";
+                cmbProdModel.Text = "";
+                txtProdName.Text = "";
+                radioCol.Enabled = false;
+                radioDel.Enabled = false;
+                numQuantity.Value = 1;
+                numQuantity.Enabled = false;
+                dtpColDel.Enabled = false;
+                #endregion
+
                 if (!columns)
                 {
                     #region Columns
@@ -241,12 +270,14 @@ namespace WindowsFormsApp2
                     #endregion 
 
                     columns = true;
+                    ordered = true;
                 }
                 if (!vals.Any(x => x.ElementAt(1).Equals(values.ElementAt(1))))
                 {
                     vals.Add(values);
                     dgvItems.Rows.Add(values);
                     dgvItems.Show();
+                    lblTotal.Text = string.Format("{0:C}", 0.00);
                     lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(6).GetType() == typeof(double) ? (double)x.ElementAt(6) : 0));
                 }
                 else
@@ -287,7 +318,7 @@ namespace WindowsFormsApp2
                     if (!string.IsNullOrEmpty(cmbProdType.Text.Trim()))
                     {
                         data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()).ToList();
-                       
+
                     }
                     #endregion
 
@@ -310,25 +341,25 @@ namespace WindowsFormsApp2
                     #region Find Product Type & Product Model
                     if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()) && !string.IsNullOrEmpty(cmbProdType.Text.Trim()))
                     {
-                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()                       
+                        data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
                        && x.ProductModel == cmbProdModel.Text.Trim()).ToList();
-                        
+
                     }
                     #endregion
 
                     #region Find Product Type, Model & Name
-                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()) 
-                    && !string.IsNullOrEmpty(cmbProdType.Text.Trim()) 
+                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim())
+                    && !string.IsNullOrEmpty(cmbProdType.Text.Trim())
                     && !string.IsNullOrEmpty(txtProdName.Text.Trim()))
                     {
                         data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
                            && x.ProductModel == cmbProdModel.Text.Trim()
                            && x.ProductName == txtProdName.Text.Trim()).ToList();
-                        
+
                     }
                     #endregion
 
-                    
+
 
                     dgvSales.DataSource = data;
 
@@ -340,6 +371,19 @@ namespace WindowsFormsApp2
                     txtProdName.DataBindings.Clear();
                     numQuantity.Enabled = true;
                     numQuantity.Value = 1;
+                    cmbPayment.Text = "--Choose Method--";
+                    cmbPayment.Enabled = true;
+                    
+                    if(!ordered)
+                    {
+                        txtCSName.Enabled = false;
+                        txtCSSurname.Enabled = false;
+                        txtCSPhone.Enabled = false;
+                        txtCSEmail.Enabled = false;
+                        radioCol.Enabled = true;
+                        radioDel.Enabled = true;
+                        dtpColDel.Enabled = true;
+                    }
                     #endregion
 
                     #region Bind
@@ -375,7 +419,9 @@ namespace WindowsFormsApp2
                     txtCSPhone.DataBindings.Clear();
                     txtCSEmail.DataBindings.Clear();
                     txtProdName.DataBindings.Clear();
-                    txtProdName.Clear();
+                    cmbProdType.Enabled = true;
+                    cmbProdModel.Enabled = true;
+                    txtProdName.Enabled = true;
                     numQuantity.Enabled = false;
                     #endregion
 
@@ -387,7 +433,7 @@ namespace WindowsFormsApp2
                     txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
                     #endregion
                 }
-                
+
                 else
                 {
                     MessageBox.Show("There were 0 search results found.");
@@ -683,6 +729,6 @@ namespace WindowsFormsApp2
 
         #endregion
 
-       
+
     }
 }
