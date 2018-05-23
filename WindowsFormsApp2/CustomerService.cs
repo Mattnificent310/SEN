@@ -204,6 +204,7 @@ namespace WindowsFormsApp2
                 txtProdName.Text,
                  radioCol.Checked ? "Collection" : "Delivery",
                 dtpColDel.Value.ToShortDateString(),
+                decimal.Parse(lblUnitPrice.Text),
                 numQuantity.Value.ToString(),
                 decimal.Parse(lblTotal.Text.Substring(1))
                 };
@@ -215,9 +216,10 @@ namespace WindowsFormsApp2
                     dgvItems.Columns.Add("ProductModel", "Product Model");
                     dgvItems.Columns.Add("ProductName", "Product Name");
                     dgvItems.Columns.Add("OrderType", "Order Type");
-                    dgvItems.Columns.Add("OrderDate", "Order Date");
+                    dgvItems.Columns.Add("OrderDate", "Estimated Date");
+                    dgvItems.Columns.Add("UnitPrice", "Unit Price");
                     dgvItems.Columns.Add("ItemQuantity", "Item Quantity");
-                    dgvItems.Columns.Add("ItemTotal", "Item Cost");
+                    dgvItems.Columns.Add("Total", "Total");
 
                     columns = true;
                 }

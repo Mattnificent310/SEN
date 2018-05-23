@@ -117,6 +117,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgvItems = new System.Windows.Forms.DataGridView();
+            this.lblGrandTotal = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
@@ -125,6 +127,7 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -144,6 +147,8 @@
             // 
             this.tabPage3.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage3.Controls.Add(this.lblGrandTotal);
+            this.tabPage3.Controls.Add(this.dgvItems); 
             this.tabPage3.Controls.Add(this.dgvSales);
             this.tabPage3.Controls.Add(this.lblCSId);
             this.tabPage3.Controls.Add(this.lblProdId);
@@ -10032,6 +10037,27 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
+            // dgvItems
+            // 
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Location = new System.Drawing.Point(17, 7);
+            this.dgvItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.Size = new System.Drawing.Size(866, 230);
+            this.dgvItems.TabIndex = 115;
+            // 
+            // lblGrandTotal
+            // 
+            this.lblGrandTotal.AutoSize = true;
+            this.lblGrandTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lblGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrandTotal.Location = new System.Drawing.Point(696, 493);
+            this.lblGrandTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGrandTotal.Name = "lblGrandTotal";
+            this.lblGrandTotal.Size = new System.Drawing.Size(25, 25);
+            this.lblGrandTotal.TabIndex = 116;
+            this.lblGrandTotal.Text = "R";
+            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -10062,6 +10088,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit(); 
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10157,5 +10184,7 @@
         private System.Windows.Forms.DataGridView dgvSales;
         private System.Windows.Forms.Label lblCSId;
         private System.Windows.Forms.Label lblProdId;
+        private System.Windows.Forms.Label lblGrandTotal;
+        private System.Windows.Forms.DataGridView dgvItems;
     }
 }
