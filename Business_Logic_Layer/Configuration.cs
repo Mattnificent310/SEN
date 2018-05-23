@@ -12,7 +12,7 @@ namespace Business_Logic_Layer
         Express,
         Custom
     }
-    class Configuration
+    class Configuration 
     {
         #region Fields
         private int configID;

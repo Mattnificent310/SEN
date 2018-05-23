@@ -21,7 +21,6 @@ namespace WindowsFormsApp2
         private static Sale sale;
         private static Order order;
         private static OrderDetail detail;
-        private static Dictionary<Sale, Dictionary<Order, List<OrderDetail>>> cart = new Dictionary<Sale, Dictionary<Order, List<OrderDetail>>>();
         private static List<OrderDetail> items = new List<OrderDetail>();
         public frmCustomerService()
         {
@@ -292,7 +291,7 @@ namespace WindowsFormsApp2
         }
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-
+           
         }
         #endregion
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data_Access_;
+using System;
+using System.Collections.Generic;
 
 namespace Business_Logic_Layer
 {
@@ -8,7 +10,7 @@ namespace Business_Logic_Layer
 
 
     }
-    public class Sale
+    public class Sale :Staff, ISale
     {
         private Guid salesNumber;
         private string salesType;
@@ -66,20 +68,43 @@ namespace Business_Logic_Layer
         {
             throw new System.NotImplementedException();
         }
-        public override bool Equals(object obj)
+        protected override bool Equals(object obj)
         {
             return obj == null || !(obj is Sale) ? false : SalesType.Equals(((Sale)obj).SalesType);
         }
 
-        public override int GetHashCode()
+        protected override int GetHashCode()
         {
             return SalesType.GetHashCode();
         }
 
-        public override string ToString()
+        protected override string ToString()
         {
             return string.Format(SalesNumber.ToString(), SalesType, SalesDate.ToShortDateString());
         }
 
+        #region CRUD
+        public bool Insert(Sale sale)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object>();
+            values.Add(Cons.table11Col1, sale.SalesType);
+            values.Add(Cons.table11Col2, sale.SalesDate);
+            values.Add(Cons.table11IdFk1, Identity);
+            values.Add(Cons.table11IDFk2, Contract.ContractID);
+            return true;
+
+        }
+
+        public bool Update(Sale sale)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int saleId)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
+
 }

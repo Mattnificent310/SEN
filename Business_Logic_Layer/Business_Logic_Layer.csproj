@@ -49,6 +49,7 @@
     <Compile Include="IClient.cs" />
     <Compile Include="Installation.cs" />
     <Compile Include="IOrder.cs" />
+    <Compile Include="ISale.cs" />
     <Compile Include="IStock.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="IProduct.cs" />

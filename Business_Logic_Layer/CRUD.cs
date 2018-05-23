@@ -76,5 +76,12 @@ namespace Business_Logic_Layer
             return new Inventory().Delete(invId);
         }
         #endregion
+
+        #region Sale
+        public static bool InsertSale(Sale sale)
+        {
+            return false;
+        }
+        #endregion
     }
 }

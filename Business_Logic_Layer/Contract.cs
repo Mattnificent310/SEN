@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Contract
+    public class Contract : Client
     {
         #region Fields
-        private string contractID;
+        private static string contractID;
         private string contractType;
         private string contractLevel;
         private DateTime issueDate;
@@ -19,7 +19,7 @@ namespace Business_Logic_Layer
 
         #region Properties
 
-        public string ContractID
+        public static string ContractID
         {
             get
             {
@@ -95,22 +95,23 @@ namespace Business_Logic_Layer
         public Contract(string _cID, string _cLevel, string _cType, DateTime _issueDate, DateTime _expiry)
         {
             this.ContractType = _cType;
+            this.ContractLevel = _cLevel;
             this.IssueDate = _issueDate;
             this.ContractTerm = _expiry;
         }
         #endregion
         #region Methods
-        public override bool Equals(object obj)
+        protected override bool Equals(object obj)
         {
             return obj == null || !(obj is Contract) ? false : ContractType.Equals(((Contract)obj).ContractType);
         }
 
-        public override int GetHashCode()
+        protected override int GetHashCode()
         {
             return ContractType.GetHashCode();
         }
 
-        public override string ToString()
+        protected override string ToString()
         {
             return string.Format(ContractID, ContractType, ContractLevel, IssueDate, ContractTerm);
         }

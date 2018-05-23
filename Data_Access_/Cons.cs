@@ -94,7 +94,8 @@ namespace Data_Access_
                             table9Col3 = "HireDate",
                             table9Col4 = "JobDetails";
         #endregion
-                            #region Accounts
+            
+        #region Accounts
         public const string table10 = "tblAccounts",
                             table10Id = "AccountIDPK",
                             table10Col1 = "Username",
@@ -103,5 +104,64 @@ namespace Data_Access_
                             table10IDFk = "StaffIDFK";
         #endregion
 
+        #region Sales
+        public const string table11 = "tblSales",
+                                   table11Id = "SalesIDPK",
+                                   table11Col1 = "SalesType",
+                                   table11Col2 = "SalesDate",
+                                   table11IdFk1 = "StaffIDFK",
+                                   table11IDFk2 = "ContractIDFK";
+        #endregion
+
+        #region Contracts
+        public const string table12 = "tblContracts",
+                                   table12Id = "ContractID",
+                                   table12Col1 = "ContractLevel",
+                                   table12Col2 = "ContractType",
+                                   table12Col3 = "ContractDateIssued",
+                                   table12Col4 = "ContractTerm",
+                                   table12IDFk = "ClientIDFK";
+        #endregion
+
+        #region Orders
+        public const string table13 = "tblOrders",
+                            table13Id = "OrderIDPK",
+                            table13Col1 = "OrderDate",
+                            table13Col2 = "OrderDetails",
+                            table13Col3 = "RequiredDate",
+                            table13IdFk1 = "SalesIDFK",
+                            table13IdFk2 = "BillingIDFK",
+                            table13IdFk3 = "ShippingIDFK";
+        #endregion
+
+        #region Configurations
+
+        public const string table14 = "tblConfigurations",
+                            table14Id = "ConfigIDPK",
+                            table14Col1 = "ConfigCriteria",
+                            table14Col2 = "ConfigType",
+                            table14Col3 = "ConfigDetails";
+        #endregion
+
+        #region Offers
+        public const string table15 = "tblOffers",
+                            table15Id = "OfferIDPK",
+                            table15Col1 = "OfferType",
+                            table15Col2 = "OfferOption",
+                            table15Col3 = "OfferDetails",
+                            table15Col4 = "OfferCriteria";
+        #endregion
+
+        #region Order_Details
+        public const string table16 = "tblAccounts",
+                            table16Id = "tblOrder_Details",
+                            table16IdFk1 = "OderID",
+                            table16IdFk2 = "ProductID",
+                            table16IDFk3 = "ConfigID",
+                            table16Col1 = "Quantity",
+                            table16Col2 = "Total",
+                            table16Col3 = "Discount";
+
+        #endregion
     }
 }
