@@ -103,6 +103,8 @@ namespace WindowsFormsApp2
                 cmbProdModel.Items.Clear();
                 cmbProdType.DataSource = Product.prods.Select(x => x.ProductType).ToList();
                 cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
+                cmbProdType.Text = "";
+                cmbProdModel.Text = "";
             }
             if (Client.clients.Any())
             {
@@ -338,6 +340,16 @@ namespace WindowsFormsApp2
 
             }
 
+        }
+        private void cmbProdType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbProdModel.Text = "";
+            txtProdName.Text = "";
+        }
+
+        private void cmbProdModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtProdName.Text = "";
         }
 
 
@@ -598,11 +610,16 @@ namespace WindowsFormsApp2
 
 
 
+        private void cmbProdType_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 
         #endregion
 
-
+       
     }
 }

@@ -3364,6 +3364,7 @@
             this.cmbProdModel.Name = "cmbProdModel";
             this.cmbProdModel.Size = new System.Drawing.Size(252, 31);
             this.cmbProdModel.TabIndex = 96;
+            this.cmbProdModel.SelectedIndexChanged += new System.EventHandler(this.cmbProdModel_SelectedIndexChanged);
             // 
             // dtpColDel
             // 
@@ -3487,6 +3488,8 @@
             this.cmbProdType.Name = "cmbProdType";
             this.cmbProdType.Size = new System.Drawing.Size(252, 31);
             this.cmbProdType.TabIndex = 83;
+            this.cmbProdType.SelectedIndexChanged += new System.EventHandler(this.cmbProdType_SelectedIndexChanged);
+            this.cmbProdType.TextChanged += new System.EventHandler(this.cmbProdType_TextChanged);
             // 
             // label27
             // 
