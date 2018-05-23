@@ -3326,17 +3326,7 @@
             this.cmbPayment.Size = new System.Drawing.Size(263, 24);
             this.cmbPayment.TabIndex = 99;
             // 
-<<<<<<< HEAD
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(44, 155);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(9, 22);
-            this.textBox1.TabIndex = 97;
-            // 
-=======
->>>>>>> 28cc06d5c731798a9aa0077eb0d687374cb407f5
+
             // cmbProdModel
             // 
             this.cmbProdModel.FormattingEnabled = true;
