@@ -107,6 +107,7 @@ namespace WindowsFormsApp2
                 cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
                 cmbProdType.Text = "";
                 cmbProdModel.Text = "";
+                numQuantity.Enabled = false;
             }
             if (Client.clients.Any())
             {
@@ -337,6 +338,8 @@ namespace WindowsFormsApp2
                     lblUnitPrice.DataBindings.Clear();
                     lblProdId.DataBindings.Clear();
                     txtProdName.DataBindings.Clear();
+                    numQuantity.Enabled = true;
+                    numQuantity.Value = 1;
                     #endregion
 
                     #region Bind
@@ -373,6 +376,7 @@ namespace WindowsFormsApp2
                     txtCSEmail.DataBindings.Clear();
                     txtProdName.DataBindings.Clear();
                     txtProdName.Clear();
+                    numQuantity.Enabled = false;
                     #endregion
 
                     #region Bind
