@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dgvSales = new System.Windows.Forms.DataGridView();
+            this.lblCSId = new System.Windows.Forms.Label();
+            this.lblProdId = new System.Windows.Forms.Label();
             this.btnEndCall = new System.Windows.Forms.Button();
             this.btnCall = new System.Windows.Forms.Button();
             this.lblUnitPrice = new System.Windows.Forms.Label();
@@ -114,17 +117,17 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblProdId = new System.Windows.Forms.Label();
-            this.lblCSId = new System.Windows.Forms.Label();
-            this.dgvSales = new System.Windows.Forms.DataGridView();
+            this.lblGrandTotal = new System.Windows.Forms.Label();
+            this.dgvItems = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -144,6 +147,8 @@
             // 
             this.tabPage3.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage3.Controls.Add(this.dgvItems);
+            this.tabPage3.Controls.Add(this.lblGrandTotal);
             this.tabPage3.Controls.Add(this.dgvSales);
             this.tabPage3.Controls.Add(this.lblCSId);
             this.tabPage3.Controls.Add(this.lblProdId);
@@ -187,6 +192,35 @@
             this.tabPage3.Text = "Sales";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // dgvSales
+            // 
+            this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSales.Location = new System.Drawing.Point(19, 7);
+            this.dgvSales.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvSales.Name = "dgvSales";
+            this.dgvSales.Size = new System.Drawing.Size(990, 230);
+            this.dgvSales.TabIndex = 114;
+            // 
+            // lblCSId
+            // 
+            this.lblCSId.AutoSize = true;
+            this.lblCSId.BackColor = System.Drawing.Color.Transparent;
+            this.lblCSId.Location = new System.Drawing.Point(469, 147);
+            this.lblCSId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCSId.Name = "lblCSId";
+            this.lblCSId.Size = new System.Drawing.Size(0, 23);
+            this.lblCSId.TabIndex = 113;
+            // 
+            // lblProdId
+            // 
+            this.lblProdId.AutoSize = true;
+            this.lblProdId.BackColor = System.Drawing.Color.Transparent;
+            this.lblProdId.Location = new System.Drawing.Point(447, 171);
+            this.lblProdId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblProdId.Name = "lblProdId";
+            this.lblProdId.Size = new System.Drawing.Size(0, 23);
+            this.lblProdId.TabIndex = 111;
             // 
             // btnEndCall
             // 
@@ -263,7 +297,6 @@
             this.radioDel.Name = "radioDel";
             this.radioDel.Size = new System.Drawing.Size(105, 27);
             this.radioDel.TabIndex = 105;
-            this.radioDel.TabStop = true;
             this.radioDel.Text = "Delivery";
             this.radioDel.UseVisualStyleBackColor = true;
             this.radioDel.CheckedChanged += new System.EventHandler(this.radioDel_CheckedChanged);
@@ -271,6 +304,7 @@
             // radioCol
             // 
             this.radioCol.AutoSize = true;
+            this.radioCol.Checked = true;
             this.radioCol.Location = new System.Drawing.Point(172, 488);
             this.radioCol.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.radioCol.Name = "radioCol";
@@ -316,7 +350,7 @@
             this.btnOrder.Name = "btnOrder";
             this.btnOrder.Size = new System.Drawing.Size(246, 37);
             this.btnOrder.TabIndex = 101;
-            this.btnOrder.Text = "Order";
+            this.btnOrder.Text = "Add";
             this.btnOrder.UseVisualStyleBackColor = false;
             this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
             // 
@@ -10000,34 +10034,26 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // lblProdId
+            // lblGrandTotal
             // 
-            this.lblProdId.AutoSize = true;
-            this.lblProdId.BackColor = System.Drawing.Color.Transparent;
-            this.lblProdId.Location = new System.Drawing.Point(447, 171);
-            this.lblProdId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblProdId.Name = "lblProdId";
-            this.lblProdId.Size = new System.Drawing.Size(0, 23);
-            this.lblProdId.TabIndex = 111;
+            this.lblGrandTotal.AutoSize = true;
+            this.lblGrandTotal.BackColor = System.Drawing.Color.Transparent;
+            this.lblGrandTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGrandTotal.Location = new System.Drawing.Point(794, 493);
+            this.lblGrandTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGrandTotal.Name = "lblGrandTotal";
+            this.lblGrandTotal.Size = new System.Drawing.Size(25, 25);
+            this.lblGrandTotal.TabIndex = 115;
+            this.lblGrandTotal.Text = "R";
             // 
-            // lblCSId
+            // dgvItems
             // 
-            this.lblCSId.AutoSize = true;
-            this.lblCSId.BackColor = System.Drawing.Color.Transparent;
-            this.lblCSId.Location = new System.Drawing.Point(469, 147);
-            this.lblCSId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCSId.Name = "lblCSId";
-            this.lblCSId.Size = new System.Drawing.Size(0, 23);
-            this.lblCSId.TabIndex = 113;
-            // 
-            // dgvSales
-            // 
-            this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSales.Location = new System.Drawing.Point(19, 7);
-            this.dgvSales.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dgvSales.Name = "dgvSales";
-            this.dgvSales.Size = new System.Drawing.Size(990, 230);
-            this.dgvSales.TabIndex = 114;
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Location = new System.Drawing.Point(19, 7);
+            this.dgvItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.Size = new System.Drawing.Size(990, 230);
+            this.dgvItems.TabIndex = 116;
             // 
             // frmCustomerService
             // 
@@ -10051,6 +10077,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
@@ -10058,7 +10085,7 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10154,5 +10181,7 @@
         private System.Windows.Forms.DataGridView dgvSales;
         private System.Windows.Forms.Label lblCSId;
         private System.Windows.Forms.Label lblProdId;
+        private System.Windows.Forms.Label lblGrandTotal;
+        private System.Windows.Forms.DataGridView dgvItems;
     }
 }

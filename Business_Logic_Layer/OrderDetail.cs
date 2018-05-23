@@ -27,8 +27,8 @@ namespace Business_Logic_Layer
         #endregion
 
         #region Constructor
-        public OrderDetail(int id, string _type, DateTime _date, string _details, int prodId, int configId, int quantity, decimal total, double discount)
-        :base( _type, _date, _details){
+        public OrderDetail(int id, int prodId, int configId, int quantity, decimal total, double discount)
+        {
             this.OrderDetailId = id;
             this.ProductId = prodId;
             this.ConfigId = configId;

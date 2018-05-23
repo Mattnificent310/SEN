@@ -17,7 +17,11 @@ namespace WindowsFormsApp2
         private static Client client;
         private static Product prod;
         private static frmMainMenu menu = new frmMainMenu();
-        private static List<OrderDetail> cart = new List<OrderDetail>();
+        private static Sale sale;
+        private static Order order;
+        private static OrderDetail detail;
+        private static Dictionary<Sale, Dictionary<Order, List<OrderDetail>>> cart = new Dictionary<Sale, Dictionary<Order, List<OrderDetail>>>();
+        private static List<OrderDetail> items = new List<OrderDetail>();
         public frmCustomerService()
         {
             InitializeComponent();
@@ -37,7 +41,7 @@ namespace WindowsFormsApp2
         public void Login(Staff staf)
         {
             if (!staf.Department.Equals("Administrator"))
-            {                
+            {
                 this.btnMain.Text = "Log Out";
                 this.btnMainMenu.Text = "Log Out";
             }
@@ -111,7 +115,7 @@ namespace WindowsFormsApp2
             }
             else
             {
-                this.Hide();                
+                this.Hide();
                 menu.Show();
             }
         }
@@ -149,12 +153,17 @@ namespace WindowsFormsApp2
         #region Sales
         private void numQuantity_ValueChanged(object sender, EventArgs e)
         {
-            lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+            lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
         }
         private void radioCol_CheckedChanged(object sender, EventArgs e)
         {
             if (radioCol.Checked)
             {
+                order = new Order(
+                    "Collection Order",
+                    DateTime.Now,
+                    "N/A"
+                    );
                 dtpColDel.Value = DateTime.Now.AddDays(1.0);
             }
         }
@@ -163,26 +172,66 @@ namespace WindowsFormsApp2
         {
             if (radioDel.Checked)
             {
+                order = new Order(
+                   "Delivery Order",
+                    DateTime.Now,
+                    "N/A"
+                    );
                 dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
             }
 
 
         }
 
+        bool columns = false;
+        List<object[]> vals = new List<object[]>();
         private void btnOrder_Click(object sender, EventArgs e)
         {
             if (ValidateAll(this.tabPage3))
             {
-                cart.Add(new OrderDetail(
+
+                items.Add(new OrderDetail(
                 0,
-                "Customer Sale",
-                DateTime.Now,
-                "N/A",
                 int.Parse(lblProdId.Text),
                 1,
                 (int)numQuantity.Value,
                 decimal.Parse(lblTotal.Text.Substring(1)),
                 0.1));
+
+                object[] values =
+                {
+                cmbProdModel.Text,
+                txtProdName.Text,
+                 radioCol.Checked ? "Collection" : "Delivery",
+                dtpColDel.Value.ToShortDateString(),
+                numQuantity.Value.ToString(),
+                decimal.Parse(lblTotal.Text.Substring(1))
+                };
+
+                if (!columns)
+                {
+                    dgvItems.DataSource = null;
+                    dgvItems.DataBindings.Clear();
+                    dgvItems.Columns.Add("ProductModel", "Product Model");
+                    dgvItems.Columns.Add("ProductName", "Product Name");
+                    dgvItems.Columns.Add("OrderType", "Order Type");
+                    dgvItems.Columns.Add("OrderDate", "Order Date");
+                    dgvItems.Columns.Add("ItemQuantity", "Item Quantity");
+                    dgvItems.Columns.Add("ItemTotal", "Item Cost");
+
+                    columns = true;
+                }
+                if (!vals.Any(x => x.ElementAt(1).Equals(values.ElementAt(1))))
+                {
+                    vals.Add(values);
+                    dgvItems.Rows.Add(values);
+                    dgvItems.Show();
+                    lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(5).GetType() == typeof(decimal) ? (decimal)x.ElementAt(5) : 0));
+                }
+                else
+                {
+                    MessageBox.Show("That item was already added.");
+                }
             }
         }
 
@@ -203,16 +252,21 @@ namespace WindowsFormsApp2
                 && string.IsNullOrEmpty(txtProdName.Text.Trim()))
                 {
                     client = new Client();
+
+                    dgvItems.Hide();
                     data.DataSource = client[
                     string.IsNullOrEmpty(txtCSName.Text.Trim()) ? null : txtCSName.Text.Trim(),
                     string.IsNullOrEmpty(txtCSSurname.Text.Trim()) ? null : txtCSSurname.Text.Trim(),
                     string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
                     dgvSales.DataSource = data;
-                    lblCSId.DataBindings.Add("Text", data, "Identity");
+                   
+                    #region Clear
                     txtCSName.DataBindings.Clear();
                     txtCSSurname.DataBindings.Clear();
                     txtCSPhone.DataBindings.Clear();
                     txtCSEmail.DataBindings.Clear();
+                    #endregion
+                    lblCSId.DataBindings.Add("Text", data, "Identity");
                     txtCSName.DataBindings.Add("Text", data, "Name");
                     txtCSSurname.DataBindings.Add("Text", data, "Surname");
                     txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
@@ -224,20 +278,29 @@ namespace WindowsFormsApp2
 
                     new Product();
                     data = new BindingSource();
+
+                    dgvItems.Hide();
+
                     data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text
                     || x.ProductModel == cmbProdModel.Text
                     || x.ProductName == txtProdName.Text.Trim()).ToList();
                     dgvSales.DataSource = data;
-                    lblProdId.DataBindings.Add("Text", data, "ProductID");
+                   
+                    #region Clear
                     cmbProdType.DataBindings.Clear();
                     cmbProdModel.DataBindings.Clear();
                     lblUnitPrice.DataBindings.Clear();
-                    lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
-                    lblTotal.Text = "R " + decimal.Parse(lblUnitPrice.Text) * numQuantity.Value;
+                    lblProdId.DataBindings.Clear();
                     txtProdName.DataBindings.Clear();
+                    #endregion
+                    lblProdId.DataBindings.Add("Text", data, "ProductID");
                     cmbProdType.DataBindings.Add("Text", data, "ProductType");
                     cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
                     txtProdName.DataBindings.Add("Text", data, "ProductName");
+                    lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                    lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+
+
                 }
             }
             catch (KeyNotFoundException knf)
@@ -457,7 +520,7 @@ namespace WindowsFormsApp2
         {
 
         }
-        
+
         private void cmbCustGender_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -510,6 +573,6 @@ namespace WindowsFormsApp2
 
         #endregion
 
-        
+
     }
 }
