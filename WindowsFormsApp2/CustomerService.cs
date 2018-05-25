@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business_Logic_Layer;
@@ -13,6 +14,7 @@ namespace WindowsFormsApp2
 {
     public partial class frmCustomerService : Form
     {
+        #region Declarations
         BindingSource data = new BindingSource();
         private static Client client;
         private static Product prod;
@@ -22,10 +24,17 @@ namespace WindowsFormsApp2
         private static Order order;
         private static OrderDetail detail;
         private static List<OrderDetail> items = new List<OrderDetail>();
+        private BackgroundWorker worker = new BackgroundWorker();
+        static Thread thread;
+        private static BackgroundWorker blinker;
+        #endregion
+
         public frmCustomerService()
         {
             InitializeComponent();
             timer1.Start();
+            blinker = new BackgroundWorker();
+            blinker.DoWork += Blinker_DoWork;
         }
 
         private void CustomerService_Load(object sender, EventArgs e)
@@ -72,6 +81,11 @@ namespace WindowsFormsApp2
                 cmbCustCountry.DataBindings.Add("Text", data, "Country");
                 cmbCustCity.DataBindings.Add("Text", data, "City");
                 txtCustStreet.DataBindings.Add("Text", data, "Street");
+                closed = false;
+                answered = false;
+                missed = false;
+                hold = false;
+                played = false;
                 return true;
             }
             return false;
@@ -180,6 +194,311 @@ namespace WindowsFormsApp2
                 menu.Show();
             }
         }
+        #endregion
+
+        #region Calls
+
+        #region Declarations
+        static bool played = false;
+        static bool answered = false;
+        static bool missed;
+        static bool closed = false;
+        static bool hold = false;
+        static bool unhold = false;
+        static int x = 0;
+        private delegate void DisplayCountDelegate(int i);
+        #endregion
+
+        #region Blink
+        private void Blink()
+        {
+            //if (lblCall.Visible == true)
+            //    lblCall.Visible = false;
+            //else
+            //{
+            //    lblCall.Visible = true;
+            string path = @"C:\Users\MC\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneIn.wav";
+            string path2 = @"C:\Users\MC\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneOut.wav";
+
+            if (!played && !answered && !closed && !missed)
+            {
+                PlaySound(path);
+                played = true;
+            }
+            else
+            {
+                if (!answered && !closed && !missed)
+                {
+
+                    Client c = new Client();
+                    List<Client> entities = new List<Client>();
+                    foreach (var item in Client.clients.Where(x => x == c))
+                    {
+                        //Add Callers
+                    }
+                    PopulateSales();
+                    PlaySound(path2);
+                    played = false;
+                }
+            }
+            if (missed)
+            {
+                Disable();
+            }
+
+        }
+        #endregion
+
+        #region Do Work
+        private void Blinker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                Random r = new Random();
+                Random rn = new Random();
+                Random rnd = new Random(1000);
+                Thread.Sleep(rn.Next(8000, 30000));
+                //string[] calls = new string[obh.CallCenter().Count()];
+                for (int i = 0; i < 1000; i++)
+                {
+                    //calls[i] = obh.ShowClient()[i].ContactNumber;
+                }
+                r = new Random();
+
+                //phone = calls[r.Next(0, calls.Length)];
+                for (int i = 0; i <= 60 * 60 * 24; i++)
+                {
+                    if (i == 20)
+                    {
+                        missed = true;
+                        btnCall.Invoke((Action)Disable);
+                        i = 60 * 60 * 24;
+                    }
+                    if (missed)
+                    {
+                        missed = false;
+                        i = 0;
+                        rn = new Random();
+                        //phone = calls[rn.Next(0, calls.Length)];
+                        rn = new Random();
+                        Thread.Sleep(rn.Next(8000, 30000));
+                    }
+                    Thread.Sleep(1400); // Set fast to slow.
+
+                    blinker.WorkerSupportsCancellation = true;
+                    if (/*lblCall.InvokeRequired*/true)
+                    {
+                        //lblCall.Invoke((Action)blink);
+                        btnCall.Invoke((Action)Enable);
+                    }
+                    else
+                    {
+                        Blink();
+                    }
+
+                    if (blinker.CancellationPending && blinker.IsBusy)
+                    {
+                        e.Cancel = true;
+
+                        return;
+                    }
+
+                }
+            }
+            catch (Exception es)
+            {
+                MessageBox.Show("Connection Lost to Call Distribution System (CDS)", "Connection Lost", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+        #endregion
+
+        #region Play Sound
+        private void PlaySound(string path)
+        {
+            System.Media.SoundPlayer player =
+                new System.Media.SoundPlayer();
+            player.SoundLocation = path;
+            player.Load();
+            player.Play();
+        }
+        #endregion
+
+        #region Simulate
+        private void SimulateCall()
+        {
+
+            if (blinker.IsBusy == false)
+            {
+
+                answered = false;
+
+                blinker.RunWorkerAsync();
+
+            }
+        }
+        #endregion
+
+        #region Enable / Disable
+        private void Enable()
+        {
+            if (btnCall.Enabled == false)
+            {
+                btnCall.Enabled = true;
+                //lblElapsed.Visible = false;
+                //btnHoldCall.Enabled = false;
+                //btnDivertCall.Enabled = false;
+            }
+            if (answered)
+            {
+                //lblElapsed.Visible = true;
+                btnCall.Enabled = false;
+                //btnHoldCall.Enabled = true;
+                //btnDivertCall.Enabled = true;
+            }
+
+
+        }
+        private void Disable()
+        {
+            if (missed)
+            {
+                btnCall.Enabled = false;
+                //lblCall.Visible = false;
+                if (blinker.IsBusy)
+                {
+
+                    btnCall.Enabled = false;
+                    //lblCall.Visible = false;
+
+                }
+
+            }
+        }
+        #endregion
+
+        #region End Session
+        private void EndSession()
+        {
+            if (blinker.IsBusy)
+            {
+                blinker.WorkerSupportsCancellation = true;
+                blinker.CancelAsync();
+                this.Close();
+                this.Dispose();
+                closed = true;
+            }
+        }
+        #endregion
+
+        #region Start Counting
+        private void StartCounting()
+        {
+            try
+            {
+
+
+                for (var i = 0; i < 100000; i++)
+                {
+
+                    //lblElapsed.Invoke(new DisplayCountDelegate(DisplayCount), i);
+                    Thread.Sleep(1000);
+
+
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("A call is still in progress\nWould you like to end it?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            }
+        }
+        #endregion
+
+        #region Display Count
+        private void DisplayCount(int i)
+        {
+
+            if (/*lblCall.Visible == false*/true)
+            {
+                //lblAnswer.Visible = true;
+            }
+            if (/*btnHoldCall.Enabled == false*/true)
+            {
+                //lblElapsed.Text = SecondsToMinutes(x++);
+            }
+            if (unhold == true)
+            {
+                //lblElapsed.Text = SecondsToMinutes(i);
+            }
+        }
+        public static string SecondsToMinutes(int seconds)
+        {
+            var ts = new TimeSpan(0, 0, seconds);
+            return new DateTime(ts.Ticks).ToString(seconds >= 3600 ? "hh:mm:ss" : "mm:ss");
+        }
+        #endregion
+
+        #region Answer Call
+        private void btnCall_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (blinker.IsBusy)
+                {
+                    blinker.CancelAsync();
+                    thread = new Thread(StartCounting);
+                    thread.IsBackground = true;
+                    thread.Start();
+                    btnCall.Enabled = false;
+                    btnEndCall.Enabled = true;
+                    //btnHoldCall.Enabled = true;
+                    //btnDivertCall.Enabled = true;
+                    unhold = true;
+                    //lblElapsed.Visible = true;
+                    answered = true;
+                }
+                if (hold)
+                {
+                    unhold = true;
+                    btnCall.Enabled = false;
+                    //btnHoldCall.Enabled = true;
+                    //lblHold.Visible = false;
+                    //lblEnd.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No Incoming Calls Detected", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+        #endregion
+
+        #region End Call
+        private void btnEndCall_Click_1(object sender, EventArgs e)
+        {
+            //lblEnd.Visible = true;
+            thread.Abort();
+            btnCall.Enabled = true;
+            btnEndCall.Enabled = false;
+            //lblCall.Visible = false;
+            //lblAnswer.Visible = false;
+            //lblHold.Visible = false;
+            //btnHoldCall.Enabled = false;
+            //btnDivertCall.Enabled = false;
+            //btnAnswerCall.Enabled = false;
+            if (blinker.IsBusy)
+            {
+                blinker.WorkerSupportsCancellation = true;
+                blinker.CancelAsync();
+            }
+            x = 0;
+            Thread.Sleep(15000);
+            //lblElapsed.Visible = false;
+            //lblEnd.Visible = false;
+            answered = false;
+            SimulateCall();
+        }
+        #endregion
+
         #endregion
 
         #region Sales
@@ -291,7 +610,7 @@ namespace WindowsFormsApp2
         }
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-           
+
         }
         #endregion
 
@@ -372,8 +691,8 @@ namespace WindowsFormsApp2
                     numQuantity.Value = 1;
                     cmbPayment.Text = "--Choose Method--";
                     cmbPayment.Enabled = true;
-                    
-                    if(!ordered)
+
+                    if (!ordered)
                     {
                         txtCSName.Enabled = false;
                         txtCSSurname.Enabled = false;
@@ -714,9 +1033,9 @@ namespace WindowsFormsApp2
 
         }
 
+       
 
-
-
+        
 
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {

@@ -254,6 +254,7 @@
             this.btnEndCall.Size = new System.Drawing.Size(105, 90);
             this.btnEndCall.TabIndex = 110;
             this.btnEndCall.UseVisualStyleBackColor = true;
+            this.btnEndCall.Click += new System.EventHandler(this.btnEndCall_Click_1);
             // 
             // btnCall
             // 
@@ -266,6 +267,7 @@
             this.btnCall.Size = new System.Drawing.Size(105, 97);
             this.btnCall.TabIndex = 109;
             this.btnCall.UseVisualStyleBackColor = true;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // lblUnitPrice
             // 

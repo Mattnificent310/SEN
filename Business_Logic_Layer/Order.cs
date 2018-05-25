@@ -16,7 +16,7 @@ namespace Business_Logic_Layer
     #endregion 
 
     
-    public class Order : Sale , IOrder
+    public class Order : Sale, IOrder
     {
         #region Fields
         private Guid orderNumber;
@@ -80,12 +80,13 @@ namespace Business_Logic_Layer
         #endregion
 
         #region Constructors
-        public Order()
+        public Order():base()
         {
 
         }
-        public Order(string _type, DateTime _date, string _details)
+        public Order(string _type, DateTime _date, string _details):this()
         {
+            
             orderNumber = Guid.NewGuid();
             orderDate = _date;
             OrderType = _type;

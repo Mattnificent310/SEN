@@ -8,7 +8,7 @@ namespace Business_Logic_Layer
 {
     public interface ISale
     {
-        bool Insert(Sale sale);
+        int Insert(Sale sale);
         bool Update(Sale sale);
         bool Delete(int saleId);
     }

@@ -66,8 +66,6 @@
     <Compile Include="Sale.cs" />
     <Compile Include="Schedule.cs" />
     <Compile Include="Staff.cs" />
-    <Compile Include="StoredProcedure.cs" />
-    <Compile Include="StoredProcedureCollection.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="Tasks.cs" />
     <Compile Include="Upgrade.cs" />

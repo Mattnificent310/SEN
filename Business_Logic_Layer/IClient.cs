@@ -8,7 +8,7 @@ namespace Business_Logic_Layer
 {
     public interface IClient
     {
-        bool Insert(Client client);
+        int? Insert(Client client);
         bool Update(Client client);
         bool Delete(int clientId);
     }

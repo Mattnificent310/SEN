@@ -84,6 +84,7 @@
     <Compile Include="Technical Support.Designer.cs">
       <DependentUpon>Technical Support.cs</DependentUpon>
     </Compile>
+    <Compile Include="Voicent.cs" />
     <EmbeddedResource Include="CustomerService.resx">
       <DependentUpon>CustomerService.cs</DependentUpon>
     </EmbeddedResource>

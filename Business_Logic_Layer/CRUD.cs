@@ -12,7 +12,7 @@ namespace Business_Logic_Layer
         #region Client
         public static bool InsertClient(Client client)
         {
-            return new Client(0).Insert(client);
+            return new Client().Insert(client) != null? true : false;
         }
 
         public static bool UpdateClient(Client client)

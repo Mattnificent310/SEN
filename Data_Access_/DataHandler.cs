@@ -21,9 +21,10 @@ namespace Data_Access_Layer
         private static DBConn db = new DBConn();
         private static string table;
         #endregion
+
         #region Constructor
         public DataHandler(string _table = null)
-            {            
+        {
             sender = new List<object>();
             table = _table;
             if (!string.IsNullOrEmpty(_table)) { GetData(); }
@@ -46,8 +47,8 @@ namespace Data_Access_Layer
                 _query += " FROM " + table;
                 //ds = db.ReadOnly(_query);
             }
-            if (!ds.Tables.Contains(_table)) ds.Merge(db.Read(_table ?? table).Tables[_table?? table]);
-             return ds.Tables[_table ?? table];
+            if (!ds.Tables.Contains(_table ?? table)) ds.Merge(db.Read(_table ?? table).Tables[_table ?? table]);
+            return ds.Tables[_table ?? table];
 
 
         }
@@ -118,11 +119,11 @@ namespace Data_Access_Layer
                 {
                     dr[item.Key] = item.Value;
                 }
-                
+
                 ds.Tables[_table ?? table].Rows.Add(dr);
                 if (db.Write(ds, _table ?? table))
                 {
-                     int count = ds.Tables[_table ?? table].Rows.Count - 1;
+                    int count = ds.Tables[_table ?? table].Rows.Count - 1;
                     return ds.Tables[_table ?? table].Rows[count][0];
 
 
@@ -176,9 +177,9 @@ namespace Data_Access_Layer
 
         public static DataRow Search(string identifier, string _table)
         {
-           
-                GetData(_table);
-            
+
+            GetData(_table);
+
             int index = -1;
             ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
             foreach (DataRow dr in ds.Tables[_table].Rows)
@@ -195,7 +196,7 @@ namespace Data_Access_Layer
             int index = -1;
             foreach (DataRow dr in ds.Tables[_table].Rows)
             {
-            //Check for matching row and column then returns the first value
+                //Check for matching row and column then returns the first value
                 if (dr == ds.Tables[_table].Select(column + " = '" + value + "'").FirstOrDefault())
                 {
                     return ds.Tables[_table].Rows[ds.Tables[_table].Rows.IndexOf(dr)];

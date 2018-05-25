@@ -1,4 +1,5 @@
 ﻿using Data_Access_;
+using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
 
@@ -15,6 +16,7 @@ namespace Business_Logic_Layer
         private Guid salesNumber;
         private string salesType;
         private DateTime salesDate;
+        private static DataHandler dh = new DataHandler(Cons.table11);
 
         public Guid SalesNumber
         {
@@ -84,14 +86,16 @@ namespace Business_Logic_Layer
         }
 
         #region CRUD
-        public bool Insert(Sale sale)
+        public int Insert(Sale sale)
         {
-            Dictionary<string, object> values = new Dictionary<string, object>();
-            values.Add(Cons.table11Col1, sale.SalesType);
-            values.Add(Cons.table11Col2, sale.SalesDate);
-            values.Add(Cons.table11IdFk1, Identity);
-            values.Add(Cons.table11IDFk2, Contract.ContractID);
-            return true;
+            return (int)dh.Insert(new Dictionary<string, object>
+            {
+                { Cons.table11Col1, sale.SalesType },
+                { Cons.table11Col2, sale.SalesDate },
+                { Cons.table11IdFk1, Identity },
+                { Cons.table11IDFk2, Contract.ContractID }
+            });
+           
 
         }
 

@@ -31,6 +31,7 @@ namespace Business_Logic_Layer
 
 
         #endregion
+
         #region Properties
 
 
@@ -100,6 +101,7 @@ namespace Business_Logic_Layer
 
 
         #endregion
+
         #region Constructor
         public Client()
         {
@@ -127,7 +129,7 @@ namespace Business_Logic_Layer
                 ));
             }
         }
-        public Client(int identity){ }
+        public Client(int identity) { }
         public Client(string cons)
         {
             dh = new Data_Access_Layer.DataHandler(cons);
@@ -144,6 +146,7 @@ namespace Business_Logic_Layer
             this.CreditRating = _credit;
         }
         #endregion
+
         #region Indexer
         public Client this[string name = null, string surname = null, string email = null]
         {
@@ -165,6 +168,7 @@ namespace Business_Logic_Layer
             }
         }
         #endregion
+
         #region Methods
         protected override List<Person> Search(string name = "empty", string surname = "empty", string email = "example@example.com")
         {
@@ -197,49 +201,43 @@ namespace Business_Logic_Layer
         #endregion
 
         #region CRUD
-        public bool Insert(Client client)
+        public int? Insert(Client client)
         {
-            int locId = loc[null,client.Street, client.City, client.Country].LocationId;
-            items = new Dictionary<string, object>();
-            items.Add(Cons.table1Col1, client.Title);
-            items.Add(Cons.table1Col2, client.Name);
-            items.Add(Cons.table1Col3, client.Surname);
-            items.Add(Cons.table1Col4, client.BirthDate);
-            items.Add(Cons.table1Col5, client.Gender.StartsWith("M") ? false : true);
-            items.Add(Cons.table1Col6, client.ContactNumber);
-            items.Add(Cons.table1Col7, client.EmailAddress);
-            items.Add(Cons.table1IdFk, locId);
-            new Client(Cons.table1);
-            return dh.Insert(items) != null ? true : false;
+            int locId = loc[null, client.Street, client.City, client.Country].LocationId;
+            return (int?)dh.Insert(new Dictionary<string, object>
+            {
+            { Cons.table1Col1, client.Title },
+            { Cons.table1Col2, client.Name },
+            { Cons.table1Col3, client.Surname},
+            { Cons.table1Col4, client.BirthDate },
+            { Cons.table1Col5, client.Gender.StartsWith("M") ? false : true },
+            { Cons.table1Col6, client.ContactNumber },
+            { Cons.table1Col7, client.EmailAddress },
+            { Cons.table1IdFk, locId }
+            }, Cons.table1);
         }
 
         public bool Update(Client client)
-        {
-            loc = new Location();
+        {            
             int locId = loc[null, client.Street, client.City, client.Country].LocationId;
-            items = new Dictionary<string, object>();
-            items.Add(Cons.table1Col1, client.Title);
-            items.Add(Cons.table1Col2, client.Name);
-            items.Add(Cons.table1Col3, client.Surname);
-            items.Add(Cons.table1Col4, client.BirthDate);
-            items.Add(Cons.table1Col5, client.Gender.StartsWith("M") ? false : true);
-            items.Add(Cons.table1Col6, client.ContactNumber);
-            items.Add(Cons.table1Col7, client.EmailAddress);
-            items.Add(Cons.table1IdFk, locId);
-            new Client(Cons.table1);
-            return dh.Update(items, client.Identity);
+            return dh.Update(new Dictionary<string, object>
+            {
+                { Cons.table1Col1, client.Title },
+                { Cons.table1Col2, client.Name },
+                { Cons.table1Col3, client.Surname },
+                { Cons.table1Col4, client.BirthDate },
+                { Cons.table1Col5, client.Gender.StartsWith("M") ? false : true },
+                { Cons.table1Col6, client.ContactNumber },
+                { Cons.table1Col7, client.EmailAddress },
+                { Cons.table1IdFk, locId }
+            }, client.Identity, Cons.table1);
+
         }
 
         public bool Delete(int clientId)
-        {
-            new Client(Cons.table1);
-            return dh.Delete(clientId.ToString());
+        {            
+            return dh.Delete(clientId.ToString(), Cons.table1);
         }
-
-
-
-
-
 
         #endregion
         #endregion
