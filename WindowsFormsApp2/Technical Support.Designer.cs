@@ -110,7 +110,7 @@
             this.tabPage1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(983, 555);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
@@ -264,7 +264,7 @@
             // txtCustName
             // 
             this.txtCustName.Location = new System.Drawing.Point(129, 256);
-            this.txtCustName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCustName.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustName.Name = "txtCustName";
             this.txtCustName.Size = new System.Drawing.Size(226, 22);
             this.txtCustName.TabIndex = 71;
@@ -292,7 +292,7 @@
             // txtCustEmail
             // 
             this.txtCustEmail.Location = new System.Drawing.Point(129, 388);
-            this.txtCustEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCustEmail.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustEmail.Name = "txtCustEmail";
             this.txtCustEmail.Size = new System.Drawing.Size(226, 22);
             this.txtCustEmail.TabIndex = 68;
@@ -300,7 +300,7 @@
             // txtCustPhone
             // 
             this.txtCustPhone.Location = new System.Drawing.Point(129, 344);
-            this.txtCustPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCustPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustPhone.Name = "txtCustPhone";
             this.txtCustPhone.Size = new System.Drawing.Size(226, 22);
             this.txtCustPhone.TabIndex = 67;
@@ -328,7 +328,7 @@
             // txtCustSurname
             // 
             this.txtCustSurname.Location = new System.Drawing.Point(129, 300);
-            this.txtCustSurname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCustSurname.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustSurname.Name = "txtCustSurname";
             this.txtCustSurname.Size = new System.Drawing.Size(226, 22);
             this.txtCustSurname.TabIndex = 64;
@@ -360,7 +360,7 @@
             this.tabPage2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(983, 555);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Manage Tasks";
