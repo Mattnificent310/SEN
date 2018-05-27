@@ -352,14 +352,14 @@ GO
 
 -- Creating table 'tblCalls'
 CREATE TABLE [dbo].[tblCalls] (
-    [CallID] char(10)  NOT NULL,
+    [CallID] int IDENTITY(1,1) NOT NULL,
     [CallDate] datetime  NOT NULL,
     [CallTime] time  NOT NULL,
     [CallDuration] time  NOT NULL,
     [CallHoldDuration] time  NOT NULL,
     [StaffIDFK] int  NOT NULL,
-    [ClientIDFK] varchar(50)  NULL,
-    [CompanyIDFK] varchar(50)  NULL
+    [ClientIDFK] int  NULL,
+    [CompanyIDFK] int  NULL
 );
 GO
 
@@ -373,15 +373,15 @@ GO
 
 -- Creating table 'tblCIties'
 CREATE TABLE [dbo].[tblCIties] (
-    [CityIDPK] int  NOT NULL,
+    [CityIDPK] int IDENTITY(1,1) NOT NULL,
     [CityName] varchar(50)  NULL,
-    [CountryIDFK] char(10)  NULL
+    [CountryIDFK] int  NULL
 );
 GO
 
 -- Creating table 'tblClients'
 CREATE TABLE [dbo].[tblClients] (
-    [ClientIDPK] varchar(50)  NOT NULL,
+    [ClientIDPK] int IDENTITY(1,1)  NOT NULL,
     [ClientTitle] varchar(50)  NOT NULL,
     [ClientName] varchar(50)  NOT NULL,
     [ClientSurname] varchar(50)  NOT NULL,
@@ -398,7 +398,7 @@ GO
 
 -- Creating table 'tblCompanies'
 CREATE TABLE [dbo].[tblCompanies] (
-    [CompanyID] varchar(50)  NOT NULL,
+    [CompanyID] int  IDENTITY(1,1)  NOT NULL,
     [CompanyName] varchar(50)  NOT NULL,
     [CompanyType] varchar(50)  NOT NULL,
     [CompanyPhone] char(10)  NOT NULL,
@@ -410,18 +410,18 @@ GO
 
 -- Creating table 'tblCompContracts'
 CREATE TABLE [dbo].[tblCompContracts] (
-    [ContractIDPK] varchar(50)  NOT NULL,
+    [ContractIDPK] int  IDENTITY(1,1)  NOT NULL,
     [ContractLevel] char(10)  NOT NULL,
     [ContractType] varchar(50)  NOT NULL,
     [ContractIssueDate] datetime  NOT NULL,
     [ContractTerm] int  NOT NULL,
-    [CompanyIDFK] varchar(50)  NOT NULL
+    [CompanyIDFK] int  NOT NULL
 );
 GO
 
 -- Creating table 'tblComponents'
 CREATE TABLE [dbo].[tblComponents] (
-    [ComponentID] varchar(50)  NOT NULL,
+    [ComponentID] int IDENTITY(1,1)  NOT NULL,
     [ComponentName] varchar(50)  NOT NULL,
     [ComponentType] varchar(50)  NOT NULL,
     [ComponetnDetails] varchar(50)  NOT NULL,
@@ -440,18 +440,18 @@ GO
 
 -- Creating table 'tblContracts'
 CREATE TABLE [dbo].[tblContracts] (
-    [ContractID] varchar(50)  NOT NULL,
+    [ContractID] int IDENTITY(1,1)  NOT NULL,
     [ContractLevel] varchar(50)  NOT NULL,
     [ContractType] varchar(50)  NOT NULL,
     [ContractDateIssued] datetime  NOT NULL,
     [ContractTerm] int  NOT NULL,
-    [ClientIDFK] varchar(50)  NOT NULL
+    [ClientIDFK] int  NOT NULL
 );
 GO
 
 -- Creating table 'tblCountries'
 CREATE TABLE [dbo].[tblCountries] (
-    [CountryIDPK] char(10)  NOT NULL,
+    [CountryIDPK] int IDENTITY(1,1) NOT NULL,
     [CountryName] varchar(50)  NULL
 );
 GO
@@ -512,7 +512,7 @@ GO
 CREATE TABLE [dbo].[tblOrder_Details] (
     [OrderDetIDPK] int IDENTITY(1,1) NOT NULL,
     [OrderID] int  NOT NULL,
-    [ProductID] varchar(50)  NOT NULL,
+    [ProductID] int  NOT NULL,
     [ConfigID] int  NOT NULL,
     [Quantity] int  NOT NULL,
     [Total] decimal(19,4)  NOT NULL,
@@ -533,7 +533,7 @@ GO
 
 -- Creating table 'tblProducts'
 CREATE TABLE [dbo].[tblProducts] (
-    [ProductSerialNoPK] varchar(50)  NOT NULL,
+    [ProductSerialNoPK] int IDENTITY(1,1) NOT NULL,
     [ProductModel] varchar(50)  NOT NULL,
     [ProductDetails] varchar(100)  NOT NULL,
     [UnitPrice] decimal(19,4)  NOT NULL,
@@ -549,7 +549,7 @@ CREATE TABLE [dbo].[tblSales] (
     [SalesType] varchar(50)  NOT NULL,
     [SalesDate] varchar(50)  NOT NULL,
     [StaffIDFK] int  NOT NULL,
-    [ContractIDFK] varchar(50)  NOT NULL
+    [ContractIDFK] int  NOT NULL
 );
 GO
 
@@ -580,7 +580,7 @@ GO
 
 -- Creating table 'tblSupports'
 CREATE TABLE [dbo].[tblSupports] (
-    [SupportIDPK] int  NOT NULL,
+    [SupportIDPK] int IDENTITY(1,1) NOT NULL,
     [SupportDetails] varchar(50)  NOT NULL,
     [SupportStartDate] datetime  NOT NULL,
     [SupportDuration] int  NOT NULL,
@@ -592,7 +592,7 @@ GO
 
 -- Creating table 'tblSupportTasks'
 CREATE TABLE [dbo].[tblSupportTasks] (
-    [TaskIDPK] int  NOT NULL,
+    [TaskIDPK] int IDENTITY(1,1) NOT NULL,
     [TaskType] varchar(50)  NOT NULL,
     [TaskDescription] varchar(50)  NOT NULL,
     [TaskCriteria] varchar(50)  NOT NULL,
@@ -602,7 +602,7 @@ GO
 
 -- Creating table 'tblTeams'
 CREATE TABLE [dbo].[tblTeams] (
-    [TeamIDPK] int  NOT NULL,
+    [TeamIDPK] int IDENTITY(1,1) NOT NULL,
     [TeamName] varchar(50)  NOT NULL,
     [TeamCapacity] int  NOT NULL,
     [TeamSpeciality] varchar(50)  NULL
@@ -611,7 +611,7 @@ GO
 
 -- Creating table 'tblAccessOrders'
 CREATE TABLE [dbo].[tblAccessOrders] (
-    [AccessoryIDq] int  NOT NULL,
+    [AccessoryIDPK] int  NOT NULL,
     [OrderID] int  NULL
 );
 GO
@@ -619,15 +619,15 @@ GO
 -- Creating table 'tblCompOffContracts'
 CREATE TABLE [dbo].[tblCompOffContracts] (
     [OfferID] int  NOT NULL,
-    [ContractID] varchar(50)  NOT NULL,
+    [ContractID] int  NOT NULL,
     [BenifitID] int  NOT NULL
 );
 GO
 
 -- Creating table 'tblConSupProds'
 CREATE TABLE [dbo].[tblConSupProds] (
-    [ContractID] varchar(50)  NOT NULL,
-    [ComponentD] varchar(50)  NOT NULL,
+    [ContractID] int  NOT NULL,
+    [ComponentD] int  NOT NULL,
     [SupportID] int  NOT NULL
 );
 GO
@@ -635,7 +635,7 @@ GO
 -- Creating table 'tblOfferContracts'
 CREATE TABLE [dbo].[tblOfferContracts] (
     [OfferID] int  NOT NULL,
-    [ContractID] varchar(50)  NOT NULL,
+    [ContractID] int  NOT NULL,
     [BenifitID] int  NOT NULL
 );
 GO
@@ -697,7 +697,7 @@ GO
 
 -- Creating table 'tblComponentSupplier'
 CREATE TABLE [dbo].[tblComponentSupplier] (
-    [tblComponents_ComponentID] varchar(50)  NOT NULL,
+    [tblComponents_ComponentID] int  NOT NULL,
     [tblManufacturers_ManufacturerIDPK] int  NOT NULL
 );
 GO
@@ -705,14 +705,14 @@ GO
 -- Creating table 'tblProdAccessories'
 CREATE TABLE [dbo].[tblProdAccessories] (
     [tblAccessories_AccessoryIDPK] int  NOT NULL,
-    [tblProducts_ProductSerialNoPK] varchar(50)  NOT NULL
+    [tblProducts_ProductSerialNoPK] int  NOT NULL
 );
 GO
 
 -- Creating table 'tblProductComponents'
 CREATE TABLE [dbo].[tblProductComponents] (
-    [tblComponents_ComponentID] varchar(50)  NOT NULL,
-    [tblProducts_ProductSerialNoPK] varchar(50)  NOT NULL
+    [tblComponents_ComponentID] int  NOT NULL,
+    [tblProducts_ProductSerialNoPK] int  NOT NULL
 );
 GO
 
@@ -908,10 +908,10 @@ ADD CONSTRAINT [PK_tblTeams]
     PRIMARY KEY CLUSTERED ([TeamIDPK] ASC);
 GO
 
--- Creating primary key on [AccessoryIDq] in table 'tblAccessOrders'
+-- Creating primary key on [AccessoryIDPK] in table 'tblAccessOrders'
 ALTER TABLE [dbo].[tblAccessOrders]
 ADD CONSTRAINT [PK_tblAccessOrders]
-    PRIMARY KEY CLUSTERED ([AccessoryIDq] ASC);
+    PRIMARY KEY CLUSTERED ([AccessoryIDPK] ASC);
 GO
 
 -- Creating primary key on [OfferID], [ContractID], [BenifitID] in table 'tblCompOffContracts'
@@ -996,10 +996,10 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [AccessoryIDq] in table 'tblAccessOrders'
+-- Creating foreign key on [AccessoryIDPK] in table 'tblAccessOrders'
 ALTER TABLE [dbo].[tblAccessOrders]
 ADD CONSTRAINT [FK_tblAccessOrder_tblAccessories]
-    FOREIGN KEY ([AccessoryIDq])
+    FOREIGN KEY ([AccessoryIDPK])
     REFERENCES [dbo].[tblAccessories]
         ([AccessoryIDPK])
     ON DELETE CASCADE ON UPDATE NO ACTION;
