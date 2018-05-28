@@ -116,7 +116,7 @@ namespace Business_Logic_Layer
                 item[Cons.table1Col1].ToString(),
                 item[Cons.table1Col2].ToString(),
                 item[Cons.table1Col3].ToString(),
-                (bool)item[Cons.table1Col5] ? "Female" : "Male",
+                item[Cons.table1Col5].ToString(),
                 (DateTime)item[Cons.table1Col4],
                 item[Cons.table1Col6].ToString(),
                 item[Cons.table1Col7].ToString(),
@@ -210,7 +210,7 @@ namespace Business_Logic_Layer
             { Cons.table1Col2, client.Name },
             { Cons.table1Col3, client.Surname},
             { Cons.table1Col4, client.BirthDate },
-            { Cons.table1Col5, client.Gender.StartsWith("M") ? false : true },
+            { Cons.table1Col5, client.Gender},
             { Cons.table1Col6, client.ContactNumber },
             { Cons.table1Col7, client.EmailAddress },
             { Cons.table1IdFk, locId }
@@ -226,7 +226,7 @@ namespace Business_Logic_Layer
                 { Cons.table1Col2, client.Name },
                 { Cons.table1Col3, client.Surname },
                 { Cons.table1Col4, client.BirthDate },
-                { Cons.table1Col5, client.Gender.StartsWith("M") ? false : true },
+                { Cons.table1Col5, client.Gender},
                 { Cons.table1Col6, client.ContactNumber },
                 { Cons.table1Col7, client.EmailAddress },
                 { Cons.table1IdFk, locId }

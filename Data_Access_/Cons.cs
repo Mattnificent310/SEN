@@ -18,7 +18,7 @@ namespace Data_Access_
                             table1Col5 = "ClientGender",
                             table1Col6 = "ClientPhone",
                             table1Col7 = "ClientEmail",
-                            table1Col8 = "ContactMethod";
+                            table1Col8 = "ContactMethod",
                             table1Col9 = "ClientStatus",
                             table1Col10 = "CreditStatus",
                             table1IdFk = "LocationIDFK";
