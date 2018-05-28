@@ -101,7 +101,7 @@ namespace Data_Access_
         public const string table10 = "tblAccounts",
                             table10Id = "AccountIDPK",
                             table10Col1 = "Username",
-                            table10Col2 = "Password",
+                            table10Col2 = "Passcode",
                             table10Col3 = "Department",
                             table10IDFk = "StaffIDFK";
         #endregion

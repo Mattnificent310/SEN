@@ -8,7 +8,7 @@ namespace Business_Logic_Layer
 {
     public interface IStaff
     {
-        bool Insert(Staff staff);
+        int? Insert(Staff staff);
         bool Update(Staff staff);
         bool Delete(int staffId);
     }

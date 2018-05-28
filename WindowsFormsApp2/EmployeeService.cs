@@ -122,7 +122,7 @@ namespace WindowsFormsApp2
             if (ValidateAll(this.tabPage2))
             {
                 staff = new Staff(
-                    0,
+                    string.Empty,
                     cmbETitle.Text,
                     txtEName.Text.Trim(),
                     txtESurname.Text.Trim(),
@@ -158,7 +158,7 @@ namespace WindowsFormsApp2
             {
                 staff = new Staff()
                 {
-                    Identity = int.Parse(txtEmpId.Text),
+                    Identity = txtEmpId.Text,
                     Title = cmbEmpTitle.Text.Trim(),
                     Name = txtEmpName.Text.Trim(),
                     Surname = txtEmpSurname.Text.Trim(),

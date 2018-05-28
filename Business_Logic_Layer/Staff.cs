@@ -11,17 +11,17 @@ namespace Business_Logic_Layer
 {
     public class Staff : Person, IStaff
     {
-        private int identity;
+        private string identity;
         private string jobDesc;
         private string department;
         public static List<Staff> staff;
         private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table3);
-        private static Dictionary<string, object> items;
+        private static string[] unique = { "A", "B", "C", "D", "E" };
         private static Location loc;
         private static Job job;
 
         #region Properties
-        public int Identity { get { return identity; } set { identity = value; } }
+        public string Identity { get { return identity; } set { identity = value; } }
         public string JobDesc { get { return jobDesc; } set { jobDesc = string.IsNullOrEmpty(value.Trim()) ? "Pending" : value.Trim(); } }
         public string Department { get { return department; } set { department = value; } }
         #endregion
@@ -40,11 +40,11 @@ namespace Business_Logic_Layer
             foreach (DataRow item in DataHandler.GetData(Cons.table3).Rows)
             {
                 staff.Add(new Staff(
-                (int)item[Cons.table3Id],
+                item[Cons.table3Id].ToString(),
                 item[Cons.table3Col1].ToString(),
                 item[Cons.table3Col2].ToString(),
                 item[Cons.table3Col3].ToString(),
-                (bool)item[Cons.table3Col5] ? "Female" : "Male",
+                item[Cons.table3Col5].ToString(),
                 (DateTime)item[Cons.table3Col4],
                 item[Cons.table3Col6].ToString(),
                 item[Cons.table3Col7].ToString(),
@@ -56,7 +56,7 @@ namespace Business_Logic_Layer
             }
 
         }
-        public Staff(int staffId, string title, string name, string surname, string gender, DateTime birth, string phone, string email, string jobDesc, string country, string city, string street)
+        public Staff(string staffId, string title, string name, string surname, string gender, DateTime birth, string phone, string email, string jobDesc, string country, string city, string street)
         : base(title, name, surname, gender, birth, phone, email, country, city, street)
         {
             this.Identity = staffId;
@@ -68,7 +68,7 @@ namespace Business_Logic_Layer
         #endregion
 
         #region Indexer
-        public Staff this[int? staffId = null, string department = null, string name = null, string surname = null, string phone = null, string email = null]
+        public Staff this[string staffId = null, string department = null, string name = null, string surname = null, string phone = null, string email = null]
         {
             get
             {
@@ -97,49 +97,50 @@ namespace Business_Logic_Layer
             {
                 if (username.Equals(item[Cons.table10Col1].ToString()) && password.Equals(item[Cons.table10Col2].ToString()))
                 {
-                    return new Staff(username,password)[(int?)item[Cons.table10IDFk], item[Cons.table10Col3].ToString()];
+                    return new Staff(username,password)[item[Cons.table10IDFk].ToString() , item[Cons.table10Col3].ToString()];
                 }
 
             }
             return null;
         }
-        public bool Insert(Staff staff)
+        public int? Insert(Staff staff)
         {
             int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
-            items = new Dictionary<string, object>();
-            items.Add(Cons.table3Col1, staff.Title);
-            items.Add(Cons.table3Col2, staff.Name);
-            items.Add(Cons.table3Col3, staff.Surname);
-            items.Add(Cons.table3Col4, staff.BirthDate);
-            items.Add(Cons.table3Col5, staff.Gender.StartsWith("M") ? false : true);
-            items.Add(Cons.table3Col6, staff.ContactNumber);
-            items.Add(Cons.table3Col7, staff.EmailAddress);
-            items.Add(Cons.table3IdFk1, staff.JobDesc.Equals("Configuration Technician") ? 1 : staff.JobDesc.Equals("Installation Technician") ? 2 : 4);
-            items.Add(Cons.table3IdFk2, locId);
-            new Staff(Cons.table3);
-            return dh.Insert(items) != null ? true : false;
+            return (int?)dh.Insert(new Dictionary<string, object>
+            {
+                { Cons.table3Col1, staff.Title },
+                { Cons.table3Col2, staff.Name },
+                { Cons.table3Col3, staff.Surname },
+                { Cons.table3Col4, staff.BirthDate },
+                { Cons.table3Col5, staff.Gender },
+                { Cons.table3Col6, staff.ContactNumber },
+                { Cons.table3Col7, staff.EmailAddress },
+                { Cons.table3IdFk1, staff.JobDesc },
+                { Cons.table3IdFk2, locId }
+            },Cons.table3);
+            
         }
 
         public bool Update(Staff staff)
         {
             int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
-            items = new Dictionary<string, object>();
-            items.Add(Cons.table3Col1, staff.Title);
-            items.Add(Cons.table3Col2, staff.Name);
-            items.Add(Cons.table3Col3, staff.Surname);
-            items.Add(Cons.table3Col4, staff.BirthDate);
-            items.Add(Cons.table3Col5, staff.Gender.StartsWith("M") ? false : true);
-            items.Add(Cons.table3Col6, staff.ContactNumber);
-            items.Add(Cons.table3Col7, staff.EmailAddress);
-            items.Add(Cons.table3IdFk2, locId);
-            new Staff(Cons.table3);
-            return dh.Update(items, staff.Identity.ToString());
+            return dh.Update(new Dictionary<string, object>
+            {
+                { Cons.table3Col1, staff.Title },
+                { Cons.table3Col2, staff.Name },
+                { Cons.table3Col3, staff.Surname },
+                { Cons.table3Col4, staff.BirthDate },
+                { Cons.table3Col5, staff.Gender },
+                { Cons.table3Col6, staff.ContactNumber },
+                { Cons.table3Col7, staff.EmailAddress },
+                { Cons.table3IdFk2, locId }
+            },Cons.table3, int.Parse(staff.Identity.Substring(1)).ToString());
         }
 
         public bool Delete(int staffId)
         {
             new Client(Cons.table3);
-            return dh.Delete(staffId.ToString());
+            return dh.Delete(int.Parse(staffId.ToString().Substring(1)).ToString());
         }
         #endregion
 
