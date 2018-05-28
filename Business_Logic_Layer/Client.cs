@@ -26,7 +26,7 @@ namespace Business_Logic_Layer
         private string creditRating;
         public static List<Client> clients;
         private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table1);
-        private static Dictionary<string, object> items;
+        private static string[] unique = { "A", "B", "C", "D", "E" };
         private static Location loc;
 
 
@@ -111,8 +111,10 @@ namespace Business_Logic_Layer
             DataTable clientTbl = DataHandler.GetData(Cons.table1);
             foreach (DataRow item in clientTbl.Rows)
             {
+                
                 clients.Add(new Client(
-                item[Cons.table1Id].ToString(),
+                string.Format("{0}{1}", unique[new Random().Next(0,4)],
+                item[Cons.table1Id].ToString().PadLeft(8,'0')),
                 item[Cons.table1Col1].ToString(),
                 item[Cons.table1Col2].ToString(),
                 item[Cons.table1Col3].ToString(),

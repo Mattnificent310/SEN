@@ -33,7 +33,7 @@ namespace Business_Logic_Layer
         }
         public static bool InsertStaff(Staff staff)
         {
-            return new Staff().Insert(staff);
+            return new Staff().Insert(staff)!=null ? true : false;
         }
         public static bool UpdateStaff(Staff staff)
         {
