@@ -14,7 +14,7 @@ namespace Data_Access_Layer
         private static SqlConnection conn;
         private static SqlCommandBuilder cmd;
         public static DataSet ds;
-        private string connStr;
+        public static string connStr;
 
         public DBConn()
         {

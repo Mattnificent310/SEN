@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data_Access_Layer;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -153,8 +154,7 @@ namespace DataAccessLayer
         private SqlConnection OpenConnection()
         {
             myAdapter = new SqlDataAdapter();
-            conn_string = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMSDB;Integrated Security=True";
-            //conn_string = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMSDB;Integrated Security=True";
+            conn_string = DBConn.connStr;
             conn = new SqlConnection(conn_string);
             if (conn.State == ConnectionState.Closed || conn.State ==
                         ConnectionState.Broken)
@@ -216,8 +216,8 @@ namespace DataAccessLayer
                     while (myEnumerator.MoveNext())
                     {
                         ParamData pData = (ParamData)myEnumerator.Current;
-                        cmd.Parameters.Add(pData.pName);
-                        cmd.Parameters[i].Value = pData.pValue;
+                        cmd.Parameters.Add(new SqlParameter(pData.pName, pData.pValue));
+                        //cmd.Parameters[i].Value = pData.pValue;
                         i++;
 
                     }
@@ -287,8 +287,8 @@ namespace DataAccessLayer
                     while (myEnumerator.MoveNext())
                     {
                         ParamData pData = (ParamData)myEnumerator.Current;
-                        cmd.Parameters.Add(pData.pName);
-                        cmd.Parameters[i].Value = pData.pValue;
+                        cmd.Parameters.Add(new SqlParameter(pData.pName, pData.pValue));
+                        //cmd.Parameters[i].Value = pData.pValue;
                         i++;
 
                     }

@@ -1,5 +1,6 @@
 ﻿using Data_Access_;
 using Data_Access_Layer;
+using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -39,6 +40,9 @@ namespace Business_Logic_Layer
 
             foreach (DataRow item in DataHandler.GetData(Cons.table3).Rows)
             {
+                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
+                { { "LocationID",item[Cons.table1IdFk] }}).Rows[0];
+
                 staff.Add(new Staff(
                 item[Cons.table3Id].ToString(),
                 item[Cons.table3Col1].ToString(),
@@ -49,9 +53,9 @@ namespace Business_Logic_Layer
                 item[Cons.table3Col6].ToString(),
                 item[Cons.table3Col7].ToString(),
                 job[(int)item[Cons.table3IdFk1]].JobDesc,
-                loc[(int)item[Cons.table3IdFk2]].Country,
-                loc.City,
-                loc.Street
+                row[Cons.table6Col1].ToString(),
+                row[Cons.table5Col1].ToString(),
+                row[Cons.table4Col1].ToString()
                 ));
             }
 
@@ -105,7 +109,8 @@ namespace Business_Logic_Layer
         }
         public int? Insert(Staff staff)
         {
-            int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
+            {{"Country",staff.Country },{"City",staff.City }}).Rows[0][0];//loc[null, staff.Street, staff.City, staff.Country].LocationId;
             return (int?)dh.Insert(new Dictionary<string, object>
             {
                 { Cons.table3Col1, staff.Title },
