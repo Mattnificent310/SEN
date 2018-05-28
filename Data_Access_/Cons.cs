@@ -18,7 +18,7 @@ namespace Data_Access_
                             table1Col5 = "ClientGender",
                             table1Col6 = "ClientPhone",
                             table1Col7 = "ClientEmail",
-                            table1Col8 = "ContactMethod";
+                            table1Col8 = "ContactMethod",
                             table1Col9 = "ClientStatus",
                             table1Col10 = "CreditStatus",
                             table1IdFk = "LocationIDFK";
@@ -101,7 +101,7 @@ namespace Data_Access_
         public const string table10 = "tblAccounts",
                             table10Id = "AccountIDPK",
                             table10Col1 = "Username",
-                            table10Col2 = "Password",
+                            table10Col2 = "Passcode",
                             table10Col3 = "Department",
                             table10IDFk = "StaffIDFK";
         #endregion

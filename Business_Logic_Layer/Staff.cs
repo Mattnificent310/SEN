@@ -44,7 +44,7 @@ namespace Business_Logic_Layer
                 item[Cons.table3Col1].ToString(),
                 item[Cons.table3Col2].ToString(),
                 item[Cons.table3Col3].ToString(),
-                (bool)item[Cons.table3Col5] ? "Female" : "Male",
+                item[Cons.table3Col5].ToString(),
                 (DateTime)item[Cons.table3Col4],
                 item[Cons.table3Col6].ToString(),
                 item[Cons.table3Col7].ToString(),
@@ -111,10 +111,10 @@ namespace Business_Logic_Layer
             items.Add(Cons.table3Col2, staff.Name);
             items.Add(Cons.table3Col3, staff.Surname);
             items.Add(Cons.table3Col4, staff.BirthDate);
-            items.Add(Cons.table3Col5, staff.Gender.StartsWith("M") ? false : true);
+            items.Add(Cons.table3Col5, staff.Gender);
             items.Add(Cons.table3Col6, staff.ContactNumber);
             items.Add(Cons.table3Col7, staff.EmailAddress);
-            items.Add(Cons.table3IdFk1, staff.JobDesc.Equals("Configuration Technician") ? 1 : staff.JobDesc.Equals("Installation Technician") ? 2 : 4);
+            items.Add(Cons.table3IdFk1, staff.JobDesc);
             items.Add(Cons.table3IdFk2, locId);
             new Staff(Cons.table3);
             return dh.Insert(items) != null ? true : false;
@@ -128,7 +128,7 @@ namespace Business_Logic_Layer
             items.Add(Cons.table3Col2, staff.Name);
             items.Add(Cons.table3Col3, staff.Surname);
             items.Add(Cons.table3Col4, staff.BirthDate);
-            items.Add(Cons.table3Col5, staff.Gender.StartsWith("M") ? false : true);
+            items.Add(Cons.table3Col5, staff.Gender);
             items.Add(Cons.table3Col6, staff.ContactNumber);
             items.Add(Cons.table3Col7, staff.EmailAddress);
             items.Add(Cons.table3IdFk2, locId);
