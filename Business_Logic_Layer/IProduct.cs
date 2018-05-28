@@ -8,7 +8,7 @@ namespace Business_Logic_Layer
 {
     public interface IProduct
     {
-        bool Insert(Product prod);
+        int? Insert(Product prod);
         bool Update(Product prod);
         bool Delete(int prodId);
     }

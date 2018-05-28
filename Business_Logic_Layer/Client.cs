@@ -212,8 +212,7 @@ namespace Business_Logic_Layer
         {
             int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
             {
-                {"Country",client.Country },
-                {"City",client.City }
+                {"Country",client.Country }, {"City",client.City }, {"Street", client.Street}
             }).Rows[0][0];//loc[null, client.Street, client.City, client.Country].LocationId;
             return (int?)dh.Insert(new Dictionary<string, object>
             {

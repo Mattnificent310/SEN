@@ -134,19 +134,20 @@ namespace Business_Logic_Layer
 
         #endregion
 
-        public bool Insert(Product prod)
+        public int? Insert(Product prod)
         {
             inv = new Inventory();
             cat = new Category();
-            Dictionary<string, object> items = new Dictionary<string, object>();
-            items.Add(Cons.table2Col1, prod.ProductModel);
-            items.Add(Cons.table2Col2, prod.ProductName);
-            items.Add(Cons.table2Col3, prod.UnitPrice);
-            items.Add(Cons.table2Col4, prod.Discontinued);
-            items.Add(Cons.table2IdFk1, cat[null, prod.ProductType].CategoryId);
-            items.Add(Cons.table2IdFk2, inv[null, null, prod.InStock].InventoryID);
-            new Product(Cons.table2);
-            return dh.Insert(items) != null ? true : false;
+            return (int?)dh.Insert(new Dictionary<string, object>
+            {
+                { Cons.table2Col1, prod.ProductModel },
+                { Cons.table2Col2, prod.ProductName },
+                { Cons.table2Col3, prod.UnitPrice },
+                { Cons.table2Col4, prod.Discontinued },
+                { Cons.table2IdFk1, cat[null, prod.ProductType].CategoryId },
+                { Cons.table2IdFk2, inv[null, null, prod.InStock].InventoryID }
+            },Cons.table2);
+            
         }
 
         public bool Update(Product prod)
