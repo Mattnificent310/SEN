@@ -229,7 +229,10 @@ namespace Business_Logic_Layer
 
         public bool Update(Client client)
         {            
-            int locId = loc[null, client.Street, client.City, client.Country].LocationId;
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
+            {
+                {"Country",client.Country }, {"City",client.City }, {"Street", client.Street}
+            }).Rows[0][0];//loc[null, client.Street, client.City, client.Country].LocationId;
             return dh.Update(new Dictionary<string, object>
             {
                 { Cons.table1Col1, client.Title },
@@ -240,7 +243,7 @@ namespace Business_Logic_Layer
                 { Cons.table1Col6, client.ContactNumber },
                 { Cons.table1Col7, client.EmailAddress },
                 { Cons.table1IdFk, locId }
-            }, client.Identity, Cons.table1);
+            }, int.Parse(client.Identity.Substring(1)).ToString(), Cons.table1);
 
         }
 
