@@ -149,7 +149,8 @@ namespace WindowsFormsApp2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unauthorized Access Detected!");
+                //MessageBox.Show("Unauthorized Access Detected!");
+                MessageBox.Show(ex.ToString());
             }
         }
 
