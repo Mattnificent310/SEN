@@ -126,24 +126,29 @@ namespace WindowsFormsApp2
                 if (Category.cats.Any())
                 {
                     cmbProdType.Items.Clear();
-                    cmbPayment.Items.Clear();
-                    cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
-                    cmbProdModel.Items.Clear();
                     cmbProdType.DataSource = Category.cats.Select(x => x.CategoryName).ToList();
-                    cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
                     cmbProdType.Text = "";
-                    cmbProdModel.Text = "";
-                    cmbProdType.Enabled = false;
-                    cmbProdModel.Enabled = false;
-                    txtProdName.Enabled = false;
-                    numQuantity.Enabled = false;
-                    radioCol.Enabled = false;
-                    radioDel.Enabled = false;
-                    dtpColDel.Enabled = false;
-                    cmbPayment.Enabled = false;
-
-                    return true;
                 }
+                if (Product.prods.Any())
+                {
+                    cmbProdModel.Items.Clear();
+                    cmbProdModel.DataSource = Product.prods.Select(x => x.ProductModel).ToList();
+                    cmbProdModel.Text = "";
+                }
+                cmbPayment.Items.Clear();
+                cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
+                cmbProdType.Enabled = false;
+                cmbProdModel.Enabled = false;
+                txtProdName.Enabled = false;
+                numQuantity.Enabled = false;
+                radioCol.Enabled = false;
+                radioDel.Enabled = false;
+                dtpColDel.Enabled = false;
+                cmbPayment.Enabled = false;
+                btnOrder.Enabled = false;
+
+                return true;
+
             }
             catch (Exception e) { MessageBox.Show("Unexpected problems were detected."); }
             return false;
@@ -516,6 +521,7 @@ namespace WindowsFormsApp2
                     "N/A"
                     );
                 dtpColDel.Value = DateTime.Now.AddDays(1.0);
+                btnOrder.Enabled = true;
             }
         }
 
@@ -529,6 +535,7 @@ namespace WindowsFormsApp2
                     "N/A"
                     );
                 dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
+                btnOrder.Enabled = true;
             }
 
 
@@ -590,7 +597,28 @@ namespace WindowsFormsApp2
                     columns = true;
                     ordered = true;
                 }
-                if (!vals.Any(x => x.ElementAt(1).Equals(values.ElementAt(1))))
+                if (vals.Any(x => x.ElementAt(0).Equals(values.ElementAt(0))
+                && x.ElementAt(1).Equals(values.ElementAt(1))
+                && x.ElementAt(2).Equals(values.ElementAt(2))
+                && x.ElementAt(3).Equals(values.ElementAt(3))
+                && x.ElementAt(4).Equals(values.ElementAt(4))
+                && !x.ElementAt(5).Equals(values.ElementAt(5))
+                && !x.ElementAt(6).Equals(values.ElementAt(6))))
+                {
+                    int index = vals.IndexOf(vals.Where(x =>
+                   x.ElementAt(0).Equals(values.ElementAt(0))
+                && x.ElementAt(1).Equals(values.ElementAt(1))
+                && x.ElementAt(2).Equals(values.ElementAt(2))
+                && x.ElementAt(3).Equals(values.ElementAt(3))
+                && x.ElementAt(4).Equals(values.ElementAt(4))).FirstOrDefault());
+                    vals[index] = values;
+                    dgvItems.Rows[index].SetValues(values);
+                    dgvItems.Show();
+                    lblTotal.Text = string.Format("{0:C}", 0.00);
+                    lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(6).GetType() == typeof(double) ? (double)x.ElementAt(6) : 0));
+
+                }
+                else if (!vals.Any(x => x.ElementAt(1).Equals(values.ElementAt(1))))
                 {
                     vals.Add(values);
                     dgvItems.Rows.Add(values);
@@ -687,8 +715,6 @@ namespace WindowsFormsApp2
                     lblUnitPrice.DataBindings.Clear();
                     lblProdId.DataBindings.Clear();
                     txtProdName.DataBindings.Clear();
-                    numQuantity.Enabled = true;
-                    numQuantity.Value = 1;
                     cmbPayment.Text = "--Choose Method--";
                     cmbPayment.Enabled = true;
 
@@ -705,12 +731,17 @@ namespace WindowsFormsApp2
                     #endregion
 
                     #region Bind
-                    lblProdId.DataBindings.Add("Text", data, "ProductID");
-                    cmbProdType.DataBindings.Add("Text", data, "ProductType");
-                    cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
-                    txtProdName.DataBindings.Add("Text", data, "ProductName");
-                    lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
-                    lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+                    if (data.Count != 0)
+                    {
+                        numQuantity.Enabled = true;
+                        lblProdId.DataBindings.Add("Text", data, "ProductID");
+                        cmbProdType.DataBindings.Add("Text", data, "ProductType");
+                        cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
+                        txtProdName.DataBindings.Add("Text", data, "ProductName");
+                        lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                        lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+                    }
+
                     #endregion
 
 
@@ -1033,9 +1064,9 @@ namespace WindowsFormsApp2
 
         }
 
-       
 
-        
+
+
 
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {
