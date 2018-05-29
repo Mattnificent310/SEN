@@ -36,15 +36,17 @@ namespace Business_Logic_Layer
 
             foreach (DataRow item in locTbl.Rows)
             {
-                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
-                {
-                    {"LocationID",(int)item[Cons.table4IdFk] }
-                }).Rows[0];
+                //DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
+                //{
+                //    {"LocationID",(int)item[Cons.table4IdFk] }
+                //}).Rows[0];
                 locs.Add(new Location(
                   (int)item[Cons.table4Id],
                        item[Cons.table4Col1].ToString().Trim(),
-                       row[Cons.table5Col1].ToString(),
-                       row[Cons.table6Col1].ToString()
+                       "City",
+                       "Country"
+                       //row[Cons.table5Col1].ToString(),
+                       //row[Cons.table6Col1].ToString()
 
                        //DataHandler.Search(item[Cons.table4IdFk].ToString(), Cons.table5)[Cons.table5Col1].ToString(),
                        //DataHandler.Search(DataHandler.Search(item[Cons.table4IdFk].ToString(),

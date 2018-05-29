@@ -220,6 +220,7 @@
             // 
             // dgvSales
             // 
+            this.dgvSales.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSales.Location = new System.Drawing.Point(17, 7);
             this.dgvSales.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

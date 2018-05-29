@@ -146,6 +146,7 @@ namespace WindowsFormsApp2
                 dtpColDel.Enabled = false;
                 cmbPayment.Enabled = false;
                 btnOrder.Enabled = false;
+                dgvItems.Hide();
 
                 return true;
 
