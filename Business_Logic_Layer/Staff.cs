@@ -120,7 +120,8 @@ namespace Business_Logic_Layer
                 { Cons.table3Col5, staff.Gender },
                 { Cons.table3Col6, staff.ContactNumber },
                 { Cons.table3Col7, staff.EmailAddress },
-                { Cons.table3IdFk1, staff.JobDesc },
+                { Cons.table3IdFk1, (int)new StoredProcedure().GetProcs("sp_SearchJobs",
+                new Dictionary<string,object>{ { "JobDesc", staff.JobDesc } }).Rows[0][0] },
                 { Cons.table3IdFk2, locId }
             },Cons.table3);
             

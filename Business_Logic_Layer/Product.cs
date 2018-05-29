@@ -156,15 +156,16 @@ namespace Business_Logic_Layer
             cat = new Category();
             int catId = cat[null, prod.ProductType].CategoryId;
             int invId = inv[null, null, prod.inStock].InventoryID;
-            Dictionary<string, object> items = new Dictionary<string, object>();
-            items.Add(Cons.table2Col1, prod.ProductModel);
-            items.Add(Cons.table2Col2, prod.ProductName);
-            items.Add(Cons.table2Col3, prod.UnitPrice);
-            items.Add(Cons.table2Col4, prod.Discontinued);
-            items.Add(Cons.table2IdFk1, catId);
-            items.Add(Cons.table2IdFk2, invId);
-            new Product(Cons.table2);
-            return dh.Update(items, prod.ProductID.ToString());
+            return dh.Update(new Dictionary<string, object>
+            {
+                { Cons.table2Col1, prod.ProductModel },
+                { Cons.table2Col2, prod.ProductName },
+                { Cons.table2Col3, prod.UnitPrice },
+                { Cons.table2Col4, prod.Discontinued },
+                { Cons.table2IdFk1, catId },
+                { Cons.table2IdFk2, invId }
+            }, Cons.table2,prod.ProductID.ToString());
+           
         }
 
         public bool Delete(int prodId)
