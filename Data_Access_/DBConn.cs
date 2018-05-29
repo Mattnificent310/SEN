@@ -18,10 +18,8 @@ namespace Data_Access_Layer
 
         public DBConn()
         {
-            //connStr = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMSDB;Integrated Security=True";
-            //connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMSDB;Integrated Security=True";
-            //connStr = @"Data Source=MSI;Initial Catalog=SHSMS;Integrated Security=True";
-            connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMS;Integrated Security=True";
+            connStr = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMS;Integrated Security=True";
+            //connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMS;Integrated Security=True";
             ds = new DataSet();
 
             //adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
@@ -50,20 +48,20 @@ namespace Data_Access_Layer
         }
         public bool Write(DataSet updDS, string _table)
         {
-          
+
             using (conn = new SqlConnection(connStr))
             {
                 using (adapter = new SqlDataAdapter("SELECT * FROM " + _table, conn))
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
-                    {                        
+                    {
                         return adapter.Update(updDS, _table) == 1 ? true : false;
-                        
+
                     }
                 }
 
             }
-           
+
         }
 
     }
