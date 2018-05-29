@@ -1,5 +1,5 @@
-USE SHSMS 
-GO
+--USE SHSMS 
+--GO
 CREATE OR ALTER PROCEDURE sp_Login 
 	-- Add the parameters for the stored procedure here
 	(@Username VARCHAR(50),
