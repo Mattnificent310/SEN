@@ -37,7 +37,7 @@ namespace Data_Access_
         #endregion
 
         #region Staff
-        public const string table3 = "tblStaffs",
+        public const string table3 = "tblStaff",
                             table3Id = "StaffIDPK",
                             table3Col1 = "StaffTitle",
                             table3Col2 = "StaffName",
