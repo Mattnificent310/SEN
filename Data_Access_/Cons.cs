@@ -27,7 +27,7 @@ namespace Data_Access_
         #region Products
 
         public const string table2 = "tblProducts",
-                            table2Id = "ProductSerialPK",
+                            table2Id = "ProductSerialNoPK",
                             table2Col1 = "ProductModel",
                             table2Col2 = "ProductDetail",
                             table2Col3 = "UnitPrice",
