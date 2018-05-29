@@ -29,7 +29,7 @@ namespace Data_Access_
         public const string table2 = "tblProducts",
                             table2Id = "ProductSerialNoPK",
                             table2Col1 = "ProductModel",
-                            table2Col2 = "ProductDetail",
+                            table2Col2 = "ProductDetails",
                             table2Col3 = "UnitPrice",
                             table2Col4 = "Discontinued",
                             table2IdFk1 = "CategoryIDFK",

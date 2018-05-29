@@ -115,11 +115,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustSurname = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lblLogin = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
@@ -209,6 +209,8 @@
             // 
             // dgvItems
             // 
+            this.dgvItems.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Location = new System.Drawing.Point(17, 7);
             this.dgvItems.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -10031,6 +10033,18 @@
             this.txtCustSurname.Size = new System.Drawing.Size(252, 22);
             this.txtCustSurname.TabIndex = 47;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
+            this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage4.Location = new System.Drawing.Point(4, 32);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1156, 620);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Contract";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
@@ -10064,18 +10078,6 @@
             this.errors.BlinkRate = 500;
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
-            this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage4.Location = new System.Drawing.Point(4, 32);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1156, 620);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Contract";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // frmCustomerService
             // 
