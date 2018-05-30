@@ -120,6 +120,9 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblCall = new System.Windows.Forms.Label();
+            this.lblElapsed = new System.Windows.Forms.Label();
+            this.lblAnswer = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
@@ -149,6 +152,9 @@
             // 
             this.tabPage3.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage3.Controls.Add(this.lblAnswer);
+            this.tabPage3.Controls.Add(this.lblElapsed);
+            this.tabPage3.Controls.Add(this.lblCall);
             this.tabPage3.Controls.Add(this.lblGrandTotal);
             this.tabPage3.Controls.Add(this.dgvItems);
             this.tabPage3.Controls.Add(this.dgvSales);
@@ -10082,6 +10088,38 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
+            // lblCall
+            // 
+            this.lblCall.AutoSize = true;
+            this.lblCall.BackColor = System.Drawing.Color.Transparent;
+            this.lblCall.Location = new System.Drawing.Point(924, 379);
+            this.lblCall.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCall.Name = "lblCall";
+            this.lblCall.Size = new System.Drawing.Size(83, 16);
+            this.lblCall.TabIndex = 117;
+            this.lblCall.Text = "Incomming...";
+            // 
+            // lblElapsed
+            // 
+            this.lblElapsed.AutoSize = true;
+            this.lblElapsed.BackColor = System.Drawing.Color.Transparent;
+            this.lblElapsed.Location = new System.Drawing.Point(924, 420);
+            this.lblElapsed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblElapsed.Name = "lblElapsed";
+            this.lblElapsed.Size = new System.Drawing.Size(0, 16);
+            this.lblElapsed.TabIndex = 118;
+            // 
+            // lblAnswer
+            // 
+            this.lblAnswer.AutoSize = true;
+            this.lblAnswer.BackColor = System.Drawing.Color.Transparent;
+            this.lblAnswer.Location = new System.Drawing.Point(924, 363);
+            this.lblAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAnswer.Name = "lblAnswer";
+            this.lblAnswer.Size = new System.Drawing.Size(86, 16);
+            this.lblAnswer.TabIndex = 119;
+            this.lblAnswer.Text = "In Progress...";
+            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -10211,5 +10249,8 @@
         private System.Windows.Forms.Label lblGrandTotal;
         private System.Windows.Forms.DataGridView dgvItems;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label lblCall;
+        private System.Windows.Forms.Label lblElapsed;
+        private System.Windows.Forms.Label lblAnswer;
     }
 }
