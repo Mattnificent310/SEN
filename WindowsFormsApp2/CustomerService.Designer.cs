@@ -209,7 +209,7 @@
             // 
             // dgvItems
             // 
-            this.dgvItems.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvItems.BackgroundColor = System.Drawing.SystemColors.Menu;
             this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Location = new System.Drawing.Point(17, 7);
@@ -6869,7 +6869,7 @@
             // 
             // dgvClient
             // 
-            this.dgvClient.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvClient.BackgroundColor = System.Drawing.SystemColors.MenuBar;
             this.dgvClient.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClient.Location = new System.Drawing.Point(28, 17);
