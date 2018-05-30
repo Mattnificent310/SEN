@@ -40,8 +40,8 @@ namespace Business_Logic_Layer
 
             foreach (DataRow item in DataHandler.GetData(Cons.table3).Rows)
             {
-                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
-                { { "LocationID",item[Cons.table1IdFk] }}).Rows[0];
+                //DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
+                //{ { "LocationID",item[Cons.table1IdFk] }}).Rows[0];
 
                 staff.Add(new Staff(
                 item[Cons.table3Id].ToString(),
@@ -53,9 +53,9 @@ namespace Business_Logic_Layer
                 item[Cons.table3Col6].ToString(),
                 item[Cons.table3Col7].ToString(),
                 job[(int)item[Cons.table3IdFk1]].JobDesc,
-                row[Cons.table6Col1].ToString(),
-                row[Cons.table5Col1].ToString(),
-                row[Cons.table4Col1].ToString()
+                "Country",//row[Cons.table6Col1].ToString(),
+                "City",//row[Cons.table5Col1].ToString(),
+                "Street"//row[Cons.table4Col1].ToString()
                 ));
             }
 

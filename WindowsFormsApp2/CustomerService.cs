@@ -468,6 +468,7 @@ namespace WindowsFormsApp2
                     lblElapsed.Show();
                     lblCall.Hide();                    
                     answered = true;
+
                 }
                 if (hold)
                 {
@@ -716,11 +717,7 @@ namespace WindowsFormsApp2
                     dgvSales.DataSource = data;
 
                     #region Clear
-                    cmbProdType.DataBindings.Clear();
-                    cmbProdModel.DataBindings.Clear();
-                    lblUnitPrice.DataBindings.Clear();
-                    lblProdId.DataBindings.Clear();
-                    txtProdName.DataBindings.Clear();
+                    ClearProduct();
                     cmbPayment.Text = "--Choose Method--";
                     cmbPayment.Enabled = true;
 
@@ -800,6 +797,14 @@ namespace WindowsFormsApp2
 
             }
 
+        }
+        private void ClearProduct()
+        {
+            cmbProdType.DataBindings.Clear();
+            cmbProdModel.DataBindings.Clear();
+            lblUnitPrice.DataBindings.Clear();
+            lblProdId.DataBindings.Clear();
+            txtProdName.DataBindings.Clear();
         }
         private void cmbProdType_SelectedIndexChanged(object sender, EventArgs e)
         {
