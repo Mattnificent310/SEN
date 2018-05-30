@@ -77,8 +77,7 @@ namespace WindowsFormsApp2
                 cmbCustTitle.DataBindings.Add("Text", data, "Title");
                 txtCustName.DataBindings.Add("Text", data, "Name");
                 txtCustSurname.DataBindings.Add("Text", data, "Surname");
-                dtpCustDOB.DataBindings.Add("Text", data, "BirthDate");
-                cmbCustGender.DataBindings.Add("Text", data, "Gender");
+                cmbCustGender.DataBindings.Add("Text", data, "Gender"); 
                 txtCustPhone.DataBindings.Add("Text", data, "ContactNumber");
                 txtCustEmail.DataBindings.Add("Text", data, "EmailAddress");
                 cmbCustCountry.DataBindings.Add("Text", data, "Country");
@@ -101,7 +100,6 @@ namespace WindowsFormsApp2
             txtCustName.DataBindings.Clear();
             txtCustSurname.DataBindings.Clear();
             cmbCustGender.DataBindings.Clear();
-            dtpCustDOB.DataBindings.Clear();
             txtCustPhone.DataBindings.Clear();
             txtCustEmail.DataBindings.Clear();
             txtCustStreet.DataBindings.Clear();
@@ -227,8 +225,8 @@ namespace WindowsFormsApp2
             {
                 lblCall.Visible = true;
             }
-            string path = @"C:\Users\matt.maree\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneIn.wav";
-            string path2 = @"C:\Users\matt.maree\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneOut.wav";
+            string path = @"C:\Users\Marline\Source\Repos\Merlin\SEN\WindowsFormsApp2\Sounds\WinPhoneIn.wav";
+            string path2 = @"C:\Users\Marline\Source\Repos\Merlin\SEN\WindowsFormsApp2\Sounds\WinPhoneOut.wav";
 
             if (!played && !answered && !closed && !missed)
             {
@@ -716,33 +714,26 @@ namespace WindowsFormsApp2
 
                     dgvSales.DataSource = data;
 
-                    #region Clear
-                    ClearProduct();
                     cmbPayment.Text = "--Choose Method--";
                     cmbPayment.Enabled = true;
 
                     if (!ordered)
                     {
-                        txtCSName.Enabled = false;
-                        txtCSSurname.Enabled = false;
-                        txtCSPhone.Enabled = false;
-                        txtCSEmail.Enabled = false;
+                        LockCust();       
                         radioCol.Enabled = true;
                         radioDel.Enabled = true;
                         dtpColDel.Enabled = true;
                     }
-                    #endregion
+                    
 
                     #region Bind
                     if (data.Count != 0)
                     {
+                        #region Clear & Bind
                         numQuantity.Enabled = true;
-                        lblProdId.DataBindings.Add("Text", data, "ProductID");
-                        cmbProdType.DataBindings.Add("Text", data, "ProductType");
-                        cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
-                        txtProdName.DataBindings.Add("Text", data, "ProductName");
-                        lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                        ReBindProduct();
                         lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+                        #endregion
                     }
 
                     #endregion
@@ -764,25 +755,10 @@ namespace WindowsFormsApp2
                     string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
                     dgvSales.DataSource = data;
 
-                    #region Clear
-                    lblCSId.DataBindings.Clear();
-                    txtCSName.DataBindings.Clear();
-                    txtCSSurname.DataBindings.Clear();
-                    txtCSPhone.DataBindings.Clear();
-                    txtCSEmail.DataBindings.Clear();
-                    txtProdName.DataBindings.Clear();
-                    cmbProdType.Enabled = true;
-                    cmbProdModel.Enabled = true;
-                    txtProdName.Enabled = true;
-                    numQuantity.Enabled = false;
-                    #endregion
-
-                    #region Bind
-                    lblCSId.DataBindings.Add("Text", data, "Identity");
-                    txtCSName.DataBindings.Add("Text", data, "Name");
-                    txtCSSurname.DataBindings.Add("Text", data, "Surname");
-                    txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
-                    txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
+                    #region Clear & Bind
+                    ReBindCustomer();
+                    UnlockProd();
+                    numQuantity.Enabled = false;         
                     #endregion
                 }
 
@@ -798,13 +774,60 @@ namespace WindowsFormsApp2
             }
 
         }
-        private void ClearProduct()
+        private void ReBindProduct()
         {
             cmbProdType.DataBindings.Clear();
             cmbProdModel.DataBindings.Clear();
             lblUnitPrice.DataBindings.Clear();
             lblProdId.DataBindings.Clear();
             txtProdName.DataBindings.Clear();
+            lblProdId.DataBindings.Add("Text", data, "ProductID");
+            cmbProdType.DataBindings.Add("Text", data, "ProductType");
+            cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
+            txtProdName.DataBindings.Add("Text", data, "ProductName");
+            lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+                       
+        }
+        private void ReBindCustomer()
+        {
+            lblCSId.DataBindings.Clear();
+            txtCSName.DataBindings.Clear();
+            txtCSSurname.DataBindings.Clear();
+            txtCSPhone.DataBindings.Clear();
+            txtCSEmail.DataBindings.Clear();
+            txtProdName.DataBindings.Clear();
+            lblCSId.DataBindings.Add("Text", data, "Identity");
+            txtCSName.DataBindings.Add("Text", data, "Name");
+            txtCSSurname.DataBindings.Add("Text", data, "Surname");
+            txtCSPhone.DataBindings.Add("Text", data, "ContactNumber");
+            txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
+
+        }
+        private void LockCust()
+        {
+            txtCSName.Enabled = false;
+            txtCSSurname.Enabled = false;
+            txtCSPhone.Enabled = false;
+            txtCSEmail.Enabled = false;
+        }
+        private void UnlockCust()
+        {
+            txtCSName.Enabled = true;
+            txtCSSurname.Enabled = true;
+            txtCSPhone.Enabled = true;
+            txtCSEmail.Enabled = true;
+        }
+        private void LockProd()
+        {
+            cmbProdType.Enabled = false;
+            cmbProdModel.Enabled = false;
+            txtProdName.Enabled = false;
+        }
+        private void UnlockProd()
+        {
+            cmbProdType.Enabled = true;
+            cmbProdModel.Enabled = true;
+            txtProdName.Enabled = true;
         }
         private void cmbProdType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -871,11 +894,11 @@ namespace WindowsFormsApp2
                 client = new Client()
                 {
                     Identity = txtClientId.Text,
-                    Title = cmbCustTitle.Text,
+                    Title = cmbCustTitle.Text, 
                     Name = txtCustName.Text,
                     Surname = txtCustSurname.Text,
                     Gender = cmbCustGender.Text,
-                    BirthDate = dtpCustDOB.Value,
+                    ContactMethod = cmbCustMethod.Text, 
                     ContactNumber = txtCustPhone.Text,
                     EmailAddress = txtCustEmail.Text,
                     Country = cmbCustCountry.Text,
@@ -1088,6 +1111,13 @@ namespace WindowsFormsApp2
 
 
         #endregion
+
+        private void txtCSName_TextChanged(object sender, EventArgs e)
+        {
+            txtCSEmail.Text = "";
+            txtCSPhone.Text = "";
+            txtCSSurname.Text = "";
+        }
 
 
     }
