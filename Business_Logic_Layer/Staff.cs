@@ -40,8 +40,7 @@ namespace Business_Logic_Layer
 
             foreach (DataRow item in DataHandler.GetData(Cons.table3).Rows)
             {
-                //DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
-                //{ { "LocationID",item[Cons.table1IdFk] }}).Rows[0];
+                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object> { { "LocationID", item[Cons.table1IdFk] } }).Rows[0];
 
                 staff.Add(new Staff(
                 item[Cons.table3Id].ToString(),
@@ -53,22 +52,22 @@ namespace Business_Logic_Layer
                 item[Cons.table3Col6].ToString(),
                 item[Cons.table3Col7].ToString(),
                 job[(int)item[Cons.table3IdFk1]].JobDesc,
-                "Country",//row[Cons.table6Col1].ToString(),
-                "City",//row[Cons.table5Col1].ToString(),
-                "Street"//row[Cons.table4Col1].ToString()
+                row[Cons.table6Col1].ToString(),
+                row[Cons.table5Col1].ToString(),
+                row[Cons.table4Col1].ToString()
                 ));
             }
 
         }
         public Staff(string staffId, string title, string name, string surname, string gender, DateTime birth, string phone, string email, string jobDesc, string country, string city, string street)
-        : base(title, name, surname, gender, birth, phone, email, country, city, street)
+            : base(title, name, surname, gender, birth, phone, email, country, city, street)
         {
             this.Identity = staffId;
             this.JobDesc = jobDesc;
         }
 
         public Staff(string username, string password)
-        {}
+        { }
         #endregion
 
         #region Indexer
@@ -101,7 +100,7 @@ namespace Business_Logic_Layer
             {
                 if (username.Equals(item[Cons.table10Col1].ToString()) && password.Equals(item[Cons.table10Col2].ToString()))
                 {
-                    return new Staff(username,password)[item[Cons.table10IDFk].ToString() , item[Cons.table10Col3].ToString()];
+                    return new Staff(username, password)[item[Cons.table10IDFk].ToString(), item[Cons.table10Col3].ToString()];
                 }
 
             }
@@ -109,8 +108,10 @@ namespace Business_Logic_Layer
         }
         public int? Insert(Staff staff)
         {
-            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
-            {{"Country",staff.Country },{"City",staff.City }}).Rows[0][0];//loc[null, staff.Street, staff.City, staff.Country].LocationId;
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object> 
+            { { "Country", staff.Country }, { "City", staff.City } }).Rows[0][0];
+            //loc[null, staff.Street, staff.City, staff.Country].LocationId;
+
             return (int?)dh.Insert(new Dictionary<string, object>
             {
                 { Cons.table3Col1, staff.Title },
@@ -123,13 +124,16 @@ namespace Business_Logic_Layer
                 { Cons.table3IdFk1, (int)new StoredProcedure().GetProcs("sp_SearchJobs",
                 new Dictionary<string,object>{ { "JobDesc", staff.JobDesc } }).Rows[0][0] },
                 { Cons.table3IdFk2, locId }
-            },Cons.table3);
-            
+            }, Cons.table3);
+
         }
 
         public bool Update(Staff staff)
         {
-            int locId = loc[null, staff.Street, staff.City, staff.Country].LocationId;
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object> 
+            { { "Country", staff.Country }, { "City", staff.City } }).Rows[0][0];
+            //loc[null, staff.Street, staff.City, staff.Country].LocationId;
+
             return dh.Update(new Dictionary<string, object>
             {
                 { Cons.table3Col1, staff.Title },
@@ -140,7 +144,7 @@ namespace Business_Logic_Layer
                 { Cons.table3Col6, staff.ContactNumber },
                 { Cons.table3Col7, staff.EmailAddress },
                 { Cons.table3IdFk2, locId }
-            },Cons.table3, int.Parse(staff.Identity.Substring(1)).ToString());
+            }, Cons.table3, int.Parse(staff.Identity.Substring(1)).ToString());
         }
 
         public bool Delete(int staffId)
