@@ -35,6 +35,8 @@ namespace WindowsFormsApp2
             timer1.Start();
             blinker = new BackgroundWorker();
             blinker.DoWork += Blinker_DoWork;
+           
+           
         }
 
         private void CustomerService_Load(object sender, EventArgs e)
@@ -44,6 +46,7 @@ namespace WindowsFormsApp2
             {
                 MessageBox.Show("No customers could be found.");
             }
+            SimulateCall();
         }
 
         #region Login
@@ -218,13 +221,14 @@ namespace WindowsFormsApp2
         #region Blink
         private void Blink()
         {
-            //if (lblCall.Visible == true)
-            //    lblCall.Visible = false;
-            //else
-            //{
-            //    lblCall.Visible = true;
-            string path = @"C:\Users\MC\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneIn.wav";
-            string path2 = @"C:\Users\MC\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneOut.wav";
+            if (lblCall.Visible == true)
+                lblCall.Visible = false;
+            else
+            {
+                lblCall.Visible = true;
+            }
+            string path = @"C:\Users\matt.maree\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneIn.wav";
+            string path2 = @"C:\Users\matt.maree\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneOut.wav";
 
             if (!played && !answered && !closed && !missed)
             {
@@ -242,7 +246,7 @@ namespace WindowsFormsApp2
                     {
                         //Add Callers
                     }
-                    PopulateSales();
+                    //PopulateSales();
                     PlaySound(path2);
                     played = false;
                 }
@@ -292,9 +296,9 @@ namespace WindowsFormsApp2
                     Thread.Sleep(1400); // Set fast to slow.
 
                     blinker.WorkerSupportsCancellation = true;
-                    if (/*lblCall.InvokeRequired*/true)
+                    if (lblCall.InvokeRequired)
                     {
-                        //lblCall.Invoke((Action)blink);
+                        lblCall.Invoke((Action)Blink);
                         btnCall.Invoke((Action)Enable);
                     }
                     else
@@ -313,7 +317,6 @@ namespace WindowsFormsApp2
             }
             catch (Exception es)
             {
-                MessageBox.Show("Connection Lost to Call Distribution System (CDS)", "Connection Lost", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         #endregion
@@ -332,7 +335,9 @@ namespace WindowsFormsApp2
         #region Simulate
         private void SimulateCall()
         {
-
+            lblCall.Hide();
+            lblAnswer.Hide();
+            btnCall.Enabled = true;
             if (blinker.IsBusy == false)
             {
 
@@ -350,14 +355,15 @@ namespace WindowsFormsApp2
             if (btnCall.Enabled == false)
             {
                 btnCall.Enabled = true;
-                //lblElapsed.Visible = false;
+                lblElapsed.Hide();
                 //btnHoldCall.Enabled = false;
                 //btnDivertCall.Enabled = false;
             }
             if (answered)
             {
-                //lblElapsed.Visible = true;
+                lblElapsed.Show();
                 btnCall.Enabled = false;
+                lblCall.Hide();
                 //btnHoldCall.Enabled = true;
                 //btnDivertCall.Enabled = true;
             }
@@ -369,12 +375,12 @@ namespace WindowsFormsApp2
             if (missed)
             {
                 btnCall.Enabled = false;
-                //lblCall.Visible = false;
+                lblCall.Hide();
                 if (blinker.IsBusy)
                 {
 
                     btnCall.Enabled = false;
-                    //lblCall.Visible = false;
+                    lblCall.Hide();
 
                 }
 
@@ -406,7 +412,7 @@ namespace WindowsFormsApp2
                 for (var i = 0; i < 100000; i++)
                 {
 
-                    //lblElapsed.Invoke(new DisplayCountDelegate(DisplayCount), i);
+                    lblElapsed.Invoke(new DisplayCountDelegate(DisplayCount), i);
                     Thread.Sleep(1000);
 
 
@@ -414,7 +420,7 @@ namespace WindowsFormsApp2
             }
             catch (Exception e)
             {
-                MessageBox.Show("A call is still in progress\nWould you like to end it?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //MessageBox.Show("A call is still in progress\nWould you like to end it?", "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             }
         }
         #endregion
@@ -423,17 +429,17 @@ namespace WindowsFormsApp2
         private void DisplayCount(int i)
         {
 
-            if (/*lblCall.Visible == false*/true)
+            if (lblCall.Visible == false)
             {
-                //lblAnswer.Visible = true;
+                lblAnswer.Show();
             }
             if (/*btnHoldCall.Enabled == false*/true)
             {
-                //lblElapsed.Text = SecondsToMinutes(x++);
+                lblElapsed.Text = SecondsToMinutes(x++);
             }
             if (unhold == true)
             {
-                //lblElapsed.Text = SecondsToMinutes(i);
+                lblElapsed.Text = SecondsToMinutes(i);
             }
         }
         public static string SecondsToMinutes(int seconds)
@@ -459,7 +465,8 @@ namespace WindowsFormsApp2
                     //btnHoldCall.Enabled = true;
                     //btnDivertCall.Enabled = true;
                     unhold = true;
-                    //lblElapsed.Visible = true;
+                    lblElapsed.Show();
+                    lblCall.Hide();                    
                     answered = true;
                 }
                 if (hold)
@@ -473,7 +480,7 @@ namespace WindowsFormsApp2
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No Incoming Calls Detected", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+               // MessageBox.Show("No Incoming Calls Detected", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
         #endregion
@@ -482,15 +489,13 @@ namespace WindowsFormsApp2
         private void btnEndCall_Click_1(object sender, EventArgs e)
         {
             //lblEnd.Visible = true;
-            thread.Abort();
-            btnCall.Enabled = true;
+            thread.Abort();            
             btnEndCall.Enabled = false;
-            //lblCall.Visible = false;
-            //lblAnswer.Visible = false;
+            lblCall.Hide();
+            lblAnswer.Hide();
             //lblHold.Visible = false;
             //btnHoldCall.Enabled = false;
             //btnDivertCall.Enabled = false;
-            //btnAnswerCall.Enabled = false;
             if (blinker.IsBusy)
             {
                 blinker.WorkerSupportsCancellation = true;
@@ -498,7 +503,7 @@ namespace WindowsFormsApp2
             }
             x = 0;
             Thread.Sleep(15000);
-            //lblElapsed.Visible = false;
+            lblElapsed.Hide();
             //lblEnd.Visible = false;
             answered = false;
             SimulateCall();
@@ -593,7 +598,7 @@ namespace WindowsFormsApp2
                     dgvItems.Columns.Add("UnitPrice", "Unit Price");
                     dgvItems.Columns.Add("ItemQuantity", "Item Quantity");
                     dgvItems.Columns.Add("Total", "Total");
-                    #endregion 
+                    #endregion
 
                     columns = true;
                     ordered = true;
@@ -909,7 +914,7 @@ namespace WindowsFormsApp2
         {
             ClearAll(this.tabPage1);
         }
-        #endregion       
+        #endregion
 
         #region Validation
 
