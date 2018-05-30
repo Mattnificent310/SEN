@@ -14,7 +14,6 @@ namespace Business_Logic_Layer
         private string contractLevel;
         private DateTime issueDate;
         private DateTime contractTerm;
-
         #endregion
 
         #region Properties

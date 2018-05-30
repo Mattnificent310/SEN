@@ -45,7 +45,7 @@ namespace Business_Logic_Layer
 
             set
             {
-                identity = string.IsNullOrEmpty(value) ? "" : value.Trim();
+                identity = string.IsNullOrEmpty(value) ? "" : string.Format("{0}{1}", unique[new Random().Next(0, 4)],value.PadLeft(8, '0'));
             }
         }
         public static List<Client> Clients
@@ -116,8 +116,8 @@ namespace Business_Logic_Layer
                 { { "LocationID", item[Cons.table1IdFk] } }).Rows[0];
                 
                 clients.Add(new Client(
-                string.Format("{0}{1}", unique[new Random().Next(0, 4)],
-                item[Cons.table1Id].ToString().PadLeft(8, '0')),
+                
+                item[Cons.table1Id].ToString(),
                 item[Cons.table1Col1].ToString(),
                 item[Cons.table1Col2].ToString(),
                 item[Cons.table1Col3].ToString(),

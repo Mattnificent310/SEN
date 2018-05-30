@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblAnswer = new System.Windows.Forms.Label();
+            this.lblElapsed = new System.Windows.Forms.Label();
+            this.lblCall = new System.Windows.Forms.Label();
             this.lblGrandTotal = new System.Windows.Forms.Label();
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.dgvSales = new System.Windows.Forms.DataGridView();
@@ -97,7 +100,6 @@
             this.dgvClient = new System.Windows.Forms.DataGridView();
             this.txtClientId = new System.Windows.Forms.TextBox();
             this.cmbCustGender = new System.Windows.Forms.ComboBox();
-            this.dtpCustDOB = new System.Windows.Forms.DateTimePicker();
             this.txtCustName = new System.Windows.Forms.TextBox();
             this.cmbCustCity = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -120,9 +122,15 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblCall = new System.Windows.Forms.Label();
-            this.lblElapsed = new System.Windows.Forms.Label();
-            this.lblAnswer = new System.Windows.Forms.Label();
+            this.cmbCtrType = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.cmbCtrLevel = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.cmbCtrTerm = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.dtpCtrDate = new System.Windows.Forms.DateTimePicker();
+            this.lblCtrDate = new System.Windows.Forms.Label();
+            this.cmbCustMethod = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
@@ -131,6 +139,7 @@
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -200,6 +209,38 @@
             this.tabPage3.Text = "Sales";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // lblAnswer
+            // 
+            this.lblAnswer.AutoSize = true;
+            this.lblAnswer.BackColor = System.Drawing.Color.Transparent;
+            this.lblAnswer.Location = new System.Drawing.Point(924, 363);
+            this.lblAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAnswer.Name = "lblAnswer";
+            this.lblAnswer.Size = new System.Drawing.Size(86, 16);
+            this.lblAnswer.TabIndex = 119;
+            this.lblAnswer.Text = "In Progress...";
+            // 
+            // lblElapsed
+            // 
+            this.lblElapsed.AutoSize = true;
+            this.lblElapsed.BackColor = System.Drawing.Color.Transparent;
+            this.lblElapsed.Location = new System.Drawing.Point(924, 420);
+            this.lblElapsed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblElapsed.Name = "lblElapsed";
+            this.lblElapsed.Size = new System.Drawing.Size(0, 16);
+            this.lblElapsed.TabIndex = 118;
+            // 
+            // lblCall
+            // 
+            this.lblCall.AutoSize = true;
+            this.lblCall.BackColor = System.Drawing.Color.Transparent;
+            this.lblCall.Location = new System.Drawing.Point(924, 379);
+            this.lblCall.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCall.Name = "lblCall";
+            this.lblCall.Size = new System.Drawing.Size(83, 16);
+            this.lblCall.TabIndex = 117;
+            this.lblCall.Text = "Incomming...";
             // 
             // lblGrandTotal
             // 
@@ -3395,6 +3436,7 @@
             this.txtCSName.Name = "txtCSName";
             this.txtCSName.Size = new System.Drawing.Size(252, 22);
             this.txtCSName.TabIndex = 94;
+            this.txtCSName.TextChanged += new System.EventHandler(this.txtCSName_TextChanged);
             // 
             // label21
             // 
@@ -3821,6 +3863,7 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.cmbCustMethod);
             this.tabPage1.Controls.Add(this.btnReset);
             this.tabPage1.Controls.Add(this.btnMainMenu);
             this.tabPage1.Controls.Add(this.btnDelete);
@@ -3829,7 +3872,6 @@
             this.tabPage1.Controls.Add(this.dgvClient);
             this.tabPage1.Controls.Add(this.txtClientId);
             this.tabPage1.Controls.Add(this.cmbCustGender);
-            this.tabPage1.Controls.Add(this.dtpCustDOB);
             this.tabPage1.Controls.Add(this.txtCustName);
             this.tabPage1.Controls.Add(this.cmbCustCity);
             this.tabPage1.Controls.Add(this.label9);
@@ -6898,19 +6940,11 @@
             this.cmbCustGender.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cmbCustGender.Location = new System.Drawing.Point(156, 517);
+            this.cmbCustGender.Location = new System.Drawing.Point(153, 458);
             this.cmbCustGender.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCustGender.Name = "cmbCustGender";
             this.cmbCustGender.Size = new System.Drawing.Size(252, 24);
             this.cmbCustGender.TabIndex = 68;
-            // 
-            // dtpCustDOB
-            // 
-            this.dtpCustDOB.Location = new System.Drawing.Point(156, 458);
-            this.dtpCustDOB.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dtpCustDOB.Name = "dtpCustDOB";
-            this.dtpCustDOB.Size = new System.Drawing.Size(252, 22);
-            this.dtpCustDOB.TabIndex = 67;
             // 
             // txtCustName
             // 
@@ -9967,7 +10001,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(156, 497);
+            this.label5.Location = new System.Drawing.Point(153, 438);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 16);
@@ -9994,12 +10028,12 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Location = new System.Drawing.Point(156, 438);
+            this.label4.Location = new System.Drawing.Point(156, 499);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 16);
+            this.label4.Size = new System.Drawing.Size(100, 16);
             this.label4.TabIndex = 51;
-            this.label4.Text = "Date of Birth";
+            this.label4.Text = "Contact Method";
             // 
             // label3
             // 
@@ -10046,6 +10080,15 @@
             // 
             this.tabPage4.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage4.Controls.Add(this.dtpCtrDate);
+            this.tabPage4.Controls.Add(this.lblCtrDate);
+            this.tabPage4.Controls.Add(this.cmbCtrTerm);
+            this.tabPage4.Controls.Add(this.label33);
+            this.tabPage4.Controls.Add(this.cmbCtrLevel);
+            this.tabPage4.Controls.Add(this.label32);
+            this.tabPage4.Controls.Add(this.cmbCtrType);
+            this.tabPage4.Controls.Add(this.label31);
+            this.tabPage4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage4.Location = new System.Drawing.Point(4, 32);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -10088,37 +10131,103 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // lblCall
+            // cmbCtrType
             // 
-            this.lblCall.AutoSize = true;
-            this.lblCall.BackColor = System.Drawing.Color.Transparent;
-            this.lblCall.Location = new System.Drawing.Point(924, 379);
-            this.lblCall.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCall.Name = "lblCall";
-            this.lblCall.Size = new System.Drawing.Size(83, 16);
-            this.lblCall.TabIndex = 117;
-            this.lblCall.Text = "Incomming...";
+            this.cmbCtrType.FormattingEnabled = true;
+            this.cmbCtrType.Location = new System.Drawing.Point(420, 148);
+            this.cmbCtrType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cmbCtrType.Name = "cmbCtrType";
+            this.cmbCtrType.Size = new System.Drawing.Size(252, 26);
+            this.cmbCtrType.TabIndex = 54;
             // 
-            // lblElapsed
+            // label31
             // 
-            this.lblElapsed.AutoSize = true;
-            this.lblElapsed.BackColor = System.Drawing.Color.Transparent;
-            this.lblElapsed.Location = new System.Drawing.Point(924, 420);
-            this.lblElapsed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblElapsed.Name = "lblElapsed";
-            this.lblElapsed.Size = new System.Drawing.Size(0, 16);
-            this.lblElapsed.TabIndex = 118;
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Transparent;
+            this.label31.Location = new System.Drawing.Point(420, 120);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(104, 18);
+            this.label31.TabIndex = 53;
+            this.label31.Text = "Contract Type";
             // 
-            // lblAnswer
+            // cmbCtrLevel
             // 
-            this.lblAnswer.AutoSize = true;
-            this.lblAnswer.BackColor = System.Drawing.Color.Transparent;
-            this.lblAnswer.Location = new System.Drawing.Point(924, 363);
-            this.lblAnswer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAnswer.Name = "lblAnswer";
-            this.lblAnswer.Size = new System.Drawing.Size(86, 16);
-            this.lblAnswer.TabIndex = 119;
-            this.lblAnswer.Text = "In Progress...";
+            this.cmbCtrLevel.FormattingEnabled = true;
+            this.cmbCtrLevel.Location = new System.Drawing.Point(420, 212);
+            this.cmbCtrLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cmbCtrLevel.Name = "cmbCtrLevel";
+            this.cmbCtrLevel.Size = new System.Drawing.Size(252, 26);
+            this.cmbCtrLevel.TabIndex = 56;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Transparent;
+            this.label32.Location = new System.Drawing.Point(420, 184);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(108, 18);
+            this.label32.TabIndex = 55;
+            this.label32.Text = "Contract Level";
+            // 
+            // cmbCtrTerm
+            // 
+            this.cmbCtrTerm.FormattingEnabled = true;
+            this.cmbCtrTerm.Items.AddRange(new object[] {
+            "Mr",
+            "Ms",
+            "Mrs",
+            "Dr",
+            "Prof",
+            "Sir"});
+            this.cmbCtrTerm.Location = new System.Drawing.Point(420, 276);
+            this.cmbCtrTerm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cmbCtrTerm.Name = "cmbCtrTerm";
+            this.cmbCtrTerm.Size = new System.Drawing.Size(252, 26);
+            this.cmbCtrTerm.TabIndex = 58;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.Color.Transparent;
+            this.label33.Location = new System.Drawing.Point(420, 248);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(105, 18);
+            this.label33.TabIndex = 57;
+            this.label33.Text = "Contract Term";
+            // 
+            // dtpCtrDate
+            // 
+            this.dtpCtrDate.Location = new System.Drawing.Point(420, 340);
+            this.dtpCtrDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dtpCtrDate.Name = "dtpCtrDate";
+            this.dtpCtrDate.Size = new System.Drawing.Size(252, 26);
+            this.dtpCtrDate.TabIndex = 69;
+            // 
+            // lblCtrDate
+            // 
+            this.lblCtrDate.AutoSize = true;
+            this.lblCtrDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblCtrDate.Location = new System.Drawing.Point(420, 312);
+            this.lblCtrDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCtrDate.Name = "lblCtrDate";
+            this.lblCtrDate.Size = new System.Drawing.Size(91, 18);
+            this.lblCtrDate.TabIndex = 68;
+            this.lblCtrDate.Text = "Date Issued";
+            // 
+            // cmbCustMethod
+            // 
+            this.cmbCustMethod.FormattingEnabled = true;
+            this.cmbCustMethod.Items.AddRange(new object[] {
+            "Phone",
+            "Email"});
+            this.cmbCustMethod.Location = new System.Drawing.Point(159, 518);
+            this.cmbCustMethod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cmbCustMethod.Name = "cmbCustMethod";
+            this.cmbCustMethod.Size = new System.Drawing.Size(252, 24);
+            this.cmbCustMethod.TabIndex = 78;
             // 
             // frmCustomerService
             // 
@@ -10150,6 +10259,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -10161,7 +10272,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ComboBox cmbCustGender;
-        private System.Windows.Forms.DateTimePicker dtpCustDOB;
         private System.Windows.Forms.TextBox txtCustName;
         private System.Windows.Forms.ComboBox cmbCustCity;
         private System.Windows.Forms.Label label9;
@@ -10252,5 +10362,14 @@
         private System.Windows.Forms.Label lblCall;
         private System.Windows.Forms.Label lblElapsed;
         private System.Windows.Forms.Label lblAnswer;
+        private System.Windows.Forms.DateTimePicker dtpCtrDate;
+        private System.Windows.Forms.Label lblCtrDate;
+        private System.Windows.Forms.ComboBox cmbCtrTerm;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ComboBox cmbCtrLevel;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox cmbCtrType;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.ComboBox cmbCustMethod;
     }
 }
