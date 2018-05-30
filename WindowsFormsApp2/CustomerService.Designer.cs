@@ -6875,6 +6875,8 @@
             // 
             // dgvClient
             // 
+            this.dgvClient.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvClient.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClient.Location = new System.Drawing.Point(28, 17);
             this.dgvClient.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
