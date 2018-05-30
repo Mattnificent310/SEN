@@ -225,8 +225,8 @@ namespace WindowsFormsApp2
             {
                 lblCall.Visible = true;
             }
-            string path = @"C:\Users\Marline\Source\Repos\Merlin\SEN\WindowsFormsApp2\Sounds\WinPhoneIn.wav";
-            string path2 = @"C:\Users\Marline\Source\Repos\Merlin\SEN\WindowsFormsApp2\Sounds\WinPhoneOut.wav";
+            string path = @"..\..\Sounds\WinPhoneIn.wav";
+            string path2 = @"..\..\Sounds\WinPhoneOut.wav";
 
             if (!played && !answered && !closed && !missed)
             {
@@ -336,6 +336,7 @@ namespace WindowsFormsApp2
             lblCall.Hide();
             lblAnswer.Hide();
             btnCall.Enabled = true;
+            btnEndCall.Enabled = false;
             if (blinker.IsBusy == false)
             {
 
