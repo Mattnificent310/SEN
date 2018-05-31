@@ -251,6 +251,7 @@ namespace WindowsFormsApp2
                     data.DataSource = Client.clients[index];
                     dgvSales.DataSource = data;
                     ReBindCustomer();
+                    dgvSales.Show();
                     shown = true;
                 }
                 if (!answered && !closed && !missed)
@@ -282,7 +283,7 @@ namespace WindowsFormsApp2
                 
                 for (int i = 0; i <= 60 * 60 * 24; i++)
                 {
-                    if (i == 20)
+                    if (i == new Random(10000).Next(5, 20))
                     {
                         missed = true;
                         btnCall.Invoke((Action)Disable);
@@ -291,11 +292,12 @@ namespace WindowsFormsApp2
                     if (missed)
                     {
                         missed = false;
+                        played = false;
                         i = 0;
-                        rn = new Random();                        
-                        Thread.Sleep(rn.Next(8000, 30000));
+                                               
+                        Thread.Sleep(new Random(10000).Next(8000, 30000));
                     }
-                    Thread.Sleep(1400); // Set fast to slow.
+                    Thread.Sleep(2200); // Set fast to slow.
 
                     blinker.WorkerSupportsCancellation = true;
                     if (lblCall.InvokeRequired)
@@ -345,6 +347,8 @@ namespace WindowsFormsApp2
             {
 
                 answered = false;
+                played = false;
+                shown = false;
 
                 blinker.RunWorkerAsync();
 
@@ -513,7 +517,8 @@ namespace WindowsFormsApp2
             Thread.Sleep(15000);
             lblElapsed.Hide();
             //lblEnd.Visible = false;
-            answered = false;
+            ClearAll(this.tabPage3);
+            dgvSales.DataSource = null;
             SimulateCall();
         }
         #endregion
