@@ -1,6 +1,8 @@
---USE SHSMS 
---GO
-CREATE OR ALTER PROCEDURE sp_Login 
+USE SHSMS 
+GO
+
+EXEC sp_SearchLocationByID 1 
+CREATE PROCEDURE sp_Login 
 	-- Add the parameters for the stored procedure here
 	(@Username VARCHAR(50),
 	@Password VARCHAR(50))
