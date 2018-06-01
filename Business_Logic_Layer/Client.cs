@@ -239,7 +239,6 @@ namespace Business_Logic_Layer
                 { Cons.table1Col1, client.Title },
                 { Cons.table1Col2, client.Name },
                 { Cons.table1Col3, client.Surname },
-                { Cons.table1Col4, client.BirthDate },
                 { Cons.table1Col5, client.Gender},
                 { Cons.table1Col6, client.ContactNumber },
                 { Cons.table1Col7, client.EmailAddress },
