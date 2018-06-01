@@ -12308,6 +12308,8 @@
             // 
             // dgvStaff
             // 
+            this.dgvStaff.BackgroundColor = System.Drawing.SystemColors.MenuBar;
+            this.dgvStaff.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dgvStaff, "dgvStaff");
             this.dgvStaff.Name = "dgvStaff";
