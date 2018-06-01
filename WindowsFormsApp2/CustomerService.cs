@@ -136,9 +136,12 @@ namespace WindowsFormsApp2
                 cmbPayment.Items.Clear();
                 cmbPayment.Items.AddRange(new object[] { "EFT", "SWIFT", "Credit/Debit", "Layby" });
                 LockProd();
+                LockCust();
                 numQuantity.Enabled = false;
                 radioCol.Enabled = false;
                 radioDel.Enabled = false;
+                radioCust.Enabled = false;
+                radioProd.Enabled = false;
                 dtpColDel.Enabled = false;
                 cmbPayment.Enabled = false;
                 btnOrder.Enabled = false;
@@ -473,6 +476,9 @@ namespace WindowsFormsApp2
                     thread.Start();
                     btnCall.Enabled = false;
                     btnEndCall.Enabled = true;
+                    radioCust.Enabled = true;
+                    radioProd.Enabled = true;
+                    radioProd.Checked = true;
                     //btnHoldCall.Enabled = true;
                     //btnDivertCall.Enabled = true;
                     unhold = true;
@@ -505,6 +511,7 @@ namespace WindowsFormsApp2
             btnEndCall.Enabled = false;
             lblCall.Hide();
             lblAnswer.Hide();
+            LockProd();
             //lblHold.Visible = false;
             //btnHoldCall.Enabled = false;
             //btnDivertCall.Enabled = false;
@@ -519,6 +526,12 @@ namespace WindowsFormsApp2
             //lblEnd.Visible = false;
             ClearAll(this.tabPage3);
             dgvSales.DataSource = null;
+            radioCust.Enabled = false;
+            radioProd.Enabled = false;
+            radioProd.Checked = false;
+            radioCol.Checked = false;
+            radioDel.Checked = false;
+            dtpColDel.Value = DateTime.Now;
             SimulateCall();
         }
         #endregion
@@ -566,7 +579,9 @@ namespace WindowsFormsApp2
         {
             if (ValidateAll(this.tabPage3))
             {
-
+                radioProd.Checked = true;
+                radioCust.Enabled = false;
+                radioProd.Enabled = false;
                 items.Add(new OrderDetail(
                 0,
                 int.Parse(lblProdId.Text),
@@ -671,7 +686,8 @@ namespace WindowsFormsApp2
                     !string.IsNullOrEmpty(txtCSName.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
-                    && !string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
+                    && !string.IsNullOrEmpty(txtCSEmail.Text.Trim())
+                    && radioProd.Checked == true)
                 {
 
                     new Product();
@@ -713,9 +729,9 @@ namespace WindowsFormsApp2
                     #endregion
 
                     #region Find Product Type, Model & Name
-                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim())
-                    && !string.IsNullOrEmpty(cmbProdType.Text.Trim())
-                    && !string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                    if (!string.IsNullOrEmpty(cmbProdType.Text.Trim())
+                        && !string.IsNullOrEmpty(txtProdName.Text.Trim())
+                        && !string.IsNullOrEmpty(txtProdName.Text.Trim()))
                     {
                         data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
                            && x.ProductModel == cmbProdModel.Text.Trim()
@@ -754,25 +770,52 @@ namespace WindowsFormsApp2
 
 
                 }
-                else if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
-                || !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
-                || !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
-                || !string.IsNullOrEmpty(txtCSEmail.Text.Trim())
-                && string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                else if (radioCust.Checked == true)
                 {
-                    client = new Client();
 
                     dgvItems.Hide();
-                    data.DataSource = client[
-                    string.IsNullOrEmpty(txtCSName.Text.Trim()) ? null : txtCSName.Text.Trim(),
-                    string.IsNullOrEmpty(txtCSSurname.Text.Trim()) ? null : txtCSSurname.Text.Trim(),
-                    string.IsNullOrEmpty(txtCSEmail.Text.Trim()) ? null : txtCSEmail.Text.Trim()];
+
+                    #region Find By Name
+                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim()))
+                        data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()).ToList();
+                    #endregion
+
+                    dgvItems.Hide();
+                    #region Find By Name, Surname
+                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSSurname.Text.Trim()))
+                        data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()
+                        && x.Surname == txtCSSurname.Text.Trim()).ToList();
+                    #endregion
+
+                    #region Find By Name, Surname, Phone
+                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSPhone.Text.Trim()))
+                        data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()
+                        && x.Surname == txtCSSurname.Text.Trim()
+                        && x.ContactNumber == txtCSPhone.Text.Trim()).ToList();
+                    #endregion
+
+                    #region Find By Name, Surname, Phone, Email
+                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                    && !string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
+                    data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()
+                    && x.Surname == txtCSSurname.Text.Trim()
+                    && x.ContactNumber == txtCSPhone.Text.Trim()
+                    && x.EmailAddress == txtCSEmail.Text.Trim()).ToList();
+                    #endregion
+
                     dgvSales.DataSource = data;
 
                     #region Clear & Bind
                     ReBindCustomer();
-                    UnlockProd();
+                    
                     numQuantity.Enabled = false;
+                    radioCust.Checked = false;
+                    radioProd.Checked = true;
                     #endregion
                 }
 
@@ -817,31 +860,35 @@ namespace WindowsFormsApp2
             txtCSEmail.DataBindings.Add("Text", data, "EmailAddress");
 
         }
-        private void LockCust()
+        private bool LockCust()
         {
             txtCSName.Enabled = false;
             txtCSSurname.Enabled = false;
             txtCSPhone.Enabled = false;
             txtCSEmail.Enabled = false;
+            return true;
         }
-        private void UnlockCust()
+        private bool UnlockCust()
         {
             txtCSName.Enabled = true;
             txtCSSurname.Enabled = true;
             txtCSPhone.Enabled = true;
             txtCSEmail.Enabled = true;
+            return true;
         }
-        private void LockProd()
+        private bool LockProd()
         {
             cmbProdType.Enabled = false;
             cmbProdModel.Enabled = false;
             txtProdName.Enabled = false;
+            return true;
         }
-        private void UnlockProd()
+        private bool UnlockProd()
         {
             cmbProdType.Enabled = true;
             cmbProdModel.Enabled = true;
             txtProdName.Enabled = true;
+            return true;
         }
         private void cmbProdType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -961,6 +1008,16 @@ namespace WindowsFormsApp2
             txtCSSurname.Text = string.Empty;
             txtCSPhone.Text = string.Empty;
             txtCSEmail.Text = string.Empty;
+        }
+        private void radioCust_CheckedChanged(object sender, EventArgs e)
+        {
+            LockProd();
+            bool locked = radioCust.Checked == true ? UnlockCust() : LockCust();
+        }
+        private void radioProd_CheckedChanged(object sender, EventArgs e)
+        {
+            LockCust();
+            bool locked = radioProd.Checked == true ? UnlockProd() : LockProd();
         }
         #endregion
 
@@ -1118,9 +1175,7 @@ namespace WindowsFormsApp2
 
         }
 
-
-
-
+       
 
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {
