@@ -112,7 +112,7 @@
             this.tabPage1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(985, 555);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
@@ -194,7 +194,7 @@
             // 
             this.cmbProdType.FormattingEnabled = true;
             this.cmbProdType.Location = new System.Drawing.Point(120, 243);
-            this.cmbProdType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbProdType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbProdType.Name = "cmbProdType";
             this.cmbProdType.Size = new System.Drawing.Size(213, 24);
             this.cmbProdType.TabIndex = 35;
@@ -210,9 +210,11 @@
             // 
             // dvgProducts
             // 
+            this.dvgProducts.BackgroundColor = System.Drawing.SystemColors.MenuBar;
+            this.dvgProducts.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dvgProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgProducts.Location = new System.Drawing.Point(22, 14);
-            this.dvgProducts.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dvgProducts.Margin = new System.Windows.Forms.Padding(2);
             this.dvgProducts.Name = "dvgProducts";
             this.dvgProducts.RowTemplate.Height = 28;
             this.dvgProducts.Size = new System.Drawing.Size(711, 191);
@@ -221,7 +223,7 @@
             // txtProdId
             // 
             this.txtProdId.Location = new System.Drawing.Point(45, 116);
-            this.txtProdId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProdId.Margin = new System.Windows.Forms.Padding(2);
             this.txtProdId.Name = "txtProdId";
             this.txtProdId.Size = new System.Drawing.Size(8, 22);
             this.txtProdId.TabIndex = 32;
@@ -303,7 +305,7 @@
             // txtProdName
             // 
             this.txtProdName.Location = new System.Drawing.Point(115, 343);
-            this.txtProdName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtProdName.Margin = new System.Windows.Forms.Padding(2);
             this.txtProdName.Name = "txtProdName";
             this.txtProdName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtProdName.Size = new System.Drawing.Size(213, 22);
@@ -328,7 +330,7 @@
             this.tabPage2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(985, 555);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "New Products";
@@ -371,7 +373,7 @@
             // txtPName
             // 
             this.txtPName.Location = new System.Drawing.Point(347, 291);
-            this.txtPName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPName.Margin = new System.Windows.Forms.Padding(2);
             this.txtPName.Name = "txtPName";
             this.txtPName.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtPName.Size = new System.Drawing.Size(217, 22);
@@ -425,7 +427,7 @@
             // 
             this.cmbPType.FormattingEnabled = true;
             this.cmbPType.Location = new System.Drawing.Point(347, 79);
-            this.cmbPType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbPType.Margin = new System.Windows.Forms.Padding(2);
             this.cmbPType.Name = "cmbPType";
             this.cmbPType.Size = new System.Drawing.Size(217, 24);
             this.cmbPType.TabIndex = 42;
@@ -477,7 +479,7 @@
             this.tabPage3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.Location = new System.Drawing.Point(4, 32);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(985, 555);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Warehouse";
@@ -527,7 +529,7 @@
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblLogin);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmProductManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product Management";

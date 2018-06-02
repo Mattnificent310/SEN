@@ -126,13 +126,13 @@ namespace WindowsFormsApp2
                                     break;
                                 }
                             case "Administrator":
-                            {
+                                {
                                     this.Hide();
                                     frmMainMenu menu = new frmMainMenu();
                                     menu.Login(staff);
                                     menu.Show();
                                     break;
-                            }
+                                }
                             default:
                                 {
 
@@ -149,8 +149,8 @@ namespace WindowsFormsApp2
             }
             catch (Exception ex)
             {
-               // MessageBox.Show("Unauthorized Access Detected!");
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Unauthorized Access Detected!");
+                // MessageBox.Show(ex.ToString());
             }
         }
 
