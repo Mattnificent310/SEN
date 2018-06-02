@@ -406,9 +406,9 @@
             // 
             // tvTechTree
             // 
-            this.tvTechTree.Location = new System.Drawing.Point(104, 55);
+            this.tvTechTree.Location = new System.Drawing.Point(94, 42);
             this.tvTechTree.Name = "tvTechTree";
-            this.tvTechTree.Size = new System.Drawing.Size(752, 366);
+            this.tvTechTree.Size = new System.Drawing.Size(785, 377);
             this.tvTechTree.TabIndex = 87;
             this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
             // 
