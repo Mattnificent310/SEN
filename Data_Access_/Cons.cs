@@ -86,7 +86,8 @@ namespace Data_Access_
                             table8Id = "InventoryIDPK",
                             table8Col1 = "WarehouseNo",
                             table8Col2 = "UnitsInStock",
-                            table8Col3 = "ReorderLevel";
+                            table8Col3 = "ReorderLevel",
+                            table8IdFk = "ProductIDFK";
         #endregion
 
         #region Job
