@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.radioProd = new System.Windows.Forms.RadioButton();
+            this.radioCust = new System.Windows.Forms.RadioButton();
             this.lblAnswer = new System.Windows.Forms.Label();
             this.lblElapsed = new System.Windows.Forms.Label();
             this.lblCall = new System.Windows.Forms.Label();
@@ -131,8 +133,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.radioCust = new System.Windows.Forms.RadioButton();
-            this.radioProd = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
@@ -214,6 +214,32 @@
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
+            // radioProd
+            // 
+            this.radioProd.AutoSize = true;
+            this.radioProd.Location = new System.Drawing.Point(58, 407);
+            this.radioProd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.radioProd.Name = "radioProd";
+            this.radioProd.Size = new System.Drawing.Size(67, 20);
+            this.radioProd.TabIndex = 121;
+            this.radioProd.TabStop = true;
+            this.radioProd.Text = "Search";
+            this.radioProd.UseVisualStyleBackColor = true;
+            this.radioProd.CheckedChanged += new System.EventHandler(this.radioProd_CheckedChanged);
+            // 
+            // radioCust
+            // 
+            this.radioCust.AutoSize = true;
+            this.radioCust.Location = new System.Drawing.Point(58, 291);
+            this.radioCust.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.radioCust.Name = "radioCust";
+            this.radioCust.Size = new System.Drawing.Size(67, 20);
+            this.radioCust.TabIndex = 120;
+            this.radioCust.TabStop = true;
+            this.radioCust.Text = "Search";
+            this.radioCust.UseVisualStyleBackColor = true;
+            this.radioCust.CheckedChanged += new System.EventHandler(this.radioCust_CheckedChanged);
+            // 
             // lblAnswer
             // 
             this.lblAnswer.AutoSize = true;
@@ -260,7 +286,7 @@
             // 
             // dgvItems
             // 
-            this.dgvItems.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvItems.BackgroundColor = System.Drawing.SystemColors.MenuBar;
             this.dgvItems.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Location = new System.Drawing.Point(17, 7);
@@ -6933,7 +6959,7 @@
             // 
             // dgvClient
             // 
-            this.dgvClient.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.dgvClient.BackgroundColor = System.Drawing.SystemColors.MenuBar;
             this.dgvClient.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClient.Location = new System.Drawing.Point(28, 17);
@@ -10232,32 +10258,6 @@
             this.errors.BlinkRate = 500;
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
-            // 
-            // radioCust
-            // 
-            this.radioCust.AutoSize = true;
-            this.radioCust.Location = new System.Drawing.Point(58, 291);
-            this.radioCust.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioCust.Name = "radioCust";
-            this.radioCust.Size = new System.Drawing.Size(67, 20);
-            this.radioCust.TabIndex = 120;
-            this.radioCust.TabStop = true;
-            this.radioCust.Text = "Search";
-            this.radioCust.UseVisualStyleBackColor = true;
-            this.radioCust.CheckedChanged += new System.EventHandler(this.radioCust_CheckedChanged);
-            // 
-            // radioProd
-            // 
-            this.radioProd.AutoSize = true;
-            this.radioProd.Location = new System.Drawing.Point(58, 407);
-            this.radioProd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioProd.Name = "radioProd";
-            this.radioProd.Size = new System.Drawing.Size(67, 20);
-            this.radioProd.TabIndex = 121;
-            this.radioProd.TabStop = true;
-            this.radioProd.Text = "Search";
-            this.radioProd.UseVisualStyleBackColor = true;
-            this.radioProd.CheckedChanged += new System.EventHandler(this.radioProd_CheckedChanged);
             // 
             // frmCustomerService
             // 
