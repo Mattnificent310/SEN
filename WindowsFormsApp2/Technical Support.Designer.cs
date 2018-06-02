@@ -61,9 +61,11 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
+            this.tvTechTree = new System.Windows.Forms.TreeView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             this.SuspendLayout();
             // 
@@ -359,13 +361,14 @@
             // 
             this.tabPage2.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage2.Controls.Add(this.tvTechTree);
             this.tabPage2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(983, 555);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Manage Tasks";
+            this.tabPage2.Text = "Tech Tree";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // lblLogin
@@ -401,6 +404,14 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
+            // tvTechTree
+            // 
+            this.tvTechTree.Location = new System.Drawing.Point(104, 55);
+            this.tvTechTree.Name = "tvTechTree";
+            this.tvTechTree.Size = new System.Drawing.Size(752, 366);
+            this.tvTechTree.TabIndex = 87;
+            this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
+            // 
             // frmTechnicalSupport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,6 +431,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -460,5 +472,6 @@
         private System.Windows.Forms.ErrorProvider errors;
         private System.Windows.Forms.Button btnEndCall;
         private System.Windows.Forms.Button btnCall;
+        private System.Windows.Forms.TreeView tvTechTree;
     }
 }

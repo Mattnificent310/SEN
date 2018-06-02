@@ -37,8 +37,8 @@ namespace WindowsFormsApp2
         public void Login(Staff staf)
         {
             if (!staf.Department.Equals("Administrator"))
-            {                
-                this.btnMainMenu.Text = "Log Out";                
+            {
+                this.btnMainMenu.Text = "Log Out";
             }
             main.Login(staf);
             lblLogin.Text = string.Format("Welcome:  {0}  {1}  {2}", staf.Title, staf.Name, staf.Surname);
@@ -67,7 +67,7 @@ namespace WindowsFormsApp2
             }
             else
             {
-                this.Hide();                
+                this.Hide();
                 main.Show();
             }
         }
@@ -511,5 +511,15 @@ namespace WindowsFormsApp2
 
         }
         #endregion
+
+        private void tvTechTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            //This makes the login panel start in the middle of the form
+            //No matter what the size of the screen is, the login panel will stay in the same position and stay the same size
+            tvTechTree.Location = new Point(
+            this.ClientSize.Width / 2 - tvTechTree.Size.Width / 2,
+            this.ClientSize.Height / 2 - tvTechTree.Size.Height / 2);
+            tvTechTree.Anchor = AnchorStyles.None;
+        }
     }
 }
