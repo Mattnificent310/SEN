@@ -11,7 +11,7 @@ namespace Business_Logic_Layer
 {
     public class Product : IProduct
     {
-        private int productID;
+        private string serialNo;
         private string productType;
         private string productModel;
         private string productName;
@@ -30,10 +30,10 @@ namespace Business_Logic_Layer
         private bool p6;
 
 
-        public int ProductID
+        public string SerialNo
         {
-            get { return productID; }
-            set { productID = value; }
+            get { return serialNo; }
+            set { serialNo = value; }
         }
         public string ProductType
         {
@@ -75,7 +75,7 @@ namespace Business_Logic_Layer
             foreach (DataRow item in DataHandler.GetData(Cons.table2).Rows)
             {
                 prods.Add(new Product(
-                (int)item[Cons.table2Id],
+                string.Format("{0}{1}{2}{3}","SHS",item[Cons.table2Col2].ToString().Split(' ')[0],item[Cons.table2Id].ToString().PadLeft(2,'0'), item[Cons.table2Id].ToString().PadLeft(3,'0')),
                  cat[(int)item[Cons.table2IdFk1]].CategoryName,
                 item[Cons.table2Col1].ToString(),
                 item[Cons.table2Col2].ToString(),
@@ -88,9 +88,9 @@ namespace Business_Logic_Layer
         {
             dh = new DataHandler(cons);
         }
-        public Product(int id, string type, string model, string name, decimal price, int inStock, bool discontinued)
+        public Product(string serial, string type, string model, string name, decimal price, int inStock, bool discontinued)
         {
-            this.ProductID = id;
+            this.SerialNo = serial;
             this.ProductType = type;
             this.ProductModel = model;
             this.ProductName = name;
@@ -110,14 +110,14 @@ namespace Business_Logic_Layer
         //    this.p6 = p6;
         //}
         #region Indexer
-        public Product this[int? prodId = null, string prodType = null, string model = null, string name = null, decimal? price = null, bool? discon = null]
+        public Product this[string prodId = null, string prodType = null, string model = null, string name = null, decimal? price = null, bool? discon = null]
         {
             get
             {
                 new Inventory();
                 foreach (var item in prods)
                 {
-                    if ((item.ProductID == (prodId ?? item.ProductID))
+                    if ((item.SerialNo == (prodId ?? item.SerialNo))
                     && (item.ProductType == (prodType ?? item.ProductType))
                     && (item.ProductModel == (model ?? item.ProductModel))
                     && (item.ProductName == (name ?? item.ProductName))
@@ -164,7 +164,7 @@ namespace Business_Logic_Layer
                 { Cons.table2Col4, prod.Discontinued },
                 { Cons.table2IdFk1, catId },
                 { Cons.table2IdFk2, invId }
-            }, Cons.table2,prod.ProductID.ToString());
+            }, int.Parse(prod.SerialNo.Substring(prod.SerialNo.Length - 3)).ToString(), Cons.table2);
            
         }
 

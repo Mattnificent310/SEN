@@ -57,7 +57,7 @@ namespace Business_Logic_Layer
         public static bool DeleteProduct(int prodId)
         {
             return new Product().Delete(prodId);
-        }
+        }        
         #endregion
 
         #region Inventory

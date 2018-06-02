@@ -10,6 +10,6 @@ namespace Business_Logic_Layer
     {
         int? Insert(Inventory inv);
         bool Update(Inventory inv);
-        bool Delete(int invId);
+        bool DeleteStock(int invId);
     }
 }

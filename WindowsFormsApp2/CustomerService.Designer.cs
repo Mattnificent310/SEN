@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.radioProd = new System.Windows.Forms.RadioButton();
+            this.radioCust = new System.Windows.Forms.RadioButton();
             this.lblAnswer = new System.Windows.Forms.Label();
             this.lblElapsed = new System.Windows.Forms.Label();
             this.lblCall = new System.Windows.Forms.Label();
@@ -42,7 +44,6 @@
             this.btnEndCall = new System.Windows.Forms.Button();
             this.btnCall = new System.Windows.Forms.Button();
             this.lblUnitPrice = new System.Windows.Forms.Label();
-            this.numQuantity = new System.Windows.Forms.NumericUpDown();
             this.lblTotal = new System.Windows.Forms.Label();
             this.radioDel = new System.Windows.Forms.RadioButton();
             this.radioCol = new System.Windows.Forms.RadioButton();
@@ -131,18 +132,18 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.radioCust = new System.Windows.Forms.RadioButton();
-            this.radioProd = new System.Windows.Forms.RadioButton();
+            this.lblStock = new System.Windows.Forms.Label();
+            this.numQuantity = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -163,6 +164,8 @@
             // 
             this.tabPage3.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage3.Controls.Add(this.numQuantity);
+            this.tabPage3.Controls.Add(this.lblStock);
             this.tabPage3.Controls.Add(this.radioProd);
             this.tabPage3.Controls.Add(this.radioCust);
             this.tabPage3.Controls.Add(this.lblAnswer);
@@ -176,7 +179,6 @@
             this.tabPage3.Controls.Add(this.btnEndCall);
             this.tabPage3.Controls.Add(this.btnCall);
             this.tabPage3.Controls.Add(this.lblUnitPrice);
-            this.tabPage3.Controls.Add(this.numQuantity);
             this.tabPage3.Controls.Add(this.lblTotal);
             this.tabPage3.Controls.Add(this.radioDel);
             this.tabPage3.Controls.Add(this.radioCol);
@@ -213,6 +215,32 @@
             this.tabPage3.Text = "Sales";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // radioProd
+            // 
+            this.radioProd.AutoSize = true;
+            this.radioProd.Location = new System.Drawing.Point(58, 407);
+            this.radioProd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.radioProd.Name = "radioProd";
+            this.radioProd.Size = new System.Drawing.Size(67, 20);
+            this.radioProd.TabIndex = 121;
+            this.radioProd.TabStop = true;
+            this.radioProd.Text = "Search";
+            this.radioProd.UseVisualStyleBackColor = true;
+            this.radioProd.CheckedChanged += new System.EventHandler(this.radioProd_CheckedChanged);
+            // 
+            // radioCust
+            // 
+            this.radioCust.AutoSize = true;
+            this.radioCust.Location = new System.Drawing.Point(58, 291);
+            this.radioCust.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.radioCust.Name = "radioCust";
+            this.radioCust.Size = new System.Drawing.Size(67, 20);
+            this.radioCust.TabIndex = 120;
+            this.radioCust.TabStop = true;
+            this.radioCust.Text = "Search";
+            this.radioCust.UseVisualStyleBackColor = true;
+            this.radioCust.CheckedChanged += new System.EventHandler(this.radioCust_CheckedChanged);
             // 
             // lblAnswer
             // 
@@ -337,25 +365,6 @@
             this.lblUnitPrice.Size = new System.Drawing.Size(0, 2);
             this.lblUnitPrice.TabIndex = 108;
             this.lblUnitPrice.TextChanged += new System.EventHandler(this.lblUnitPrice_TextChanged);
-            // 
-            // numQuantity
-            // 
-            this.numQuantity.Location = new System.Drawing.Point(562, 448);
-            this.numQuantity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.numQuantity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numQuantity.Name = "numQuantity";
-            this.numQuantity.Size = new System.Drawing.Size(262, 22);
-            this.numQuantity.TabIndex = 107;
-            this.numQuantity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
             // 
             // lblTotal
             // 
@@ -3490,7 +3499,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Location = new System.Drawing.Point(562, 253);
+            this.label25.Location = new System.Drawing.Point(634, 88);
             this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(105, 16);
@@ -3520,6 +3529,7 @@
             this.txtCSPhone.Name = "txtCSPhone";
             this.txtCSPhone.Size = new System.Drawing.Size(263, 22);
             this.txtCSPhone.TabIndex = 85;
+            this.txtCSPhone.TextChanged += new System.EventHandler(this.txtCSPhone_TextChanged);
             // 
             // label26
             // 
@@ -3601,6 +3611,8 @@
             this.txtCSSurname.Name = "txtCSSurname";
             this.txtCSSurname.Size = new System.Drawing.Size(252, 22);
             this.txtCSSurname.TabIndex = 78;
+            this.txtCSSurname.Text = "a";
+            this.txtCSSurname.TextChanged += new System.EventHandler(this.txtCSSurname_TextChanged);
             // 
             // tabPage2
             // 
@@ -10233,31 +10245,34 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // radioCust
+            // lblStock
             // 
-            this.radioCust.AutoSize = true;
-            this.radioCust.Location = new System.Drawing.Point(58, 291);
-            this.radioCust.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioCust.Name = "radioCust";
-            this.radioCust.Size = new System.Drawing.Size(67, 20);
-            this.radioCust.TabIndex = 120;
-            this.radioCust.TabStop = true;
-            this.radioCust.Text = "Search";
-            this.radioCust.UseVisualStyleBackColor = true;
-            this.radioCust.CheckedChanged += new System.EventHandler(this.radioCust_CheckedChanged);
+            this.lblStock.AutoSize = true;
+            this.lblStock.BackColor = System.Drawing.Color.Transparent;
+            this.lblStock.Location = new System.Drawing.Point(572, 450);
+            this.lblStock.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(0, 16);
+            this.lblStock.TabIndex = 122;
             // 
-            // radioProd
+            // numQuantity
             // 
-            this.radioProd.AutoSize = true;
-            this.radioProd.Location = new System.Drawing.Point(58, 407);
-            this.radioProd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioProd.Name = "radioProd";
-            this.radioProd.Size = new System.Drawing.Size(67, 20);
-            this.radioProd.TabIndex = 121;
-            this.radioProd.TabStop = true;
-            this.radioProd.Text = "Search";
-            this.radioProd.UseVisualStyleBackColor = true;
-            this.radioProd.CheckedChanged += new System.EventHandler(this.radioProd_CheckedChanged);
+            this.numQuantity.Location = new System.Drawing.Point(562, 448);
+            this.numQuantity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numQuantity.Name = "numQuantity";
+            this.numQuantity.Size = new System.Drawing.Size(262, 22);
+            this.numQuantity.TabIndex = 123;
+            this.numQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
             // 
             // frmCustomerService
             // 
@@ -10283,7 +10298,6 @@
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -10292,6 +10306,7 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10379,7 +10394,6 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox txtCSSurname;
-        private System.Windows.Forms.NumericUpDown numQuantity;
         private System.Windows.Forms.Label lblUnitPrice;
         private System.Windows.Forms.Button btnEndCall;
         private System.Windows.Forms.Button btnCall;
@@ -10403,5 +10417,7 @@
         private System.Windows.Forms.ComboBox cmbCustMethod;
         private System.Windows.Forms.RadioButton radioProd;
         private System.Windows.Forms.RadioButton radioCust;
+        private System.Windows.Forms.NumericUpDown numQuantity;
+        private System.Windows.Forms.Label lblStock;
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Inventory : IStock
+    public class Inventory : Product, IStock
     {
         private int inventoryID;
         private string warehouse;
@@ -79,7 +79,8 @@ namespace Business_Logic_Layer
                 ((int)item[Cons.table8Id],
                 item[Cons.table8Col1] as string,
                 (int)item[Cons.table8Col2],
-                (int)item[Cons.table8Col3]
+                (int)item[Cons.table8Col3],
+                (int)item[Cons.table8IdFk]
                 ));
             }
 
@@ -89,12 +90,13 @@ namespace Business_Logic_Layer
         {
             dh = new DataHandler(cons);
         }
-        public Inventory(int invId, string _warehouse, int _units, int _reorder)
+        public Inventory(int invId, string _warehouse, int _units, int _reorder, int prodId)
         {
             this.InventoryID = invId;
             this.Warehouse = _warehouse;
             this.UnitsInStock = _units;
             this.ReorderLevel = _reorder;
+            SerialNo = prodId.ToString();
         }
         #region Indexer
         public Inventory this[int? invId = null, string warehouse = null, int? stock = null, int? reorder = null]
@@ -115,7 +117,7 @@ namespace Business_Logic_Layer
                         return (Inventory)item;
                     }
                 }
-                return new Inventory(Insert(new Inventory(invId ?? 0, warehouse, stock ?? 10, reorder ?? 1)) ?? 0, warehouse, stock ?? 10, reorder ?? 1);
+                //return new Inventory(Insert(new Inventory(0, warehouse, stock ?? 10, reorder ?? 1, int.Parse(SerialNo.Substring(SerialNo.Length - 3)))),warehouse, stock,reorder, int.Parse(SerialNo.Substring(SerialNo.Length - 3)));
                 throw new KeyNotFoundException();
             }
         }
@@ -130,7 +132,8 @@ namespace Business_Logic_Layer
             {
                 { Cons.table8Col1, inv.Warehouse},
                 { Cons.table8Col2, inv.UnitsInStock},
-                { Cons.table8Col3, inv.ReorderLevel}
+                { Cons.table8Col3, inv.ReorderLevel},
+                { Cons.table8IdFk, SerialNo }
             },Cons.table8);
         }
         public bool Update(Inventory inv)
@@ -139,11 +142,12 @@ namespace Business_Logic_Layer
             {
                 { Cons.table8Col1, inv.Warehouse },
                 { Cons.table8Col2, inv.UnitsInStock },
-                { Cons.table8Col3, inv.ReorderLevel }
+                { Cons.table8Col3, inv.ReorderLevel },
+                { Cons.table8IdFk, SerialNo }
             }, inv.InventoryID.ToString(), Cons.table8);            
         }
 
-        public bool Delete(int invId)
+        public bool DeleteStock(int invId)
         {
             return dh.Delete(invId.ToString());
         }

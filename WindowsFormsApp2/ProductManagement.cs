@@ -80,7 +80,7 @@ namespace WindowsFormsApp2
         {
             if (Populate())
             {
-                txtProdId.DataBindings.Add("Text", data, "ProductID");
+                txtProdId.DataBindings.Add("Text", data, "SerialNo");
                 cmbProdType.DataBindings.Add("Text", data, "ProductType");
                 cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
                 txtProdName.DataBindings.Add("Text", data, "ProductName");
@@ -125,7 +125,7 @@ namespace WindowsFormsApp2
             if (ValidateAll(this.tabPage2))
             {
                 prod = new Product(
-               0,
+               string.Empty,
                cmbPType.Text,
                cmbProductModel.Text,
                txtPName.Text.Trim(),
@@ -158,7 +158,7 @@ namespace WindowsFormsApp2
             {
                 
                 prod = new Product(
-                   int.Parse(txtProdId.Text),
+                  txtProdId.Text,
                   cmbProdType.Text,
                    cmbProdModel.Text,
                    txtProdName.Text,

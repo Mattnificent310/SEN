@@ -396,7 +396,7 @@ namespace WindowsFormsApp2
                 else
                 {
                     prod = new Product();
-                    data.DataSource = prod[int.Parse(txtProdNo.Text)];
+                    data.DataSource = prod[txtProdNo.Text];
                     dgvTech.DataSource = data;
                 }
 

@@ -83,7 +83,7 @@ namespace WindowsFormsApp2
                 cmbCustCountry.DataBindings.Add("Text", dataClient, "Country");
                 cmbCustCity.DataBindings.Add("Text", dataClient, "City");
                 txtCustStreet.DataBindings.Add("Text", dataClient, "Street");
-                
+
                 return true;
             }
             return false;
@@ -258,11 +258,11 @@ namespace WindowsFormsApp2
                     shown = true;
                 }
                 if (!answered && !closed && !missed)
-                {                     
+                {
                     PlaySound(path2);
                     played = false;
                 }
-                
+
             }
             if (missed)
             {
@@ -280,10 +280,10 @@ namespace WindowsFormsApp2
                 //Random r = new Random();
                 Random rn = new Random();
                 Random rnd = new Random(1000);
-                Thread.Sleep(rn.Next(8000, 30000));                
+                Thread.Sleep(rn.Next(8000, 30000));
                 //r = new Random();
 
-                
+
                 for (int i = 0; i <= 60 * 60 * 24; i++)
                 {
                     if (i == new Random(10000).Next(5, 20))
@@ -297,7 +297,7 @@ namespace WindowsFormsApp2
                         missed = false;
                         played = false;
                         i = 0;
-                                               
+
                         Thread.Sleep(new Random(10000).Next(8000, 30000));
                     }
                     Thread.Sleep(2200); // Set fast to slow.
@@ -479,6 +479,7 @@ namespace WindowsFormsApp2
                     radioCust.Enabled = true;
                     radioProd.Enabled = true;
                     radioProd.Checked = true;
+                    dgvClient.DataSource = data;
                     //btnHoldCall.Enabled = true;
                     //btnDivertCall.Enabled = true;
                     unhold = true;
@@ -512,6 +513,8 @@ namespace WindowsFormsApp2
             lblCall.Hide();
             lblAnswer.Hide();
             LockProd();
+            vals.Clear();
+            dgvItems.Hide();
             //lblHold.Visible = false;
             //btnHoldCall.Enabled = false;
             //btnDivertCall.Enabled = false;
@@ -529,8 +532,14 @@ namespace WindowsFormsApp2
             radioCust.Enabled = false;
             radioProd.Enabled = false;
             radioProd.Checked = false;
+            radioCust.Checked = false;
+            radioProd.Show();
+            radioCust.Show();
             radioCol.Checked = false;
             radioDel.Checked = false;
+            btnOrder.Enabled = false;
+            ordered = false;
+            lblGrandTotal.Text = "R 0.00";
             dtpColDel.Value = DateTime.Now;
             SimulateCall();
         }
@@ -542,6 +551,7 @@ namespace WindowsFormsApp2
         private void numQuantity_ValueChanged(object sender, EventArgs e)
         {
             lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
+            lblStock.Text = string.Format("{0}", int.Parse(lblStock.Text) - numQuantity.Value);
         }
         private void radioCol_CheckedChanged(object sender, EventArgs e)
         {
@@ -579,12 +589,11 @@ namespace WindowsFormsApp2
         {
             if (ValidateAll(this.tabPage3))
             {
-                radioProd.Checked = true;
-                radioCust.Enabled = false;
-                radioProd.Enabled = false;
+
+
                 items.Add(new OrderDetail(
                 0,
-                int.Parse(lblProdId.Text),
+                int.Parse(lblProdId.Text.Substring(lblProdId.Text.Count()-3)),
                 1,
                 (int)numQuantity.Value,
                 decimal.Parse(lblTotal.Text.Substring(1)),
@@ -603,12 +612,19 @@ namespace WindowsFormsApp2
                 };
                 #endregion
 
+                #region Update Inventory
+                CRUD.UpdateInventory(new Inventory(0, "1001", int.Parse(lblStock.Text), 10, int.Parse(lblProdId.Text.Substring(lblProdId.Text.Length - 3))));
+                #endregion
+
                 #region Clear
                 cmbProdType.Text = "";
                 cmbProdModel.Text = "";
                 txtProdName.Text = "";
                 radioCol.Enabled = false;
                 radioDel.Enabled = false;
+                radioCust.Hide();
+                radioProd.Hide();
+                UnlockProd();
                 numQuantity.Value = 1;
                 numQuantity.Enabled = false;
                 dtpColDel.Enabled = false;
@@ -673,6 +689,7 @@ namespace WindowsFormsApp2
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
 
+
         }
         #endregion
 
@@ -680,6 +697,7 @@ namespace WindowsFormsApp2
 
         private void button4_Click(object sender, EventArgs e)
         {
+            data = new BindingSource();
             try
             {
                 if (
@@ -687,11 +705,8 @@ namespace WindowsFormsApp2
                     && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSEmail.Text.Trim())
-                    && radioProd.Checked == true)
+                    || radioProd.Checked == true)
                 {
-
-                    new Product();
-                    data = new BindingSource();
 
                     dgvItems.Hide();
 
@@ -714,13 +729,15 @@ namespace WindowsFormsApp2
                     #region Find Product Name
                     if (!string.IsNullOrEmpty(txtProdName.Text.Trim()))
                     {
-                        data.DataSource = Product.prods.Where(x => x.ProductName == txtProdName.Text.Trim()).ToList();
+                        data.DataSource = Product.prods.Where(x => x.ProductName.ToLowerInvariant() == txtProdName.Text.Trim().ToLowerInvariant()).ToList();
 
                     }
                     #endregion
 
                     #region Find Product Type & Product Model
-                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim()) && !string.IsNullOrEmpty(cmbProdType.Text.Trim()))
+                    if (!string.IsNullOrEmpty(cmbProdModel.Text.Trim())
+                    && !string.IsNullOrEmpty(cmbProdType.Text.Trim())
+                    && string.IsNullOrEmpty(txtProdName.Text.Trim()))
                     {
                         data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
                        && x.ProductModel == cmbProdModel.Text.Trim()).ToList();
@@ -735,12 +752,22 @@ namespace WindowsFormsApp2
                     {
                         data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
                            && x.ProductModel == cmbProdModel.Text.Trim()
-                           && x.ProductName == txtProdName.Text.Trim()).ToList();
+                           && x.ProductName.ToLowerInvariant() == txtProdName.Text.Trim().ToLowerInvariant()).ToList();
 
                     }
                     #endregion
 
-
+                    #region Find Anything
+                    if (!string.IsNullOrEmpty(cmbProdType.Text.Trim())
+                       || !string.IsNullOrEmpty(txtProdName.Text.Trim())
+                       || !string.IsNullOrEmpty(txtProdName.Text.Trim()))
+                    {
+                        if (data == null)
+                            data.DataSource = Product.prods.Where(x => x.ProductType == cmbProdType.Text.Trim()
+                               || x.ProductModel == cmbProdModel.Text.Trim()
+                               || x.ProductName.ToLowerInvariant() == txtProdName.Text.Trim().ToLowerInvariant()).ToList();
+                    }
+                    #endregion
 
                     dgvSales.DataSource = data;
 
@@ -776,25 +803,37 @@ namespace WindowsFormsApp2
                     dgvItems.Hide();
 
                     #region Find By Name
-                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim()))
-                        data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()).ToList();
+                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
+                    && string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                    && string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                    && string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
+                    {
+                        dataClient.DataSource = data.DataSource = Client.clients.Where(x => x.Name.ToLowerInvariant() == txtCSName.Text.Trim().ToLowerInvariant()).ToList();
+                    }
                     #endregion
 
-                    dgvItems.Hide();
                     #region Find By Name, Surname
                     if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
-                    && !string.IsNullOrEmpty(txtCSSurname.Text.Trim()))
-                        data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()
-                        && x.Surname == txtCSSurname.Text.Trim()).ToList();
+                    && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                    && string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                    && string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
+                    {
+                        dataClient.DataSource = data.DataSource = Client.clients.Where(x => x.Name.ToLowerInvariant() == txtCSName.Text.Trim().ToLowerInvariant()
+                        && x.Surname.ToLowerInvariant() == txtCSSurname.Text.Trim().ToLowerInvariant()).ToList();
+                    }
                     #endregion
 
                     #region Find By Name, Surname, Phone
                     if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
-                    && !string.IsNullOrEmpty(txtCSPhone.Text.Trim()))
-                        data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()
-                        && x.Surname == txtCSSurname.Text.Trim()
-                        && x.ContactNumber == txtCSPhone.Text.Trim()).ToList();
+                    && !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                    && string.IsNullOrEmpty(txtCSEmail.Text.Trim())
+                   )
+                    {
+                        dataClient.DataSource = data.DataSource = Client.clients.Where(x => x.Name.ToLowerInvariant() == txtCSName.Text.Trim().ToLowerInvariant()
+                        && x.Surname.ToLowerInvariant() == txtCSSurname.Text.Trim().ToLowerInvariant()
+                        && x.ContactNumber.ToLowerInvariant() == txtCSPhone.Text.Trim().ToLowerInvariant()).ToList();
+                    }
                     #endregion
 
                     #region Find By Name, Surname, Phone, Email
@@ -802,20 +841,39 @@ namespace WindowsFormsApp2
                     && !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
                     && !string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
-                    data.DataSource = Client.clients.Where(x => x.Name == txtCSName.Text.Trim()
-                    && x.Surname == txtCSSurname.Text.Trim()
-                    && x.ContactNumber == txtCSPhone.Text.Trim()
-                    && x.EmailAddress == txtCSEmail.Text.Trim()).ToList();
+                    {
+                        dataClient.DataSource = data.DataSource = Client.clients.Where(x => x.Name.ToLowerInvariant() == txtCSName.Text.Trim().ToLowerInvariant()
+                        && x.Surname.ToLowerInvariant() == txtCSSurname.Text.Trim().ToLowerInvariant()
+                        && x.ContactNumber.ToLowerInvariant() == txtCSPhone.Text.Trim().ToLowerInvariant()
+                        && x.EmailAddress.ToLowerInvariant() == txtCSEmail.Text.Trim().ToLowerInvariant()).ToList();
+                    }
+                    #endregion
+
+                    #region Find Anything
+                    if (!string.IsNullOrEmpty(txtCSName.Text.Trim())
+                   || !string.IsNullOrEmpty(txtCSSurname.Text.Trim())
+                   || !string.IsNullOrEmpty(txtCSPhone.Text.Trim())
+                   || !string.IsNullOrEmpty(txtCSEmail.Text.Trim()))
+                    {
+                        dataClient.DataSource = data.DataSource = Client.clients.Where(x => x.Name.ToLowerInvariant() == txtCSName.Text.Trim().ToLowerInvariant()
+                        || x.Surname.ToLowerInvariant() == txtCSSurname.Text.Trim().ToLowerInvariant()
+                        || x.ContactNumber.ToLowerInvariant() == txtCSPhone.Text.Trim().ToLowerInvariant()
+                        || x.EmailAddress.ToLowerInvariant() == txtCSEmail.Text.Trim().ToLowerInvariant()).ToList();
+                    }
                     #endregion
 
                     dgvSales.DataSource = data;
+                    dgvClient.DataSource = data;
 
                     #region Clear & Bind
-                    ReBindCustomer();
-                    
-                    numQuantity.Enabled = false;
-                    radioCust.Checked = false;
-                    radioProd.Checked = true;
+                    if (data.Count != 0)
+                    {
+                        ReBindCustomer();
+                        numQuantity.Enabled = false;
+                        radioCust.Checked = false;
+                        radioProd.Checked = true;
+                    }
+
                     #endregion
                 }
 
@@ -831,21 +889,28 @@ namespace WindowsFormsApp2
             }
 
         }
-        private void ReBindProduct()
+        private void ClearProd()
         {
             cmbProdType.DataBindings.Clear();
             cmbProdModel.DataBindings.Clear();
             lblUnitPrice.DataBindings.Clear();
             lblProdId.DataBindings.Clear();
+            lblStock.DataBindings.Clear();
             txtProdName.DataBindings.Clear();
-            lblProdId.DataBindings.Add("Text", data, "ProductID");
+
+        }
+        private void ReBindProduct()
+        {
+            ClearProd();
+            lblProdId.DataBindings.Add("Text", data, "SerialNo");
             cmbProdType.DataBindings.Add("Text", data, "ProductType");
             cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
             txtProdName.DataBindings.Add("Text", data, "ProductName");
             lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
+            lblStock.DataBindings.Add("Text", data, "UnitsInStock");
 
         }
-        private void ReBindCustomer()
+        private void ClearCust()
         {
             lblCSId.DataBindings.Clear();
             txtCSName.DataBindings.Clear();
@@ -853,6 +918,11 @@ namespace WindowsFormsApp2
             txtCSPhone.DataBindings.Clear();
             txtCSEmail.DataBindings.Clear();
             txtProdName.DataBindings.Clear();
+
+        }
+        private void ReBindCustomer()
+        {
+            ClearCust();
             lblCSId.DataBindings.Add("Text", data, "Identity");
             txtCSName.DataBindings.Add("Text", data, "Name");
             txtCSSurname.DataBindings.Add("Text", data, "Surname");
@@ -894,15 +964,13 @@ namespace WindowsFormsApp2
         {
             cmbProdModel.Text = "";
             txtProdName.Text = "";
-            cmbProdModel.DataBindings.Clear();
-            txtProdName.DataBindings.Clear();
+            ClearProd();
         }
 
         private void cmbProdModel_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtProdName.Text = "";
-            cmbProdType.DataBindings.Clear();
-            txtProdName.DataBindings.Clear();
+            ClearProd();
         }
 
 
@@ -1008,6 +1076,19 @@ namespace WindowsFormsApp2
             txtCSSurname.Text = string.Empty;
             txtCSPhone.Text = string.Empty;
             txtCSEmail.Text = string.Empty;
+            ClearCust();
+        }
+        private void txtCSSurname_TextChanged(object sender, EventArgs e)
+        {
+            txtCSPhone.Text = string.Empty;
+            txtCSEmail.Text = string.Empty;
+            ClearCust();
+        }
+
+        private void txtCSPhone_TextChanged(object sender, EventArgs e)
+        {
+            txtCSEmail.Text = string.Empty;
+            ClearCust();
         }
         private void radioCust_CheckedChanged(object sender, EventArgs e)
         {
@@ -1175,8 +1256,6 @@ namespace WindowsFormsApp2
 
         }
 
-       
-
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {
 
@@ -1187,7 +1266,7 @@ namespace WindowsFormsApp2
 
         #endregion
 
-        
+
 
 
     }
