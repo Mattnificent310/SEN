@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.numQuantity = new System.Windows.Forms.NumericUpDown();
+            this.lblStock = new System.Windows.Forms.Label();
             this.radioProd = new System.Windows.Forms.RadioButton();
             this.radioCust = new System.Windows.Forms.RadioButton();
             this.lblAnswer = new System.Windows.Forms.Label();
@@ -132,10 +134,12 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblStock = new System.Windows.Forms.Label();
-            this.numQuantity = new System.Windows.Forms.NumericUpDown();
+            this.btnIssueCtr = new System.Windows.Forms.Button();
+            this.btnUpdateCtr = new System.Windows.Forms.Button();
+            this.dgvContractDetails = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -143,7 +147,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContractDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -215,6 +219,36 @@
             this.tabPage3.Text = "Sales";
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // numQuantity
+            // 
+            this.numQuantity.Location = new System.Drawing.Point(565, 449);
+            this.numQuantity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.numQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numQuantity.Name = "numQuantity";
+            this.numQuantity.Size = new System.Drawing.Size(262, 22);
+            this.numQuantity.TabIndex = 123;
+            this.numQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
+            // 
+            // lblStock
+            // 
+            this.lblStock.AutoSize = true;
+            this.lblStock.BackColor = System.Drawing.Color.Transparent;
+            this.lblStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStock.Location = new System.Drawing.Point(580, 450);
+            this.lblStock.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStock.Name = "lblStock";
+            this.lblStock.Size = new System.Drawing.Size(0, 17);
+            this.lblStock.TabIndex = 122;
             // 
             // radioProd
             // 
@@ -10105,6 +10139,9 @@
             // 
             this.tabPage4.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage4.Controls.Add(this.dgvContractDetails);
+            this.tabPage4.Controls.Add(this.btnUpdateCtr);
+            this.tabPage4.Controls.Add(this.btnIssueCtr);
             this.tabPage4.Controls.Add(this.dtpCtrDate);
             this.tabPage4.Controls.Add(this.lblCtrDate);
             this.tabPage4.Controls.Add(this.cmbCtrTerm);
@@ -10124,7 +10161,7 @@
             // 
             // dtpCtrDate
             // 
-            this.dtpCtrDate.Location = new System.Drawing.Point(420, 340);
+            this.dtpCtrDate.Location = new System.Drawing.Point(186, 551);
             this.dtpCtrDate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dtpCtrDate.Name = "dtpCtrDate";
             this.dtpCtrDate.Size = new System.Drawing.Size(252, 26);
@@ -10134,7 +10171,7 @@
             // 
             this.lblCtrDate.AutoSize = true;
             this.lblCtrDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblCtrDate.Location = new System.Drawing.Point(420, 312);
+            this.lblCtrDate.Location = new System.Drawing.Point(186, 523);
             this.lblCtrDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCtrDate.Name = "lblCtrDate";
             this.lblCtrDate.Size = new System.Drawing.Size(91, 18);
@@ -10151,7 +10188,7 @@
             "Dr",
             "Prof",
             "Sir"});
-            this.cmbCtrTerm.Location = new System.Drawing.Point(420, 276);
+            this.cmbCtrTerm.Location = new System.Drawing.Point(186, 487);
             this.cmbCtrTerm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCtrTerm.Name = "cmbCtrTerm";
             this.cmbCtrTerm.Size = new System.Drawing.Size(252, 26);
@@ -10161,7 +10198,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.BackColor = System.Drawing.Color.Transparent;
-            this.label33.Location = new System.Drawing.Point(420, 248);
+            this.label33.Location = new System.Drawing.Point(186, 459);
             this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(105, 18);
@@ -10171,7 +10208,7 @@
             // cmbCtrLevel
             // 
             this.cmbCtrLevel.FormattingEnabled = true;
-            this.cmbCtrLevel.Location = new System.Drawing.Point(420, 212);
+            this.cmbCtrLevel.Location = new System.Drawing.Point(186, 423);
             this.cmbCtrLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCtrLevel.Name = "cmbCtrLevel";
             this.cmbCtrLevel.Size = new System.Drawing.Size(252, 26);
@@ -10181,7 +10218,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.BackColor = System.Drawing.Color.Transparent;
-            this.label32.Location = new System.Drawing.Point(420, 184);
+            this.label32.Location = new System.Drawing.Point(186, 395);
             this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(108, 18);
@@ -10191,7 +10228,7 @@
             // cmbCtrType
             // 
             this.cmbCtrType.FormattingEnabled = true;
-            this.cmbCtrType.Location = new System.Drawing.Point(420, 148);
+            this.cmbCtrType.Location = new System.Drawing.Point(186, 359);
             this.cmbCtrType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCtrType.Name = "cmbCtrType";
             this.cmbCtrType.Size = new System.Drawing.Size(252, 26);
@@ -10201,7 +10238,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.BackColor = System.Drawing.Color.Transparent;
-            this.label31.Location = new System.Drawing.Point(420, 120);
+            this.label31.Location = new System.Drawing.Point(186, 331);
             this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(104, 18);
@@ -10242,35 +10279,37 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // lblStock
+            // btnIssueCtr
             // 
-            this.lblStock.AutoSize = true;
-            this.lblStock.BackColor = System.Drawing.Color.Transparent;
-            this.lblStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStock.Location = new System.Drawing.Point(580, 450);
-            this.lblStock.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStock.Name = "lblStock";
-            this.lblStock.Size = new System.Drawing.Size(0, 17);
-            this.lblStock.TabIndex = 122;
+            this.btnIssueCtr.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnIssueCtr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIssueCtr.Location = new System.Drawing.Point(633, 496);
+            this.btnIssueCtr.Name = "btnIssueCtr";
+            this.btnIssueCtr.Size = new System.Drawing.Size(190, 30);
+            this.btnIssueCtr.TabIndex = 70;
+            this.btnIssueCtr.Text = "Issue Contract";
+            this.btnIssueCtr.UseVisualStyleBackColor = false;
             // 
-            // numQuantity
+            // btnUpdateCtr
             // 
-            this.numQuantity.Location = new System.Drawing.Point(565, 449);
-            this.numQuantity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.numQuantity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numQuantity.Name = "numQuantity";
-            this.numQuantity.Size = new System.Drawing.Size(262, 22);
-            this.numQuantity.TabIndex = 123;
-            this.numQuantity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
+            this.btnUpdateCtr.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnUpdateCtr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateCtr.Location = new System.Drawing.Point(633, 547);
+            this.btnUpdateCtr.Name = "btnUpdateCtr";
+            this.btnUpdateCtr.Size = new System.Drawing.Size(190, 30);
+            this.btnUpdateCtr.TabIndex = 71;
+            this.btnUpdateCtr.Text = "Update";
+            this.btnUpdateCtr.UseVisualStyleBackColor = false;
+            // 
+            // dgvContractDetails
+            // 
+            this.dgvContractDetails.BackgroundColor = System.Drawing.SystemColors.MenuBar;
+            this.dgvContractDetails.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvContractDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContractDetails.Location = new System.Drawing.Point(37, 26);
+            this.dgvContractDetails.Name = "dgvContractDetails";
+            this.dgvContractDetails.Size = new System.Drawing.Size(810, 236);
+            this.dgvContractDetails.TabIndex = 72;
             // 
             // frmCustomerService
             // 
@@ -10294,6 +10333,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -10304,7 +10344,7 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContractDetails)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10417,5 +10457,8 @@
         private System.Windows.Forms.RadioButton radioCust;
         private System.Windows.Forms.NumericUpDown numQuantity;
         private System.Windows.Forms.Label lblStock;
+        private System.Windows.Forms.Button btnUpdateCtr;
+        private System.Windows.Forms.Button btnIssueCtr;
+        private System.Windows.Forms.DataGridView dgvContractDetails;
     }
 }
