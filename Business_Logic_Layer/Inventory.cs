@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Inventory : Product, IStock
+    public class Inventory : IStock
     {
         private int inventoryID;
         private string warehouse;
         private int unitsInStock;
         private int reorderLevel;
+        private string key;
         public static List<Inventory> stocks;
-        private static DataHandler dh;
+        private static DataHandler dh = new DataHandler();
         private Dictionary<string, object> values;
 
         public int InventoryID
@@ -80,7 +81,7 @@ namespace Business_Logic_Layer
                 item[Cons.table8Col1] as string,
                 (int)item[Cons.table8Col2],
                 (int)item[Cons.table8Col3],
-                (int)item[Cons.table8IdFk]
+                item[Cons.table8IdFk].ToString()
                 ));
             }
 
@@ -90,23 +91,23 @@ namespace Business_Logic_Layer
         {
             dh = new DataHandler(cons);
         }
-        public Inventory(int invId, string _warehouse, int _units, int _reorder, int prodId)
+        public Inventory(int invId, string _warehouse, int _units, int _reorder, string prodId)
         {
             this.InventoryID = invId;
             this.Warehouse = _warehouse;
             this.UnitsInStock = _units;
             this.ReorderLevel = _reorder;
-            SerialNo = prodId.ToString();
+            this.key = prodId;
         }
         #region Indexer
-        public Inventory this[int? invId = null, string warehouse = null, int? stock = null, int? reorder = null]
+        public Inventory this[string prodId, int? invId = null, string warehouse = null, int? stock = null, int? reorder = null]
         {
             get
             {
-                new Inventory();
                 foreach (var item in stocks)
                 {
-                    if (item.Warehouse == (warehouse ?? item.Warehouse)
+                    if (item.key == (prodId ?? item.key)
+                    && item.Warehouse == (warehouse ?? item.Warehouse)
                     && item.UnitsInStock == (stock ?? item.UnitsInStock)
                     && item.ReorderLevel == (reorder ?? item.ReorderLevel))
                     {
@@ -114,10 +115,11 @@ namespace Business_Logic_Layer
                         this.UnitsInStock = item.UnitsInStock;
                         this.Warehouse = item.Warehouse;
                         this.ReorderLevel = item.ReorderLevel;
+                        this.key = item.key;
                         return (Inventory)item;
                     }
                 }
-                //return new Inventory(Insert(new Inventory(0, warehouse, stock ?? 10, reorder ?? 1, int.Parse(SerialNo.Substring(SerialNo.Length - 3)))),warehouse, stock,reorder, int.Parse(SerialNo.Substring(SerialNo.Length - 3)));
+                return new Inventory((int)Insert(new Inventory(0, warehouse, stock ?? 10, reorder ?? 1, key)),warehouse, stock ?? 1,reorder ?? 1, key);
                 throw new KeyNotFoundException();
             }
         }
@@ -133,7 +135,7 @@ namespace Business_Logic_Layer
                 { Cons.table8Col1, inv.Warehouse},
                 { Cons.table8Col2, inv.UnitsInStock},
                 { Cons.table8Col3, inv.ReorderLevel},
-                { Cons.table8IdFk, SerialNo }
+                { Cons.table8IdFk, inv.key }
             },Cons.table8);
         }
         public bool Update(Inventory inv)
@@ -143,7 +145,7 @@ namespace Business_Logic_Layer
                 { Cons.table8Col1, inv.Warehouse },
                 { Cons.table8Col2, inv.UnitsInStock },
                 { Cons.table8Col3, inv.ReorderLevel },
-                { Cons.table8IdFk, SerialNo }
+                { Cons.table8IdFk, inv.key }
             }, inv.InventoryID.ToString(), Cons.table8);            
         }
 

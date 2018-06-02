@@ -551,7 +551,7 @@ namespace WindowsFormsApp2
         private void numQuantity_ValueChanged(object sender, EventArgs e)
         {
             lblTotal.Text = string.Format("{0:C}", decimal.Parse(lblUnitPrice.Text) * numQuantity.Value);
-            lblStock.Text = string.Format("{0}", int.Parse(lblStock.Text) - numQuantity.Value);
+            lblStock.Text = string.Format("{0}", int.Parse(lblStock.Text) - int.Parse(numQuantity.Text));
         }
         private void radioCol_CheckedChanged(object sender, EventArgs e)
         {
@@ -613,7 +613,9 @@ namespace WindowsFormsApp2
                 #endregion
 
                 #region Update Inventory
-                CRUD.UpdateInventory(new Inventory(0, "1001", int.Parse(lblStock.Text), 10, int.Parse(lblProdId.Text.Substring(lblProdId.Text.Length - 3))));
+                var inv = new Inventory()[int.Parse(lblProdId.Text.Substring(lblProdId.Text.Length - 3)).ToString()];
+                inv.UnitsInStock -= (int)numQuantity.Value;
+                CRUD.UpdateInventory(inv);
                 #endregion
 
                 #region Clear
@@ -709,7 +711,7 @@ namespace WindowsFormsApp2
                 {
 
                     dgvItems.Hide();
-
+                    new Product();
                     #region Find Product Type
                     if (!string.IsNullOrEmpty(cmbProdType.Text.Trim()))
                     {
@@ -907,7 +909,7 @@ namespace WindowsFormsApp2
             cmbProdModel.DataBindings.Add("Text", data, "ProductModel");
             txtProdName.DataBindings.Add("Text", data, "ProductName");
             lblUnitPrice.DataBindings.Add("Text", data, "UnitPrice");
-            lblStock.DataBindings.Add("Text", data, "UnitsInStock");
+            lblStock.DataBindings.Add("Text", data, "InStock");
 
         }
         private void ClearCust()

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_Access_;
 using Data_Access_Layer;
+using DataAccessLayer;
 
 namespace Business_Logic_Layer
 {
@@ -20,8 +21,6 @@ namespace Business_Logic_Layer
         private bool discontinued;
         private static DataHandler dh = new DataHandler(Cons.table2);
         public static List<Product> prods;
-        private static Inventory inv;
-        private static Category cat;
         private int p1;
         private string p2;
         private string p3;
@@ -69,18 +68,22 @@ namespace Business_Logic_Layer
 
         public Product()
         {
-            cat = new Category();
-            inv = new Inventory();
+
+         
             prods = new List<Product>();
             foreach (DataRow item in DataHandler.GetData(Cons.table2).Rows)
             {
+                DataRow row = new StoredProcedure().GetProcs("sp_GetStockByProduct", new Dictionary<string, object>
+            {
+               { "ProductId", item[Cons.table2Id] }
+            }).Rows[0];
                 prods.Add(new Product(
-                string.Format("{0}{1}{2}{3}","SHS",item[Cons.table2Col2].ToString().Split(' ')[0],item[Cons.table2Id].ToString().PadLeft(2,'0'), item[Cons.table2Id].ToString().PadLeft(3,'0')),
-                 cat[(int)item[Cons.table2IdFk1]].CategoryName,
+                string.Format("{0}{1}{2}{3}", "SHS", item[Cons.table2Col2].ToString().Split(' ')[0], item[Cons.table2Id].ToString().PadLeft(2, '0'), item[Cons.table2Id].ToString().PadLeft(3, '0')),
+                 new Category()[(int)item[Cons.table2IdFk1]].CategoryName,
                 item[Cons.table2Col1].ToString(),
                 item[Cons.table2Col2].ToString(),
                 (decimal)item[Cons.table2Col3],
-                 inv[(int)item[Cons.table2IdFk2]].UnitsInStock,
+                 (int)row[0],
                  (bool)item[Cons.table2Col4]));
             }
         }
@@ -136,36 +139,31 @@ namespace Business_Logic_Layer
 
         public int? Insert(Product prod)
         {
-            inv = new Inventory();
-            cat = new Category();
             return (int?)dh.Insert(new Dictionary<string, object>
             {
                 { Cons.table2Col1, prod.ProductModel },
                 { Cons.table2Col2, prod.ProductName },
                 { Cons.table2Col3, prod.UnitPrice },
                 { Cons.table2Col4, prod.Discontinued },
-                { Cons.table2IdFk1, cat[null, prod.ProductType].CategoryId },
-                { Cons.table2IdFk2, inv[null, null, prod.InStock].InventoryID }
-            },Cons.table2);
-            
+                { Cons.table2IdFk1, 1//cat[null, prod.ProductType].CategoryId 
+                }
+            }, Cons.table2);
+
         }
 
         public bool Update(Product prod)
         {
-            inv = new Inventory();
-            cat = new Category();
-            int catId = cat[null, prod.ProductType].CategoryId;
-            int invId = inv[null, null, prod.inStock].InventoryID;
+            int catId = 1;//cat[null, prod.ProductType].CategoryId;
+            int invId = 1;//inv[null, null, null, prod.inStock].InventoryID;
             return dh.Update(new Dictionary<string, object>
             {
                 { Cons.table2Col1, prod.ProductModel },
                 { Cons.table2Col2, prod.ProductName },
                 { Cons.table2Col3, prod.UnitPrice },
                 { Cons.table2Col4, prod.Discontinued },
-                { Cons.table2IdFk1, catId },
-                { Cons.table2IdFk2, invId }
+                { Cons.table2IdFk1, catId }
             }, int.Parse(prod.SerialNo.Substring(prod.SerialNo.Length - 3)).ToString(), Cons.table2);
-           
+
         }
 
         public bool Delete(int prodId)

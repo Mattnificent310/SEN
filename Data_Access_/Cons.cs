@@ -32,8 +32,7 @@ namespace Data_Access_
                             table2Col2 = "ProductDetails",
                             table2Col3 = "UnitPrice",
                             table2Col4 = "Discontinued",
-                            table2IdFk1 = "CategoryIDFK",
-                            table2IdFk2 = "InventoryIDFK";
+                            table2IdFk1 = "CategoryIDFK";
         #endregion
 
         #region Staff

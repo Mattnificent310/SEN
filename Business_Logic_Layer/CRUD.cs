@@ -73,7 +73,7 @@ namespace Business_Logic_Layer
 
         public static bool DeleteInventory(int invId)
         {
-            return new Inventory().Delete(invId);
+            return new Inventory().DeleteStock(invId);
         }
         #endregion
 
