@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Assigned Jobs");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Unassigned Jobs");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Technicians0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnEndCall = new System.Windows.Forms.Button();
@@ -57,11 +62,11 @@
             this.dgvTech = new System.Windows.Forms.DataGridView();
             this.btnMainMenu = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tvTechTree = new System.Windows.Forms.TreeView();
             this.lblLogin = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tvTechTree = new System.Windows.Forms.TreeView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -371,6 +376,23 @@
             this.tabPage2.Text = "Tech Tree";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tvTechTree
+            // 
+            this.tvTechTree.Location = new System.Drawing.Point(94, 42);
+            this.tvTechTree.Name = "tvTechTree";
+            treeNode1.Name = "AssignedNode";
+            treeNode1.Text = "Assigned Jobs";
+            treeNode2.Name = "UnassignedNode";
+            treeNode2.Text = "Unassigned Jobs";
+            treeNode3.ForeColor = System.Drawing.Color.Black;
+            treeNode3.Name = "TechnicianNode()";
+            treeNode3.Text = "Technicians0";
+            this.tvTechTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            this.tvTechTree.Size = new System.Drawing.Size(785, 377);
+            this.tvTechTree.TabIndex = 87;
+            this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
+            // 
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
@@ -403,14 +425,6 @@
             // 
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
-            // 
-            // tvTechTree
-            // 
-            this.tvTechTree.Location = new System.Drawing.Point(94, 42);
-            this.tvTechTree.Name = "tvTechTree";
-            this.tvTechTree.Size = new System.Drawing.Size(785, 377);
-            this.tvTechTree.TabIndex = 87;
-            this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
             // 
             // frmTechnicalSupport
             // 
