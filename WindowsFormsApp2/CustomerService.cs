@@ -555,7 +555,7 @@ namespace WindowsFormsApp2
         }
         private void radioCol_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioCol.Checked)
+            if (radioCol.Checked == true)
             {
                 order = new Order(
                     "Collection Order",
@@ -563,14 +563,13 @@ namespace WindowsFormsApp2
                     "N/A"
                     );
                 dtpColDel.Value = DateTime.Now.AddDays(1.0);
-                if (radioCol.Checked != true && radioDel.Checked != true) { btnOrder.Enabled = false; }
-                else btnOrder.Enabled = true;
+                btnOrder.Enabled = true;
             }
         }
 
         private void radioDel_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioDel.Checked)
+            if (radioDel.Checked == true)
             {
                 order = new Order(
                    "Delivery Order",
@@ -578,9 +577,8 @@ namespace WindowsFormsApp2
                     "N/A"
                     );
                 dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
-                
-                if (radioCol.Checked != true && radioDel.Checked != true){ btnOrder.Enabled = false; }
-                else btnOrder.Enabled = true;
+
+                btnOrder.Enabled = true;
             }
 
 
@@ -596,7 +594,7 @@ namespace WindowsFormsApp2
 
                 items.Add(new OrderDetail(
                 0,
-                int.Parse(lblProdId.Text.Substring(lblProdId.Text.Count()-3)),
+                int.Parse(lblProdId.Text.Substring(lblProdId.Text.Count() - 3)),
                 1,
                 (int)numQuantity.Value,
                 decimal.Parse(lblTotal.Text.Substring(1)),
@@ -614,7 +612,7 @@ namespace WindowsFormsApp2
                 double.Parse(lblTotal.Text.Substring(1))
                 };
                 #endregion
-                
+
                 #region Clear
                 cmbProdType.Text = "";
                 cmbProdModel.Text = "";
@@ -627,6 +625,8 @@ namespace WindowsFormsApp2
                 numQuantity.Value = 1;
                 numQuantity.Enabled = false;
                 dtpColDel.Enabled = false;
+                btnOrder.Enabled = true;
+
                 #endregion
 
                 if (!columns)
@@ -665,7 +665,7 @@ namespace WindowsFormsApp2
                 && x.ElementAt(4).Equals(values.ElementAt(4))).FirstOrDefault());
 
                     #region Update Stock
-                    
+
                     if ((int.Parse(vals[index].ElementAt(5).ToString()) > int.Parse(values.ElementAt(5).ToString())))
                     {
                         inv.UnitsInStock += (int.Parse(vals[index].ElementAt(5).ToString()) - int.Parse(values.ElementAt(5).ToString()));
@@ -683,8 +683,8 @@ namespace WindowsFormsApp2
                     dgvItems.Show();
                     lblTotal.Text = string.Format("{0:C}", 0.00);
                     lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(6).GetType() == typeof(double) ? (double)x.ElementAt(6) : 0));
-                   
-                    
+
+
 
                 }
                 else if (!vals.Any(x => x.ElementAt(1).Equals(values.ElementAt(1))))
@@ -1119,6 +1119,7 @@ namespace WindowsFormsApp2
         {
             LockProd();
             bool locked = radioCust.Checked == true ? UnlockCust() : LockCust();
+            btnOrder.Enabled = false;
         }
         private void radioProd_CheckedChanged(object sender, EventArgs e)
         {
