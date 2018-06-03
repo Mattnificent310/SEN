@@ -93,7 +93,7 @@ namespace WindowsFormsApp2
                 jobDescs.DataSource = Job.jobs.Select(x => x.JobDesc);
                 cmbJobDescription.DataSource = jobDescs;
                 cmbJobDesc.DataSource = jobDescs;
-                cmbECountry.Items.Clear();
+                //cmbECountry.Items.Clear();
                 cmbECountry.DataSource = Business_Logic_Layer.Location.countries.Select(x => x.Country).ToList();
                 cmbEmpCountry.DataSource = Business_Logic_Layer.Location.countries.Select(x => x.Country).ToList();
                 return true;

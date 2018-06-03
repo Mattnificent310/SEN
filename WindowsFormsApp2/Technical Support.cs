@@ -198,7 +198,7 @@ namespace WindowsFormsApp2
         #region Play Sound
         private void PlaySound(string path)
         {
-            
+
             player.SoundLocation = path;
             player.Load();
             player.Play();
@@ -211,7 +211,7 @@ namespace WindowsFormsApp2
             try
             {
 
-                
+
                 for (var i = 0; i < 100000; i++)
                 {
 
@@ -261,7 +261,7 @@ namespace WindowsFormsApp2
             PlaySound(path2);
             Thread.Sleep(5000);
             player.Stop();
-            
+
         }
         #endregion
 
@@ -371,11 +371,11 @@ namespace WindowsFormsApp2
                     played = true;
                     shown = true;
                 }
-                   
 
-                
-                    
-                
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -405,6 +405,7 @@ namespace WindowsFormsApp2
         }
         private void ClearCust()
         {
+            lblCustId.DataBindings.Clear();
             txtCustName.DataBindings.Clear();
             txtCustSurname.DataBindings.Clear();
             txtCustPhone.DataBindings.Clear();
@@ -458,7 +459,7 @@ namespace WindowsFormsApp2
                     }
                 case "Customer Support":
                     {
-                        
+
                         data = new BindingSource();
                         data.DataSource = Client.clients;
                         dgvTech.DataSource = data;

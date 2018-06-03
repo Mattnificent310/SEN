@@ -108,8 +108,8 @@ namespace Business_Logic_Layer
         }
         public int? Insert(Staff staff)
         {
-            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object> 
-            { { "Country", staff.Country }, { "City", staff.City } }).Rows[0][0];
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
+            { { "Country", staff.Country }, { "City", staff.City }, {"Street", staff.Street } }).Rows[0][0];
             //loc[null, staff.Street, staff.City, staff.Country].LocationId;
 
             return (int?)dh.Insert(new Dictionary<string, object>
@@ -131,7 +131,7 @@ namespace Business_Logic_Layer
         public bool Update(Staff staff)
         {
             int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object> 
-            { { "Country", staff.Country }, { "City", staff.City } }).Rows[0][0];
+            { { "Country", staff.Country }, { "City", staff.City }, {"Street", staff.Street } }).Rows[0][0];
             //loc[null, staff.Street, staff.City, staff.Country].LocationId;
 
             return dh.Update(new Dictionary<string, object>
@@ -144,13 +144,13 @@ namespace Business_Logic_Layer
                 { Cons.table3Col6, staff.ContactNumber },
                 { Cons.table3Col7, staff.EmailAddress },
                 { Cons.table3IdFk2, locId }
-            }, Cons.table3, int.Parse(staff.Identity.Substring(1)).ToString());
+            }, staff.Identity, Cons.table3 );
         }
 
         public bool Delete(int staffId)
         {
-            new Client(Cons.table3);
-            return dh.Delete(int.Parse(staffId.ToString().Substring(1)).ToString());
+            new Staff(Cons.table3);
+            return dh.Delete(staffId.ToString());
         }
         #endregion
 

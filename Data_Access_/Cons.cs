@@ -165,6 +165,18 @@ namespace Data_Access_
                             table16Col3 = "ConfigDetails";
         #endregion
 
-      
+        #region Calls
+        public const string table17 = "tblCalls",
+                            table17Id = "CallID",
+                            table17Col1 = "CallDate",
+                            table17Col2 = "CallTime",
+                            table17Col3 = "CallDuration",
+                            table17Col4 = "CallHoldDuration",
+                            table17IDFK1 = "StaffIDFK",
+                            table17IDFK2 = "ClientIDFK",
+                            table17IDFK3 = "CompanyIDFK";
+        #endregion
+
+
     }
 }
