@@ -1283,6 +1283,11 @@ namespace WindowsFormsApp2
 
         }
 
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {
 
