@@ -563,7 +563,8 @@ namespace WindowsFormsApp2
                     "N/A"
                     );
                 dtpColDel.Value = DateTime.Now.AddDays(1.0);
-                btnOrder.Enabled = true;
+                if (radioCol.Checked != true && radioDel.Checked != true) { btnOrder.Enabled = false; }
+                else btnOrder.Enabled = true;
             }
         }
 
@@ -577,7 +578,9 @@ namespace WindowsFormsApp2
                     "N/A"
                     );
                 dtpColDel.Value = DateTime.Now.AddDays(new Random().Next(2, 14));
-                btnOrder.Enabled = true;
+                
+                if (radioCol.Checked != true && radioDel.Checked != true){ btnOrder.Enabled = false; }
+                else btnOrder.Enabled = true;
             }
 
 
@@ -602,7 +605,7 @@ namespace WindowsFormsApp2
                 #region Values
                 object[] values =
                 {
-                cmbProdModel.Text,
+                lblProdId.Text,
                 txtProdName.Text,
                  radioCol.Checked ? "Collection" : "Delivery",
                 dtpColDel.Value.ToShortDateString(),
@@ -611,13 +614,7 @@ namespace WindowsFormsApp2
                 double.Parse(lblTotal.Text.Substring(1))
                 };
                 #endregion
-
-                #region Update Inventory
-                var inv = new Inventory()[int.Parse(lblProdId.Text.Substring(lblProdId.Text.Length - 3)).ToString()];
-                inv.UnitsInStock -= (int)numQuantity.Value;
-                CRUD.UpdateInventory(inv);
-                #endregion
-
+                
                 #region Clear
                 cmbProdType.Text = "";
                 cmbProdModel.Text = "";
@@ -637,7 +634,7 @@ namespace WindowsFormsApp2
                     #region Columns
                     dgvItems.DataSource = null;
                     dgvItems.DataBindings.Clear();
-                    dgvItems.Columns.Add("ProductModel", "Product Model");
+                    dgvItems.Columns.Add("SerialNo", "Serial No");
                     dgvItems.Columns.Add("ProductName", "Product Name");
                     dgvItems.Columns.Add("OrderType", "Order Type");
                     dgvItems.Columns.Add("OrderDate", "Estimated Date");
@@ -649,6 +646,9 @@ namespace WindowsFormsApp2
                     columns = true;
                     ordered = true;
                 }
+
+                var inv = new Inventory()[int.Parse(lblProdId.Text.Substring(lblProdId.Text.Length - 3)).ToString()];
+
                 if (vals.Any(x => x.ElementAt(0).Equals(values.ElementAt(0))
                 && x.ElementAt(1).Equals(values.ElementAt(1))
                 && x.ElementAt(2).Equals(values.ElementAt(2))
@@ -663,11 +663,28 @@ namespace WindowsFormsApp2
                 && x.ElementAt(2).Equals(values.ElementAt(2))
                 && x.ElementAt(3).Equals(values.ElementAt(3))
                 && x.ElementAt(4).Equals(values.ElementAt(4))).FirstOrDefault());
+
+                    #region Update Stock
+                    
+                    if ((int.Parse(vals[index].ElementAt(5).ToString()) > int.Parse(values.ElementAt(5).ToString())))
+                    {
+                        inv.UnitsInStock += (int.Parse(vals[index].ElementAt(5).ToString()) - int.Parse(values.ElementAt(5).ToString()));
+                    }
+                    else if ((int.Parse(vals[index].ElementAt(5).ToString()) < int.Parse(values.ElementAt(5).ToString())))
+                    {
+                        inv.UnitsInStock -= (int.Parse(values.ElementAt(5).ToString()) - int.Parse(vals[index].ElementAt(5).ToString()));
+
+                    }
+                    CRUD.UpdateInventory(inv);
+                    #endregion
+
                     vals[index] = values;
                     dgvItems.Rows[index].SetValues(values);
                     dgvItems.Show();
                     lblTotal.Text = string.Format("{0:C}", 0.00);
                     lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(6).GetType() == typeof(double) ? (double)x.ElementAt(6) : 0));
+                   
+                    
 
                 }
                 else if (!vals.Any(x => x.ElementAt(1).Equals(values.ElementAt(1))))
@@ -677,6 +694,12 @@ namespace WindowsFormsApp2
                     dgvItems.Show();
                     lblTotal.Text = string.Format("{0:C}", 0.00);
                     lblGrandTotal.Text = string.Format("{0:C}", vals.Sum(x => x.ElementAt(6).GetType() == typeof(double) ? (double)x.ElementAt(6) : 0));
+                    #region Update Stock
+
+                    inv.UnitsInStock -= int.Parse(values.ElementAt(5).ToString());
+                    CRUD.UpdateInventory(inv);
+
+                    #endregion
                 }
                 else
                 {

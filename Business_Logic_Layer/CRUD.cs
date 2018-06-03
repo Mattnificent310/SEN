@@ -48,7 +48,10 @@ namespace Business_Logic_Layer
         #region Products
         public static bool InsertProduct(Product prod)
         {
-            return new Product().Insert(prod) != null ? true : false;
+            var prodId = new Product().Insert(prod);
+            var inv = new Inventory(0, "1001", prod.InStock, 10, prodId.ToString());
+            inv.Insert(inv);
+            return prodId != null && inv != null ? true : false;
         }
         public static bool UpdateProduct(Product prod)
         {

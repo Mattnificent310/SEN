@@ -145,7 +145,7 @@ namespace Business_Logic_Layer
                 { Cons.table2Col2, prod.ProductName },
                 { Cons.table2Col3, prod.UnitPrice },
                 { Cons.table2Col4, prod.Discontinued },
-                { Cons.table2IdFk1, 1//cat[null, prod.ProductType].CategoryId 
+                { Cons.table2IdFk1, new Category()[null, prod.ProductType].CategoryId 
                 }
             }, Cons.table2);
 
@@ -153,8 +153,8 @@ namespace Business_Logic_Layer
 
         public bool Update(Product prod)
         {
-            int catId = 1;//cat[null, prod.ProductType].CategoryId;
-            int invId = 1;//inv[null, null, null, prod.inStock].InventoryID;
+            int catId = new Category()[null, prod.ProductType].CategoryId;
+            
             return dh.Update(new Dictionary<string, object>
             {
                 { Cons.table2Col1, prod.ProductModel },
