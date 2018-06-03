@@ -31,6 +31,8 @@ namespace WindowsFormsApp2
             new Product();
             timer1.Start();
             lblAnswer.Hide();
+            lblCalling.Hide();
+            lblCall.Hide();
 
         }
 
@@ -47,7 +49,9 @@ namespace WindowsFormsApp2
         }
         private void frmTechnicalSupport_Load(object sender, EventArgs e)
         {
-
+            blinker = new BackgroundWorker();
+            blinker.DoWork += Blinker_DoWork;
+            SimulateCall();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -94,14 +98,43 @@ namespace WindowsFormsApp2
         #region Blink
         private void Blink()
         {
-            string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
-            string path1 = @"..\..\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
+            if (lblCall.Visible == true)
+                lblCall.Hide();
+            else
+            {
+                lblCall.Visible = true;
+            }
+            string path = @"..\..\Sounds\WinPhoneIn.wav";
+            string path2 = @"..\..\Sounds\WinPhoneOut.wav";
 
+            if (!played && !answered && !closed && !missed)
+            {
+                PlaySound(path);
+                played = true;
+            }
+            else
+            {
+                if (!shown)
+                {
+                    int index = new Random().Next(0, Client.clients.Count() - 1);
+                    data = new BindingSource();
+                    data.DataSource = Client.clients[index];
+                    dgvTech.DataSource = data;
+                    ReBindCustomer();
+                    dgvTech.Show();
+                    shown = true;
+                }
+                if (!answered && !closed && !missed)
+                {
+                    PlaySound(path2);
+                    played = false;
+                }
 
-            PlaySound(path1);
-            Thread.Sleep(2000);
-            PlaySound(path2);
-
+            }
+            if (missed)
+            {
+                Disable();
+            }
 
         }
         #endregion
@@ -111,13 +144,50 @@ namespace WindowsFormsApp2
         {
             try
             {
-              string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
-                string path1 = @"..\..\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
+                //Random r = new Random();
+                Random rn = new Random();
+                Random rnd = new Random(1000);
+                Thread.Sleep(rn.Next(8000, 30000));
+                //r = new Random();
 
 
-                PlaySound(path1);
-                Thread.Sleep(2000);
-                PlaySound(path2);
+                for (int i = 0; i <= 60 * 60 * 24; i++)
+                {
+                    if (i == new Random(10000).Next(5, 20))
+                    {
+                        missed = true;
+                        btnCall.Invoke((Action)Disable);
+                        i = 60 * 60 * 24;
+                    }
+                    if (missed)
+                    {
+                        missed = false;
+                        played = false;
+                        i = 0;
+
+                        Thread.Sleep(new Random(10000).Next(8000, 30000));
+                    }
+                    Thread.Sleep(2200); // Set fast to slow.
+
+                    blinker.WorkerSupportsCancellation = true;
+                    if (lblCall.InvokeRequired)
+                    {
+                        lblCall.Invoke((Action)Blink);
+                        btnCall.Invoke((Action)Enable);
+                    }
+                    else
+                    {
+                        Blink();
+                    }
+
+                    if (blinker.CancellationPending && blinker.IsBusy)
+                    {
+                        e.Cancel = true;
+
+                        return;
+                    }
+
+                }
             }
             catch (Exception es)
             {
@@ -133,76 +203,7 @@ namespace WindowsFormsApp2
             player.Load();
             player.Play();
         }
-        #endregion
-
-        #region Simulate
-        private void SimulateCall()
-        {
-            lblAnswer.Show();
-            btnCall.Enabled = false;
-            btnEndCall.Enabled = true;
-             string path1 = @"..\..\Sounds\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
-
-
-            PlaySound(path1);
-            
-
-
-            answered = true;
-
-
-            
-
-
-        }
-        #endregion
-
-        #region Enable / Disable
-        private void Enable()
-        {
-            if (btnCall.Enabled == false)
-            {
-                btnCall.Enabled = true;
-                btnEndCall.Enabled = true;
-                //btnHoldCall.Enabled = false;
-                //btnDivertCall.Enabled = false;
-            }
-
-            lblElapsed.Show();
-            btnCall.Enabled = false;
-            //btnHoldCall.Enabled = true;
-            //btnDivertCall.Enabled = true;
-
-
-
-        }
-        private void Disable()
-        {
-            if (missed)
-            {
-                btnCall.Enabled = false;
-                shown = false;
-                data = new BindingSource();
-                ClearAll(this.tabPage1);
-                if (blinker.IsBusy)
-                {
-                    btnCall.Enabled = false;
-                }
-
-            }
-        }
-        #endregion
-
-        #region End Session
-        private void EndSession()
-        {
-            
-                this.Close();
-                this.Dispose();
-                closed = true;
-            
-        }
-        #endregion
+        #endregion        
 
         #region Start Counting
         private void StartCounting()
@@ -247,28 +248,129 @@ namespace WindowsFormsApp2
         }
         #endregion
 
+        #region Outgoing
+        private void OutgoingCall()
+        {
+            string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
+            btnCall.Enabled = false;
+            btnEndCall.Enabled = true;
+            string path1 = @"..\..\Sounds\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
+
+            PlaySound(path1);
+            Thread.Sleep(4000);
+            PlaySound(path2);
+            Thread.Sleep(5000);
+            player.Stop();
+            
+        }
+        #endregion
+
+        #region Simulate
+        private void SimulateCall()
+        {
+            lblCall.Hide();
+            lblAnswer.Hide();
+            btnCall.Enabled = true;
+            btnEndCall.Enabled = false;
+            if (blinker.IsBusy == false)
+            {
+
+                answered = false;
+                played = false;
+                shown = false;
+
+                blinker.RunWorkerAsync();
+
+            }
+        }
+        #endregion
+
+        #region Enable / Disable
+        private void Enable()
+        {
+            if (btnCall.Enabled == false)
+            {
+                btnCall.Enabled = true;
+                lblElapsed.Hide();
+                //btnHoldCall.Enabled = false;
+                //btnDivertCall.Enabled = false;
+            }
+            if (answered)
+            {
+                lblElapsed.Show();
+                btnCall.Enabled = false;
+                lblCall.Hide();
+                //btnHoldCall.Enabled = true;
+                //btnDivertCall.Enabled = true;
+            }
+
+
+        }
+        private void Disable()
+        {
+            if (missed)
+            {
+                btnCall.Enabled = false;
+                lblCall.Hide();
+                shown = false;
+                data = new BindingSource();
+                dgvTech.DataSource = data;
+                ClearAll(this.tabPage1);
+                if (blinker.IsBusy)
+                {
+
+                    btnCall.Enabled = false;
+                    lblCall.Hide();
+
+                }
+
+            }
+        }
+        #endregion
+
+        #region End Session
+        private void EndSession()
+        {
+            if (blinker.IsBusy)
+            {
+                blinker.WorkerSupportsCancellation = true;
+                blinker.CancelAsync();
+                this.Close();
+                this.Dispose();
+                closed = true;
+            }
+        }
+        #endregion
+
+
         #region Answer Call
         private void btnCall_Click(object sender, EventArgs e)
         {
             try
             {
-                SimulateCall();
-                string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
-                Thread.Sleep(4000);
-                PlaySound(path2);
-                Thread.Sleep(5000);
-                player.Stop();
-                thread = new Thread(StartCounting);
+                if (cmbSuportType.Text != string.Empty)
+                {
+                    lblCalling.Visible = true;
+                    OutgoingCall();
+                    lblCalling.Show();
+                }
+                else
+                if (blinker.IsBusy)
+                {
+                    blinker.CancelAsync();
+                    thread = new Thread(StartCounting);
                     thread.IsBackground = true;
                     thread.Start();
                     btnCall.Enabled = false;
                     btnEndCall.Enabled = true;
-
                     //btnHoldCall.Enabled = true;
                     //btnDivertCall.Enabled = true;
                     unhold = true;
                     lblElapsed.Show();
-
+                    answered = true;
+                    played = true;
+                    shown = true;
+                }
                    
 
                 
@@ -289,6 +391,26 @@ namespace WindowsFormsApp2
         }
         #endregion
 
+        #endregion
+
+        #region Clear & Bind
+        private void ReBindCustomer()
+        {
+            ClearCust();
+            lblCustId.DataBindings.Add("Text", data, "Identity");
+            txtCustName.DataBindings.Add("Text", data, "Name");
+            txtCustSurname.DataBindings.Add("Text", data, "Surname");
+            txtCustPhone.DataBindings.Add("Text", data, "ContactNumber");
+            txtCustEmail.DataBindings.Add("Text", data, "EmailAddress");
+        }
+        private void ClearCust()
+        {
+            txtCustName.DataBindings.Clear();
+            txtCustSurname.DataBindings.Clear();
+            txtCustPhone.DataBindings.Clear();
+            txtCustEmail.DataBindings.Clear();
+
+        }
         #endregion
 
         #region Search
@@ -336,9 +458,11 @@ namespace WindowsFormsApp2
                     }
                 case "Customer Support":
                     {
+                        
                         data = new BindingSource();
                         data.DataSource = Client.clients;
                         dgvTech.DataSource = data;
+                        ReBindCustomer();
                         break;
                     }
                 default:

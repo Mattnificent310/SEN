@@ -36,6 +36,8 @@
             treeNode2});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblElapsed = new System.Windows.Forms.Label();
+            this.lblAnswer = new System.Windows.Forms.Label();
             this.btnEndCall = new System.Windows.Forms.Button();
             this.btnCall = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
@@ -51,7 +53,6 @@
             this.lblTaskType = new System.Windows.Forms.Label();
             this.txtProdNo = new System.Windows.Forms.TextBox();
             this.lblProdNo = new System.Windows.Forms.Label();
-            this.txtCustName = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtCustEmail = new System.Windows.Forms.TextBox();
@@ -67,8 +68,10 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblAnswer = new System.Windows.Forms.Label();
-            this.lblElapsed = new System.Windows.Forms.Label();
+            this.lblCall = new System.Windows.Forms.Label();
+            this.lblCustId = new System.Windows.Forms.Label();
+            this.txtCustName = new System.Windows.Forms.TextBox();
+            this.lblCalling = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -91,6 +94,10 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.lblCalling);
+            this.tabPage1.Controls.Add(this.txtCustName);
+            this.tabPage1.Controls.Add(this.lblCustId);
+            this.tabPage1.Controls.Add(this.lblCall);
             this.tabPage1.Controls.Add(this.lblElapsed);
             this.tabPage1.Controls.Add(this.lblAnswer);
             this.tabPage1.Controls.Add(this.btnEndCall);
@@ -108,7 +115,6 @@
             this.tabPage1.Controls.Add(this.lblTaskType);
             this.tabPage1.Controls.Add(this.txtProdNo);
             this.tabPage1.Controls.Add(this.lblProdNo);
-            this.tabPage1.Controls.Add(this.txtCustName);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.txtCustEmail);
@@ -126,6 +132,23 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // lblElapsed
+            // 
+            this.lblElapsed.AutoSize = true;
+            this.lblElapsed.Location = new System.Drawing.Point(753, 319);
+            this.lblElapsed.Name = "lblElapsed";
+            this.lblElapsed.Size = new System.Drawing.Size(0, 16);
+            this.lblElapsed.TabIndex = 88;
+            // 
+            // lblAnswer
+            // 
+            this.lblAnswer.AutoSize = true;
+            this.lblAnswer.Location = new System.Drawing.Point(753, 281);
+            this.lblAnswer.Name = "lblAnswer";
+            this.lblAnswer.Size = new System.Drawing.Size(86, 16);
+            this.lblAnswer.TabIndex = 87;
+            this.lblAnswer.Text = "In Progress...";
             // 
             // btnEndCall
             // 
@@ -273,14 +296,6 @@
             this.lblProdNo.Size = new System.Drawing.Size(73, 16);
             this.lblProdNo.TabIndex = 72;
             this.lblProdNo.Text = "Product No";
-            // 
-            // txtCustName
-            // 
-            this.txtCustName.Location = new System.Drawing.Point(129, 256);
-            this.txtCustName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCustName.Name = "txtCustName";
-            this.txtCustName.Size = new System.Drawing.Size(226, 22);
-            this.txtCustName.TabIndex = 71;
             // 
             // label8
             // 
@@ -432,22 +447,40 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // lblAnswer
+            // lblCall
             // 
-            this.lblAnswer.AutoSize = true;
-            this.lblAnswer.Location = new System.Drawing.Point(753, 281);
-            this.lblAnswer.Name = "lblAnswer";
-            this.lblAnswer.Size = new System.Drawing.Size(86, 16);
-            this.lblAnswer.TabIndex = 87;
-            this.lblAnswer.Text = "In Progress...";
+            this.lblCall.AutoSize = true;
+            this.lblCall.Location = new System.Drawing.Point(755, 297);
+            this.lblCall.Name = "lblCall";
+            this.lblCall.Size = new System.Drawing.Size(83, 16);
+            this.lblCall.TabIndex = 89;
+            this.lblCall.Text = "Incomming...";
             // 
-            // lblElapsed
+            // lblCustId
             // 
-            this.lblElapsed.AutoSize = true;
-            this.lblElapsed.Location = new System.Drawing.Point(753, 319);
-            this.lblElapsed.Name = "lblElapsed";
-            this.lblElapsed.Size = new System.Drawing.Size(0, 16);
-            this.lblElapsed.TabIndex = 88;
+            this.lblCustId.AutoSize = true;
+            this.lblCustId.BackColor = System.Drawing.Color.Transparent;
+            this.lblCustId.Location = new System.Drawing.Point(147, 259);
+            this.lblCustId.Name = "lblCustId";
+            this.lblCustId.Size = new System.Drawing.Size(0, 16);
+            this.lblCustId.TabIndex = 90;
+            // 
+            // txtCustName
+            // 
+            this.txtCustName.Location = new System.Drawing.Point(129, 253);
+            this.txtCustName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCustName.Name = "txtCustName";
+            this.txtCustName.Size = new System.Drawing.Size(226, 22);
+            this.txtCustName.TabIndex = 91;
+            // 
+            // lblCalling
+            // 
+            this.lblCalling.AutoSize = true;
+            this.lblCalling.Location = new System.Drawing.Point(755, 265);
+            this.lblCalling.Name = "lblCalling";
+            this.lblCalling.Size = new System.Drawing.Size(59, 16);
+            this.lblCalling.TabIndex = 92;
+            this.lblCalling.Text = "Calling...";
             // 
             // frmTechnicalSupport
             // 
@@ -482,7 +515,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnMainMenu;
         private System.Windows.Forms.DataGridView dgvTech;
-        private System.Windows.Forms.TextBox txtCustName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtCustEmail;
@@ -512,5 +544,9 @@
         private System.Windows.Forms.TreeView tvTechTree;
         private System.Windows.Forms.Label lblElapsed;
         private System.Windows.Forms.Label lblAnswer;
+        private System.Windows.Forms.Label lblCall;
+        private System.Windows.Forms.Label lblCalling;
+        private System.Windows.Forms.TextBox txtCustName;
+        private System.Windows.Forms.Label lblCustId;
     }
 }
