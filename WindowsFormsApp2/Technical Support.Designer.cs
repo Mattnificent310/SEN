@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Assigned Jobs");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Unassigned Jobs");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Technicians0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnEndCall = new System.Windows.Forms.Button();
@@ -381,6 +386,15 @@
             // 
             this.tvTechTree.Location = new System.Drawing.Point(94, 42);
             this.tvTechTree.Name = "tvTechTree";
+            treeNode1.Name = "AssignedNode";
+            treeNode1.Text = "Assigned Jobs";
+            treeNode2.Name = "UnassignedNode";
+            treeNode2.Text = "Unassigned Jobs";
+            treeNode3.ForeColor = System.Drawing.Color.Black;
+            treeNode3.Name = "TechnicianNode()";
+            treeNode3.Text = "Technicians0";
+            this.tvTechTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode3});
             this.tvTechTree.Size = new System.Drawing.Size(785, 377);
             this.tvTechTree.TabIndex = 87;
             this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);

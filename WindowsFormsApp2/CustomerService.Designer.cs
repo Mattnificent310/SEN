@@ -122,6 +122,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustSurname = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgvContractDetails = new System.Windows.Forms.DataGridView();
+            this.btnUpdateCtr = new System.Windows.Forms.Button();
+            this.btnIssueCtr = new System.Windows.Forms.Button();
             this.dtpCtrDate = new System.Windows.Forms.DateTimePicker();
             this.lblCtrDate = new System.Windows.Forms.Label();
             this.cmbCtrTerm = new System.Windows.Forms.ComboBox();
@@ -134,9 +137,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnIssueCtr = new System.Windows.Forms.Button();
-            this.btnUpdateCtr = new System.Windows.Forms.Button();
-            this.dgvContractDetails = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
@@ -146,8 +146,8 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContractDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -3952,7 +3952,7 @@
             this.cmbCustMethod.Items.AddRange(new object[] {
             "Phone",
             "Email"});
-            this.cmbCustMethod.Location = new System.Drawing.Point(159, 518);
+            this.cmbCustMethod.Location = new System.Drawing.Point(156, 518);
             this.cmbCustMethod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCustMethod.Name = "cmbCustMethod";
             this.cmbCustMethod.Size = new System.Drawing.Size(252, 24);
@@ -6999,7 +6999,7 @@
             this.cmbCustGender.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cmbCustGender.Location = new System.Drawing.Point(153, 458);
+            this.cmbCustGender.Location = new System.Drawing.Point(156, 458);
             this.cmbCustGender.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCustGender.Name = "cmbCustGender";
             this.cmbCustGender.Size = new System.Drawing.Size(252, 24);
@@ -10060,7 +10060,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Location = new System.Drawing.Point(153, 438);
+            this.label5.Location = new System.Drawing.Point(156, 438);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 16);
@@ -10158,6 +10158,38 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Contract";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dgvContractDetails
+            // 
+            this.dgvContractDetails.BackgroundColor = System.Drawing.SystemColors.MenuBar;
+            this.dgvContractDetails.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvContractDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContractDetails.Location = new System.Drawing.Point(37, 26);
+            this.dgvContractDetails.Name = "dgvContractDetails";
+            this.dgvContractDetails.Size = new System.Drawing.Size(810, 236);
+            this.dgvContractDetails.TabIndex = 72;
+            // 
+            // btnUpdateCtr
+            // 
+            this.btnUpdateCtr.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnUpdateCtr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateCtr.Location = new System.Drawing.Point(633, 547);
+            this.btnUpdateCtr.Name = "btnUpdateCtr";
+            this.btnUpdateCtr.Size = new System.Drawing.Size(190, 30);
+            this.btnUpdateCtr.TabIndex = 71;
+            this.btnUpdateCtr.Text = "Update";
+            this.btnUpdateCtr.UseVisualStyleBackColor = false;
+            // 
+            // btnIssueCtr
+            // 
+            this.btnIssueCtr.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnIssueCtr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIssueCtr.Location = new System.Drawing.Point(633, 496);
+            this.btnIssueCtr.Name = "btnIssueCtr";
+            this.btnIssueCtr.Size = new System.Drawing.Size(190, 30);
+            this.btnIssueCtr.TabIndex = 70;
+            this.btnIssueCtr.Text = "Issue Contract";
+            this.btnIssueCtr.UseVisualStyleBackColor = false;
             // 
             // dtpCtrDate
             // 
@@ -10279,38 +10311,6 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // btnIssueCtr
-            // 
-            this.btnIssueCtr.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnIssueCtr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIssueCtr.Location = new System.Drawing.Point(633, 496);
-            this.btnIssueCtr.Name = "btnIssueCtr";
-            this.btnIssueCtr.Size = new System.Drawing.Size(190, 30);
-            this.btnIssueCtr.TabIndex = 70;
-            this.btnIssueCtr.Text = "Issue Contract";
-            this.btnIssueCtr.UseVisualStyleBackColor = false;
-            // 
-            // btnUpdateCtr
-            // 
-            this.btnUpdateCtr.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.btnUpdateCtr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateCtr.Location = new System.Drawing.Point(633, 547);
-            this.btnUpdateCtr.Name = "btnUpdateCtr";
-            this.btnUpdateCtr.Size = new System.Drawing.Size(190, 30);
-            this.btnUpdateCtr.TabIndex = 71;
-            this.btnUpdateCtr.Text = "Update";
-            this.btnUpdateCtr.UseVisualStyleBackColor = false;
-            // 
-            // dgvContractDetails
-            // 
-            this.dgvContractDetails.BackgroundColor = System.Drawing.SystemColors.MenuBar;
-            this.dgvContractDetails.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvContractDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContractDetails.Location = new System.Drawing.Point(37, 26);
-            this.dgvContractDetails.Name = "dgvContractDetails";
-            this.dgvContractDetails.Size = new System.Drawing.Size(810, 236);
-            this.dgvContractDetails.TabIndex = 72;
-            // 
             // frmCustomerService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -10343,8 +10343,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContractDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

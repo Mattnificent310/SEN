@@ -112,11 +112,10 @@ namespace Business_Logic_Layer
             DataTable clientTbl = DataHandler.GetData(Cons.table1);
             foreach (DataRow item in clientTbl.Rows)
             {
-                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object> 
-                { { "LocationID", item[Cons.table1IdFk] } }).Rows[0];
-                
+                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object> { { "LocationID", item[Cons.table1IdFk] } }).Rows[0];
+
                 clients.Add(new Client(
-                 string.Format("{0}{1}", unique[new Random().Next(0, 4)], 
+                 string.Format("{0}{1}", unique[new Random().Next(0, 4)],
                 item[Cons.table1Id].ToString().PadLeft(8, '0')),
                 item[Cons.table1Col1].ToString(),
                 item[Cons.table1Col2].ToString(),
@@ -131,9 +130,9 @@ namespace Business_Logic_Layer
                 row[Cons.table6Col1].ToString(),
                 row[Cons.table5Col1].ToString(),
                 row[Cons.table4Col1].ToString()
-                //loc[(int)item[Cons.table1IdFk]].Country,
-                //loc.City,
-                //loc.Street
+                    //loc[(int)item[Cons.table1IdFk]].Country,
+                    //loc.City,
+                    //loc.Street
                 ));
             }
         }
@@ -211,10 +210,9 @@ namespace Business_Logic_Layer
         #region CRUD
         public int? Insert(Client client)
         {
-            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
-            { {"Country",client.Country }, {"City",client.City }, {"Street", client.Street} }).Rows[0][0];
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object> { { "Country", client.Country }, { "City", client.City }, { "Street", client.Street } }).Rows[0][0];
             //loc[null, client.Street, client.City, client.Country].LocationId;
-            
+
             return (int?)dh.Insert(new Dictionary<string, object>
             {
             { Cons.table1Col1, client.Title },
@@ -229,11 +227,10 @@ namespace Business_Logic_Layer
         }
 
         public bool Update(Client client)
-        {            
-            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object>
-            { {"Country",client.Country }, {"City",client.City }, {"Street", client.Street} }).Rows[0][0];
+        {
+            int locId = (int)new StoredProcedure().GetProcs("sp_SearchLocation", new Dictionary<string, object> { { "Country", client.Country }, { "City", client.City }, { "Street", client.Street } }).Rows[0][0];
             //loc[null, client.Street, client.City, client.Country].LocationId;
-            
+
             return dh.Update(new Dictionary<string, object>
             {
                 { Cons.table1Col1, client.Title },
@@ -242,13 +239,14 @@ namespace Business_Logic_Layer
                 { Cons.table1Col5, client.Gender},
                 { Cons.table1Col6, client.ContactNumber },
                 { Cons.table1Col7, client.EmailAddress },
+                { Cons.table1Col8, client.ContactMethod },
                 { Cons.table1IdFk, locId }
             }, int.Parse(client.Identity.Substring(1)).ToString(), Cons.table1);
 
         }
 
         public bool Delete(int clientId)
-        {            
+        {
             return dh.Delete(clientId.ToString(), Cons.table1);
         }
 
