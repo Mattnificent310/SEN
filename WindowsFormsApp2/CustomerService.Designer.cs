@@ -3723,6 +3723,11 @@
             // cmbCCity
             // 
             this.cmbCCity.FormattingEnabled = true;
+            this.cmbCCity.Items.AddRange(new object[] {
+            "Pretoria",
+            "Rustenburg",
+            "Johannesburg",
+            "Brits"});
             this.cmbCCity.Location = new System.Drawing.Point(551, 298);
             this.cmbCCity.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCCity.Name = "cmbCCity";
