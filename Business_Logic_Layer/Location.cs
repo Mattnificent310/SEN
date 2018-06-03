@@ -17,7 +17,8 @@ namespace Business_Logic_Layer
         private string city;
         private string street;
         private static Data_Access_Layer.DataHandler dh = new DataHandler(Cons.table4);
-        private static List<Location> locs;
+        public static List<Location> locs;
+        public static  List<Location> countries;
         private static Dictionary<string, object> values;
         private static bool notFound = false;
 
@@ -36,24 +37,27 @@ namespace Business_Logic_Layer
 
             foreach (DataRow item in locTbl.Rows)
             {
-                //DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
-                //{
-                //    {"LocationID",(int)item[Cons.table4IdFk] }
-                //}).Rows[0];
+                DataRow row = new StoredProcedure().GetProcs("sp_SearchLocationByID", new Dictionary<string, object>
+                {
+                    {"LocationID",(int)item[Cons.table4IdFk] }
+                }).Rows[0];
                 locs.Add(new Location(
                   (int)item[Cons.table4Id],
                        item[Cons.table4Col1].ToString().Trim(),
-                       "City",
-                       "Country"
-                       //row[Cons.table5Col1].ToString(),
-                       //row[Cons.table6Col1].ToString()
+                       row[Cons.table5Col1].ToString(),
+                       row[Cons.table6Col1].ToString()
 
                        //DataHandler.Search(item[Cons.table4IdFk].ToString(), Cons.table5)[Cons.table5Col1].ToString(),
                        //DataHandler.Search(DataHandler.Search(item[Cons.table4IdFk].ToString(),
                        //Cons.table5)[Cons.table5IdFk].ToString(),
                        //Cons.table6)[Cons.table6Col1].ToString()
-
                   ));
+            }
+            countries = new List<Location>();
+            DataRowCollection rows = new StoredProcedure().ShowAll("sp_GetCountries").Rows;
+            foreach (DataRow item in rows)
+            {
+                countries.Add(new Location(0,"","",item[Cons.table6Col1].ToString()));
             }
         }
 
