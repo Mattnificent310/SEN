@@ -28,7 +28,7 @@ namespace WindowsFormsApp2
         public void Login(Staff staf)
         {
             if (!staf.Department.Equals("Administrator"))
-            {               
+            {
                 this.btnMainMenu.Text = "Log Out";
             }
             menu.Login(staf);
@@ -93,6 +93,9 @@ namespace WindowsFormsApp2
                 jobDescs.DataSource = Job.jobs.Select(x => x.JobDesc);
                 cmbJobDescription.DataSource = jobDescs;
                 cmbJobDesc.DataSource = jobDescs;
+                cmbECountry.Items.Clear();
+                cmbECountry.DataSource = Business_Logic_Layer.Location.countries.Select(x => x.Country).ToList();
+                cmbEmpCountry.DataSource = Business_Logic_Layer.Location.countries.Select(x => x.Country).ToList();
                 return true;
             }
             return false;
@@ -110,7 +113,7 @@ namespace WindowsFormsApp2
             }
             else
             {
-                this.Hide();                
+                this.Hide();
                 menu.Show();
             }
         }
@@ -326,5 +329,15 @@ namespace WindowsFormsApp2
 
         }
         #endregion
+
+        private void cmbEmpTitle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbEmpCity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
