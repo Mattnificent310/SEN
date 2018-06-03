@@ -57,11 +57,13 @@
             this.dgvTech = new System.Windows.Forms.DataGridView();
             this.btnMainMenu = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tvTechTree = new System.Windows.Forms.TreeView();
             this.lblLogin = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tvTechTree = new System.Windows.Forms.TreeView();
+            this.lblAnswer = new System.Windows.Forms.Label();
+            this.lblElapsed = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -84,6 +86,8 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.lblElapsed);
+            this.tabPage1.Controls.Add(this.lblAnswer);
             this.tabPage1.Controls.Add(this.btnEndCall);
             this.tabPage1.Controls.Add(this.btnCall);
             this.tabPage1.Controls.Add(this.btnReset);
@@ -128,6 +132,7 @@
             this.btnEndCall.Size = new System.Drawing.Size(90, 79);
             this.btnEndCall.TabIndex = 86;
             this.btnEndCall.UseVisualStyleBackColor = true;
+            this.btnEndCall.Click += new System.EventHandler(this.btnEndCall_Click_1);
             // 
             // btnCall
             // 
@@ -139,6 +144,7 @@
             this.btnCall.Size = new System.Drawing.Size(90, 79);
             this.btnCall.TabIndex = 85;
             this.btnCall.UseVisualStyleBackColor = true;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // btnReset
             // 
@@ -371,6 +377,14 @@
             this.tabPage2.Text = "Tech Tree";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tvTechTree
+            // 
+            this.tvTechTree.Location = new System.Drawing.Point(94, 42);
+            this.tvTechTree.Name = "tvTechTree";
+            this.tvTechTree.Size = new System.Drawing.Size(785, 377);
+            this.tvTechTree.TabIndex = 87;
+            this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
+            // 
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
@@ -404,13 +418,22 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // tvTechTree
+            // lblAnswer
             // 
-            this.tvTechTree.Location = new System.Drawing.Point(94, 42);
-            this.tvTechTree.Name = "tvTechTree";
-            this.tvTechTree.Size = new System.Drawing.Size(785, 377);
-            this.tvTechTree.TabIndex = 87;
-            this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
+            this.lblAnswer.AutoSize = true;
+            this.lblAnswer.Location = new System.Drawing.Point(753, 281);
+            this.lblAnswer.Name = "lblAnswer";
+            this.lblAnswer.Size = new System.Drawing.Size(86, 16);
+            this.lblAnswer.TabIndex = 87;
+            this.lblAnswer.Text = "In Progress...";
+            // 
+            // lblElapsed
+            // 
+            this.lblElapsed.AutoSize = true;
+            this.lblElapsed.Location = new System.Drawing.Point(753, 319);
+            this.lblElapsed.Name = "lblElapsed";
+            this.lblElapsed.Size = new System.Drawing.Size(0, 16);
+            this.lblElapsed.TabIndex = 88;
             // 
             // frmTechnicalSupport
             // 
@@ -473,5 +496,7 @@
         private System.Windows.Forms.Button btnEndCall;
         private System.Windows.Forms.Button btnCall;
         private System.Windows.Forms.TreeView tvTechTree;
+        private System.Windows.Forms.Label lblElapsed;
+        private System.Windows.Forms.Label lblAnswer;
     }
 }

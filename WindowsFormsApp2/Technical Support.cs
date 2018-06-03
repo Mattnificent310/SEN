@@ -30,6 +30,7 @@ namespace WindowsFormsApp2
             new Client();
             new Product();
             timer1.Start();
+            lblAnswer.Hide();
 
         }
 
@@ -82,46 +83,25 @@ namespace WindowsFormsApp2
         static bool closed = false;
         static bool hold = false;
         static bool unhold = false;
+        static bool shown = false;
         static int x = 0;
+        static System.Media.SoundPlayer player =
+                new System.Media.SoundPlayer();
+        static List<Client> callers = new List<Client>();
         private delegate void DisplayCountDelegate(int i);
         #endregion
 
         #region Blink
         private void Blink()
         {
-            //if (lblCall.Visible == true)
-            //    lblCall.Visible = false;
-            //else
-            //{
-            //    lblCall.Visible = true;
-            string path = @"C:\Users\MC\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneIn.wav";
-            string path2 = @"C:\Users\MC\Desktop\SEN 321\Assignments\Project\SHS Management System\WindowsFormsApplication1\Images\WinPhoneOut.wav";
+            string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
+            string path1 = @"..\..\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
 
-            if (!played && !answered && !closed && !missed)
-            {
-                PlaySound(path);
-                played = true;
-            }
-            else
-            {
-                if (!answered && !closed && !missed)
-                {
 
-                    Client c = new Client();
-                    List<Client> entities = new List<Client>();
-                    foreach (var item in Client.clients.Where(x => x == c))
-                    {
-                        //Add Callers
-                    }
-                    //Populate();
-                    PlaySound(path2);
-                    played = false;
-                }
-            }
-            if (missed)
-            {
-                Disable();
-            }
+            PlaySound(path1);
+            Thread.Sleep(2000);
+            PlaySound(path2);
+
 
         }
         #endregion
@@ -131,60 +111,16 @@ namespace WindowsFormsApp2
         {
             try
             {
-                Random r = new Random();
-                Random rn = new Random();
-                Random rnd = new Random(1000);
-                Thread.Sleep(rn.Next(8000, 30000));
-                //string[] calls = new string[obh.CallCenter().Count()];
-                for (int i = 0; i < 1000; i++)
-                {
-                    //calls[i] = obh.ShowClient()[i].ContactNumber;
-                }
-                r = new Random();
+              string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
+                string path1 = @"..\..\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
 
-                //phone = calls[r.Next(0, calls.Length)];
-                for (int i = 0; i <= 60 * 60 * 24; i++)
-                {
-                    if (i == 20)
-                    {
-                        missed = true;
-                        btnCall.Invoke((Action)Disable);
-                        i = 60 * 60 * 24;
-                    }
-                    if (missed)
-                    {
-                        missed = false;
-                        i = 0;
-                        rn = new Random();
-                        //phone = calls[rn.Next(0, calls.Length)];
-                        rn = new Random();
-                        Thread.Sleep(rn.Next(8000, 30000));
-                    }
-                    Thread.Sleep(1400); // Set fast to slow.
 
-                    blinker.WorkerSupportsCancellation = true;
-                    if (/*lblCall.InvokeRequired*/true)
-                    {
-                        //lblCall.Invoke((Action)blink);
-                        btnCall.Invoke((Action)Enable);
-                    }
-                    else
-                    {
-                        Blink();
-                    }
-
-                    if (blinker.CancellationPending && blinker.IsBusy)
-                    {
-                        e.Cancel = true;
-
-                        return;
-                    }
-
-                }
+                PlaySound(path1);
+                Thread.Sleep(2000);
+                PlaySound(path2);
             }
             catch (Exception es)
             {
-                MessageBox.Show("Connection Lost to Call Distribution System (CDS)", "Connection Lost", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
         #endregion
@@ -192,8 +128,7 @@ namespace WindowsFormsApp2
         #region Play Sound
         private void PlaySound(string path)
         {
-            System.Media.SoundPlayer player =
-                new System.Media.SoundPlayer();
+            
             player.SoundLocation = path;
             player.Load();
             player.Play();
@@ -203,15 +138,22 @@ namespace WindowsFormsApp2
         #region Simulate
         private void SimulateCall()
         {
+            lblAnswer.Show();
+            btnCall.Enabled = false;
+            btnEndCall.Enabled = true;
+             string path1 = @"..\..\Sounds\Phone_Dialing_With_Dialtone-KevanGC-721344923.wav";
 
-            if (blinker.IsBusy == false)
-            {
 
-                answered = false;
+            PlaySound(path1);
+            
 
-                blinker.RunWorkerAsync();
 
-            }
+            answered = true;
+
+
+            
+
+
         }
         #endregion
 
@@ -221,17 +163,16 @@ namespace WindowsFormsApp2
             if (btnCall.Enabled == false)
             {
                 btnCall.Enabled = true;
-                //lblElapsed.Visible = false;
+                btnEndCall.Enabled = true;
                 //btnHoldCall.Enabled = false;
                 //btnDivertCall.Enabled = false;
             }
-            if (answered)
-            {
-                //lblElapsed.Visible = true;
-                btnCall.Enabled = false;
-                //btnHoldCall.Enabled = true;
-                //btnDivertCall.Enabled = true;
-            }
+
+            lblElapsed.Show();
+            btnCall.Enabled = false;
+            //btnHoldCall.Enabled = true;
+            //btnDivertCall.Enabled = true;
+
 
 
         }
@@ -240,13 +181,12 @@ namespace WindowsFormsApp2
             if (missed)
             {
                 btnCall.Enabled = false;
-                //lblCall.Visible = false;
+                shown = false;
+                data = new BindingSource();
+                ClearAll(this.tabPage1);
                 if (blinker.IsBusy)
                 {
-
                     btnCall.Enabled = false;
-                    //lblCall.Visible = false;
-
                 }
 
             }
@@ -256,14 +196,11 @@ namespace WindowsFormsApp2
         #region End Session
         private void EndSession()
         {
-            if (blinker.IsBusy)
-            {
-                blinker.WorkerSupportsCancellation = true;
-                blinker.CancelAsync();
+            
                 this.Close();
                 this.Dispose();
                 closed = true;
-            }
+            
         }
         #endregion
 
@@ -273,11 +210,11 @@ namespace WindowsFormsApp2
             try
             {
 
-
+                
                 for (var i = 0; i < 100000; i++)
                 {
 
-                    //lblElapsed.Invoke(new DisplayCountDelegate(DisplayCount), i);
+                    lblElapsed.Invoke(new DisplayCountDelegate(DisplayCount), i);
                     Thread.Sleep(1000);
 
 
@@ -294,17 +231,13 @@ namespace WindowsFormsApp2
         private void DisplayCount(int i)
         {
 
-            if (/*lblCall.Visible == false*/true)
-            {
-                //lblAnswer.Visible = true;
-            }
-            if (/*btnHoldCall.Enabled == false*/true)
-            {
-                //lblElapsed.Text = SecondsToMinutes(x++);
-            }
+
+            lblAnswer.Show();
+            lblElapsed.Text = SecondsToMinutes(x++);
+
             if (unhold == true)
             {
-                //lblElapsed.Text = SecondsToMinutes(i);
+                lblElapsed.Text = SecondsToMinutes(i);
             }
         }
         public static string SecondsToMinutes(int seconds)
@@ -319,28 +252,28 @@ namespace WindowsFormsApp2
         {
             try
             {
-                if (blinker.IsBusy)
-                {
-                    blinker.CancelAsync();
-                    thread = new Thread(StartCounting);
+                SimulateCall();
+                string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
+                Thread.Sleep(4000);
+                PlaySound(path2);
+                Thread.Sleep(5000);
+                player.Stop();
+                thread = new Thread(StartCounting);
                     thread.IsBackground = true;
                     thread.Start();
                     btnCall.Enabled = false;
                     btnEndCall.Enabled = true;
+
                     //btnHoldCall.Enabled = true;
                     //btnDivertCall.Enabled = true;
                     unhold = true;
-                    //lblElapsed.Visible = true;
-                    answered = true;
-                }
-                if (hold)
-                {
-                    unhold = true;
-                    btnCall.Enabled = false;
-                    //btnHoldCall.Enabled = true;
-                    //lblHold.Visible = false;
-                    //lblEnd.Visible = false;
-                }
+                    lblElapsed.Show();
+
+                   
+
+                
+                    
+                
             }
             catch (Exception ex)
             {
@@ -352,27 +285,7 @@ namespace WindowsFormsApp2
         #region End Call
         private void btnEndCall_Click_1(object sender, EventArgs e)
         {
-            //lblEnd.Visible = true;
-            thread.Abort();
-            btnCall.Enabled = true;
-            btnEndCall.Enabled = false;
-            //lblCall.Visible = false;
-            //lblAnswer.Visible = false;
-            //lblHold.Visible = false;
-            //btnHoldCall.Enabled = false;
-            //btnDivertCall.Enabled = false;
-            //btnAnswerCall.Enabled = false;
-            if (blinker.IsBusy)
-            {
-                blinker.WorkerSupportsCancellation = true;
-                blinker.CancelAsync();
-            }
-            x = 0;
-            Thread.Sleep(15000);
-            //lblElapsed.Visible = false;
-            //lblEnd.Visible = false;
-            answered = false;
-            SimulateCall();
+
         }
         #endregion
 
@@ -432,7 +345,7 @@ namespace WindowsFormsApp2
                     break;
             }
         }
-        #endregion       
+        #endregion
 
         #region Validation
         private Dictionary<Type, Action<object>> actions = new Dictionary<Type, Action<object>>
