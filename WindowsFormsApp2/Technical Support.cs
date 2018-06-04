@@ -34,7 +34,6 @@ namespace WindowsFormsApp2
             lblAnswer.Hide();
             lblCalling.Hide();
             lblCall.Hide();
-            radioCall.Enabled = false;
 
         }
 
@@ -375,6 +374,7 @@ namespace WindowsFormsApp2
                     
                     OutgoingCall();
                     lblCalling.Hide();
+                    radioCall.Enabled = false;
                 }
                 else
                 if (blinker.IsBusy)
@@ -431,7 +431,8 @@ namespace WindowsFormsApp2
             dgvTech.DataSource = null;
             btnBookTask.Enabled = false;
             lblCall.Text = "Incomming...";
-            radioCall.Enabled = false;
+            radioCall.Enabled = true;
+            radioCall.Checked = false;
 
             //Log call information after call was ended.
             CRUD.InsertCall(new Call(0, "Technical Support Call", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), lblElapsed.Text, staffId, (int.Parse(lblCustId.Text.Substring(2)))));
@@ -486,7 +487,8 @@ namespace WindowsFormsApp2
                     prod = new Product();
                     data.DataSource = prod[txtProdNo.Text];
                     dgvTech.DataSource = data;
-                    radioCall.Enabled = false;
+                    txtProdNo.DataBindings.Clear();
+                    txtProdNo.DataBindings.Add("Text", data, "ProductSerialNo");
                 }
 
             }
@@ -507,6 +509,8 @@ namespace WindowsFormsApp2
                     {
                         data = new BindingSource();
                         data.DataSource = Product.prods;
+                        txtProdNo.DataBindings.Clear();
+                        txtProdNo.DataBindings.Add("Text", data, "ProductSerialNo");
                         dgvTech.DataSource = data;
                         break;
                     }
@@ -519,6 +523,11 @@ namespace WindowsFormsApp2
                         ReBindCustomer();
                         break;
                     }
+                case "Maintenance":
+                { break; }
+                case "Upgrade":
+                { break; }
+                case "Installation":
                 default:
                     break;
             }
@@ -626,6 +635,7 @@ namespace WindowsFormsApp2
                 blinker.WorkerSupportsCancellation = true;
                 blinker.CancelAsync();
                 player.Stop();
+                closed = true;
                 lblCall.Hide();
                 lblCall.Text = "";
                 lblCalling.Text = "Outgoing...";
