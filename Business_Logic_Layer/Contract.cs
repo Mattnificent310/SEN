@@ -112,6 +112,7 @@ namespace Business_Logic_Layer
         }
         public Contract(string _cID, string _cLevel, string _cType, DateTime _issueDate, int _term, string key)
         {
+            this.ContractID = _cID;
             this.ContractType = _cType;
             this.ContractLevel = _cLevel;
             this.IssueDate = _issueDate;
