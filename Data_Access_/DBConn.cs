@@ -64,7 +64,7 @@ namespace Data_Access_Layer
                         bool sync = adapter.Update(updDS, _table) == 1 ? true : false;
                         DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
                     { {"Table",_table} }).Rows[0];
-                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[5] - (int)row[6];
+                        ds.Tables[_table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
                         return sync;
 
 
