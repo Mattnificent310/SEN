@@ -127,6 +127,10 @@ namespace WindowsFormsApp2
         {
             if(PopulateContracts())
             {
+                cmbCtrType.DataBindings.Clear();
+                cmbCtrLevel.DataBindings.Clear();
+                cmbCtrTerm.DataBindings.Clear();
+                dtpCtrDate.DataBindings.Clear();
                 cmbCtrType.DataBindings.Add("Text", dataCtr, "ContractType");
                 cmbCtrLevel.DataBindings.Add("Text", dataCtr, "ContractLevel");
                 cbxInstall.Checked = cmbCtrType.Text == "Economic Pak" ? true : false;
