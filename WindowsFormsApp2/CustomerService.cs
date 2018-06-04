@@ -23,6 +23,8 @@ namespace WindowsFormsApp2
         private static Category cat;
         private static frmMainMenu menu = new frmMainMenu();
         private static Sale sale;
+        private static Contract ctr;
+        private static BindingSource dataCtr;
         private static Order order;
         private static OrderDetail detail;
         private static List<OrderDetail> items = new List<OrderDetail>();
@@ -42,6 +44,7 @@ namespace WindowsFormsApp2
             blinker = new BackgroundWorker();
             blinker.DoWork += Blinker_DoWork;
             PopulateSales();
+            BindContracts();
             if (!BindData())
             {
                 MessageBox.Show("No customers could be found.");
@@ -119,6 +122,29 @@ namespace WindowsFormsApp2
                 return true;
             }
             return false;
+        }
+        private bool BindContracts()
+        {
+            if(PopulateContracts())
+            {
+                cmbCtrType.DataBindings.Add("Text", dataCtr, "ContractType");
+                cmbCtrLevel.DataBindings.Add("Text", dataCtr, "ContractLevel");
+                cmbCtrService.DataBindings.Add("Text", dataCtr, "Contract");
+            }
+            return false;
+        }
+        private bool PopulateContracts()
+        {
+            ctr = new Contract();
+            dataCtr = new BindingSource();
+            if (Contract.contracts.Any())
+            {
+                dataCtr.DataSource = Contract.contracts;
+                dgvContractDetails.DataSource = dataCtr;
+                return true;
+            }
+            return false;
+
         }
         private bool PopulateSales()
         {
@@ -1001,13 +1027,12 @@ namespace WindowsFormsApp2
         {
             cmbProdModel.Text = "";
             txtProdName.Text = "";
-            ClearProd();
+            
         }
 
         private void cmbProdModel_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtProdName.Text = "";
-            ClearProd();
         }
 
 

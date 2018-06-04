@@ -2,6 +2,7 @@
 using Data_Access_Layer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,9 @@ namespace Business_Logic_Layer
         private string contractType;
         private string contractLevel;
         private DateTime issueDate;
-        private DateTime contractTerm;
+        private int contractTerm;
+        public static List<Contract> contracts;
+        private static DataHandler dh = new DataHandler();
         #endregion
 
         #region Properties
@@ -72,7 +75,7 @@ namespace Business_Logic_Layer
             }
         }
 
-        public DateTime ContractTerm
+        public int ContractTerm
         {
             get
             {
@@ -91,14 +94,24 @@ namespace Business_Logic_Layer
         #region Contrutors
         public Contract()
         {
-
+            contracts = new List<Contract>();
+            foreach (DataRow item in DataHandler.GetData(Cons.table12).Rows)
+            {
+                contracts.Add(new Contract(
+                    item[Cons.table12Id].ToString(),
+                    item[Cons.table12Col1].ToString(),
+                    item[Cons.table12Col2].ToString(),
+                    (DateTime)item[Cons.table12Col3],
+                    (int)item[Cons.table12Col4]
+                ));
+            }
         }
-        public Contract(string _cID, string _cLevel, string _cType, DateTime _issueDate, DateTime _expiry)
+        public Contract(string _cID, string _cLevel, string _cType, DateTime _issueDate, int _term)
         {
             this.ContractType = _cType;
             this.ContractLevel = _cLevel;
             this.IssueDate = _issueDate;
-            this.ContractTerm = _expiry;
+            this.ContractTerm = _term;
         }
         #endregion
 
