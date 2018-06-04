@@ -84,6 +84,7 @@ namespace WindowsFormsApp2
                 cmbCustCity.DataBindings.Add("Text", dataClient, "City");
                 txtCustStreet.DataBindings.Add("Text", dataClient, "Street");
                 cmbCCountry.DataSource = Business_Logic_Layer.Location.countries.Select(x => x.Country).ToList();
+                cmbCustCountry.DataSource = Business_Logic_Layer.Location.countries.Select(x => x.Country).ToList();
 
                 return true;
             }
