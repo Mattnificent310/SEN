@@ -1333,8 +1333,8 @@ namespace WindowsFormsApp2
 
         private void btnIssueCtr_Click(object sender, EventArgs e)
         {
-            Contract contract = new Contract(string.Empty, cmbCtrLevel.Text, cmbCtrType.Text, dtpCtrDate.Value, cmbCtrTerm.SelectedIndex);
-            contract.Identity = lblCSId.Text.Substring(2);
+            Contract contract = new Contract(string.Empty, cmbCtrLevel.Text, cmbCtrType.Text, dtpCtrDate.Value, cmbCtrTerm.SelectedIndex, lblCSId.Text.Substring(2));
+            
             if (CRUD.InsertContract(contract))
             {
                 MessageBox.Show("Contract Issued");

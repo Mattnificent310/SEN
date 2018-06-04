@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Contract : Client, IContract
+    public class Contract : IContract
     {
         #region Fields
         private string contractID;
+        private string clientId;
         private string contractType;
         private string contractLevel;
         private DateTime issueDate;
@@ -98,20 +99,24 @@ namespace Business_Logic_Layer
             foreach (DataRow item in DataHandler.GetData(Cons.table12).Rows)
             {
                 contracts.Add(new Contract(
-                    item[Cons.table12Id].ToString(),
+                string.Format("{0}{1}{2}{3}",DateTime.Parse(item[Cons.table12Col3].ToString()).Year,
+                item[Cons.table12Col2].ToString()[0], item[Cons.table12Col1].ToString(),
+                    item[Cons.table12Id].ToString().PadLeft(6,'0')),
                     item[Cons.table12Col1].ToString(),
                     item[Cons.table12Col2].ToString(),
                     (DateTime)item[Cons.table12Col3],
-                    (int)item[Cons.table12Col4]
+                    (int)item[Cons.table12Col4],
+                    item[Cons.table12IdFk].ToString()
                 ));
             }
         }
-        public Contract(string _cID, string _cLevel, string _cType, DateTime _issueDate, int _term)
+        public Contract(string _cID, string _cLevel, string _cType, DateTime _issueDate, int _term, string key)
         {
             this.ContractType = _cType;
             this.ContractLevel = _cLevel;
             this.IssueDate = _issueDate;
             this.ContractTerm = _term;
+            this.clientId = key;
         }
         #endregion
 
@@ -124,7 +129,7 @@ namespace Business_Logic_Layer
                 {Cons.table12Col2, contract.ContractType },
                 {Cons.table12Col3, contract.IssueDate },
                 {Cons.table12Col4, contract.ContractTerm },
-                {Cons.table12IdFk, contract.Identity }
+                {Cons.table12IdFk, contract.clientId }
             }, Cons.table12);
         }
 
@@ -136,7 +141,7 @@ namespace Business_Logic_Layer
                 {Cons.table12Col2, contract.ContractType },
                 {Cons.table12Col3, contract.IssueDate },
                 {Cons.table12Col4, contract.ContractTerm },
-                {Cons.table12IdFk, contract.Identity }
+                {Cons.table12IdFk, contract.clientId }
             }, contract.ContractID, Cons.table12);
         }
 
@@ -147,17 +152,17 @@ namespace Business_Logic_Layer
         #endregion
 
         #region Methods
-        protected override bool Equals(object obj)
+        public override bool Equals(object obj)
         {
             return obj == null || !(obj is Contract) ? false : ContractType.Equals(((Contract)obj).ContractType);
         }
 
-        protected override int GetHashCode()
+        public override int GetHashCode()
         {
             return ContractType.GetHashCode();
         }
 
-        protected override string ToString()
+        public override string ToString()
         {
             return string.Format(ContractID, ContractType, ContractLevel, IssueDate, ContractTerm);
         }
