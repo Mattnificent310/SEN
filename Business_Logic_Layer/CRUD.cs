@@ -61,9 +61,10 @@ namespace Business_Logic_Layer
         }
         public static bool DeleteProduct(int prodId)
         {
+            var prod = new Product();
             var inv = new Inventory()[prodId.ToString()];
             inv.DeleteStock(inv.InventoryID);
-            return new Product().Delete(prodId);
+            return prod.Delete(prodId);
         }        
         #endregion
 

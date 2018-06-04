@@ -125,7 +125,7 @@ namespace Data_Access_Layer
                 ds.Tables[_table ?? table].Rows.Add(dr);
                 if (db.Write(ds, _table ?? table))
                 {
-                    ds = db.Read(_table ?? table);
+                    //ds = db.Read(_table ?? table);
                     int count = ds.Tables[_table ?? table].Rows.Count - 1;
                      return ds.Tables[_table ?? table].Rows[count][0];
 
