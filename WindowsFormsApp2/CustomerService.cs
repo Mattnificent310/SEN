@@ -929,6 +929,7 @@ namespace WindowsFormsApp2
         {
             cmbProdType.DataBindings.Clear();
             cmbProdModel.DataBindings.Clear();
+            txtProdName.DataBindings.Clear();
             lblUnitPrice.DataBindings.Clear();
             lblProdId.DataBindings.Clear();
             lblStock.DataBindings.Clear();
