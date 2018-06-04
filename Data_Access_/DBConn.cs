@@ -35,15 +35,18 @@ namespace Data_Access_Layer
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
                         DBConn.ds = new DataSet();
-                        adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+                        //adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
                         adapter.Fill(DBConn.ds, _table);
+                        
                         DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
-                    { {"Table",_table} }).Rows[0];
-                        ds.Tables[_table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
+                        { {"Table",_table} }).Rows[0];
+                        ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
+                        ds.Tables[_table].Columns[0].AutoIncrement = true;
 
-                        //ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
-                        //ds.Tables[_table].Columns[0].AutoIncrement = true;
-
+                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (long.Parse(row[5].ToString()) - long.Parse(row[6].ToString())+1);
+                        //ds.Tables[_table].Columns[0].AutoIncrementStep = (long.Parse(row[5].ToString()) - long.Parse(row[6].ToString())) - long.Parse(row[2].ToString() + 1);
+                        
+                        
 
 
                     }
@@ -61,11 +64,11 @@ namespace Data_Access_Layer
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
-                        bool sync = adapter.Update(updDS, _table) == 1 ? true : false;
-                        DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
-                    { {"Table",_table} }).Rows[0];
-                        ds.Tables[_table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
-                        return sync;
+                        return adapter.Update(updDS, _table) == 1 ? true : false;
+                    //    DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
+                    //{ {"Table",_table} }).Rows[0];
+                    //    ds.Tables[_table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
+                    //    return sync;
 
 
                     }
