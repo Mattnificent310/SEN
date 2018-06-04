@@ -15,8 +15,9 @@ namespace WindowsFormsApp2
     public partial class frmCustomerService : Form
     {
         #region Declarations
-        BindingSource data;
-        BindingSource dataClient;
+        private BindingSource data;
+        private static int staffId;
+        private BindingSource dataClient;
         private static Client client;
         private static Product prod;
         private static Category cat;
@@ -55,7 +56,9 @@ namespace WindowsFormsApp2
             {
                 this.btnMain.Text = "Log Out";
                 this.btnMainMenu.Text = "Log Out";
+                
             }
+            staffId = int.Parse(staf.Identity);
             menu.Login(staf);
             lblLogin.Text = string.Format("Welcome:  {0}  {1}  {2}", staf.Title, staf.Name, staf.Surname);
 
@@ -542,6 +545,12 @@ namespace WindowsFormsApp2
             ordered = false;
             lblGrandTotal.Text = "R 0.00";
             dtpColDel.Value = DateTime.Now;
+
+            //Log call information after call was ended.
+            CRUD.InsertCall(new Call(0, "Product Sales Call", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), lblElapsed.Text, staffId, (int.Parse(lblCSId.Text.Substring(2)))));
+            
+
+            
             SimulateCall();
         }
         #endregion

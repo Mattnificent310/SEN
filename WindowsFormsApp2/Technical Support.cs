@@ -17,6 +17,7 @@ namespace WindowsFormsApp2
         #region Declarations
         private static BindingSource data = new BindingSource();
         private static Client client;
+        private static int staffId;
         private static Product prod;
         private static frmMainMenu main = new frmMainMenu();
         private BackgroundWorker worker = new BackgroundWorker();
@@ -33,6 +34,7 @@ namespace WindowsFormsApp2
             lblAnswer.Hide();
             lblCalling.Hide();
             lblCall.Hide();
+            radioCall.Enabled = false;
 
         }
 
@@ -43,6 +45,7 @@ namespace WindowsFormsApp2
             {
                 this.btnMainMenu.Text = "Log Out";
             }
+            staffId = int.Parse(staf.Identity);
             main.Login(staf);
             lblLogin.Text = string.Format("Welcome:  {0}  {1}  {2}", staf.Title, staf.Name, staf.Surname);
 
@@ -66,12 +69,14 @@ namespace WindowsFormsApp2
         {
             if (this.btnMainMenu.Text.StartsWith("Log Out"))
             {
+                EndSession();
                 this.Hide();
                 Login login = new Login();
                 login.Show();
             }
             else
             {
+                EndSession();
                 this.Hide();
                 main.Show();
             }
@@ -251,6 +256,7 @@ namespace WindowsFormsApp2
         #region Outgoing
         private void OutgoingCall()
         {
+            lblCall.Hide();
             string path2 = @"..\..\Sounds\Phone_Ringing_8x-Mike_Koenig-696238708.wav";
             btnCall.Enabled = false;
             btnEndCall.Enabled = true;
@@ -259,8 +265,23 @@ namespace WindowsFormsApp2
             PlaySound(path1);
             Thread.Sleep(4000);
             PlaySound(path2);
+            this.lblCalling.Text = "Calling...";
             Thread.Sleep(5000);
             player.Stop();
+            blinker.CancelAsync();
+            thread = new Thread(StartCounting);
+            thread.IsBackground = true;
+            thread.Start();
+            btnCall.Enabled = false;
+            btnEndCall.Enabled = true;
+            
+            //btnHoldCall.Enabled = true;
+            //btnDivertCall.Enabled = true;
+            unhold = true;
+            lblElapsed.Show();
+            answered = true;
+            played = true;
+            shown = true;
 
         }
         #endregion
@@ -346,13 +367,14 @@ namespace WindowsFormsApp2
         #region Answer Call
         private void btnCall_Click(object sender, EventArgs e)
         {
+            
             try
             {
-                if (cmbSuportType.Text != string.Empty)
+                if (radioCall.Enabled == true && radioCall.Checked == true)
                 {
-                    lblCalling.Visible = true;
+                    
                     OutgoingCall();
-                    lblCalling.Show();
+                    lblCalling.Hide();
                 }
                 else
                 if (blinker.IsBusy)
@@ -387,7 +409,36 @@ namespace WindowsFormsApp2
         #region End Call
         private void btnEndCall_Click_1(object sender, EventArgs e)
         {
+            //lblEnd.Visible = true;
+            thread.Abort();
+            btnEndCall.Enabled = false;
+            lblCall.Hide();
+            lblAnswer.Hide();
 
+            //lblHold.Visible = false;
+            //btnHoldCall.Enabled = false;
+            //btnDivertCall.Enabled = false;
+            if (blinker.IsBusy)
+            {
+                blinker.WorkerSupportsCancellation = true;
+                blinker.CancelAsync();
+            }
+            x = 0;
+            Thread.Sleep(15000);
+            lblElapsed.Hide();
+            //lblEnd.Visible = false;
+            ClearAll(this.tabPage1);
+            dgvTech.DataSource = null;
+            btnBookTask.Enabled = false;
+            lblCall.Text = "Incomming...";
+            radioCall.Enabled = false;
+
+            //Log call information after call was ended.
+            CRUD.InsertCall(new Call(0, "Technical Support Call", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), lblElapsed.Text, staffId, (int.Parse(lblCustId.Text.Substring(2)))));
+
+
+
+            SimulateCall();
         }
         #endregion
 
@@ -426,14 +477,16 @@ namespace WindowsFormsApp2
                     string.IsNullOrEmpty(txtCustName.Text.Trim()) ? null : txtCustName.Text.Trim(),
                     string.IsNullOrEmpty(txtCustSurname.Text.Trim()) ? null : txtCustSurname.Text.Trim(),
                     string.IsNullOrEmpty(txtCustEmail.Text.Trim()) ? null : txtCustEmail.Text.Trim()];
+                    ReBindCustomer();
                     dgvTech.DataSource = data;
-
+                    radioCall.Enabled = true;
                 }
                 else
                 {
                     prod = new Product();
                     data.DataSource = prod[txtProdNo.Text];
                     dgvTech.DataSource = data;
+                    radioCall.Enabled = false;
                 }
 
             }
@@ -558,6 +611,35 @@ namespace WindowsFormsApp2
             this.ClientSize.Width / 2 - tvTechTree.Size.Width / 2,
             this.ClientSize.Height / 2 - tvTechTree.Size.Height / 2);
             tvTechTree.Anchor = AnchorStyles.None;
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioCall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioCall.Checked == true)
+            {
+
+                blinker.WorkerSupportsCancellation = true;
+                blinker.CancelAsync();
+                player.Stop();
+                lblCall.Hide();
+                lblCall.Text = "";
+                lblCalling.Text = "Outgoing...";
+                lblCalling.Show();
+
+            }
+        }
+
+        private void txtCustName_TextChanged(object sender, EventArgs e)
+        {
+            txtCustEmail.Text = "";
+            txtCustSurname.Text = "";
+            txtCustPhone.Text = "";
+
         }
     }
 }

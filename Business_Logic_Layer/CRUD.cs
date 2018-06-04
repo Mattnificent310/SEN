@@ -86,5 +86,12 @@ namespace Business_Logic_Layer
             return false;
         }
         #endregion
+
+        #region CallLog
+        public static bool InsertCall(Call call)
+        {
+            return new Call().InsertCall(call) == null ? false : true;
+        }
+        #endregion
     }
 }

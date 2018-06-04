@@ -174,7 +174,8 @@ namespace Data_Access_
                             table17Col4 = "CallHoldDuration",
                             table17IDFK1 = "StaffIDFK",
                             table17IDFK2 = "ClientIDFK",
-                            table17IDFK3 = "CompanyIDFK";
+                            table17IDFK3 = "CompanyIDFK",
+                            table17Col5 = "CallType";
         #endregion
 
 
