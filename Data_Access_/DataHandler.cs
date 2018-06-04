@@ -122,7 +122,7 @@ namespace Data_Access_Layer
                 {
                     dr[item.Key] = item.Value;
                 }
-                ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[6] - (int)row[7];
+                ds.Tables[_table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
                 if (db.Write(ds, _table ?? table))
                 {
                     int count = ds.Tables[_table ?? table].Rows.Count - 1;
@@ -173,7 +173,7 @@ namespace Data_Access_Layer
                 DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
                     { {"Table",_table ?? table} }).Rows[0];
 
-                ds.Tables[_table ?? table].Columns[0].AutoIncrementSeed = (int)row[6] - (int)row[7];
+                ds.Tables[_table ?? table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
                 return db.Write(ds, _table ?? table);
 
             }
