@@ -37,9 +37,9 @@ namespace Data_Access_Layer
                         DBConn.ds = new DataSet();
                         adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
                         adapter.Fill(DBConn.ds, _table);
-                        DataRow row = new StoredProcedure().GetProcs("sp_GetNewInsert", new Dictionary<string, object>
+                        DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
                     { {"Table",_table} }).Rows[0];
-                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[4] - (int)row[5];
+                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[6] - (int)row[7];
 
                         //ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
                         //ds.Tables[_table].Columns[0].AutoIncrement = true;
@@ -62,9 +62,9 @@ namespace Data_Access_Layer
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
                         bool sync = adapter.Update(updDS, _table) == 1 ? true : false;
-                        DataRow row = new StoredProcedure().GetProcs("sp_GetNewInsert", new Dictionary<string, object>
+                        DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
                     { {"Table",_table} }).Rows[0];
-                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[4] - (int)row[5];
+                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[6] - (int)row[7];
                         return sync;
 
 
