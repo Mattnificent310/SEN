@@ -29,13 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Assigned Jobs");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Unassigned Jobs");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Technicians0", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Assigned Jobs");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Unassigned Jobs");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Technicians0", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblCalling = new System.Windows.Forms.Label();
+            this.txtCustName = new System.Windows.Forms.TextBox();
+            this.lblCustId = new System.Windows.Forms.Label();
+            this.lblCall = new System.Windows.Forms.Label();
             this.lblElapsed = new System.Windows.Forms.Label();
             this.lblAnswer = new System.Windows.Forms.Label();
             this.btnEndCall = new System.Windows.Forms.Button();
@@ -68,10 +72,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblCall = new System.Windows.Forms.Label();
-            this.lblCustId = new System.Windows.Forms.Label();
-            this.txtCustName = new System.Windows.Forms.TextBox();
-            this.lblCalling = new System.Windows.Forms.Label();
+            this.radioCall = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTech)).BeginInit();
@@ -94,6 +95,7 @@
             // 
             this.tabPage1.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage1.Controls.Add(this.radioCall);
             this.tabPage1.Controls.Add(this.lblCalling);
             this.tabPage1.Controls.Add(this.txtCustName);
             this.tabPage1.Controls.Add(this.lblCustId);
@@ -132,6 +134,43 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // lblCalling
+            // 
+            this.lblCalling.AutoSize = true;
+            this.lblCalling.Location = new System.Drawing.Point(755, 265);
+            this.lblCalling.Name = "lblCalling";
+            this.lblCalling.Size = new System.Drawing.Size(59, 16);
+            this.lblCalling.TabIndex = 92;
+            this.lblCalling.Text = "Calling...";
+            // 
+            // txtCustName
+            // 
+            this.txtCustName.Location = new System.Drawing.Point(129, 253);
+            this.txtCustName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtCustName.Name = "txtCustName";
+            this.txtCustName.Size = new System.Drawing.Size(226, 22);
+            this.txtCustName.TabIndex = 91;
+            this.txtCustName.TextChanged += new System.EventHandler(this.txtCustName_TextChanged);
+            // 
+            // lblCustId
+            // 
+            this.lblCustId.AutoSize = true;
+            this.lblCustId.BackColor = System.Drawing.Color.Transparent;
+            this.lblCustId.Location = new System.Drawing.Point(147, 259);
+            this.lblCustId.Name = "lblCustId";
+            this.lblCustId.Size = new System.Drawing.Size(0, 16);
+            this.lblCustId.TabIndex = 90;
+            // 
+            // lblCall
+            // 
+            this.lblCall.AutoSize = true;
+            this.lblCall.Location = new System.Drawing.Point(755, 297);
+            this.lblCall.Name = "lblCall";
+            this.lblCall.Size = new System.Drawing.Size(83, 16);
+            this.lblCall.TabIndex = 89;
+            this.lblCall.Text = "Incomming...";
             // 
             // lblElapsed
             // 
@@ -259,9 +298,9 @@
             this.lblSupCost.AutoSize = true;
             this.lblSupCost.Location = new System.Drawing.Point(473, 371);
             this.lblSupCost.Name = "lblSupCost";
-            this.lblSupCost.Size = new System.Drawing.Size(84, 16);
+            this.lblSupCost.Size = new System.Drawing.Size(90, 16);
             this.lblSupCost.TabIndex = 76;
-            this.lblSupCost.Text = "Support Cost";
+            this.lblSupCost.Text = "Support Detail";
             // 
             // lblStartDate
             // 
@@ -401,15 +440,15 @@
             // 
             this.tvTechTree.Location = new System.Drawing.Point(94, 42);
             this.tvTechTree.Name = "tvTechTree";
-            treeNode1.Name = "AssignedNode";
-            treeNode1.Text = "Assigned Jobs";
-            treeNode2.Name = "UnassignedNode";
-            treeNode2.Text = "Unassigned Jobs";
-            treeNode3.ForeColor = System.Drawing.Color.Black;
-            treeNode3.Name = "TechnicianNode()";
-            treeNode3.Text = "Technicians0";
+            treeNode7.Name = "AssignedNode";
+            treeNode7.Text = "Assigned Jobs";
+            treeNode8.Name = "UnassignedNode";
+            treeNode8.Text = "Unassigned Jobs";
+            treeNode9.ForeColor = System.Drawing.Color.Black;
+            treeNode9.Name = "TechnicianNode()";
+            treeNode9.Text = "Technicians0";
             this.tvTechTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode9});
             this.tvTechTree.Size = new System.Drawing.Size(785, 377);
             this.tvTechTree.TabIndex = 87;
             this.tvTechTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTechTree_AfterSelect);
@@ -447,40 +486,17 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // lblCall
+            // radioCall
             // 
-            this.lblCall.AutoSize = true;
-            this.lblCall.Location = new System.Drawing.Point(755, 297);
-            this.lblCall.Name = "lblCall";
-            this.lblCall.Size = new System.Drawing.Size(83, 16);
-            this.lblCall.TabIndex = 89;
-            this.lblCall.Text = "Incomming...";
-            // 
-            // lblCustId
-            // 
-            this.lblCustId.AutoSize = true;
-            this.lblCustId.BackColor = System.Drawing.Color.Transparent;
-            this.lblCustId.Location = new System.Drawing.Point(147, 259);
-            this.lblCustId.Name = "lblCustId";
-            this.lblCustId.Size = new System.Drawing.Size(0, 16);
-            this.lblCustId.TabIndex = 90;
-            // 
-            // txtCustName
-            // 
-            this.txtCustName.Location = new System.Drawing.Point(129, 253);
-            this.txtCustName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCustName.Name = "txtCustName";
-            this.txtCustName.Size = new System.Drawing.Size(226, 22);
-            this.txtCustName.TabIndex = 91;
-            // 
-            // lblCalling
-            // 
-            this.lblCalling.AutoSize = true;
-            this.lblCalling.Location = new System.Drawing.Point(755, 265);
-            this.lblCalling.Name = "lblCalling";
-            this.lblCalling.Size = new System.Drawing.Size(59, 16);
-            this.lblCalling.TabIndex = 92;
-            this.lblCalling.Text = "Calling...";
+            this.radioCall.AutoSize = true;
+            this.radioCall.Location = new System.Drawing.Point(42, 275);
+            this.radioCall.Name = "radioCall";
+            this.radioCall.Size = new System.Drawing.Size(48, 20);
+            this.radioCall.TabIndex = 93;
+            this.radioCall.TabStop = true;
+            this.radioCall.Text = "Call";
+            this.radioCall.UseVisualStyleBackColor = true;
+            this.radioCall.CheckedChanged += new System.EventHandler(this.radioCall_CheckedChanged);
             // 
             // frmTechnicalSupport
             // 
@@ -548,5 +564,6 @@
         private System.Windows.Forms.Label lblCalling;
         private System.Windows.Forms.TextBox txtCustName;
         private System.Windows.Forms.Label lblCustId;
+        private System.Windows.Forms.RadioButton radioCall;
     }
 }
