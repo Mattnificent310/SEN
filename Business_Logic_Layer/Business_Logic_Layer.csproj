@@ -49,6 +49,7 @@
     <Compile Include="CRUD.cs" />
     <Compile Include="ICall.cs" />
     <Compile Include="IClient.cs" />
+    <Compile Include="IContract.cs" />
     <Compile Include="Installation.cs" />
     <Compile Include="IOrder.cs" />
     <Compile Include="ISale.cs" />

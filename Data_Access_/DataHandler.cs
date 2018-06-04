@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data;
 using System.Collections;
+using DataAccessLayer;
 
 namespace Data_Access_Layer
 {
@@ -115,12 +116,13 @@ namespace Data_Access_Layer
             try
             {
                 DataRow dr = ds.Tables[_table ?? table].NewRow();
+                DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
+                    { {"Table",_table} }).Rows[0];
                 foreach (var item in values)
                 {
                     dr[item.Key] = item.Value;
                 }
-
-                ds.Tables[_table ?? table].Rows.Add(dr);
+                ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[4] - (int)row[5];
                 if (db.Write(ds, _table ?? table))
                 {
                     int count = ds.Tables[_table ?? table].Rows.Count - 1;
@@ -168,6 +170,10 @@ namespace Data_Access_Layer
             try
             {
                 ds.Tables[_table ?? table].Rows[GetRow(ds, _table ?? table, identifier)].Delete();
+                DataRow row = new StoredProcedure().GetProcs("sp_GetAutoIncrement", new Dictionary<string, object>
+                    { {"Table",_table ?? table} }).Rows[0];
+
+                ds.Tables[_table ?? table].Columns[0].AutoIncrementSeed = (int)row[4] - (int)row[5];
                 return db.Write(ds, _table ?? table);
 
             }

@@ -133,7 +133,7 @@ namespace Business_Logic_Layer
             return (int?)dh.Insert(new Dictionary<string, object>
             {
                 { Cons.table8Col1, inv.Warehouse},
-                { Cons.table8Col2, inv.UnitsInStock},
+                { Cons.table8Col2, inv.UnitsInStock},                
                 { Cons.table8Col3, inv.ReorderLevel},
                 { Cons.table8IdFk, inv.key }
             },Cons.table8);
@@ -151,7 +151,7 @@ namespace Business_Logic_Layer
 
         public bool DeleteStock(int invId)
         {
-            return dh.Delete(invId.ToString());
+            return dh.Delete(invId.ToString(), Cons.table8);
         }
         #endregion
 

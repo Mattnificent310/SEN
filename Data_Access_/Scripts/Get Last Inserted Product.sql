@@ -1,0 +1,9 @@
+USE SHSMS
+GO
+CREATE PROCEDURE sp_GetLastInsert
+AS 
+BEGIN 
+SELECT TOP 1 ProductSerialNoPK 
+FROM tblProducts
+ORDER BY ProductSerialNoPK DESC
+END

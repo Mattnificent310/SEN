@@ -1,4 +1,5 @@
 ﻿using Data_Access_;
+using DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,9 +49,10 @@ namespace Business_Logic_Layer
         #region Products
         public static bool InsertProduct(Product prod)
         {
-            var prodId = new Product().Insert(prod);
+            new Product().Insert(prod);
+            var prodId = (int?)new StoredProcedure().SelectProcedure("sp_GetLastInsert").Rows[0][0];
             var inv = new Inventory(0, "1001", prod.InStock, 10, prodId.ToString());
-            inv.Insert(inv);
+            new Inventory().Insert(inv);
             return prodId != null && inv != null ? true : false;
         }
         public static bool UpdateProduct(Product prod)
@@ -59,6 +61,8 @@ namespace Business_Logic_Layer
         }
         public static bool DeleteProduct(int prodId)
         {
+            var inv = new Inventory()[prodId.ToString()];
+            inv.DeleteStock(inv.InventoryID);
             return new Product().Delete(prodId);
         }        
         #endregion
@@ -91,6 +95,21 @@ namespace Business_Logic_Layer
         public static bool InsertCall(Call call)
         {
             return new Call().InsertCall(call) == null ? false : true;
+        }
+        #endregion
+
+        #region Contract
+        public static bool InsertContract(Contract contract)
+        {
+            return new Contract().InsertContract(contract) == null ? false : true;
+        }
+        public static bool UpdateContract(Contract contract)
+        {
+            return new Contract().UpdateContract(contract);
+        }
+        public bool DeleteContract(int contractId)
+        {
+            return new Contract().DeleteContract(contractId);
         }
         #endregion
     }

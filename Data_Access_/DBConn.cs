@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -22,7 +23,7 @@ namespace Data_Access_Layer
             //connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMS;Integrated Security=True";
             ds = new DataSet();
 
-            //adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+
 
         }
         public DataSet Read(string _table)
@@ -34,9 +35,14 @@ namespace Data_Access_Layer
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
                         DBConn.ds = new DataSet();
+                        adapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
                         adapter.Fill(DBConn.ds, _table);
-                        ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
-                        ds.Tables[_table].Columns[0].AutoIncrement = true;
+                        DataRow row = new StoredProcedure().GetProcs("sp_GetNewInsert", new Dictionary<string, object>
+                    { {"Table",_table} }).Rows[0];
+                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[4] - (int)row[5];
+
+                        //ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
+                        //ds.Tables[_table].Columns[0].AutoIncrement = true;
 
 
 
@@ -55,7 +61,12 @@ namespace Data_Access_Layer
                 {
                     using (cmd = new SqlCommandBuilder(adapter))
                     {
-                        return adapter.Update(updDS, _table) == 1 ? true : false;
+                        bool sync = adapter.Update(updDS, _table) == 1 ? true : false;
+                        DataRow row = new StoredProcedure().GetProcs("sp_GetNewInsert", new Dictionary<string, object>
+                    { {"Table",_table} }).Rows[0];
+                        ds.Tables[_table].Columns[0].AutoIncrementSeed = (int)row[4] - (int)row[5];
+                        return sync;
+
 
                     }
                 }

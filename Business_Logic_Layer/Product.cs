@@ -169,7 +169,7 @@ namespace Business_Logic_Layer
         public bool Delete(int prodId)
         {
             new Product(Cons.table2);
-            return dh.Delete(prodId.ToString());
+            return dh.Delete(prodId.ToString(), Cons.table2);
         }
     }
 

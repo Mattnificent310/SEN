@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Data_Access_;
+using Data_Access_Layer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Business_Logic_Layer
 {
-    public class Contract : Client
+    public class Contract : Client, IContract
     {
         #region Fields
-        private static string contractID;
+        private string contractID;
         private string contractType;
         private string contractLevel;
         private DateTime issueDate;
@@ -18,7 +20,7 @@ namespace Business_Logic_Layer
 
         #region Properties
 
-        public static string ContractID
+        public string ContractID
         {
             get
             {
@@ -99,6 +101,38 @@ namespace Business_Logic_Layer
             this.ContractTerm = _expiry;
         }
         #endregion
+
+        #region CRUD
+        public int? InsertContract(Contract contract)
+        {
+            return (int?)new DataHandler().Insert(new Dictionary<string, object>
+            {
+                {Cons.table12Col1, contract.ContractLevel },
+                {Cons.table12Col2, contract.ContractType },
+                {Cons.table12Col3, contract.IssueDate },
+                {Cons.table12Col4, contract.ContractTerm },
+                {Cons.table12IdFk, contract.Identity }
+            }, Cons.table12);
+        }
+
+        public bool UpdateContract(Contract contract)
+        {
+            return new DataHandler().Update(new Dictionary<string, object>
+            {
+                {Cons.table12Col1, contract.ContractLevel },
+                {Cons.table12Col2, contract.ContractType },
+                {Cons.table12Col3, contract.IssueDate },
+                {Cons.table12Col4, contract.ContractTerm },
+                {Cons.table12IdFk, contract.Identity }
+            }, contract.ContractID, Cons.table12);
+        }
+
+        public bool DeleteContract(int contractId)
+        {
+            return new DataHandler().Delete(contractId.ToString(), Cons.table12);
+        }
+        #endregion
+
         #region Methods
         protected override bool Equals(object obj)
         {
@@ -114,6 +148,8 @@ namespace Business_Logic_Layer
         {
             return string.Format(ContractID, ContractType, ContractLevel, IssueDate, ContractTerm);
         }
+
+
         #endregion
     }
 }

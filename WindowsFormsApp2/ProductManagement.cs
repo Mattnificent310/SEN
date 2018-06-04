@@ -185,7 +185,7 @@ namespace WindowsFormsApp2
         #region Delete
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (!CRUD.DeleteProduct(int.Parse(txtProdId.Text)))
+            if (!CRUD.DeleteProduct(int.Parse(txtProdId.Text.Substring(txtProdId.Text.Length - 3))))
             {
                 MessageBox.Show("The product could not be removed.");
             }

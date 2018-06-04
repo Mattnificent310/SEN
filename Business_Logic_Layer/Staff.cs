@@ -150,7 +150,7 @@ namespace Business_Logic_Layer
         public bool Delete(int staffId)
         {
             new Staff(Cons.table3);
-            return dh.Delete(staffId.ToString());
+            return dh.Delete(staffId.ToString(), Cons.table3);
         }
         #endregion
 

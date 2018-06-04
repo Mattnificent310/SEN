@@ -92,8 +92,8 @@ namespace Business_Logic_Layer
             {
                 { Cons.table11Col1, sale.SalesType },
                 { Cons.table11Col2, sale.SalesDate },
-                { Cons.table11IDFK1, Identity },
-                { Cons.table11IDFk2, Contract.ContractID }
+                { Cons.table11IDFK1, sale.Identity },
+                { Cons.table11IDFk2, 1 }
             });
            
 
