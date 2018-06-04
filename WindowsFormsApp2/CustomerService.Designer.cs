@@ -122,6 +122,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustSurname = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.nupCtrCost = new System.Windows.Forms.NumericUpDown();
+            this.lblCtrCost = new System.Windows.Forms.Label();
+            this.lblCtrService = new System.Windows.Forms.Label();
             this.dgvContractDetails = new System.Windows.Forms.DataGridView();
             this.btnUpdateCtr = new System.Windows.Forms.Button();
             this.btnIssueCtr = new System.Windows.Forms.Button();
@@ -137,10 +140,9 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cmbCtrService = new System.Windows.Forms.ComboBox();
-            this.lblCtrService = new System.Windows.Forms.Label();
-            this.lblCtrCost = new System.Windows.Forms.Label();
-            this.nupCtrCost = new System.Windows.Forms.NumericUpDown();
+            this.cbxInstall = new System.Windows.Forms.CheckBox();
+            this.cbxUpgrade = new System.Windows.Forms.CheckBox();
+            this.cbxRepair = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
@@ -150,9 +152,9 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupCtrCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContractDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nupCtrCost)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -10148,9 +10150,11 @@
             // 
             this.tabPage4.BackgroundImage = global::WindowsFormsApp2.Properties.Resources._50_Beautiful_and_Minimalist_Presentation_Backgrounds_081;
             this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage4.Controls.Add(this.cbxRepair);
+            this.tabPage4.Controls.Add(this.cbxUpgrade);
+            this.tabPage4.Controls.Add(this.cbxInstall);
             this.tabPage4.Controls.Add(this.nupCtrCost);
             this.tabPage4.Controls.Add(this.lblCtrCost);
-            this.tabPage4.Controls.Add(this.cmbCtrService);
             this.tabPage4.Controls.Add(this.lblCtrService);
             this.tabPage4.Controls.Add(this.dgvContractDetails);
             this.tabPage4.Controls.Add(this.btnUpdateCtr);
@@ -10172,6 +10176,50 @@
             this.tabPage4.Text = "Contract";
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
+            // 
+            // nupCtrCost
+            // 
+            this.nupCtrCost.DecimalPlaces = 2;
+            this.nupCtrCost.Location = new System.Drawing.Point(506, 384);
+            this.nupCtrCost.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nupCtrCost.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nupCtrCost.Name = "nupCtrCost";
+            this.nupCtrCost.Size = new System.Drawing.Size(252, 26);
+            this.nupCtrCost.TabIndex = 76;
+            this.nupCtrCost.ThousandsSeparator = true;
+            this.nupCtrCost.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // lblCtrCost
+            // 
+            this.lblCtrCost.AutoSize = true;
+            this.lblCtrCost.Location = new System.Drawing.Point(506, 354);
+            this.lblCtrCost.Name = "lblCtrCost";
+            this.lblCtrCost.Size = new System.Drawing.Size(104, 18);
+            this.lblCtrCost.TabIndex = 75;
+            this.lblCtrCost.Text = "Contract Cost";
+            // 
+            // lblCtrService
+            // 
+            this.lblCtrService.AutoSize = true;
+            this.lblCtrService.BackColor = System.Drawing.Color.Transparent;
+            this.lblCtrService.Location = new System.Drawing.Point(99, 350);
+            this.lblCtrService.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCtrService.Name = "lblCtrService";
+            this.lblCtrService.Size = new System.Drawing.Size(119, 18);
+            this.lblCtrService.TabIndex = 73;
+            this.lblCtrService.Text = "Contract Sevice";
             // 
             // dgvContractDetails
             // 
@@ -10204,6 +10252,7 @@
             this.btnIssueCtr.TabIndex = 70;
             this.btnIssueCtr.Text = "Issue Contract";
             this.btnIssueCtr.UseVisualStyleBackColor = false;
+            this.btnIssueCtr.Click += new System.EventHandler(this.btnIssueCtr_Click);
             // 
             // dtpCtrDate
             // 
@@ -10228,12 +10277,11 @@
             // 
             this.cmbCtrTerm.FormattingEnabled = true;
             this.cmbCtrTerm.Items.AddRange(new object[] {
-            "Mr",
-            "Ms",
-            "Mrs",
-            "Dr",
-            "Prof",
-            "Sir"});
+            "1 Year",
+            "2 Year",
+            "3 Year",
+            "4 Year",
+            "5 Year"});
             this.cmbCtrTerm.Location = new System.Drawing.Point(99, 506);
             this.cmbCtrTerm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCtrTerm.Name = "cmbCtrTerm";
@@ -10254,6 +10302,11 @@
             // cmbCtrLevel
             // 
             this.cmbCtrLevel.FormattingEnabled = true;
+            this.cmbCtrLevel.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C",
+            "D"});
             this.cmbCtrLevel.Location = new System.Drawing.Point(99, 442);
             this.cmbCtrLevel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCtrLevel.Name = "cmbCtrLevel";
@@ -10274,6 +10327,10 @@
             // cmbCtrType
             // 
             this.cmbCtrType.FormattingEnabled = true;
+            this.cmbCtrType.Items.AddRange(new object[] {
+            "Economic Pack",
+            "Family Pack",
+            "Business Pack"});
             this.cmbCtrType.Location = new System.Drawing.Point(99, 314);
             this.cmbCtrType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmbCtrType.Name = "cmbCtrType";
@@ -10325,41 +10382,35 @@
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
             // 
-            // cmbCtrService
+            // cbxInstall
             // 
-            this.cmbCtrService.FormattingEnabled = true;
-            this.cmbCtrService.Location = new System.Drawing.Point(99, 378);
-            this.cmbCtrService.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.cmbCtrService.Name = "cmbCtrService";
-            this.cmbCtrService.Size = new System.Drawing.Size(252, 26);
-            this.cmbCtrService.TabIndex = 74;
+            this.cbxInstall.AutoSize = true;
+            this.cbxInstall.Location = new System.Drawing.Point(22, 371);
+            this.cbxInstall.Name = "cbxInstall";
+            this.cbxInstall.Size = new System.Drawing.Size(99, 22);
+            this.cbxInstall.TabIndex = 79;
+            this.cbxInstall.Text = "Installation";
+            this.cbxInstall.UseVisualStyleBackColor = true;
             // 
-            // lblCtrService
+            // cbxUpgrade
             // 
-            this.lblCtrService.AutoSize = true;
-            this.lblCtrService.BackColor = System.Drawing.Color.Transparent;
-            this.lblCtrService.Location = new System.Drawing.Point(99, 350);
-            this.lblCtrService.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCtrService.Name = "lblCtrService";
-            this.lblCtrService.Size = new System.Drawing.Size(119, 18);
-            this.lblCtrService.TabIndex = 73;
-            this.lblCtrService.Text = "Contract Sevice";
+            this.cbxUpgrade.AutoSize = true;
+            this.cbxUpgrade.Location = new System.Drawing.Point(132, 371);
+            this.cbxUpgrade.Name = "cbxUpgrade";
+            this.cbxUpgrade.Size = new System.Drawing.Size(96, 22);
+            this.cbxUpgrade.TabIndex = 80;
+            this.cbxUpgrade.Text = "Upgrades";
+            this.cbxUpgrade.UseVisualStyleBackColor = true;
             // 
-            // lblCtrCost
+            // cbxRepair
             // 
-            this.lblCtrCost.AutoSize = true;
-            this.lblCtrCost.Location = new System.Drawing.Point(506, 354);
-            this.lblCtrCost.Name = "lblCtrCost";
-            this.lblCtrCost.Size = new System.Drawing.Size(104, 18);
-            this.lblCtrCost.TabIndex = 75;
-            this.lblCtrCost.Text = "Contract Cost";
-            // 
-            // nupCtrCost
-            // 
-            this.nupCtrCost.Location = new System.Drawing.Point(506, 384);
-            this.nupCtrCost.Name = "nupCtrCost";
-            this.nupCtrCost.Size = new System.Drawing.Size(252, 26);
-            this.nupCtrCost.TabIndex = 76;
+            this.cbxRepair.AutoSize = true;
+            this.cbxRepair.Location = new System.Drawing.Point(240, 371);
+            this.cbxRepair.Name = "cbxRepair";
+            this.cbxRepair.Size = new System.Drawing.Size(116, 22);
+            this.cbxRepair.TabIndex = 81;
+            this.cbxRepair.Text = "Maintenance";
+            this.cbxRepair.UseVisualStyleBackColor = true;
             // 
             // frmCustomerService
             // 
@@ -10393,9 +10444,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nupCtrCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContractDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nupCtrCost)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -10511,9 +10562,11 @@
         private System.Windows.Forms.Button btnUpdateCtr;
         private System.Windows.Forms.Button btnIssueCtr;
         private System.Windows.Forms.DataGridView dgvContractDetails;
-        private System.Windows.Forms.ComboBox cmbCtrService;
         private System.Windows.Forms.Label lblCtrService;
         private System.Windows.Forms.NumericUpDown nupCtrCost;
         private System.Windows.Forms.Label lblCtrCost;
+        private System.Windows.Forms.CheckBox cbxRepair;
+        private System.Windows.Forms.CheckBox cbxUpgrade;
+        private System.Windows.Forms.CheckBox cbxInstall;
     }
 }

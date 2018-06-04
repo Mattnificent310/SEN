@@ -129,7 +129,10 @@ namespace WindowsFormsApp2
             {
                 cmbCtrType.DataBindings.Add("Text", dataCtr, "ContractType");
                 cmbCtrLevel.DataBindings.Add("Text", dataCtr, "ContractLevel");
-                cmbCtrService.DataBindings.Add("Text", dataCtr, "Contract");
+                cbxInstall.Checked = cmbCtrType.Text == "Economic Pak" ? true : false;
+                cmbCtrTerm.DataBindings.Add("SelectedIndex", dataCtr, "ContractTerm");
+                //nupCtrCost.DataBindings.Add("Text", dataCtr, "ContractCost");
+                dtpCtrDate.DataBindings.Add("Text", dataCtr, "IssueDate");
             }
             return false;
         }
@@ -1324,9 +1327,20 @@ namespace WindowsFormsApp2
 
         }
 
+        private void btnIssueCtr_Click(object sender, EventArgs e)
+        {
+            Contract contract = new Contract(string.Empty, cmbCtrLevel.Text, cmbCtrType.Text, dtpCtrDate.Value, cmbCtrTerm.SelectedIndex);
+            contract.Identity = lblCSId.Text.Substring(2);
+            if (CRUD.InsertContract(contract))
+            {
+                MessageBox.Show("Contract Issued");
+                BindContracts();
+            }
+        }
+
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {
-
+            // Daai program run nog in die agtergrond lol
         }
 
 

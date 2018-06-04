@@ -49,7 +49,7 @@ namespace Data_Access_Layer
                         
 
 
-                    }
+                     }
                 }
 
             }
@@ -70,7 +70,7 @@ namespace Data_Access_Layer
                     //    ds.Tables[_table].Columns[0].AutoIncrementSeed = long.Parse(row[5].ToString()) - long.Parse(row[6].ToString());
                     //    return sync;
 
-
+                   
                     }
                 }
 

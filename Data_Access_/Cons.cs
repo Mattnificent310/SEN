@@ -121,7 +121,7 @@ namespace Data_Access_
         public const string table12 = "tblContracts",
                             table12Id = "ContractID",
                             table12Col1 = "ContractLevel",
-                            table12Col2 = "ContracType",
+                            table12Col2 = "ContractType",
                             table12Col3 = "ContractDateIssued",
                             table12Col4 = "ContractTerm",
                             table12IdFk = "ClientIDFK";
