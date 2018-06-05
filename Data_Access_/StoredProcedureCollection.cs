@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    //Allows a collection of stored procedures to be executed at the same time
     public class StoredProcedureCollection : System.Collections.CollectionBase
     {
 

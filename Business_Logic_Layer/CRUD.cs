@@ -49,8 +49,8 @@ namespace Business_Logic_Layer
         #region Products
         public static bool InsertProduct(Product prod)
         {
-            new Product().Insert(prod);
-            var prodId = (int?)new StoredProcedure().SelectProcedure("sp_GetLastInsert").Rows[0][0];
+            var prodId = (int)new Product().Insert(prod);
+            //var prodId = (int?)new StoredProcedure().SelectProcedure("sp_GetLastInsert").Rows[0][0];
             var inv = new Inventory(0, "1001", prod.InStock, 10, prodId.ToString());
             new Inventory().Insert(inv);
             return prodId != null && inv != null ? true : false;

@@ -64,6 +64,13 @@
     <Compile Include="Order.cs" />
     <Compile Include="OrderDetail.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Priority Queue\ArrayQueue.cs" />
+    <Compile Include="Priority Queue\IPriorityQueue.cs" />
+    <Compile Include="Priority Queue\IQueue.cs" />
+    <Compile Include="Priority Queue\LinkedQueue.cs" />
+    <Compile Include="Priority Queue\PriorityQueue.cs" />
+    <Compile Include="Priority Queue\Queue.cs" />
+    <Compile Include="Priority Queue\QueueExceptions.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sale.cs" />
@@ -79,8 +86,6 @@
       <Name>Data_Access_Layer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Priority Queue\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

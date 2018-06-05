@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    //Dynamic stored procedure struct that takes any stored procedure name 
+    //and parameters with values then executes
     struct ParamData
     {
         public string pName;

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer
 {
+    //Handles the connections to and interactions with the connected databases
     class DBConn
     {
         private static SqlDataAdapter adapter;
@@ -20,7 +21,6 @@ namespace Data_Access_Layer
         public DBConn()
         {
             connStr = @"Data Source=LENOVO\SQLEXPRESS;Initial Catalog=SHSMS;Integrated Security=True";
-            //connStr = @"Data Source=TRACKDS1G014723;Initial Catalog=SHSMS;Integrated Security=True";
             ds = new DataSet();
 
 
@@ -43,6 +43,7 @@ namespace Data_Access_Layer
                         ds.Tables[_table].PrimaryKey = new DataColumn[] { ds.Tables[_table].Columns[0] };
                         ds.Tables[_table].Columns[0].AutoIncrement = true;
 
+                        //Sets the auto increment seed to the next available identiy value
                         ds.Tables[_table].Columns[0].AutoIncrementSeed = (long.Parse(row[5].ToString()) - long.Parse(row[6].ToString())+1);
                         //ds.Tables[_table].Columns[0].AutoIncrementStep = (long.Parse(row[5].ToString()) - long.Parse(row[6].ToString())) - long.Parse(row[2].ToString() + 1);
                         
@@ -55,6 +56,7 @@ namespace Data_Access_Layer
             }
             return DBConn.ds;
         }
+        //Updates the database with all changes made to the local dataset 
         public bool Write(DataSet updDS, string _table)
         {
 

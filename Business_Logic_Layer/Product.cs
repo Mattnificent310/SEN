@@ -72,7 +72,7 @@ namespace Business_Logic_Layer
          
             prods = new List<Product>();
             foreach (DataRow item in DataHandler.GetData(Cons.table2).Rows)
-            {
+            { 
                 DataRow row = new StoredProcedure().GetProcs("sp_GetStockByProduct", new Dictionary<string, object>
             {
                { "ProductId", item[Cons.table2Id] }

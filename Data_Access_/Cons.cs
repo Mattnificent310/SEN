@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data_Access_
 {
+    //Stores all entities with column names as constants for use accross the application
     public class Cons
     {
         #region Clients

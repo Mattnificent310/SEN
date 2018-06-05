@@ -33,6 +33,7 @@ namespace Data_Access_Layer
         #endregion
 
         #region Method
+        //Builds a dataset of all entities that calls this method
         public static DataTable GetData(string _table = null, string[] columns = null)
         {
             int i = 0;
@@ -53,7 +54,7 @@ namespace Data_Access_Layer
 
 
         }
-
+        //Builds an insert query for any entity during runtime
         public static bool CreateEntity(Dictionary<string, object> create, string[] columns)
         {
             bool inserted = false;
@@ -84,6 +85,8 @@ namespace Data_Access_Layer
             catch (SqlException e) { throw new Exception(e.Message); }
             return inserted;
         }
+
+        //Builds an update query for any entity during runtime
         public static bool ChangeEntity(Dictionary<string, object> values, string[] columns)
         {
             try
@@ -111,6 +114,7 @@ namespace Data_Access_Layer
             return false;
         }
 
+        //Dynamically allows the Insert of any entity that calls this method
         public object Insert(Dictionary<string, object> values, string _table = null)
         {
             try
@@ -137,6 +141,7 @@ namespace Data_Access_Layer
             catch (SqlException e) { throw new Exception(e.Message); }
 
         }
+        //Searches for the particular row equal to the entities identifier
         public int GetRow(DataSet getDS, string getTable, string identifier)
         {
             getDS.Tables[getTable].PrimaryKey = new DataColumn[] { getDS.Tables[getTable].Columns[0] };
@@ -150,6 +155,8 @@ namespace Data_Access_Layer
             }
             return index;
         }
+
+        //Dynamically Updates any entity values that calls this method
         public bool Update(Dictionary<string, object> values, string identifier, string _table = null)
         {
             try
@@ -165,6 +172,7 @@ namespace Data_Access_Layer
             catch (SqlException e) { throw new Exception(e.Message); }
 
         }
+        //Dynamically deletes any entity row that calls this method
         public bool Delete(string identifier, string _table = null)
         {
 

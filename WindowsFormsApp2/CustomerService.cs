@@ -1121,8 +1121,8 @@ namespace WindowsFormsApp2
         #region Delete
         private void btnDelete_Click_2(object sender, EventArgs e)
         {
-
-            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text)))
+            //This checks whether a selected client was deleted or not
+            if (!CRUD.DeleteClient(int.Parse(txtClientId.Text.Substring(2))))
             {
                 MessageBox.Show("Customer could not be deleted.");
             }
