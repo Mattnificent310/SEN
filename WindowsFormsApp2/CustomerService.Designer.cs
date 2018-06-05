@@ -122,6 +122,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtCustSurname = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.cbxRepair = new System.Windows.Forms.CheckBox();
+            this.cbxUpgrade = new System.Windows.Forms.CheckBox();
+            this.cbxInstall = new System.Windows.Forms.CheckBox();
             this.nupCtrCost = new System.Windows.Forms.NumericUpDown();
             this.lblCtrCost = new System.Windows.Forms.Label();
             this.lblCtrService = new System.Windows.Forms.Label();
@@ -140,9 +143,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblDate = new System.Windows.Forms.Label();
             this.errors = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cbxInstall = new System.Windows.Forms.CheckBox();
-            this.cbxUpgrade = new System.Windows.Forms.CheckBox();
-            this.cbxRepair = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
@@ -10177,6 +10177,39 @@
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
+            // cbxRepair
+            // 
+            this.cbxRepair.AutoSize = true;
+            this.cbxRepair.Location = new System.Drawing.Point(240, 371);
+            this.cbxRepair.Name = "cbxRepair";
+            this.cbxRepair.Size = new System.Drawing.Size(116, 22);
+            this.cbxRepair.TabIndex = 81;
+            this.cbxRepair.Text = "Maintenance";
+            this.cbxRepair.UseVisualStyleBackColor = true;
+            this.cbxRepair.CheckedChanged += new System.EventHandler(this.cbxRepair_CheckedChanged);
+            // 
+            // cbxUpgrade
+            // 
+            this.cbxUpgrade.AutoSize = true;
+            this.cbxUpgrade.Location = new System.Drawing.Point(132, 371);
+            this.cbxUpgrade.Name = "cbxUpgrade";
+            this.cbxUpgrade.Size = new System.Drawing.Size(96, 22);
+            this.cbxUpgrade.TabIndex = 80;
+            this.cbxUpgrade.Text = "Upgrades";
+            this.cbxUpgrade.UseVisualStyleBackColor = true;
+            this.cbxUpgrade.CheckedChanged += new System.EventHandler(this.cbxUpgrade_CheckedChanged);
+            // 
+            // cbxInstall
+            // 
+            this.cbxInstall.AutoSize = true;
+            this.cbxInstall.Location = new System.Drawing.Point(22, 371);
+            this.cbxInstall.Name = "cbxInstall";
+            this.cbxInstall.Size = new System.Drawing.Size(99, 22);
+            this.cbxInstall.TabIndex = 79;
+            this.cbxInstall.Text = "Installation";
+            this.cbxInstall.UseVisualStyleBackColor = true;
+            this.cbxInstall.CheckedChanged += new System.EventHandler(this.cbxInstall_CheckedChanged);
+            // 
             // nupCtrCost
             // 
             this.nupCtrCost.DecimalPlaces = 2;
@@ -10277,6 +10310,7 @@
             // 
             this.cmbCtrTerm.FormattingEnabled = true;
             this.cmbCtrTerm.Items.AddRange(new object[] {
+            "--Choose Term--",
             "1 Year",
             "2 Year",
             "3 Year",
@@ -10287,6 +10321,7 @@
             this.cmbCtrTerm.Name = "cmbCtrTerm";
             this.cmbCtrTerm.Size = new System.Drawing.Size(252, 26);
             this.cmbCtrTerm.TabIndex = 58;
+            this.cmbCtrTerm.SelectedIndexChanged += new System.EventHandler(this.cmbCtrTerm_SelectedIndexChanged);
             // 
             // label33
             // 
@@ -10312,6 +10347,7 @@
             this.cmbCtrLevel.Name = "cmbCtrLevel";
             this.cmbCtrLevel.Size = new System.Drawing.Size(252, 26);
             this.cmbCtrLevel.TabIndex = 56;
+            this.cmbCtrLevel.SelectedIndexChanged += new System.EventHandler(this.cmbCtrLevel_SelectedIndexChanged);
             // 
             // label32
             // 
@@ -10336,6 +10372,7 @@
             this.cmbCtrType.Name = "cmbCtrType";
             this.cmbCtrType.Size = new System.Drawing.Size(252, 26);
             this.cmbCtrType.TabIndex = 54;
+            this.cmbCtrType.SelectedIndexChanged += new System.EventHandler(this.cmbCtrType_SelectedIndexChanged);
             // 
             // label31
             // 
@@ -10381,36 +10418,6 @@
             this.errors.BlinkRate = 500;
             this.errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errors.ContainerControl = this;
-            // 
-            // cbxInstall
-            // 
-            this.cbxInstall.AutoSize = true;
-            this.cbxInstall.Location = new System.Drawing.Point(22, 371);
-            this.cbxInstall.Name = "cbxInstall";
-            this.cbxInstall.Size = new System.Drawing.Size(99, 22);
-            this.cbxInstall.TabIndex = 79;
-            this.cbxInstall.Text = "Installation";
-            this.cbxInstall.UseVisualStyleBackColor = true;
-            // 
-            // cbxUpgrade
-            // 
-            this.cbxUpgrade.AutoSize = true;
-            this.cbxUpgrade.Location = new System.Drawing.Point(132, 371);
-            this.cbxUpgrade.Name = "cbxUpgrade";
-            this.cbxUpgrade.Size = new System.Drawing.Size(96, 22);
-            this.cbxUpgrade.TabIndex = 80;
-            this.cbxUpgrade.Text = "Upgrades";
-            this.cbxUpgrade.UseVisualStyleBackColor = true;
-            // 
-            // cbxRepair
-            // 
-            this.cbxRepair.AutoSize = true;
-            this.cbxRepair.Location = new System.Drawing.Point(240, 371);
-            this.cbxRepair.Name = "cbxRepair";
-            this.cbxRepair.Size = new System.Drawing.Size(116, 22);
-            this.cbxRepair.TabIndex = 81;
-            this.cbxRepair.Text = "Maintenance";
-            this.cbxRepair.UseVisualStyleBackColor = true;
             // 
             // frmCustomerService
             // 

@@ -1333,18 +1333,164 @@ namespace WindowsFormsApp2
 
         private void btnIssueCtr_Click(object sender, EventArgs e)
         {
-            Contract contract = new Contract(string.Empty, cmbCtrLevel.Text, cmbCtrType.Text, dtpCtrDate.Value, cmbCtrTerm.SelectedIndex, lblCSId.Text.Substring(2));
-            
-            if (CRUD.InsertContract(contract))
+            if (ValidateAll(tabPage4))
             {
-                MessageBox.Show("Contract Issued");
-                BindContracts();
+                Contract contract = new Contract(string.Empty, cmbCtrLevel.Text, cmbCtrType.Text, dtpCtrDate.Value, cmbCtrTerm.SelectedIndex, lblCSId.Text.Substring(2));
+
+                if (CRUD.InsertContract(contract))
+                {
+                    MessageBox.Show("Contract Issued");
+                    BindContracts();
+                }
+            }
+        }
+        static double type = 1;
+        private void cmbCtrType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbCtrType.SelectedIndex)
+            {
+                case 0:
+                {
+                        type = 12550;
+                        break;
+                }
+                case 1:
+                {
+                        type = 14550;
+                        break;
+                }
+                case 2:
+                {
+                        type = 21550;
+                        break;
+                }
+                default:
+                    break;
+            }
+            nupCtrCost.Value = (decimal)((type + level) * term) < 100 ? 100 : (decimal)((type + level) * term);
+            ValidateAll(tabPage4);
+        }
+        static double level = 1;
+        private void cmbCtrLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbCtrLevel.SelectedIndex)
+            {
+                case 0:
+                    {
+                        level = 1550;
+                        break;
+                    }
+                case 1:
+                    {
+                        level = 450;
+                        break;
+                    }
+                case 2:
+                    {
+                        level = 250;
+                        break;
+                    }
+                case 3:
+                {
+                        level = 150;
+                        break;
+                    }
+                default:
+                    break;
+            }
+            nupCtrCost.Value = (decimal)((type + level) * term) < 100 ? 100 : (decimal)((type + level) * term);
+            ValidateAll(tabPage4);
+        }
+        double term;
+        private void cmbCtrTerm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            switch (cmbCtrTerm.SelectedIndex)
+            {
+                case 0:
+                {
+                        errors.SetError(cmbCtrTerm, "Please Select a Term");
+                        term = 0;
+                        break;
+                }
+                case 1:
+                    {
+                        term = 1;
+                        errors.SetError(cmbCtrTerm, "");
+                        break;
+                    }
+                case 2:
+                    {
+                        term = 2;
+                        errors.SetError(cmbCtrTerm, "");
+                        break;
+                    }
+                case 3:
+                    {
+                        term = 3;
+                        errors.SetError(cmbCtrTerm, "");
+                        errors.SetError(cmbCtrTerm, "");
+                        break;
+                    }
+                case 4:
+                {
+                        term = 4;
+                        errors.SetError(cmbCtrTerm, "");
+                        break;
+                }
+                case 5:
+                {
+                        term = 5;
+                        errors.SetError(cmbCtrTerm, "");
+                        break;
+                }
+                default:
+                    break;
+            }
+            nupCtrCost.Value = (decimal)((type + level) * term) < 100 ? 100 : (decimal)((type + level) * term);
+
+
+        }
+
+        private void cbxInstall_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxInstall.Checked == true)
+            {
+                nupCtrCost.Value += 250;
+            }
+            else
+            {
+                nupCtrCost.Value -= 250;
+            }
+        }
+
+        private void cbxUpgrade_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxUpgrade.Checked == true)
+            {
+                nupCtrCost.Value += 250;
+            }
+            else
+            {
+                nupCtrCost.Value -= 250;
+            }
+        }
+
+        private void cbxRepair_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxRepair.Checked == true)
+            {
+                nupCtrCost.Value += 250;
+            }
+            else
+            {
+                nupCtrCost.Value -= 250;
             }
         }
 
         private void cmbProdType_TextChanged(object sender, EventArgs e)
         {
-            // Daai program run nog in die agtergrond lol
+            
         }
 
 

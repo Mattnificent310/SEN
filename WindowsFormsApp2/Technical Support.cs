@@ -371,7 +371,7 @@ namespace WindowsFormsApp2
             {
                 if (radioCall.Enabled == true && radioCall.Checked == true)
                 {
-                    
+                    ValidateAll(tabPage1);
                     OutgoingCall();
                     lblCalling.Hide();
                     radioCall.Enabled = false;
@@ -510,7 +510,7 @@ namespace WindowsFormsApp2
                         data = new BindingSource();
                         data.DataSource = Product.prods;
                         txtProdNo.DataBindings.Clear();
-                        txtProdNo.DataBindings.Add("Text", data, "ProductSerialNo");
+                        txtProdNo.DataBindings.Add("Text", data, "SerialNo");
                         dgvTech.DataSource = data;
                         break;
                     }
@@ -631,7 +631,7 @@ namespace WindowsFormsApp2
         {
             if (radioCall.Checked == true)
             {
-
+                ValidateAll(this.tabPage1);
                 blinker.WorkerSupportsCancellation = true;
                 blinker.CancelAsync();
                 player.Stop();
